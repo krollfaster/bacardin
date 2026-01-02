@@ -1,11 +1,21 @@
 import { Hero } from "@/components/sections/Hero";
 import { Achievements } from "@/components/sections/Achievements";
 import { Experience } from "@/components/sections/Experience";
+import { HomeCases } from "@/components/sections/HomeCases";
 import { Tags } from "@/components/sections/Tags";
 import { Traits } from "@/components/sections/Traits";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { getFeaturedCases, getPublishedCases } from "@/lib/cases";
 
-export default function HomePage() {
+interface HomePageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
+  const featuredCases = await getFeaturedCases();
+  const allPublishedCases = await getPublishedCases();
+
   return (
     <main className="min-h-screen">
       {/* Переключатель языка */}
@@ -15,9 +25,13 @@ export default function HomePage() {
       <Hero />
       <Achievements />
       <Experience />
+      <HomeCases 
+        cases={featuredCases} 
+        locale={locale} 
+        totalCasesCount={allPublishedCases.length}
+      />
       <Tags />
       <Traits />
     </main>
   );
 }
-

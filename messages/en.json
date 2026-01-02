@@ -93,5 +93,15 @@
     "viewCase": "View case",
     "allCases": "All cases",
     "backToHome": "Back to home"
+  },
+  "casesPage": {
+    "title": "I am Designer Hyperformer ✦",
+    "line1": "Currently, I am designing SBERBANK ✦",
+    "line2": "Creator of Appearance Plugin, Stockholm Icons, & Right Question ✦",
+    "noCases": "Cases coming soon",
+    "telegramButton": "Go to telegram?"
+  },
+  "cases": {
+    "title": "Cases"
   }
 }

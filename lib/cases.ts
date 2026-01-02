@@ -35,6 +35,12 @@ export async function getPublishedCases(): Promise<Case[]> {
   return cases.filter((c) => c.published);
 }
 
+// Получение кейсов для главной страницы
+export async function getFeaturedCases(): Promise<Case[]> {
+  const cases = await getAllCases();
+  return cases.filter((c) => c.published && c.featuredOnHome);
+}
+
 // Получение кейса по ID
 export async function getCaseById(id: string): Promise<Case | null> {
   const cases = await getAllCases();
@@ -55,14 +61,18 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
   const newCase: Case = {
     id: generateId(),
     slug: generateSlug(data.title),
+    type: data.type,
     title: data.title,
     description: data.description,
+    date: data.date,
     category: data.category,
     coverImage: data.coverImage,
     images: data.images || [],
+    componentUrl: data.componentUrl,
     tags: data.tags || [],
     content: data.content,
     published: data.published ?? false,
+    featuredOnHome: data.featuredOnHome ?? false,
     createdAt: now,
     updatedAt: now,
   };
@@ -115,4 +125,3 @@ export async function deleteCase(id: string): Promise<boolean> {
 async function saveCases(cases: Case[]): Promise<void> {
   await fs.writeFile(DATA_FILE, JSON.stringify(cases, null, 2), "utf-8");
 }
-

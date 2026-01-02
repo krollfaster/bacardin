@@ -1,0 +1,124 @@
+:root {
+    --bg-color: #0d0d0d;
+    /* Slightly darker than reference for contrast */
+    --container-bg: #171717;
+    --text-color: #999;
+    --text-active: #fff;
+    --shine-color: rgba(255, 255, 255, 0.1);
+    --border-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text-color);
+}
+
+.wrapper {
+    padding: 1px;
+    /* To show the border effect if needed, or just spacing */
+    border-radius: var(--border-radius);
+    position: relative;
+    /* The flashlight effect will be on this wrapper or the container */
+}
+
+.tabs-container {
+    display: flex;
+    background-color: var(--container-bg);
+    padding: 4px;
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+    /* We'll apply the flashlight effect here */
+    background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            rgba(255, 255, 255, 0.06),
+            transparent 40%), var(--container-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    position: relative;
+    transition: color 0.2s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.tab:hover {
+    color: #ccc;
+}
+
+.tab.active {
+    color: var(--text-active);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* The shine effect for the active tab */
+.tab-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.2s ease;
+    /* Gradient to mimic the reference shine */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.0) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab.active .tab-shine {
+    opacity: 1;
+    background: linear-gradient(180deg,
+            rgba(50, 50, 50, 0.5) 0%,
+            rgba(28, 28, 28, 0) 100%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Refined active state based on observation */
+.tab.active .tab-shine {
+    background: conic-gradient(from 180deg at 50% -50%,
+            transparent 165deg,
+            rgba(255, 255, 255, 0.2) 180deg,
+            transparent 195deg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: none;
+}
+
+/* Flashlight effect on the bottom border of the active tab */
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    /* Pushed down to align with container border (4px padding + 1px) */
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: radial-gradient(40px 1px at 50% 100%,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+    box-shadow: 0 1px 4px rgba(255, 255, 255, 0.3);
+}

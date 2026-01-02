@@ -2,33 +2,48 @@
   {
     "id": "example1",
     "slug": "brand-identity-project",
+    "type": "gallery",
     "title": "Brand Identity Project",
     "description": "Разработка фирменного стиля для технологического стартапа. Создание логотипа, цветовой палитры и типографики.",
+    "date": "2024-01-15",
     "category": "branding",
-    "coverImage": "/images/cases/example-cover.jpg",
+    "coverImage": "/images/cases/1767380861504-1mrqf6.png",
     "images": [
       "/images/cases/example-1.jpg",
       "/images/cases/example-2.jpg"
     ],
-    "tags": ["branding", "identity", "logo"],
+    "tags": [
+      "branding",
+      "identity",
+      "logo"
+    ],
     "content": "# Brand Identity Project\n\nПодробное описание проекта по разработке фирменного стиля.\n\n## Задача\n\nКлиент обратился с запросом на создание современной и запоминающейся айдентики для своего стартапа.\n\n## Решение\n\nБыл разработан минималистичный логотип с использованием геометрических форм.",
     "published": true,
+    "featuredOnHome": true,
     "createdAt": "2024-01-15T10:00:00.000Z",
-    "updatedAt": "2024-01-15T10:00:00.000Z"
+    "updatedAt": "2026-01-02T19:07:52.656Z",
+    "componentUrl": ""
   },
   {
     "id": "example2",
     "slug": "web-app-development",
+    "type": "component",
     "title": "Web App Development",
     "description": "Разработка веб-приложения для управления задачами с использованием React и Node.js.",
+    "date": "2024-02-20",
     "category": "development",
-    "coverImage": "/images/cases/example-cover-2.jpg",
+    "coverImage": "/images/cases/1767380889586-0ar4hd.png",
     "images": [],
-    "tags": ["react", "nodejs", "webapp"],
+    "componentUrl": "https://example.com/widget",
+    "tags": [
+      "react",
+      "nodejs",
+      "webapp"
+    ],
     "content": "# Web App Development\n\nПолноценное веб-приложение для управления проектами.",
     "published": true,
+    "featuredOnHome": true,
     "createdAt": "2024-02-20T14:30:00.000Z",
-    "updatedAt": "2024-02-20T14:30:00.000Z"
+    "updatedAt": "2026-01-02T19:08:17.530Z"
   }
 ]
-
