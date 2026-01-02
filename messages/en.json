@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "name": "Ernest von Shuldays",
+    "status": "(Looking for work)",
+    "description": "Staff Product Designer ⇢ Product redesign for the top management of Russia's largest bank"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "items": {
+      "okr_part1": "Worked on OKR cascading in a product for",
+      "okr_highlight1": "25,000+",
+      "okr_part2": "employees, ensuring goal transparency for",
+      "okr_highlight2": "300+",
+      "okr_part3": "Agile teams",
+      "redesign_part1": "Redesigned a web platform with",
+      "redesign_highlight1": "4",
+      "redesign_part2": "domains making them interconnected, increasing manager efficiency by",
+      "redesign_highlight2": "40%",
+      "agile_part1": "Improved Agile processes in a team of",
+      "agile_highlight1": "14 people",
+      "agile_part2": "as a",
+      "agile_highlight2": "Scrum Master",
+      "ai_part1": "Implemented important",
+      "ai_highlight1": "AI",
+      "ai_part2": "features that improved team efficiency"
+    }
+  },
+  "experience": {
+    "title": "Experience: 6+",
+    "items": {
+      "sber": {
+        "position": "Staff Product Designer",
+        "company": "SBERBANK",
+        "dates": "2024 → 2025",
+        "description": "Responsible for redesign and development of an assistant tool for top management of the country's largest bank",
+        "link": "Recommendation letter",
+        "linkUrl": "#"
+      },
+      "mid": {
+        "position": "Lead UX Researcher",
+        "company": "MEN IN DEV",
+        "dates": "2024",
+        "description_part1": "Organized and conducted research on morphing the design system of a product with",
+        "description_highlight": "MAU 3.2 m",
+        "description_part2": "users for stakeholders"
+      },
+      "unitbean": {
+        "position": "Senior UX/UI Designer",
+        "company": "UNITBEAN",
+        "dates": "2022 → 2024",
+        "description": "As a Senior UX/UI designer led studio projects, designed complex business solutions ERP/CRM, Mobile applications (IOS, ANDROID)",
+        "link": "Behance cases",
+        "linkUrl": "#"
+      }
+    }
+  },
+  "tags": {
+    "title": "Tags",
+    "items": ["Leadership", "JTBD", "Business Strategy", "AI", "Metrics", "B2C", "AGILE", "SCRUM", "AI Agents", "Facilitation", "CJM", "RICE/ICE", "AARRR", "SWOT Analysis", "DOR/DOT", "Semiotic Analysis", "Design system"]
+  },
+  "traits": {
+    "title": "Traits",
+    "items": [
+      {
+        "title": "Business Thinking",
+        "text": "I understand how big business works and what it needs. Understanding of horizontal and vertical goal cascading and RCD initiatives"
+      },
+      {
+        "title": "Design Task Development",
+        "text": "I have a refined workflow for deep UX and UI development. Working in various methods (Data driven/Data informed) and verticals (B2C/B2E)"
+      },
+      {
+        "title": "Process Optimization",
+        "text": "I know how to make processes more efficient using methodologies: Agile (Scrum/Kanban), Triple diamond, LESS"
+      },
+      {
+        "title": "Working with AI",
+        "text": "I have experience and know how to work with AI. I'm aware of all trends and can think ahead about how AI will be useful. I integrate AI into my workflow to optimize work"
+      },
+      {
+        "title": "Strong Background",
+        "text": "I understand development well, as I studied HTML CSS MySQL JS PHP. Experience in implementing and improving Design systems. Experience in organizing and managing UX research"
+      }
+    ]
+  },
+  "nav": {
+    "home": "Home",
+    "cases": "Cases",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "common": {
+    "viewCase": "View case",
+    "allCases": "All cases",
+    "backToHome": "Back to home"
+  }
+}

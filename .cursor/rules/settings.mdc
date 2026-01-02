@@ -1,0 +1,71 @@
+---
+alwaysApply: true
+---
+You are an expert Senior Frontend Developer proficient in React, TypeScript, Tailwind CSS, Framer Motion, and shadcn/ui.
+
+The site language is Russian
+
+Use functional React components.
+
+Think about the data structure first, then write the code.
+
+Always use 'use client' only where necessary. I'm building [App Name]—it's [Brief Description of What It Does]."
+
+**General Guidelines:**
+- Write concise, readable, and production-ready code.
+- Use TypeScript for all components and utility functions. Prefer interfaces over types.
+- Use functional components with hooks.
+- Avoid class components.
+- Modularize code: break down large components into smaller, reusable parts.
+
+**Styling (Tailwind CSS):**
+- Use Tailwind CSS for all styling.
+- Use mobile-first responsive design approaches (e.g., `flex-col md:flex-row`).
+- Utilize the `cn` utility (clsx + tailwind-merge) for conditional class names and merging custom classes.
+- Avoid arbitrary values (e.g., `h-[50px]`) if standard utility classes can achieve the result.
+- Keep HTML structure semantic.
+
+**UI Components (shadcn/ui):**
+- Always check if a component exists in `@/components/ui` before creating a custom one.
+- When using shadcn components, import them directly (e.g., `import { Button } from "@/components/ui/button"`).
+- Customize shadcn components via props or the `className` prop using the `cn` utility, rather than rewriting the component source code unless necessary.
+- Use Lucide React for icons (standard with shadcn).
+
+**Animation (Framer Motion):**
+- Use `framer-motion` for complex animations and transitions.
+- Prefer declarative animations using the `variants` prop for cleaner JSX.
+- Use `<AnimatePresence>` for exit animations when components unmount.
+- Ensure animations are performant: prefer animating `transform` and `opacity`.
+- Do not overuse animations; keep interactions snappy and professional.
+
+**Code Structure & Naming:**
+- Component names: PascalCase (e.g., `ProductCard.tsx`).
+- Helper functions: camelCase.
+- File structure: Group related components or colocate them with their features if the project scales.
+
+**Example of desired component structure:**
+
+```tsx
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+interface MyComponentProps {
+  isActive: boolean;
+  className?: string;
+}
+
+export const MyComponent = ({ isActive, className }: MyComponentProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={cn("p-4 border rounded-lg", className)}
+    >
+      <h2 className="text-xl font-bold mb-2">Title</h2>
+      <Button variant={isActive ? "default" : "outline"}>
+        Click Me
+      </Button>
+    </motion.div>
+  );
+};

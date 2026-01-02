@@ -1,0 +1,34 @@
+[
+  {
+    "id": "example1",
+    "slug": "brand-identity-project",
+    "title": "Brand Identity Project",
+    "description": "Разработка фирменного стиля для технологического стартапа. Создание логотипа, цветовой палитры и типографики.",
+    "category": "branding",
+    "coverImage": "/images/cases/example-cover.jpg",
+    "images": [
+      "/images/cases/example-1.jpg",
+      "/images/cases/example-2.jpg"
+    ],
+    "tags": ["branding", "identity", "logo"],
+    "content": "# Brand Identity Project\n\nПодробное описание проекта по разработке фирменного стиля.\n\n## Задача\n\nКлиент обратился с запросом на создание современной и запоминающейся айдентики для своего стартапа.\n\n## Решение\n\nБыл разработан минималистичный логотип с использованием геометрических форм.",
+    "published": true,
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "example2",
+    "slug": "web-app-development",
+    "title": "Web App Development",
+    "description": "Разработка веб-приложения для управления задачами с использованием React и Node.js.",
+    "category": "development",
+    "coverImage": "/images/cases/example-cover-2.jpg",
+    "images": [],
+    "tags": ["react", "nodejs", "webapp"],
+    "content": "# Web App Development\n\nПолноценное веб-приложение для управления проектами.",
+    "published": true,
+    "createdAt": "2024-02-20T14:30:00.000Z",
+    "updatedAt": "2024-02-20T14:30:00.000Z"
+  }
+]
+
