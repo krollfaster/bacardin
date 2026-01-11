@@ -37,10 +37,6 @@ export const CasesHero = () => {
         <motion.div variants={slideUp}>
           <p className="text-[50px] leading-[1.1] font-medium text-muted-foreground">
             {t("title")}
-            <br />
-            {t("line1")}
-            <br />
-            {t("line2")}
           </p>
         </motion.div>
       </div>

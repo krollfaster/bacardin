@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
+import { ContactButtons } from "@/components/layout/ContactButtons";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -42,6 +43,7 @@ export default async function LocaleLayout({
         className={`${spaceGrotesk.variable} font-sans antialiased bg-background text-foreground`}
       >
         <NextIntlClientProvider messages={messages}>
+          <ContactButtons />
           {children}
           <Toaster />
         </NextIntlClientProvider>

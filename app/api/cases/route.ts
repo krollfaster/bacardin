@@ -46,11 +46,16 @@ export async function POST(request: Request) {
     const data: CreateCaseData = await request.json();
 
     // Валидация обязательных полей
-    if (!data.title || !data.description || !data.category || !data.content) {
+    if (!data.title || !data.description || !data.category) {
       return NextResponse.json(
         { success: false, error: "Заполните все обязательные поля" },
         { status: 400 }
       );
+    }
+
+    // Устанавливаем значение по умолчанию для content
+    if (!data.content) {
+      data.content = "";
     }
 
     const newCase = await createCase(data);

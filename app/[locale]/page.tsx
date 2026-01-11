@@ -19,7 +19,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <main className="min-h-screen">
       {/* Переключатель языка */}
-      <div className="fixed top-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 z-50">
         <LanguageSwitcher />
       </div>
       <Hero />

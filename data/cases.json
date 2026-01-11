@@ -1,49 +1,89 @@
 [
   {
-    "id": "example1",
-    "slug": "brand-identity-project",
-    "type": "gallery",
-    "title": "Brand Identity Project",
-    "description": "Разработка фирменного стиля для технологического стартапа. Создание логотипа, цветовой палитры и типографики.",
-    "date": "2024-01-15",
-    "category": "branding",
-    "coverImage": "/images/cases/1767380861504-1mrqf6.png",
-    "images": [
-      "/images/cases/example-1.jpg",
-      "/images/cases/example-2.jpg"
-    ],
+    "id": "mk9t1qnhu1suxj6t5bm",
+    "slug": "slider-tick",
+    "type": "component",
+    "title": "Slider tick!",
+    "description": "Slider",
+    "date": "2026-01-10",
+    "category": "design",
+    "coverImage": "/images/cases/1768140352860-plagzs.png",
+    "images": [],
+    "componentUrl": "/Elements/text show/index.html",
     "tags": [
-      "branding",
-      "identity",
-      "logo"
+      "test"
     ],
-    "content": "# Brand Identity Project\n\nПодробное описание проекта по разработке фирменного стиля.\n\n## Задача\n\nКлиент обратился с запросом на создание современной и запоминающейся айдентики для своего стартапа.\n\n## Решение\n\nБыл разработан минималистичный логотип с использованием геометрических форм.",
+    "content": "test slider",
     "published": true,
     "featuredOnHome": true,
-    "createdAt": "2024-01-15T10:00:00.000Z",
-    "updatedAt": "2026-01-02T19:07:52.656Z",
-    "componentUrl": ""
+    "createdAt": "2026-01-11T14:04:02.477Z",
+    "updatedAt": "2026-01-11T14:43:26.437Z"
   },
   {
-    "id": "example2",
-    "slug": "web-app-development",
-    "type": "component",
-    "title": "Web App Development",
-    "description": "Разработка веб-приложения для управления задачами с использованием React и Node.js.",
-    "date": "2024-02-20",
-    "category": "development",
-    "coverImage": "/images/cases/1767380889586-0ar4hd.png",
-    "images": [],
-    "componentUrl": "https://example.com/widget",
-    "tags": [
-      "react",
-      "nodejs",
-      "webapp"
+    "id": "mk9tmbkk8rtaei411o",
+    "slug": "the-hood",
+    "type": "gallery",
+    "title": "The HOOD%/)",
+    "description": "Product designer with over six years of experience working with mobile and web products. Product designer with over six years of experience working with mobile and web products.",
+    "date": "2026-01-11",
+    "category": "design",
+    "coverImage": "/images/cases/1768141154011-gznfvx.png",
+    "images": [
+      "/images/cases/1768141189542-5wzviu.png",
+      "/images/cases/1768141189552-ic25sh.png",
+      "/images/cases/1768141189553-hq9exk.png",
+      "/images/cases/1768141189563-9ulpvn.png",
+      "/images/cases/1768141189570-3hr7g2.png",
+      "/images/cases/1768141189571-he6cq9.png",
+      "/images/cases/1768141189601-vcw7vw.png",
+      "/images/cases/1768141189601-kt401f.png",
+      "/images/cases/1768141189608-qyulwq.png",
+      "/images/cases/1768141189612-p4oqqb.png",
+      "/images/cases/1768141189613-wopnm2.png",
+      "/images/cases/1768141189614-6ne7me.png",
+      "/images/cases/1768141189629-scujew.png"
     ],
-    "content": "# Web App Development\n\nПолноценное веб-приложение для управления проектами.",
+    "componentUrl": "",
+    "tags": [
+      "APPP"
+    ],
+    "content": "test",
     "published": true,
     "featuredOnHome": true,
-    "createdAt": "2024-02-20T14:30:00.000Z",
-    "updatedAt": "2026-01-02T19:08:17.530Z"
+    "createdAt": "2026-01-11T14:20:02.708Z",
+    "updatedAt": "2026-01-11T14:20:02.708Z"
+  },
+  {
+    "id": "mk9uetxnue3k2wwpk3",
+    "slug": "isu-app-",
+    "type": "gallery",
+    "title": "ISU APP ",
+    "description": "Таск трекер для руководителей",
+    "date": "2026-01-11",
+    "category": "design",
+    "coverImage": "/images/cases/1768142499689-seydqb.png",
+    "images": [
+      "/images/cases/1768142519920-585fdz.png",
+      "/images/cases/1768142519957-hwx97s.png",
+      "/images/cases/1768142519964-9zs7zv.png",
+      "/images/cases/1768142519958-al43wc.png",
+      "/images/cases/1768142519974-6leoni.png",
+      "/images/cases/1768142519984-7he01n.png",
+      "/images/cases/1768142519997-bvbbvo.png",
+      "/images/cases/1768142520030-k1jzpe.png",
+      "/images/cases/1768142520050-qaz1hs.png",
+      "/images/cases/1768142520059-i30srb.png",
+      "/images/cases/1768142520062-cqzc6k.png",
+      "/images/cases/1768142520062-iry8qc.png"
+    ],
+    "componentUrl": "",
+    "tags": [
+      "APPP"
+    ],
+    "content": "",
+    "published": true,
+    "featuredOnHome": true,
+    "createdAt": "2026-01-11T14:42:12.875Z",
+    "updatedAt": "2026-01-11T14:42:12.875Z"
   }
 ]

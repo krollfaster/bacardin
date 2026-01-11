@@ -16,7 +16,7 @@ const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = date.toLocaleDateString("en-US", { month: "short" }).toLowerCase();
-  return `${year} ${month}`;
+  return `${month} ${year}`;
 };
 
 export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
@@ -43,7 +43,7 @@ export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
                 src={caseItem.coverImage}
                 alt={caseItem.title}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-cover"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
