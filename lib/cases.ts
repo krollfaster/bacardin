@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { Case, CreateCaseData, UpdateCaseData } from "@/types";
+import type { Case, CreateCaseData, UpdateCaseData, HomeOrderUpdate } from "@/types";
 
 const DATA_FILE = path.join(process.cwd(), "data", "cases.json");
 
@@ -35,10 +35,12 @@ export async function getPublishedCases(): Promise<Case[]> {
   return cases.filter((c) => c.published);
 }
 
-// Получение кейсов для главной страницы
+// Получение кейсов для главной страницы (сортировка по homeOrder)
 export async function getFeaturedCases(): Promise<Case[]> {
   const cases = await getAllCases();
-  return cases.filter((c) => c.published && c.featuredOnHome);
+  return cases
+    .filter((c) => c.published && c.homeOrder !== null && c.homeOrder > 0)
+    .sort((a, b) => (a.homeOrder ?? 99) - (b.homeOrder ?? 99));
 }
 
 // Получение кейса по ID
@@ -68,11 +70,13 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
     category: data.category,
     coverImage: data.coverImage,
     images: data.images || [],
+    galleryLayout: data.galleryLayout ?? "stack",
     componentUrl: data.componentUrl,
     tags: data.tags || [],
     content: data.content,
     published: data.published ?? false,
     featuredOnHome: data.featuredOnHome ?? false,
+    homeOrder: data.homeOrder ?? null,
     createdAt: now,
     updatedAt: now,
   };
@@ -118,6 +122,24 @@ export async function deleteCase(id: string): Promise<boolean> {
   if (filteredCases.length === cases.length) return false;
 
   await saveCases(filteredCases);
+  return true;
+}
+
+// Массовое обновление порядка на главной
+export async function updateHomeOrder(updates: HomeOrderUpdate[]): Promise<boolean> {
+  const cases = await getAllCases();
+  const now = new Date().toISOString();
+
+  for (const update of updates) {
+    const index = cases.findIndex((c) => c.id === update.id);
+    if (index !== -1) {
+      cases[index].homeOrder = update.homeOrder;
+      cases[index].featuredOnHome = update.homeOrder !== null && update.homeOrder > 0;
+      cases[index].updatedAt = now;
+    }
+  }
+
+  await saveCases(cases);
   return true;
 }
 

@@ -2,11 +2,14 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import type { GalleryLayout } from "@/types";
+import { cn } from "@/lib/utils";
 
 interface GalleryCaseViewProps {
   title: string;
   description: string;
   images: string[];
+  layout?: GalleryLayout;
 }
 
 const containerVariants = {
@@ -31,7 +34,12 @@ const itemVariants = {
   },
 };
 
-export const GalleryCaseView = ({ title, description, images }: GalleryCaseViewProps) => {
+export const GalleryCaseView = ({ 
+  title, 
+  description, 
+  images,
+  layout = "stack" 
+}: GalleryCaseViewProps) => {
   return (
     <motion.div
       className="min-h-screen pb-16"
@@ -56,27 +64,74 @@ export const GalleryCaseView = ({ title, description, images }: GalleryCaseViewP
       </div>
 
       {/* Галерея изображений */}
-      <motion.div
-        className="px-16 flex flex-col gap-8"
-        variants={containerVariants}
-      >
-        {images.map((image, index) => (
-          <motion.div
-            key={index}
-            className="w-full rounded-2xl overflow-hidden"
-            variants={itemVariants}
-          >
-            <Image
-              src={image}
-              alt={`${title} - изображение ${index + 1}`}
-              width={1920}
-              height={1080}
-              className="w-full h-auto"
-              sizes="(max-width: 768px) 100vw, calc(100vw - 128px)"
-            />
-          </motion.div>
-        ))}
-      </motion.div>
+      {layout === "stack" ? (
+        <StackGallery images={images} title={title} />
+      ) : (
+        <MasonryGallery images={images} title={title} />
+      )}
     </motion.div>
   );
 };
+
+// Стек - картинки друг под другом
+function StackGallery({ images, title }: { images: string[]; title: string }) {
+  return (
+    <motion.div
+      className="px-4 md:px-16 flex flex-col gap-8"
+      variants={containerVariants}
+    >
+      {images.map((image, index) => (
+        <motion.div
+          key={index}
+          className="w-full rounded-2xl overflow-hidden"
+          variants={itemVariants}
+        >
+          <Image
+            src={image}
+            alt={`${title} - изображение ${index + 1}`}
+            width={1920}
+            height={1080}
+            className="w-full h-auto"
+            sizes="(max-width: 768px) 100vw, calc(100vw - 128px)"
+          />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
+
+// Masonry сетка - колонки с разной высотой
+function MasonryGallery({ images, title }: { images: string[]; title: string }) {
+  return (
+    <motion.div
+      className={cn(
+        "px-4 md:px-8 lg:px-16",
+        // CSS columns для masonry эффекта
+        "columns-1 sm:columns-2 lg:columns-3",
+        "gap-4 md:gap-6"
+      )}
+      variants={containerVariants}
+    >
+      {images.map((image, index) => (
+        <motion.div
+          key={index}
+          className={cn(
+            "break-inside-avoid mb-4 md:mb-6",
+            "rounded-xl overflow-hidden",
+            "bg-muted/20"
+          )}
+          variants={itemVariants}
+        >
+          <Image
+            src={image}
+            alt={`${title} - изображение ${index + 1}`}
+            width={800}
+            height={600}
+            className="w-full h-auto"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}

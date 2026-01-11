@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Reorder, useDragControls } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,9 +22,11 @@ import {
   Folder, 
   Edit3,
   Upload,
-  Loader2
+  Loader2,
+  GripVertical
 } from "lucide-react";
-import type { Case, CaseType } from "@/types";
+import type { Case, CaseType, GalleryLayout } from "@/types";
+import { LayoutList, LayoutGrid } from "lucide-react";
 
 interface CaseFormProps {
   initialData?: Case | null;
@@ -41,6 +43,7 @@ export interface CaseFormData {
   category: string;
   coverImage: string;
   images: string[];
+  galleryLayout: GalleryLayout;
   componentUrl?: string;
   tags: string[];
   content: string;
@@ -69,6 +72,7 @@ export function CaseForm({
     category: "design",
     coverImage: "",
     images: [],
+    galleryLayout: "stack",
     componentUrl: "",
     tags: [],
     content: "",
@@ -113,6 +117,7 @@ export function CaseForm({
         category: initialData.category,
         coverImage: initialData.coverImage,
         images: initialData.images || [],
+        galleryLayout: initialData.galleryLayout || "stack",
         componentUrl: initialData.componentUrl || "",
         tags: initialData.tags || [],
         content: initialData.content,
@@ -411,6 +416,38 @@ export function CaseForm({
             exit={{ opacity: 0, height: 0 }}
             className="space-y-4 overflow-hidden"
           >
+            {/* Вид отображения галереи */}
+            <div className="space-y-2">
+              <Label>Вид галереи</Label>
+              <Select
+                value={formData.galleryLayout}
+                onValueChange={(value: GalleryLayout) =>
+                  setFormData((prev) => ({ ...prev, galleryLayout: value }))
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="stack">
+                    <div className="flex items-center gap-2">
+                      <LayoutList className="w-4 h-4" />
+                      Стек (по вертикали)
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="masonry">
+                    <div className="flex items-center gap-2">
+                      <LayoutGrid className="w-4 h-4" />
+                      Сетка (masonry)
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                Стек — картинки друг под другом. Сетка — в колонках с разной высотой.
+              </p>
+            </div>
+
             <div className="space-y-2">
               <Label>Изображения галереи</Label>
               <input
@@ -442,26 +479,26 @@ export function CaseForm({
               </button>
               
               {formData.images.length > 0 && (
-                <div className="grid grid-cols-3 gap-2 mt-3">
-                  {formData.images.map((img, index) => (
-                    <div
-                      key={index}
-                      className="relative group aspect-square rounded-lg overflow-hidden border border-border"
-                    >
-                      <img
-                        src={img}
-                        alt={`Image ${index + 1}`}
-                        className="w-full h-full object-cover"
+                <div className="mt-3">
+                  <p className="text-xs text-muted-foreground mb-2">
+                    Перетаскивайте для изменения порядка
+                  </p>
+                  <Reorder.Group
+                    axis="y"
+                    values={formData.images}
+                    onReorder={(newOrder) => 
+                      setFormData((prev) => ({ ...prev, images: newOrder }))
+                    }
+                    className="space-y-2"
+                  >
+                    {formData.images.map((img) => (
+                      <DraggableImageItem
+                        key={img}
+                        image={img}
+                        onRemove={() => removeImage(formData.images.indexOf(img))}
                       />
-                      <button
-                        type="button"
-                        onClick={() => removeImage(index)}
-                        className="absolute top-1 right-1 p-1 rounded-full bg-black/70 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
-                    </div>
-                  ))}
+                    ))}
+                  </Reorder.Group>
                 </div>
               )}
             </div>
@@ -602,35 +639,19 @@ export function CaseForm({
       </div>
 
       {/* Публикация */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <input
-            type="checkbox"
-            id="published"
-            checked={formData.published}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, published: e.target.checked }))
-            }
-            className="w-4 h-4 rounded border-border"
-          />
-          <Label htmlFor="published" className="cursor-pointer">
-            Опубликовать кейс
-          </Label>
-        </div>
-        <div className="flex items-center gap-3">
-          <input
-            type="checkbox"
-            id="featuredOnHome"
-            checked={formData.featuredOnHome}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, featuredOnHome: e.target.checked }))
-            }
-            className="w-4 h-4 rounded border-border"
-          />
-          <Label htmlFor="featuredOnHome" className="cursor-pointer">
-            Опубликовать на главной
-          </Label>
-        </div>
+      <div className="flex items-center gap-3">
+        <input
+          type="checkbox"
+          id="published"
+          checked={formData.published}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, published: e.target.checked }))
+          }
+          className="w-4 h-4 rounded border-border"
+        />
+        <Label htmlFor="published" className="cursor-pointer">
+          Опубликовать кейс
+        </Label>
       </div>
 
       {/* Кнопки */}
@@ -658,5 +679,59 @@ export function CaseForm({
         </Button>
       </div>
     </form>
+  );
+}
+
+// Перетаскиваемый элемент изображения
+interface DraggableImageItemProps {
+  image: string;
+  onRemove: () => void;
+}
+
+function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
+  const controls = useDragControls();
+
+  return (
+    <Reorder.Item
+      value={image}
+      dragListener={false}
+      dragControls={controls}
+      className="group"
+    >
+      <div className="flex items-center gap-3 p-2 rounded-lg border border-border bg-background hover:border-primary/50 transition-colors">
+        {/* Превью изображения */}
+        <div className="w-16 h-16 rounded-md overflow-hidden bg-muted flex-shrink-0">
+          <img
+            src={image}
+            alt="Preview"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Путь к файлу */}
+        <div className="flex-1 min-w-0">
+          <p className="text-xs text-muted-foreground truncate font-mono">
+            {image.split('/').pop()}
+          </p>
+        </div>
+
+        {/* Кнопка удаления */}
+        <button
+          type="button"
+          onClick={onRemove}
+          className="p-1.5 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+        >
+          <X className="w-4 h-4" />
+        </button>
+
+        {/* Ручка перетаскивания */}
+        <div
+          onPointerDown={(e) => controls.start(e)}
+          className="cursor-grab active:cursor-grabbing p-1.5 hover:bg-muted rounded-md"
+        >
+          <GripVertical className="w-4 h-4 text-muted-foreground" />
+        </div>
+      </div>
+    </Reorder.Item>
   );
 }

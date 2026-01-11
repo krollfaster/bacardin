@@ -33,6 +33,7 @@ export default async function CasePage({ params }: CasePageProps) {
           title={caseData.title}
           description={caseData.description}
           images={caseData.images}
+          layout={caseData.galleryLayout}
         />
       )}
     </main>

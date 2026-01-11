@@ -28,15 +28,16 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
     >
       <LaurelIcon size={64} className="mb-4" />
       <p className="text-[28px] leading-[38px] font-[500] text-muted-foreground">
-        {parts.map((part, i) =>
-          part.type === "highlight" ? (
-            <span key={i} className="text-foreground">
-              {part.value}
-            </span>
-          ) : (
-            <span key={i}>{part.value} </span>
-          )
-        )}
+        {parts.map((part, i) => (
+          <span key={i}>
+            {part.type === "highlight" ? (
+              <span className="text-foreground">{part.value}</span>
+            ) : (
+              part.value
+            )}
+            {i < parts.length - 1 ? " " : ""}
+          </span>
+        ))}
       </p>
     </motion.div>
   );

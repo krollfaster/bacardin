@@ -3,12 +3,18 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { CasesList } from "@/components/admin/CasesList";
+import { HomeOrderManager } from "@/components/admin/HomeOrderManager";
 import { Toaster } from "@/components/ui/sonner";
+import { cn } from "@/lib/utils";
+import { Layers, Home } from "lucide-react";
 import type { Case } from "@/types";
+
+type Tab = "cases" | "home";
 
 export default function AdminPage() {
   const [cases, setCases] = useState<Case[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<Tab>("cases");
 
   const fetchCases = useCallback(async () => {
     try {
@@ -28,6 +34,11 @@ export default function AdminPage() {
     fetchCases();
   }, [fetchCases]);
 
+  const tabs = [
+    { id: "cases" as Tab, label: "Кейсы", icon: Layers },
+    { id: "home" as Tab, label: "Главная страница", icon: Home },
+  ];
+
   return (
     <>
       <motion.div
@@ -36,6 +47,25 @@ export default function AdminPage() {
         transition={{ duration: 0.3 }}
         className="p-8"
       >
+        {/* Табы */}
+        <div className="flex gap-1 p-1 bg-muted rounded-lg w-fit mb-6">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                activeTab === tab.id
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <tab.icon className="w-4 h-4" />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
         {isLoading ? (
           <div className="flex items-center justify-center h-64">
             <motion.div
@@ -45,11 +75,17 @@ export default function AdminPage() {
             />
           </div>
         ) : (
-          <CasesList cases={cases} onRefresh={fetchCases} />
+          <>
+            {activeTab === "cases" && (
+              <CasesList cases={cases} onRefresh={fetchCases} />
+            )}
+            {activeTab === "home" && (
+              <HomeOrderManager cases={cases} onUpdate={fetchCases} />
+            )}
+          </>
         )}
       </motion.div>
       <Toaster />
     </>
   );
 }
-

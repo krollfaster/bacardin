@@ -16,8 +16,9 @@
     "content": "test slider",
     "published": true,
     "featuredOnHome": true,
+    "homeOrder": 3,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-11T16:23:28.183Z"
+    "updatedAt": "2026-01-11T20:16:37.582Z"
   },
   {
     "id": "mk9tmbkk8rtaei411o",
@@ -32,16 +33,11 @@
       "/images/cases/1768141189542-5wzviu.png",
       "/images/cases/1768141189552-ic25sh.png",
       "/images/cases/1768141189553-hq9exk.png",
-      "/images/cases/1768141189563-9ulpvn.png",
-      "/images/cases/1768141189570-3hr7g2.png",
       "/images/cases/1768141189571-he6cq9.png",
+      "/images/cases/1768141189563-9ulpvn.png",
       "/images/cases/1768141189601-vcw7vw.png",
-      "/images/cases/1768141189601-kt401f.png",
-      "/images/cases/1768141189608-qyulwq.png",
-      "/images/cases/1768141189612-p4oqqb.png",
       "/images/cases/1768141189613-wopnm2.png",
-      "/images/cases/1768141189614-6ne7me.png",
-      "/images/cases/1768141189629-scujew.png"
+      "/images/cases/1768141189614-6ne7me.png"
     ],
     "componentUrl": "",
     "tags": [
@@ -50,8 +46,10 @@
     "content": "test",
     "published": true,
     "featuredOnHome": true,
+    "homeOrder": 2,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-11T17:52:08.767Z"
+    "updatedAt": "2026-01-11T20:33:03.341Z",
+    "galleryLayout": "masonry"
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
@@ -63,18 +61,17 @@
     "category": "design",
     "coverImage": "/images/cases/1768153830078-jpy0n7.png",
     "images": [
+      "/images/cases/1768142520062-iry8qc.png",
       "/images/cases/1768142519920-585fdz.png",
-      "/images/cases/1768142519957-hwx97s.png",
-      "/images/cases/1768142519964-9zs7zv.png",
-      "/images/cases/1768142519958-al43wc.png",
+      "/images/cases/1768142520062-cqzc6k.png",
       "/images/cases/1768142519974-6leoni.png",
+      "/images/cases/1768142519957-hwx97s.png",
+      "/images/cases/1768142519958-al43wc.png",
       "/images/cases/1768142519984-7he01n.png",
+      "/images/cases/1768142519964-9zs7zv.png",
       "/images/cases/1768142519997-bvbbvo.png",
       "/images/cases/1768142520030-k1jzpe.png",
-      "/images/cases/1768142520050-qaz1hs.png",
-      "/images/cases/1768142520059-i30srb.png",
-      "/images/cases/1768142520062-cqzc6k.png",
-      "/images/cases/1768142520062-iry8qc.png"
+      "/images/cases/1768142520059-i30srb.png"
     ],
     "componentUrl": "",
     "tags": [
@@ -83,8 +80,10 @@
     "content": "",
     "published": true,
     "featuredOnHome": true,
+    "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-11T17:50:32.928Z"
+    "updatedAt": "2026-01-11T20:37:23.144Z",
+    "galleryLayout": "stack"
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
@@ -101,7 +100,8 @@
     "content": "",
     "published": true,
     "featuredOnHome": true,
+    "homeOrder": 4,
     "createdAt": "2026-01-11T17:40:38.872Z",
-    "updatedAt": "2026-01-11T17:52:18.036Z"
+    "updatedAt": "2026-01-11T20:16:37.582Z"
   }
 ]
