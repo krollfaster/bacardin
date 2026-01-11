@@ -7,7 +7,7 @@
     "description": "Slider",
     "date": "2026-01-10",
     "category": "design",
-    "coverImage": "/images/cases/1768140352860-plagzs.png",
+    "coverImage": "/images/cases/1768148605948-j9qvrm.png",
     "images": [],
     "componentUrl": "/Elements/text show/index.html",
     "tags": [
@@ -17,17 +17,17 @@
     "published": true,
     "featuredOnHome": true,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-11T14:43:26.437Z"
+    "updatedAt": "2026-01-11T16:23:28.183Z"
   },
   {
     "id": "mk9tmbkk8rtaei411o",
-    "slug": "the-hood",
+    "slug": "the-hood-app-b2c",
     "type": "gallery",
-    "title": "The HOOD%/)",
+    "title": "The HOOD APP B2C",
     "description": "Product designer with over six years of experience working with mobile and web products. Product designer with over six years of experience working with mobile and web products.",
     "date": "2026-01-11",
     "category": "design",
-    "coverImage": "/images/cases/1768141154011-gznfvx.png",
+    "coverImage": "/images/cases/1768150977091-0lzdme.png",
     "images": [
       "/images/cases/1768141189542-5wzviu.png",
       "/images/cases/1768141189552-ic25sh.png",
@@ -51,17 +51,17 @@
     "published": true,
     "featuredOnHome": true,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-11T14:20:02.708Z"
+    "updatedAt": "2026-01-11T17:52:08.767Z"
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
-    "slug": "isu-app-",
+    "slug": "sberbank-task-tracker",
     "type": "gallery",
-    "title": "ISU APP ",
+    "title": "Sberbank Task Tracker",
     "description": "Таск трекер для руководителей",
     "date": "2026-01-11",
     "category": "design",
-    "coverImage": "/images/cases/1768142499689-seydqb.png",
+    "coverImage": "/images/cases/1768153830078-jpy0n7.png",
     "images": [
       "/images/cases/1768142519920-585fdz.png",
       "/images/cases/1768142519957-hwx97s.png",
@@ -84,6 +84,24 @@
     "published": true,
     "featuredOnHome": true,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-11T14:42:12.875Z"
+    "updatedAt": "2026-01-11T17:50:32.928Z"
+  },
+  {
+    "id": "mka0saqg9dksvu4qxmc",
+    "slug": "graph-cursor",
+    "type": "component",
+    "title": "Graph cursor",
+    "description": "dfg",
+    "date": "2026-01-11",
+    "category": "design",
+    "coverImage": "/images/cases/1768153227831-p8sjov.png",
+    "images": [],
+    "componentUrl": "/Elements/Slider/standalone_preview.html",
+    "tags": [],
+    "content": "",
+    "published": true,
+    "featuredOnHome": true,
+    "createdAt": "2026-01-11T17:40:38.872Z",
+    "updatedAt": "2026-01-11T17:52:18.036Z"
   }
 ]

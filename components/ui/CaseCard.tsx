@@ -33,10 +33,7 @@ export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
           {/* Блок с превью картинкой */}
           <div 
             className="flex-1 rounded-2xl overflow-hidden relative"
-            style={{ 
-              backgroundColor: "#16130F",
-              boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)"
-            }}
+            style={{ backgroundColor: "#16130F" }}
           >
             {caseItem.coverImage ? (
               <Image
@@ -50,6 +47,11 @@ export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
                 <span className="text-muted-foreground">No image</span>
               </div>
             )}
+            {/* Overlay для внутренней тени поверх изображения */}
+            <div 
+              className="absolute inset-0 pointer-events-none rounded-2xl"
+              style={{ boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)" }}
+            />
           </div>
 
           {/* Блок с текстом */}
