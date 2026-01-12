@@ -77,13 +77,24 @@ const ExperienceCard = ({
 export const Experience = () => {
   const t = useTranslations("experience");
 
-  const experiences = [
+  const experiences: Array<{
+    icon: string;
+    position: string;
+    company: string;
+    dates: string;
+    description: React.ReactNode;
+    link?: { text: string; url: string };
+  }> = [
     {
       icon: "/images/icons/sber.svg",
       position: t("items.sber.position"),
       company: t("items.sber.company"),
       dates: t("items.sber.dates"),
       description: t("items.sber.description"),
+      link: {
+        text: t("items.sber.link"),
+        url: t("items.sber.linkUrl"),
+      },
     },
     {
       icon: "/images/icons/mid.svg",
@@ -106,6 +117,10 @@ export const Experience = () => {
       company: t("items.unitbean.company"),
       dates: t("items.unitbean.dates"),
       description: t("items.unitbean.description"),
+      link: {
+        text: t("items.unitbean.link"),
+        url: t("items.unitbean.linkUrl"),
+      },
     },
   ];
 
