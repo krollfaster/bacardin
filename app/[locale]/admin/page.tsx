@@ -4,12 +4,13 @@ import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { CasesList } from "@/components/admin/CasesList";
 import { HomeOrderManager } from "@/components/admin/HomeOrderManager";
+import { SoundSettings } from "@/components/admin/SoundSettings";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
-import { Layers, Home } from "lucide-react";
+import { Layers, Home, Volume2 } from "lucide-react";
 import type { Case } from "@/types";
 
-type Tab = "cases" | "home";
+type Tab = "cases" | "home" | "sounds";
 
 export default function AdminPage() {
   const [cases, setCases] = useState<Case[]>([]);
@@ -37,6 +38,7 @@ export default function AdminPage() {
   const tabs = [
     { id: "cases" as Tab, label: "Кейсы", icon: Layers },
     { id: "home" as Tab, label: "Главная страница", icon: Home },
+    { id: "sounds" as Tab, label: "Звуки", icon: Volume2 },
   ];
 
   return (
@@ -81,6 +83,9 @@ export default function AdminPage() {
             )}
             {activeTab === "home" && (
               <HomeOrderManager cases={cases} onUpdate={fetchCases} />
+            )}
+            {activeTab === "sounds" && (
+              <SoundSettings />
             )}
           </>
         )}

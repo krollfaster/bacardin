@@ -117,8 +117,8 @@ function MasonryGallery({ images, title }: { images: string[]; title: string }) 
           key={index}
           className={cn(
             "break-inside-avoid mb-4 md:mb-6",
-            "rounded-xl overflow-hidden",
-            "bg-muted/20"
+            "overflow-hidden",
+            "bg-transparent"
           )}
           variants={itemVariants}
         >

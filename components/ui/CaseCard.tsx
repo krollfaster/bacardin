@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { staggerItem, cardHover, cardTap } from "@/lib/animations";
+import { useHoverSound } from "@/hooks/useHoverSound";
 import type { Case } from "@/types";
 
 interface CaseCardProps {
@@ -20,11 +21,14 @@ const formatDate = (dateString: string) => {
 };
 
 export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
+  const { playHoverSound } = useHoverSound();
+
   return (
     <motion.div
       variants={staggerItem}
       whileHover={cardHover}
       whileTap={cardTap}
+      onHoverStart={playHoverSound}
     >
       <Link href={`/${locale}/cases/${caseItem.slug}`}>
         <article 

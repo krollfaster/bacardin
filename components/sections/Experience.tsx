@@ -84,10 +84,6 @@ export const Experience = () => {
       company: t("items.sber.company"),
       dates: t("items.sber.dates"),
       description: t("items.sber.description"),
-      link: {
-        text: t("items.sber.link"),
-        url: t("items.sber.linkUrl"),
-      },
     },
     {
       icon: "/images/icons/mid.svg",
@@ -110,10 +106,6 @@ export const Experience = () => {
       company: t("items.unitbean.company"),
       dates: t("items.unitbean.dates"),
       description: t("items.unitbean.description"),
-      link: {
-        text: t("items.unitbean.link"),
-        url: t("items.unitbean.linkUrl"),
-      },
     },
   ];
 
