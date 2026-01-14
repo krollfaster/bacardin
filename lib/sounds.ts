@@ -1,7 +1,7 @@
 "use client";
 
 // Типы звуков
-export type SoundType = "none" | "softClick" | "tick" | "pop" | "whoosh" | "chime";
+export type SoundType = "none" | "softClick" | "tick" | "pop" | "whoosh" | "chime" | "thud" | "tap" | "knock";
 
 export interface SoundConfig {
   id: SoundType;
@@ -16,10 +16,60 @@ export const SOUND_OPTIONS: SoundConfig[] = [
   { id: "pop", name: "Поп", description: "Звук лопающегося пузырика" },
   { id: "whoosh", name: "Свист", description: "Мягкий звук движения воздуха" },
   { id: "chime", name: "Тон", description: "Короткая музыкальная нота" },
+  { id: "thud", name: "Глухой удар", description: "Низкий приглушённый удар" },
+  { id: "tap", name: "Тап", description: "Мягкое касание поверхности" },
+  { id: "knock", name: "Стук", description: "Глухой стук по дереву" },
 ];
 
 // Глобальный AudioContext (создаётся один раз)
 let audioContext: AudioContext | null = null;
+let isUnlocked = false;
+
+// Разблокировка AudioContext при первом user gesture
+const unlockAudioContext = (): void => {
+  if (isUnlocked) return;
+  
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+  }
+  
+  if (audioContext.state === "suspended") {
+    audioContext.resume().then(() => {
+      isUnlocked = true;
+    });
+  } else {
+    isUnlocked = true;
+  }
+};
+
+// Регистрируем глобальные обработчики для разблокировки
+const setupAudioUnlock = () => {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  
+  const events = ["click", "touchstart", "touchend", "keydown", "pointerdown"];
+  
+  const handleUserGesture = () => {
+    unlockAudioContext();
+    // Удаляем обработчики после разблокировки
+    events.forEach(event => {
+      document.removeEventListener(event, handleUserGesture, true);
+    });
+  };
+  
+  // Добавляем обработчики с capture для раннего срабатывания
+  events.forEach(event => {
+    document.addEventListener(event, handleUserGesture, true);
+  });
+};
+
+// Инициализируем после загрузки DOM
+if (typeof window !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupAudioUnlock);
+  } else {
+    setupAudioUnlock();
+  }
+}
 
 const getAudioContext = (): AudioContext | null => {
   if (typeof window === "undefined") return null;
@@ -152,6 +202,97 @@ const playSound = {
 
     oscillator.start(ctx.currentTime);
     oscillator.stop(ctx.currentTime + 0.2);
+  },
+
+  thud: () => {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    oscillator.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    // Низкая частота для глухого звука
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(80, ctx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.08);
+
+    // Фильтр низких частот для приглушения
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(200, ctx.currentTime);
+
+    gainNode.gain.setValueAtTime(0.25, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.08);
+  },
+
+  tap: () => {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    oscillator.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    // Очень короткий, мягкий тап
+    oscillator.type = "triangle";
+    oscillator.frequency.setValueAtTime(300, ctx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.025);
+
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(500, ctx.currentTime);
+
+    gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.025);
+
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.025);
+  },
+
+  knock: () => {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const oscillator = ctx.createOscillator();
+    const oscillator2 = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    oscillator.connect(filter);
+    oscillator2.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    // Два осциллятора для более "деревянного" звука
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(150, ctx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.06);
+
+    oscillator2.type = "triangle";
+    oscillator2.frequency.setValueAtTime(250, ctx.currentTime);
+    oscillator2.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.04);
+
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(400, ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.06);
+
+    gainNode.gain.setValueAtTime(0.18, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.06);
+
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.06);
+    oscillator2.start(ctx.currentTime);
+    oscillator2.stop(ctx.currentTime + 0.04);
   },
 };
 

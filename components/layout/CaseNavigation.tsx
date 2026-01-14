@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { ArrowLeftIcon } from "@/components/ui/icons/ArrowLeftIcon";
 import { MailIcon } from "@/components/ui/icons/MailIcon";
 import { TelegramIcon } from "@/components/ui/icons/TelegramIcon";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 const contactLinks = [
   {
@@ -32,31 +32,27 @@ export const CaseNavigation = () => {
   return (
     <div className="fixed top-[28px] left-0 right-0 z-50 flex justify-between px-[32px]">
       {/* Кнопка назад */}
-      <motion.button
+      <MagneticButton
         onClick={handleBack}
         aria-label="Назад"
         className={buttonClassName}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
       >
         <ArrowLeftIcon size={54} />
-      </motion.button>
+      </MagneticButton>
 
       {/* Кнопки связи */}
       <div className="flex gap-6">
         {contactLinks.map((link) => (
-          <motion.a
+          <MagneticButton
             key={link.label}
             href={link.href}
             target={link.href.startsWith("mailto:") ? undefined : "_blank"}
             rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
             aria-label={link.label}
             className={buttonClassName}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             <link.icon size={54} />
-          </motion.a>
+          </MagneticButton>
         ))}
       </div>
     </div>
