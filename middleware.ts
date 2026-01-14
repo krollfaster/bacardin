@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
       // Получаем локаль из pathname
       const locale = pathname.split("/")[1];
       const validLocales = ["en", "ru"];
-      const currentLocale = validLocales.includes(locale) ? locale : "en";
+      const currentLocale = validLocales.includes(locale) ? locale : "ru";
       
       const loginUrl = new URL(`/${currentLocale}/login`, request.url);
       loginUrl.searchParams.set("redirect", pathname);

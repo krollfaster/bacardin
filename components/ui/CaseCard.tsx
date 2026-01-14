@@ -10,17 +10,10 @@ import type { Case } from "@/types";
 interface CaseCardProps {
   caseItem: Case;
   locale: string;
+  uiElementLabel?: string;
 }
 
-// Форматирование даты
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = date.toLocaleDateString("en-US", { month: "short" }).toLowerCase();
-  return `${month} ${year}`;
-};
-
-export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
+export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) => {
   const { playHoverSound } = useHoverSound();
 
   return (
@@ -60,7 +53,7 @@ export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
 
           {/* Блок с текстом */}
           <div 
-            className="h-[54px] rounded-2xl px-4 flex items-center justify-between"
+            className="h-[54px] rounded-2xl px-5 flex items-center justify-between"
             style={{ 
               backgroundColor: "#16130F",
               boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)"
@@ -70,7 +63,10 @@ export const CaseCard = ({ caseItem, locale }: CaseCardProps) => {
               {caseItem.title}
             </span>
             <span className="text-lg text-muted-foreground whitespace-nowrap ml-4">
-              {formatDate(caseItem.date || caseItem.createdAt)}
+              {caseItem.type === "component" 
+                ? (uiElementLabel || "UI Element")
+                : (caseItem.tags && caseItem.tags.length > 0 ? caseItem.tags.join(", ") : null)
+              }
             </span>
           </div>
         </article>

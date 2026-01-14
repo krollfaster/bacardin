@@ -34,7 +34,7 @@
         "dates": "2024 → 2025",
         "description": "Responsible for redesign and development of an assistant tool for top management of the country's largest bank",
         "link": "Recommendation letter",
-        "linkUrl": "https://bacardin.taptop.site/recomendation-open-"
+        "linkUrl": "/recommendation-letter"
       },
       "mid": {
         "position": "Lead UX Researcher",
@@ -52,6 +52,30 @@
         "link": "Behance cases",
         "linkUrl": "https://www.behance.net/bacardin"
       }
+    }
+  },
+  "recommendationLetter": {
+    "title": "Recommendation letter",
+    "description": "From Denis Bolshakov (Design Lead, ISU manager assistant, SBER).",
+    "content": {
+      "paragraphs": [
+        "Ernest Shuldays worked in my team from October 2024 to October 2025 on the “POTOK” product. His responsibilities included tasks that directly impacted key business metrics.",
+        "His main achievement was a full redesign of the “POTOK” interface. Based on strategic goals and research, Ernest completely refreshed the UI. As a result, CSI increased by 2 points and NPS by 6 pp; we also received positive feedback from key business stakeholders.",
+        "His contribution to the bank’s OKR system deserves special mention: he conceptually developed goal cascading from top management to product teams. Later, he produced target design versions that incorporated project work principles and were approved by stakeholders."
+      ],
+      "bullets": [
+        "Initiated and implemented a UI kit and aligned it with engineering, which significantly increased the release speed of new features.",
+        "Served as a key bridge between analytics and engineering, ensuring seamless communication and thereby reducing the number of questions and discussions.",
+        "Clearly understood how his work affected product metrics and proposed solutions aligned with strategic decisions.",
+        "Worked effectively under urgent tasks that were not planned for the sprint, quickly elaborating concepts and securing final stakeholder approval."
+      ],
+      "closing": "I confidently recommend Ernest Shuldays for Senior/Lead Product Designer roles, especially in teams where a strong focus on hypotheses, data, and business outcomes is critical."
+    },
+    "proof": {
+      "title": "Document",
+      "caption": "Scanned recommendation letter.",
+      "downloadJpg": "Download JPG",
+      "imageAlt": "Scanned recommendation letter"
     }
   },
   "tags": {
@@ -95,13 +119,15 @@
     "backToHome": "Back to home"
   },
   "casesPage": {
-    "title": "Check out my delicious UI ✦",
+    "title": "UI should be such that users want to come back again and again to see how the button is pressed",
     "line1": "Currently, I am designing SBERBANK ✦",
     "line2": "Creator of Appearance Plugin, Stockholm Icons, & Right Question ✦",
     "noCases": "Cases coming soon",
     "telegramButton": "Go to telegram?"
   },
   "cases": {
-    "title": "Cases"
+    "title": "UI Cases",
+    "showMore": "Show more ({count})",
+    "uiElement": "UI Element"
   }
 }

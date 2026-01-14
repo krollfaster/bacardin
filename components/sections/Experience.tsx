@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { fadeIn, staggerContainer } from "@/lib/animations";
+import { Link } from "@/i18n/routing";
 
 interface ExperienceCardProps {
   icon: string;
@@ -57,18 +58,31 @@ const ExperienceCard = ({
       </div>
 
       {/* Область с описанием */}
-      <p className="text-[28px] leading-[38px] font-[500] text-muted-foreground">
+      <p className="text-[28px] leading-[36px] font-[500] text-muted-foreground">
         {description}
       </p>
 
       {/* Область со ссылкой */}
       {link && (
-        <a
-          href={link.url}
-          className="inline-block mt-6 text-[28px] leading-[38px] font-[500] text-[#96C7FB] underline underline-offset-4 hover:opacity-80 transition-opacity"
-        >
-          {link.text}
-        </a>
+        <>
+          {link.url.startsWith("/") ? (
+            <Link
+              href={link.url}
+              className="inline-block mt-6 text-[28px] leading-[36px] font-[500] text-[#96C7FB] underline underline-offset-4 hover:opacity-80 transition-opacity"
+            >
+              {link.text}
+            </Link>
+          ) : (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-6 text-[28px] leading-[36px] font-[500] text-[#96C7FB] underline underline-offset-4 hover:opacity-80 transition-opacity"
+            >
+              {link.text}
+            </a>
+          )}
+        </>
       )}
     </motion.div>
   );

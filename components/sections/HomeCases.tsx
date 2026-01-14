@@ -48,7 +48,8 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
             <CaseCard 
               key={caseItem.id} 
               caseItem={caseItem} 
-              locale={locale} 
+              locale={locale}
+              uiElementLabel={t("uiElement")}
             />
           ))}
         </motion.div>
@@ -76,7 +77,7 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
               className="text-[50px] font-medium"
               style={{ color: "#8BCBF7" }}
             >
-              show more ({totalCasesCount})
+              {t("showMore", { count: totalCasesCount })}
             </span>
           </Link>
         </motion.div>

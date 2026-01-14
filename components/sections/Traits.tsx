@@ -22,10 +22,10 @@ const Trait = ({ title, text, index }: TraitItem & { index: number }) => {
       }}
       className="flex flex-col gap-1"
     >
-      <h3 className="text-[28px] leading-[38px] font-[500] text-foreground">
+      <h3 className="text-[28px] leading-[36px] font-[500] text-foreground">
         {title}
       </h3>
-      <p className="text-[28px] leading-[38px] font-[500] text-muted-foreground">
+      <p className="text-[28px] leading-[36px] font-[500] text-muted-foreground">
         {text}
       </p>
     </motion.div>

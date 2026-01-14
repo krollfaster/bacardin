@@ -27,7 +27,7 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
       style={{ boxShadow: 'inset 0 0 18px rgba(255, 255, 255, 0.04)' }}
     >
       <LaurelIcon size={64} className="mb-4" />
-      <p className="text-[28px] leading-[38px] font-[500] text-muted-foreground">
+      <p className="text-[28px] leading-[36px] font-[500] text-muted-foreground">
         {parts.map((part, i) => (
           <span key={i}>
             {part.type === "highlight" ? (

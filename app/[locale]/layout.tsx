@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Google_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -11,6 +11,11 @@ import "../globals.css";
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin", "latin-ext"],
+});
+
+const googleSans = Google_Sans({
+  variable: "--font-google-sans",
+  subsets: ["cyrillic", "latin"],
 });
 
 export const metadata: Metadata = {
@@ -37,10 +42,14 @@ export default async function LocaleLayout({
   // Получаем сообщения для текущей локали
   const messages = await getMessages();
 
+  // Выбираем шрифт в зависимости от локали
+  const fontVariable = locale === "ru" ? googleSans.variable : spaceGrotesk.variable;
+  const fontClass = locale === "ru" ? "font-google-sans" : "font-sans";
+
   return (
     <html lang={locale} className="dark">
       <body
-        className={`${spaceGrotesk.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${fontVariable} ${fontClass} antialiased bg-background text-foreground`}
       >
         <NextIntlClientProvider messages={messages}>
           <ContactButtons />

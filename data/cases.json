@@ -1,9 +1,9 @@
 [
   {
     "id": "mk9t1qnhu1suxj6t5bm",
-    "slug": "component-slider-tick",
+    "slug": "awesome-slider",
     "type": "component",
-    "title": "Slider Tick!",
+    "title": "Awesome slider",
     "description": "Slider",
     "date": "2026-01-10",
     "category": "design",
@@ -18,14 +18,14 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-12T20:37:54.388Z",
+    "updatedAt": "2026-01-14T14:38:58.306Z",
     "galleryLayout": "stack"
   },
   {
     "id": "mk9tmbkk8rtaei411o",
-    "slug": "app-game-club",
+    "slug": "app-for-game-club-",
     "type": "gallery",
-    "title": "APP Game Club",
+    "title": "APP for Game club ",
     "description": "Product designer with over six years of experience working with mobile and web products. Product designer with over six years of experience working with mobile and web products.",
     "date": "2026-01-11",
     "category": "design",
@@ -48,28 +48,28 @@
     ],
     "componentUrl": "",
     "tags": [
-      "APPP"
+      "IOS APP",
+      "B2C"
     ],
     "content": "test",
     "published": true,
     "featuredOnHome": true,
     "homeOrder": 4,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-12T20:37:54.388Z",
+    "updatedAt": "2026-01-14T14:42:36.127Z",
     "galleryLayout": "masonry"
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
-    "slug": "sber-web-app",
+    "slug": "web-app-for-top-managers-",
     "type": "gallery",
-    "title": "SBER web APP",
+    "title": "Web APP for Top-Managers ",
     "description": "Таск трекер для руководителей",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768245632342-6iywil.png",
     "images": [
       "/images/cases/1768142520062-iry8qc.png",
-      "/images/cases/1768142519920-585fdz.png",
       "/images/cases/1768142520062-cqzc6k.png",
       "/images/cases/1768142519974-6leoni.png",
       "/images/cases/1768142519957-hwx97s.png",
@@ -82,19 +82,20 @@
     ],
     "componentUrl": "",
     "tags": [
-      "APPP"
+      "Web",
+      "B2C/B2E"
     ],
     "content": "",
     "published": true,
     "featuredOnHome": true,
     "homeOrder": 2,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-12T20:37:54.388Z",
+    "updatedAt": "2026-01-14T14:42:18.460Z",
     "galleryLayout": "stack"
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
-    "slug": "component-graph-cursor",
+    "slug": "graph-cursor",
     "type": "component",
     "title": "Graph cursor",
     "description": "dfg",
@@ -106,45 +107,48 @@
     "tags": [],
     "content": "",
     "published": true,
-    "featuredOnHome": true,
-    "homeOrder": 5,
+    "featuredOnHome": false,
+    "homeOrder": null,
     "createdAt": "2026-01-11T17:40:38.872Z",
-    "updatedAt": "2026-01-12T20:37:54.388Z",
+    "updatedAt": "2026-01-14T15:02:09.625Z",
     "galleryLayout": "stack"
   },
   {
     "id": "mkb6qlltgq9abjbichq",
-    "slug": "app-fitness-emotion",
+    "slug": "app-for-fitness-emotion",
     "type": "gallery",
-    "title": "APP Fitness Emotion",
-    "description": "фитнесс эмотиал",
+    "title": "APP for Fitness Emotion",
+    "description": "✦ Успешный редизайн Web-платформы: Рост NPS на 6 п.п., CSI на 2 пункта. Достигнут показатель Pixel Perfect 97% (при KPI 90%). Получена высокая оценка от правления банка.\n\n✦ Разработал и защитил концепт системы каскадирования целей для 300+ команд (внедрение утверждено на 2026 г.).\n\n✦ Внедрил дизайн-систему и процесс дизайн ревью, что кратно сократило Time-to-Market. Повысил качество работы с макетами\n\n✦ В роли Scrum-мастера оптимизировал процессы в команде из 14 человек (фасилитация, менторство, работа с выгоранием сотрудников).\n",
     "date": "2026-01-12",
     "category": "design",
     "coverImage": "/images/cases/1768249470031-7esw3g.png",
     "images": [
       "/images/cases/1768248645890-omvmde.png",
+      "/images/cases/1768248645918-dqdnwx.png",
       "/images/cases/1768248645891-umo751.png",
       "/images/cases/1768248645898-qgzjsl.png",
-      "/images/cases/1768248645898-j7egu9.png",
       "/images/cases/1768248645900-7c2ztg.png",
       "/images/cases/1768248645901-064po2.png",
-      "/images/cases/1768248645918-dqdnwx.png"
+      "/images/cases/1768248645898-j7egu9.png"
     ],
     "galleryLayout": "masonry",
     "componentUrl": "",
-    "tags": [],
+    "tags": [
+      "IOS APP",
+      "B2C"
+    ],
     "content": "",
     "published": true,
     "featuredOnHome": true,
     "homeOrder": 3,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-12T20:37:54.388Z"
+    "updatedAt": "2026-01-14T14:43:24.436Z"
   },
   {
     "id": "mkbmbxy1ltw6szmy33",
-    "slug": "wms-profit-kit",
+    "slug": "wms-for-armada",
     "type": "gallery",
-    "title": "WMS Profit Kit",
+    "title": "WMS for Armada",
     "description": "gfdgdfgfdg dfg",
     "date": "2026-01-12",
     "category": "design",
@@ -160,12 +164,15 @@
     ],
     "galleryLayout": "stack",
     "componentUrl": "",
-    "tags": [],
+    "tags": [
+      "WMS",
+      "B2E"
+    ],
     "content": "",
     "published": true,
-    "featuredOnHome": true,
-    "homeOrder": 6,
+    "featuredOnHome": false,
+    "homeOrder": null,
     "createdAt": "2026-01-12T20:31:33.529Z",
-    "updatedAt": "2026-01-12T20:37:54.388Z"
+    "updatedAt": "2026-01-14T15:01:38.853Z"
   }
 ]

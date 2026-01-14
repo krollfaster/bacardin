@@ -12,6 +12,7 @@ interface CasesListProps {
 
 export const CasesList = ({ cases }: CasesListProps) => {
   const t = useTranslations("casesPage");
+  const tCases = useTranslations("cases");
   const locale = useLocale();
   
   const publishedCases = cases.filter((c) => c.published);
@@ -45,7 +46,8 @@ export const CasesList = ({ cases }: CasesListProps) => {
             <CaseCard 
               key={caseItem.id} 
               caseItem={caseItem} 
-              locale={locale} 
+              locale={locale}
+              uiElementLabel={tCases("uiElement")}
             />
           ))}
         </motion.div>

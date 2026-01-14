@@ -48,7 +48,7 @@ export const GalleryCaseView = ({
       variants={containerVariants}
     >
       {/* Текстовый блок */}
-      <div className="max-w-[760px] mx-auto pt-[120px] px-4 mb-16">
+      <div className="max-w-[860px] mx-auto pt-[240px] px-4 mb-16">
         <motion.h1
           className="text-[50px] leading-[54px] font-bold"
           variants={itemVariants}
