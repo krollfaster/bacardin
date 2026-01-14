@@ -21,6 +21,10 @@ const googleSans = Google_Sans({
 export const metadata: Metadata = {
   title: "Bacardin — Портфолио",
   description: "Портфолио дизайнера и разработчика",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.svg",
+  },
 };
 
 interface LocaleLayoutProps {

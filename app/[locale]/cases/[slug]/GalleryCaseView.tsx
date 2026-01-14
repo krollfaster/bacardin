@@ -55,12 +55,19 @@ export const GalleryCaseView = ({
         >
           {title}
         </motion.h1>
-        <motion.p
-          className="text-[28px] leading-[35px] mt-4 text-muted-foreground"
+        <motion.div
+          className="mt-4"
           variants={itemVariants}
         >
-          {description}
-        </motion.p>
+          {description.split(/\n\n+/).map((paragraph, index) => (
+            <p 
+              key={index}
+              className="text-[28px] leading-[35px] text-muted-foreground whitespace-pre-line mb-6 last:mb-0"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </motion.div>
       </div>
 
       {/* Галерея изображений */}
