@@ -8,7 +8,7 @@
     "title": "Достижения",
     "items": {
       "okr_part1": "Работал с каскадированием OKR в продукте для",
-      "okr_highlight1": "25 000+",
+      "okr_highlight1": "25\u00A0000+",
       "okr_part2": "сотрудников, обеспечивая прозрачность работы с целями у",
       "okr_highlight2": "300+",
       "okr_part3": "Agile команд",
@@ -16,23 +16,29 @@
       "redesign_highlight1": "4",
       "redesign_part2": "доменами сделав их взаимосвязанными, увеличив эффективность руководителей на",
       "redesign_highlight2": "40%",
-      "agile_part1": "Улучшал Agile процессы в команде из",
+      "agile_part1": "Фасилитировал события и улучшал Agile процессы в команде из",
       "agile_highlight1": "14 человек",
       "agile_part2": "в роли",
       "agile_highlight2": "Scrum мастер",
-      "ai_part1": "Внедрял важные",
-      "ai_highlight1": "AI",
-      "ai_part2": "фичи которые улучшали эффективность команд"
+      "ai_part1": "Внедрил и придумал реализацию",
+      "ai_highlight1": "12 AI",
+      "ai_part2": "фич на оптимизацию флоу работы руководителя"
     }
   },
   "experience": {
-    "title": "Опыт работы: 6+",
+    "title": "Опыт работы:",
+    "titleHighlight": "6+",
     "items": {
       "sber": {
         "position": "Staff Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
-        "description": "Отвечал за редизайн и развитием инструмента помошника руководителя для топ менеджмента крупнейшего банка страны",
+        "desc_part1": "Лидировал редизайн B2E/B2C-like экосистемы для",
+        "desc_highlight1": "80+",
+        "desc_part2": "топ-менеджеров и",
+        "desc_highlight2": "25\u00A0000+",
+        "desc_part3": "сотрудников крупнейшего банка. Результат:",
+        "desc_highlight3": "NPS +6 п.п., CSI +2 пункта",
         "link": "Рекомендательное письмо",
         "linkUrl": "/recommendation-letter"
       },
@@ -40,15 +46,25 @@
         "position": "Lead UX Researcher",
         "company": "MEN IN DEV",
         "dates": "2024",
-        "description_part1": "Организовал и проводил исследование по морфированию дизайн системы продукта с",
-        "description_highlight": "MAU 3.2 m",
-        "description_part2": "человек для стейкхолдеров"
+        "desc_part1": "Лидировал UX-исследование редизайна Litnet (MAU",
+        "desc_highlight1": "40 млн",
+        "desc_part2": ", bounce rate",
+        "desc_highlight2": "24%",
+        "desc_part3": "). Провёл",
+        "desc_highlight3": "30+",
+        "desc_part4": "интервью, A/B и юзабилити тестирование, защитил решения перед стейкхолдерами"
       },
       "unitbean": {
-        "position": "Senior UX/UI Designer",
+        "position": "Product Designer",
         "company": "UNITBEAN",
         "dates": "2022 → 2024",
-        "description": "В роли Senior Ux/UI дизайнера ввел проекты студии, проектировал комплексные решения бизнеса ERP/CRM, Мобильные приложения (IOS, ANDROID)",
+        "desc_part1": "Запустил и поддерживал",
+        "desc_highlight1": "3",
+        "desc_part2": "комплексных продукта:",
+        "desc_highlight2": "B2C",
+        "desc_part3": "мобильные приложения и высоконагруженные",
+        "desc_highlight3": "B2E",
+        "desc_part4": "ERP/CRM системы для разных индустрий",
         "link": "Behance кейсы",
         "linkUrl": "https://www.behance.net/bacardin"
       }

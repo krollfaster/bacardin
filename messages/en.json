@@ -16,23 +16,29 @@
       "redesign_highlight1": "4",
       "redesign_part2": "domains making them interconnected, increasing manager efficiency by",
       "redesign_highlight2": "40%",
-      "agile_part1": "Improved Agile processes in a team of",
+      "agile_part1": "Facilitated events and improved Agile processes in a team of",
       "agile_highlight1": "14 people",
       "agile_part2": "as a",
       "agile_highlight2": "Scrum Master",
-      "ai_part1": "Implemented important",
-      "ai_highlight1": "AI",
-      "ai_part2": "features that improved team efficiency"
+      "ai_part1": "Implemented and designed",
+      "ai_highlight1": "12 AI",
+      "ai_part2": "features to optimize manager workflow"
     }
   },
   "experience": {
-    "title": "Experience: 6+",
+    "title": "Experience:",
+    "titleHighlight": "6+",
     "items": {
       "sber": {
         "position": "Staff Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
-        "description": "Responsible for redesign and development of an assistant tool for top management of the country's largest bank",
+        "desc_part1": "Led the redesign of a B2E/B2C-like ecosystem for",
+        "desc_highlight1": "80+",
+        "desc_part2": "C-level executives and",
+        "desc_highlight2": "25,000+",
+        "desc_part3": "employees of the largest bank. Results:",
+        "desc_highlight3": "NPS +6 pp, CSI +2 points",
         "link": "Recommendation letter",
         "linkUrl": "/recommendation-letter"
       },
@@ -40,15 +46,25 @@
         "position": "Lead UX Researcher",
         "company": "MEN IN DEV",
         "dates": "2024",
-        "description_part1": "Organized and conducted research on morphing the design system of a product with",
-        "description_highlight": "MAU 3.2 m",
-        "description_part2": "users for stakeholders"
+        "desc_part1": "Led UX research for Litnet redesign (MAU",
+        "desc_highlight1": "40M",
+        "desc_part2": ", bounce rate",
+        "desc_highlight2": "24%",
+        "desc_part3": "). Conducted",
+        "desc_highlight3": "30+",
+        "desc_part4": "interviews, A/B and usability testing, presented findings to stakeholders"
       },
       "unitbean": {
-        "position": "Senior UX/UI Designer",
+        "position": "Product Designer",
         "company": "UNITBEAN",
         "dates": "2022 → 2024",
-        "description": "As a Senior UX/UI designer led studio projects, designed complex business solutions ERP/CRM, Mobile applications (IOS, ANDROID)",
+        "desc_part1": "Launched and maintained",
+        "desc_highlight1": "3",
+        "desc_part2": "complex products:",
+        "desc_highlight2": "B2C",
+        "desc_part3": "mobile apps and high-load",
+        "desc_highlight3": "B2E",
+        "desc_part4": "ERP/CRM systems across different industries",
         "link": "Behance cases",
         "linkUrl": "https://www.behance.net/bacardin"
       }

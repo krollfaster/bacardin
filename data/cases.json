@@ -125,12 +125,15 @@
     "coverImage": "/images/cases/1768249470031-7esw3g.png",
     "images": [
       "/images/cases/1768248645890-omvmde.png",
-      "/images/cases/1768248645918-dqdnwx.png",
       "/images/cases/1768248645891-umo751.png",
+      "/images/cases/1768248645918-dqdnwx.png",
       "/images/cases/1768248645898-qgzjsl.png",
       "/images/cases/1768248645900-7c2ztg.png",
+      "/images/cases/1768496957274-10cx3n.png",
       "/images/cases/1768248645901-064po2.png",
-      "/images/cases/1768248645898-j7egu9.png"
+      "/images/cases/1768248645898-j7egu9.png",
+      "/images/cases/1768496957272-373s4d.png",
+      "/images/cases/1768496957275-rocu0g.png"
     ],
     "galleryLayout": "masonry",
     "componentUrl": "",
@@ -143,7 +146,7 @@
     "featuredOnHome": true,
     "homeOrder": 2,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-14T21:00:37.694Z"
+    "updatedAt": "2026-01-15T17:11:08.355Z"
   },
   {
     "id": "mkbmbxy1ltw6szmy33",

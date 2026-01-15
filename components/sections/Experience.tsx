@@ -94,7 +94,16 @@ export const Experience = () => {
       position: t("items.sber.position"),
       company: t("items.sber.company"),
       dates: t("items.sber.dates"),
-      description: t("items.sber.description"),
+      description: (
+        <>
+          {t("items.sber.desc_part1")}{" "}
+          <span className="text-foreground">{t("items.sber.desc_highlight1")}</span>{" "}
+          {t("items.sber.desc_part2")}{" "}
+          <span className="text-foreground">{t("items.sber.desc_highlight2")}</span>{" "}
+          {t("items.sber.desc_part3")}{" "}
+          <span className="text-foreground">{t("items.sber.desc_highlight3")}</span>
+        </>
+      ),
       link: {
         text: t("items.sber.link"),
         url: t("items.sber.linkUrl"),
@@ -108,11 +117,13 @@ export const Experience = () => {
       dates: t("items.mid.dates"),
       description: (
         <>
-          {t("items.mid.description_part1")}{" "}
-          <span className="text-foreground">
-            {t("items.mid.description_highlight")}
-          </span>{" "}
-          {t("items.mid.description_part2")}
+          {t("items.mid.desc_part1")}{" "}
+          <span className="text-foreground">{t("items.mid.desc_highlight1")}</span>
+          {t("items.mid.desc_part2")}{" "}
+          <span className="text-foreground">{t("items.mid.desc_highlight2")}</span>
+          {t("items.mid.desc_part3")}{" "}
+          <span className="text-foreground">{t("items.mid.desc_highlight3")}</span>{" "}
+          {t("items.mid.desc_part4")}
         </>
       ),
     },
@@ -121,7 +132,17 @@ export const Experience = () => {
       position: t("items.unitbean.position"),
       company: t("items.unitbean.company"),
       dates: t("items.unitbean.dates"),
-      description: t("items.unitbean.description"),
+      description: (
+        <>
+          {t("items.unitbean.desc_part1")}{" "}
+          <span className="text-foreground">{t("items.unitbean.desc_highlight1")}</span>{" "}
+          {t("items.unitbean.desc_part2")}{" "}
+          <span className="text-foreground">{t("items.unitbean.desc_highlight2")}</span>{" "}
+          {t("items.unitbean.desc_part3")}{" "}
+          <span className="text-foreground">{t("items.unitbean.desc_highlight3")}</span>{" "}
+          {t("items.unitbean.desc_part4")}
+        </>
+      ),
       link: {
         text: t("items.unitbean.link"),
         url: t("items.unitbean.linkUrl"),
@@ -144,7 +165,7 @@ export const Experience = () => {
           variants={fadeIn}
           className="text-[28px] leading-[36px] font-medium text-muted-foreground mb-8"
         >
-          {t("title")}
+          {t("title")} <span className="text-foreground">{t("titleHighlight")}</span>
         </motion.h2>
 
         {/* Карточки опыта */}
