@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { fadeIn, staggerContainer } from "@/lib/animations";
-import { Link } from "@/i18n/routing";
+import { LinkPreview } from "@/components/ui/LinkPreview";
 
 interface ExperienceCardProps {
   icon: string;
@@ -12,7 +12,7 @@ interface ExperienceCardProps {
   company: string;
   dates: string;
   description: React.ReactNode;
-  link?: { text: string; url: string };
+  link?: { text: string; url: string; previewImage?: string };
   index: number;
 }
 
@@ -64,25 +64,15 @@ const ExperienceCard = ({
 
       {/* Область со ссылкой */}
       {link && (
-        <>
-          {link.url.startsWith("/") ? (
-            <Link
-              href={link.url}
-              className="inline-block mt-6 text-[28px] leading-[36px] font-[500] text-[#96C7FB] underline underline-offset-4 hover:opacity-80 transition-opacity"
-            >
-              {link.text}
-            </Link>
-          ) : (
-            <a
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-6 text-[28px] leading-[36px] font-[500] text-[#96C7FB] underline underline-offset-4 hover:opacity-80 transition-opacity"
-            >
-              {link.text}
-            </a>
-          )}
-        </>
+        <div className="mt-6">
+          <LinkPreview
+            href={link.url}
+            previewImage={link.previewImage || "/images/preview-default.png"}
+            isExternal={!link.url.startsWith("/")}
+          >
+            {link.text}
+          </LinkPreview>
+        </div>
       )}
     </motion.div>
   );
@@ -97,7 +87,7 @@ export const Experience = () => {
     company: string;
     dates: string;
     description: React.ReactNode;
-    link?: { text: string; url: string };
+    link?: { text: string; url: string; previewImage?: string };
   }> = [
     {
       icon: "/images/icons/sber.svg",
@@ -108,6 +98,7 @@ export const Experience = () => {
       link: {
         text: t("items.sber.link"),
         url: t("items.sber.linkUrl"),
+        previewImage: "/images/letter.jpg",
       },
     },
     {
@@ -134,6 +125,7 @@ export const Experience = () => {
       link: {
         text: t("items.unitbean.link"),
         url: t("items.unitbean.linkUrl"),
+        previewImage: "/images/behance-preview.jpg",
       },
     },
   ];
