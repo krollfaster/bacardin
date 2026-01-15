@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
 import type { GalleryLayout } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -80,30 +81,56 @@ export const GalleryCaseView = ({
   );
 };
 
-// Стек - картинки друг под другом
+// Компонент картинки с Scale + Opacity эффектом при скролле
+function ScaleOnScrollImage({ 
+  image, 
+  title, 
+  index 
+}: { 
+  image: string; 
+  title: string; 
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start 0.7"]
+  });
+  
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
+  
+  return (
+    <motion.div 
+      ref={ref}
+      style={{ scale, opacity }}
+      className="w-full rounded-2xl overflow-hidden origin-center"
+    >
+      <Image
+        src={image}
+        alt={`${title} - изображение ${index + 1}`}
+        width={1920}
+        height={1080}
+        className="w-full h-auto"
+        sizes="(max-width: 768px) 100vw, calc(100vw - 128px)"
+      />
+    </motion.div>
+  );
+}
+
+// Стек - картинки друг под другом с Scale + Opacity эффектом
 function StackGallery({ images, title }: { images: string[]; title: string }) {
   return (
-    <motion.div
-      className="px-4 md:px-16 flex flex-col gap-8"
-      variants={containerVariants}
-    >
+    <div className="px-4 md:px-16 flex flex-col gap-8">
       {images.map((image, index) => (
-        <motion.div
-          key={index}
-          className="w-full rounded-2xl overflow-hidden"
-          variants={itemVariants}
-        >
-          <Image
-            src={image}
-            alt={`${title} - изображение ${index + 1}`}
-            width={1920}
-            height={1080}
-            className="w-full h-auto"
-            sizes="(max-width: 768px) 100vw, calc(100vw - 128px)"
-          />
-        </motion.div>
+        <ScaleOnScrollImage 
+          key={index} 
+          image={image} 
+          title={title} 
+          index={index} 
+        />
       ))}
-    </motion.div>
+    </div>
   );
 }
 
@@ -113,7 +140,6 @@ function MasonryGallery({ images, title }: { images: string[]; title: string }) 
     <motion.div
       className={cn(
         "px-4 md:px-8 lg:px-16",
-        // CSS columns для masonry эффекта
         "columns-1 sm:columns-2 lg:columns-3",
         "gap-4 md:gap-6"
       )}
