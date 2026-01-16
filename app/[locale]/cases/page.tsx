@@ -2,10 +2,12 @@ import { CasesHero } from "@/components/sections/CasesHero";
 import { CasesList } from "@/components/sections/CasesList";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { CaseNavigation } from "@/components/layout/CaseNavigation";
-import { getAllCases } from "@/lib/cases";
+import { getPublishedCases } from "@/lib/cases";
 
 export default async function CasesPage() {
-  const cases = await getAllCases();
+  const allCases = await getPublishedCases();
+  // Показываем только кейсы типа "component"
+  const componentCases = allCases.filter(c => c.type === "component");
 
   return (
     <main className="min-h-screen">
@@ -17,7 +19,7 @@ export default async function CasesPage() {
         <LanguageSwitcher />
       </div>
       <CasesHero />
-      <CasesList cases={cases} />
+      <CasesList cases={componentCases} />
     </main>
   );
 }

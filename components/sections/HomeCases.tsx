@@ -4,14 +4,16 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { fadeIn, staggerContainer } from "@/lib/animations";
 import { CaseCard } from "@/components/ui/CaseCard";
+import { AllCasesButton } from "@/components/ui/AllCasesButton";
 import type { Case } from "@/types";
 
 interface HomeCasesProps {
   cases: Case[];
   locale: string;
+  totalCasesCount: number;
 }
 
-export const HomeCases = ({ cases, locale }: HomeCasesProps) => {
+export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) => {
   const t = useTranslations("cases");
 
   // Если нет кейсов для отображения, не рендерим секцию
@@ -51,6 +53,12 @@ export const HomeCases = ({ cases, locale }: HomeCasesProps) => {
           ))}
         </motion.div>
 
+        {/* Кнопка перехода ко всем кейсам */}
+        <AllCasesButton 
+          locale={locale}
+          totalCount={totalCasesCount}
+          label={t("vibecodeCases")}
+        />
       </div>
     </motion.section>
   );
