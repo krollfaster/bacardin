@@ -18,6 +18,9 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
   const { playHoverSound } = useHoverSound();
   const [isHovering, setIsHovering] = useState(false);
 
+  // Выбираем title по локали
+  const title = locale === "en" && caseItem.title_en ? caseItem.title_en : caseItem.title;
+
   // Motion values для отслеживания позиции курсора (0-1)
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
@@ -114,7 +117,7 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
                 >
                   <Image
                     src={caseItem.coverImage}
-                    alt={caseItem.title}
+                    alt={title}
                     fill
                     className="object-cover"
                   />
@@ -140,7 +143,7 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
               }}
             >
               <span className="text-lg font-medium text-foreground truncate">
-                {caseItem.title}
+                {title}
               </span>
               <span className="text-lg text-muted-foreground whitespace-nowrap ml-4">
                 {caseItem.type === "component" 
