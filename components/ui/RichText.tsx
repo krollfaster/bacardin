@@ -152,7 +152,7 @@ export function RichText({ content, className }: RichTextProps) {
             return (
               <motion.p
                 key={index}
-                className="text-[28px] leading-[35px] text-muted-foreground"
+                className="text-[28px] leading-[35px] text-muted-foreground font-medium"
                 variants={itemVariants}
               >
                 {parseInlineFormatting(block.items.join(" "))}
@@ -163,12 +163,12 @@ export function RichText({ content, className }: RichTextProps) {
             return (
               <motion.ol
                 key={index}
-                className="space-y-3 text-[28px] leading-[35px] text-muted-foreground"
+                className="space-y-3 text-[28px] leading-[35px] text-muted-foreground font-medium"
                 variants={itemVariants}
               >
                 {block.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="flex gap-3">
-                    <span className="text-foreground font-medium min-w-[32px]">
+                  <li key={itemIndex} className="flex">
+                    <span className="text-foreground font-medium w-[32px] shrink-0">
                       {itemIndex + 1}.
                     </span>
                     <span>{parseInlineFormatting(item)}</span>
@@ -181,11 +181,12 @@ export function RichText({ content, className }: RichTextProps) {
             return (
               <motion.ul
                 key={index}
-                className="space-y-3 text-[28px] leading-[35px] text-muted-foreground pl-8"
+                className="space-y-3 text-[28px] leading-[35px] text-muted-foreground font-medium"
                 variants={itemVariants}
               >
                 {block.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="list-disc">
+                  <li key={itemIndex} className="flex">
+                    <span className="text-muted-foreground w-[32px] shrink-0">•</span>
                     <span>{parseInlineFormatting(item)}</span>
                   </li>
                 ))}
