@@ -15,17 +15,17 @@
     ],
     "content": "test slider",
     "published": true,
-    "featuredOnHome": true,
-    "homeOrder": 4,
+    "featuredOnHome": false,
+    "homeOrder": null,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-14T21:00:13.617Z",
+    "updatedAt": "2026-01-16T21:09:32.185Z",
     "galleryLayout": "stack"
   },
   {
     "id": "mk9tmbkk8rtaei411o",
-    "slug": "app-for-game-club-",
+    "slug": "ios-app-dlya-igrovogo-kluba",
     "type": "gallery",
-    "title": "APP for Game club ",
+    "title": "IOS APP для игрового клуба",
     "description": " ",
     "date": "2026-01-11",
     "category": "design",
@@ -56,15 +56,17 @@
     "featuredOnHome": true,
     "homeOrder": 3,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-14T20:59:45.606Z",
-    "galleryLayout": "masonry"
+    "updatedAt": "2026-01-16T21:09:32.185Z",
+    "galleryLayout": "masonry",
+    "title_en": "IOS APP for Game club ",
+    "description_en": ""
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
-    "slug": "web-app-for-top-managers-",
+    "slug": "web-app-dlya-top-menedzherov",
     "type": "gallery",
-    "title": "Web APP for Top-Managers ",
-    "description": " ",
+    "title": "Web APP для топ-менеджеров",
+    "description": "Продукт: ПОТОК (Agile-инструмент Сбера) | Роль: Staff Product Designer Цель: Унификация UX и сокращение Time-to-Market | Статус: Release & Scale\n\n**Проблема.** Продукт вырос из дополнения в самостоятельный инструмент, но развивался фрагментарно. Это привело к трем критическим барьерам:\n1. UX/Design долг: Отсутствие единой логики делало интерфейс сложным для обучения и работы.\n2. Архитектурный тупик: Текущая структура не позволяла внедрить новый критичный слой — «Проекты».\n3. Медленная разработка: Отсутствие Дизайн-системы (DS) тормозило вывод новых фич (Time-to-Market).\n\n**Цели.** Проведен полный редизайн продукта с переходом на промышленную дизайн-систему.\n- Информационная архитектура: Внедрена новая иерархия (Цели банка → Проекты → Задачи → Заметки). Связаны разорванные модули.\n- Дизайн-система: Миграция на ANT Design System. Это унифицировало UI и ускорило верстку.\n- Новые домены: Создан фундамент для сущности «Проекты» и AI-ассистента (автопротоколы встреч, саммари).\n- Процесс: Инкрементальный редизайн параллельно с продуктовой разработкой (поддержка старой и новой версии UI).\n\n**Ключевые метрики.** Мы оценивали успех через удовлетворенность пользователей и качественную валидацию от топ-менеджмента.\n\n**Процесс работы.** Чтобы не останавливать развитие продукта, внедрение шло в 4 этапа:\n1. Фундамент: Обновление навигации и структуры контента (Side bar).\n2. System: Внедрение токенов и стилей ANT Design System.\n3. Scale: Внедрение слоя «Проекты» (масштабируемость).\n4. UX Polish: Последовательное обновление модулей (Задачи, Заметки) и устранение долга.\n\n**Риск менеджмент.** \n- Риск: Сопротивление изменениям со стороны консервативных пользователей. Митигация: Провели серию UX-интервью до релиза и быстрые циклы сбора ОС после.\n- Риск: Рассинхрон с параллельной разработкой фич. Митигация: Регулярная синхронизация плана редизайна с бэклогом фич, чтобы новые фичи сразу делались на новых компонентах.\n\n**Итоги.** «ПОТОК» трансформировался из разрозненного набора модулей в единую платформу для продуктивности Agile-команд.\n- Заложен фундамент для AI-ассистента.\n- Обеспечена масштабируемость (слой «Проекты»).\n- Единый UI/UX код во всех модулях.",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768245632342-6iywil.png",
@@ -91,8 +93,10 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-14T21:13:43.861Z",
-    "galleryLayout": "stack"
+    "updatedAt": "2026-01-16T21:09:32.185Z",
+    "galleryLayout": "stack",
+    "title_en": "Web APP for Top-Managers ",
+    "description_en": "Product: POTOK (Sber’s Agile tool) | Role: Staff Product Designer Goal: UX Unification and reducing Time-to-Market | Status: Release & Scale\n\n**Problem.** The product evolved from an add-on into a standalone tool, but it developed in a fragmented way. This led to three critical barriers:\n1. UX/Design Debt: The lack of a unified logic made the interface difficult to learn and operate.\n2. Architectural Dead End: The existing structure did not allow for the implementation of a critical new layer — \"Projects.\"\n3. Slow Development: The absence of a Design System (DS) slowed down the release of new features (Time-to-Market).\n\n**Goals.** Conducted a full product redesign with a transition to an enterprise-grade design system.\n- Information Architecture: Implemented a new hierarchy (Bank Goals → Projects → Tasks → Notes). Connected previously disconnected modules.\n- Design System: Migration to the ANT Design System. This unified the UI and accelerated frontend development.\n- New Domains: Created the foundation for the \"Projects\" entity and the AI Assistant (automated meeting minutes, summaries).\n- Process: Incremental redesign ran parallel to product development (supporting both the old and new UI versions).\n\n**Key Metrics.** We evaluated success through user satisfaction and qualitative validation from top management.\n\n**Timeline & Scope.** To avoid halting product evolution, implementation was carried out in 4 stages:\n1. Foundation: Updating navigation and content structure (Sidebar).\n2. System: Implementing ANT Design System tokens and styles.\n3. Scale: Implementing the \"Projects\" layer (scalability).\n4. UX Polish: Sequential updates of modules (Tasks, Notes) and debt elimination.\n\n**Risks.** \n- Risk: Resistance to change from conservative users. Mitigation: Conducted a series of UX interviews prior to release and utilized rapid feedback loops post-release.\n- Risk: Misalignment with parallel feature development. Mitigation: Regular synchronization of the redesign plan with the feature backlog to ensure new features were built immediately using new components.\n\n**Outcome.** \"POTOK\" transformed from a scattered set of modules into a unified productivity platform for Agile teams.\n- Laid the foundation for the AI Assistant.\n- Ensured scalability (via the \"Projects\" layer).\n- Established a unified UI/UX code base across all modules."
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
@@ -111,14 +115,14 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-11T17:40:38.872Z",
-    "updatedAt": "2026-01-14T21:00:30.276Z",
+    "updatedAt": "2026-01-16T21:09:32.185Z",
     "galleryLayout": "stack"
   },
   {
     "id": "mkb6qlltgq9abjbichq",
-    "slug": "app-for-fitness-emotion",
+    "slug": "ios-app-dlya-fitnesa",
     "type": "gallery",
-    "title": "APP for Fitness Emotion",
+    "title": "IOS APP для фитнеса",
     "description": " ",
     "date": "2026-01-12",
     "category": "design",
@@ -146,7 +150,9 @@
     "featuredOnHome": true,
     "homeOrder": 2,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-15T17:11:08.355Z"
+    "updatedAt": "2026-01-16T21:09:32.185Z",
+    "title_en": "APP for Fitness Emotion",
+    "description_en": ""
   },
   {
     "id": "mkbmbxy1ltw6szmy33",
@@ -177,13 +183,13 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-12T20:31:33.529Z",
-    "updatedAt": "2026-01-14T21:19:07.692Z"
+    "updatedAt": "2026-01-16T21:09:32.185Z"
   },
   {
     "id": "mkejkh4k9ahs3yeqhrm",
-    "slug": "erp-for-game-club",
+    "slug": "erp-dlya-igrovogo-kluba",
     "type": "gallery",
-    "title": "ERP for Game club",
+    "title": "ERP для игрового клуба",
     "description": " ",
     "date": "2026-01-14",
     "category": "design",
@@ -213,9 +219,11 @@
     ],
     "content": "",
     "published": true,
-    "featuredOnHome": false,
-    "homeOrder": null,
+    "featuredOnHome": true,
+    "homeOrder": 4,
     "createdAt": "2026-01-14T21:37:31.316Z",
-    "updatedAt": "2026-01-14T21:40:46.917Z"
+    "updatedAt": "2026-01-16T21:09:32.185Z",
+    "title_en": "ERP for Game club",
+    "description_en": ""
   }
 ]

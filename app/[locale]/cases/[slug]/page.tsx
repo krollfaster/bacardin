@@ -12,7 +12,7 @@ interface CasePageProps {
 }
 
 export default async function CasePage({ params }: CasePageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const caseData = await getCaseBySlug(slug);
 
   // Если кейс не найден или не опубликован - 404
@@ -20,18 +20,22 @@ export default async function CasePage({ params }: CasePageProps) {
     notFound();
   }
 
+  // Определяем title и description по локали
+  const title = locale === "en" && caseData.title_en ? caseData.title_en : caseData.title;
+  const description = locale === "en" ? caseData.description_en : caseData.description;
+
   return (
     <main className="min-h-screen bg-background">
       <CaseNavigation />
 
       {caseData.type === "component" && caseData.componentUrl && (
-        <ComponentCaseView componentUrl={caseData.componentUrl} title={caseData.title} />
+        <ComponentCaseView componentUrl={caseData.componentUrl} title={title} />
       )}
 
       {caseData.type === "gallery" && (
         <GalleryCaseView
-          title={caseData.title}
-          description={caseData.description}
+          title={title}
+          description={description}
           images={caseData.images}
           layout={caseData.galleryLayout}
         />

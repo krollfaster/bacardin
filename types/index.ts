@@ -10,7 +10,9 @@ export interface Case {
   slug: string;
   type: CaseType;
   title: string;
+  title_en?: string; // Английская версия названия
   description: string;
+  description_en?: string; // Английская версия описания
   date: string; // Дата кейса
   category: string;
   coverImage: string;
@@ -32,7 +34,9 @@ export interface Case {
 export interface CreateCaseData {
   type: CaseType;
   title: string;
+  title_en?: string;
   description: string;
+  description_en?: string;
   date: string;
   category: string;
   coverImage: string;
@@ -50,8 +54,10 @@ export interface CreateCaseData {
 export interface UpdateCaseData {
   type?: CaseType;
   title?: string;
+  title_en?: string;
   slug?: string;
   description?: string;
+  description_en?: string;
   date?: string;
   category?: string;
   coverImage?: string;

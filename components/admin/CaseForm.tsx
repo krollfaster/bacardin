@@ -38,7 +38,9 @@ interface CaseFormProps {
 export interface CaseFormData {
   type: CaseType;
   title: string;
+  title_en: string;
   description: string;
+  description_en: string;
   date: string;
   category: string;
   coverImage: string;
@@ -67,7 +69,9 @@ export function CaseForm({
   const [formData, setFormData] = useState<CaseFormData>({
     type: "gallery",
     title: "",
+    title_en: "",
     description: "",
+    description_en: "",
     date: new Date().toISOString().split("T")[0],
     category: "design",
     coverImage: "",
@@ -79,6 +83,8 @@ export function CaseForm({
     published: false,
     featuredOnHome: false,
   });
+
+  const [activeLang, setActiveLang] = useState<"ru" | "en">("ru");
 
   const [newTag, setNewTag] = useState("");
   const [elementFolders, setElementFolders] = useState<ElementFolder[]>([]);
@@ -112,7 +118,9 @@ export function CaseForm({
       setFormData({
         type: initialData.type || "gallery",
         title: initialData.title,
+        title_en: initialData.title_en || "",
         description: initialData.description,
+        description_en: initialData.description_en || "",
         date: initialData.date || new Date().toISOString().split("T")[0],
         category: initialData.category,
         coverImage: initialData.coverImage,
@@ -279,18 +287,49 @@ export function CaseForm({
         </Select>
       </div>
 
+      {/* Табы языка */}
+      <div className="flex gap-2 p-1 rounded-lg bg-muted/50 w-fit">
+        <button
+          type="button"
+          onClick={() => setActiveLang("ru")}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            activeLang === "ru"
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          🇷🇺 Русский
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveLang("en")}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            activeLang === "en"
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          🇬🇧 English
+        </button>
+      </div>
+
       {/* Основные поля */}
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="title">Название *</Label>
+          <Label htmlFor="title">
+            Название {activeLang === "ru" ? "*" : "(опционально)"}
+          </Label>
           <Input
             id="title"
-            value={formData.title}
+            value={activeLang === "ru" ? formData.title : formData.title_en}
             onChange={(e) =>
-              setFormData((prev) => ({ ...prev, title: e.target.value }))
+              setFormData((prev) => ({
+                ...prev,
+                [activeLang === "ru" ? "title" : "title_en"]: e.target.value,
+              }))
             }
-            placeholder="Название кейса"
-            required
+            placeholder={activeLang === "ru" ? "Название кейса" : "Case title"}
+            required={activeLang === "ru"}
           />
         </div>
         <div className="space-y-2">
@@ -309,17 +348,37 @@ export function CaseForm({
 
       {/* Описание */}
       <div className="space-y-2">
-        <Label htmlFor="description">Описание *</Label>
+        <Label htmlFor="description">
+          Описание {activeLang === "ru" ? "*" : "(опционально)"}
+        </Label>
         <Textarea
           id="description"
-          value={formData.description}
+          value={activeLang === "ru" ? formData.description : formData.description_en}
           onChange={(e) =>
-            setFormData((prev) => ({ ...prev, description: e.target.value }))
+            setFormData((prev) => ({
+              ...prev,
+              [activeLang === "ru" ? "description" : "description_en"]: e.target.value,
+            }))
           }
-          placeholder="Краткое описание кейса"
-          rows={3}
-          required
+          placeholder={
+            activeLang === "ru"
+              ? "Описание кейса с форматированием..."
+              : "Case description with formatting..."
+          }
+          rows={8}
+          required={activeLang === "ru"}
+          className="font-mono text-sm"
         />
+        <div className="p-3 rounded-lg bg-muted/50 border border-border text-xs text-muted-foreground space-y-2">
+          <p className="font-medium text-foreground">Форматирование текста:</p>
+          <div className="grid grid-cols-2 gap-2">
+            <div><code className="bg-muted px-1 rounded">**текст**</code> — выделенный белым</div>
+            <div><code className="bg-muted px-1 rounded">*текст*</code> — курсив</div>
+            <div><code className="bg-muted px-1 rounded">1. текст</code> — нумерованный список</div>
+            <div><code className="bg-muted px-1 rounded">- текст</code> — маркированный список</div>
+          </div>
+          <p className="text-muted-foreground/70">Пустая строка разделяет блоки текста</p>
+        </div>
       </div>
 
       {/* Категория */}

@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useRef } from "react";
 import type { GalleryLayout } from "@/types";
 import { cn } from "@/lib/utils";
+import { RichText } from "@/components/ui/RichText";
 
 interface GalleryCaseViewProps {
   title: string;
-  description: string;
+  description?: string; // Опционально - может отсутствовать для EN версии
   images: string[];
   layout?: GalleryLayout;
 }
@@ -56,19 +57,14 @@ export const GalleryCaseView = ({
         >
           {title}
         </motion.h1>
-        <motion.div
-          className="mt-4"
-          variants={itemVariants}
-        >
-          {description.split(/\n\n+/).map((paragraph, index) => (
-            <p 
-              key={index}
-              className="text-[28px] leading-[35px] text-muted-foreground whitespace-pre-line mb-6 last:mb-0"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </motion.div>
+        {description && description.trim() && (
+          <motion.div
+            className="mt-4"
+            variants={itemVariants}
+          >
+            <RichText content={description} />
+          </motion.div>
+        )}
       </div>
 
       {/* Галерея изображений */}
