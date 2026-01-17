@@ -34,7 +34,7 @@ export const CasesList = ({ cases }: CasesListProps) => {
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
-      className="pt-24 pb-24"
+      className="pt-16 pb-64"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Сетка кейсов */}

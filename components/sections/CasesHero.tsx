@@ -13,26 +13,9 @@ export const CasesHero = () => {
       initial="hidden"
       animate="visible"
       variants={fadeIn}
-      className="pt-36"
+      className="pt-60"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
-        {/* Аватарка */}
-        <motion.div
-          variants={slideUp}
-          className="mb-16"
-        >
-          <div className="w-[265px] h-[245px] rounded-[90px] overflow-hidden">
-            <Image
-              src="/images/cases-avatar.jpg"
-              alt="Designer avatar"
-              width={265}
-              height={245}
-              className="w-full h-full object-cover"
-              priority
-            />
-          </div>
-        </motion.div>
-
         {/* Текст заголовка */}
         <motion.div variants={slideUp}>
           <p className="text-[50px] leading-[1.1] font-medium text-muted-foreground">

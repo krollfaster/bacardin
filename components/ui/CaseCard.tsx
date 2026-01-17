@@ -49,7 +49,7 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
     damping: 25,
   });
 
-  // Градиент spotlight, следующий за курсором
+  // Градиент spotlight, следующий за курсором (белый)
   const spotlightBackground = useMotionTemplate`
     radial-gradient(
       500px circle at ${mouseX}px ${mouseY}px,
@@ -57,6 +57,23 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
       transparent 70%
     )
   `;
+
+  // Радужный градиент spotlight для component карточек
+  const rainbowSpotlightBackground = useMotionTemplate`
+    radial-gradient(
+      500px 500px at ${mouseX}px ${mouseY}px,
+      rgba(255, 80, 80, 0.4),
+      rgba(255, 180, 50, 0.4) 20%,
+      rgba(50, 255, 120, 0.4) 40%,
+      rgba(50, 180, 255, 0.40) 60%,
+      rgba(180, 50, 255, 0.40) 80%,
+      transparent 100%
+    )
+  `;
+
+  // Выбираем градиент в зависимости от типа карточки
+  const isComponent = caseItem.type === "component";
+  const currentSpotlight = isComponent ? rainbowSpotlightBackground : spotlightBackground;
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -97,11 +114,11 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
           <article 
             className="relative h-[380px] rounded-[28px] p-3 flex flex-col gap-3 cursor-pointer group bg-[#1F1C18] overflow-hidden"
           >
-            {/* Spotlight gradient overlay */}
+            {/* Spotlight gradient overlay - радужный для component карточек */}
             <motion.div
               className="absolute inset-0 rounded-[28px] pointer-events-none z-0 transition-opacity duration-300"
               style={{ 
-                background: spotlightBackground,
+                background: currentSpotlight,
                 opacity: isHovering ? 1 : 0,
               }}
             />
