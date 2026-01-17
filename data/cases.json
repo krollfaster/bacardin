@@ -1,9 +1,9 @@
 [
   {
     "id": "mk9t1qnhu1suxj6t5bm",
-    "slug": "slider",
+    "slug": "slayder",
     "type": "component",
-    "title": "Slider",
+    "title": "Слайдер",
     "description": " ",
     "date": "2026-01-10",
     "category": "design",
@@ -18,9 +18,9 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-17T14:21:01.274Z",
+    "updatedAt": "2026-01-17T15:22:18.640Z",
     "galleryLayout": "stack",
-    "title_en": "Слайдер",
+    "title_en": "Slider",
     "description_en": ""
   },
   {
