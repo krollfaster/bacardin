@@ -47,11 +47,11 @@ const ExperienceCard = ({
           height={52}
           className="flex-shrink-0"
         />
-        <div className="flex flex-col">
-          <h3 className="text-[28px] leading-[26px] font-medium text-foreground">
+        <div className="flex flex-col min-w-0 flex-1">
+          <h3 className="text-[28px] leading-[26px] font-medium text-foreground truncate">
             {position} · {company}
           </h3>
-          <span className="text-[28px] leading-[26px] font-medium text-muted-foreground mt-3">
+          <span className="text-[28px] leading-[26px] font-medium text-muted-foreground mt-3 truncate">
             {dates}
           </span>
         </div>
@@ -169,7 +169,7 @@ export const Experience = () => {
         </motion.h2>
 
         {/* Карточки опыта */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 md:gap-8">
           {experiences.map((exp, index) => (
             <ExperienceCard
               key={index}

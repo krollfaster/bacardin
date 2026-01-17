@@ -107,17 +107,24 @@ export const AllCasesButton = ({ locale, totalCount, label }: AllCasesButtonProp
             >
               {/* Левая часть: иконка + текст */}
               <div className="flex items-center gap-4">
+                {/* Иконка скрыта на мобильных */}
                 <Image
                   src="/images/icons/code.svg"
                   alt="Code"
                   width={54}
                   height={54}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 hidden md:block"
                 />
+                {/* Полный текст на десктопе, короткий на мобильных */}
                 <span 
-                  className="text-[50px] font-medium leading-[54px] text-muted-foreground"
+                  className="text-[50px] font-medium leading-[54px] text-muted-foreground hidden md:inline"
                 >
                   {label}
+                </span>
+                <span 
+                  className="text-[50px] font-medium leading-[54px] text-muted-foreground md:hidden"
+                >
+                  Vibecode
                 </span>
               </div>
               
