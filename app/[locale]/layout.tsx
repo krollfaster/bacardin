@@ -3,6 +3,7 @@ import { Space_Grotesk, Google_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactButtons } from "@/components/layout/ContactButtons";
 import { routing } from "@/i18n/routing";
@@ -60,6 +61,7 @@ export default async function LocaleLayout({
           {children}
           <Toaster />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
