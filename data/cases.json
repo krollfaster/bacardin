@@ -127,7 +127,7 @@
     "slug": "ios-app-dlya-fitnesa",
     "type": "gallery",
     "title": "IOS APP для фитнеса",
-    "description": " ",
+    "description": "Скоро тут будет описание кейса! Пока в работе...",
     "date": "2026-01-12",
     "category": "design",
     "coverImage": "/images/cases/1768249470031-7esw3g.png",
@@ -154,16 +154,16 @@
     "featuredOnHome": true,
     "homeOrder": 2,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-16T21:09:32.185Z",
+    "updatedAt": "2026-01-18T20:36:09.479Z",
     "title_en": "APP for Fitness Emotion",
-    "description_en": ""
+    "description_en": "A case study will be posted here soon! It's still in development..."
   },
   {
     "id": "mkbmbxy1ltw6szmy33",
-    "slug": "wms-for-armada",
+    "slug": "wms-modul-skladov",
     "type": "gallery",
-    "title": "WMS for Armada",
-    "description": " ",
+    "title": "WMS модуль складов",
+    "description": "Скоро тут будет описание кейса! Пока в работе... ",
     "date": "2026-01-12",
     "category": "design",
     "coverImage": "/images/cases/1768249881758-ccjxdn.png",
@@ -187,7 +187,9 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-12T20:31:33.529Z",
-    "updatedAt": "2026-01-16T21:09:32.185Z"
+    "updatedAt": "2026-01-18T20:37:41.016Z",
+    "title_en": "WMS for Armada",
+    "description_en": "A case study will be posted here soon! It's still in development..."
   },
   {
     "id": "mkejkh4k9ahs3yeqhrm",
