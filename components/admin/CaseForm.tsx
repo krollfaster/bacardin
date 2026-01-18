@@ -372,6 +372,7 @@ export function CaseForm({
         <div className="p-3 rounded-lg bg-muted/50 border border-border text-xs text-muted-foreground space-y-2">
           <p className="font-medium text-foreground">Форматирование текста:</p>
           <div className="grid grid-cols-2 gap-2">
+            <div><code className="bg-muted px-1 rounded">## Заголовок</code> — заголовок секции</div>
             <div><code className="bg-muted px-1 rounded">**текст**</code> — выделенный белым</div>
             <div><code className="bg-muted px-1 rounded">*текст*</code> — курсив</div>
             <div><code className="bg-muted px-1 rounded">1. текст</code> — нумерованный список</div>

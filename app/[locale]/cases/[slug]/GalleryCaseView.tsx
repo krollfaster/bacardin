@@ -59,7 +59,7 @@ export const GalleryCaseView = ({
         </motion.h1>
         {description && description.trim() && (
           <motion.div
-            className="mt-4"
+            className="mt-[18px]"
             variants={itemVariants}
           >
             <RichText content={description} />
