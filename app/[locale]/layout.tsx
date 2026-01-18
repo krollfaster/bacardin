@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactButtons } from "@/components/layout/ContactButtons";
 import { routing } from "@/i18n/routing";
@@ -62,6 +63,7 @@ export default async function LocaleLayout({
           <Toaster />
         </NextIntlClientProvider>
         <Analytics />
+        <GoogleAnalytics gaId="G-YXG782L92T" />
       </body>
     </html>
   );
