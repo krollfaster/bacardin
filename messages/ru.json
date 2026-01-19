@@ -2,7 +2,7 @@
   "hero": {
     "name": "Эрнест фон Шульдайс",
     "status": "(Ищу работу)",
-    "description": "Lead Product Designer ⇢ Редизайн продукта для топ-менеджмента крупнейшего банка России"
+    "description": "Staff Product Designer ⇢ Редизайн продукта для топ-менеджмента крупнейшего банка России"
   },
   "achievements": {
     "title": "Достижения",
@@ -30,7 +30,7 @@
     "titleHighlight": "6+",
     "items": {
       "sber": {
-        "position": "Senior Product Designer",
+        "position": "Staff Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
         "desc_part1": "Лидировал редизайн B2E/B2C-like экосистемы для",
