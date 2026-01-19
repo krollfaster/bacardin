@@ -2,7 +2,7 @@
   "hero": {
     "name": "Ernest von Shuldays",
     "status": "(Looking for work)",
-    "description": "Lead (Staff) Product Designer ⇢ Product redesign for the top management of Russia's largest bank"
+    "description": "Lead Product Designer ⇢ Product redesign for the top management of Russia's largest bank"
   },
   "achievements": {
     "title": "Achievements",
@@ -30,7 +30,7 @@
     "titleHighlight": "6+",
     "items": {
       "sber": {
-        "position": "Lead (Staff) Product Designer",
+        "position": "Senior Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
         "desc_part1": "Led the redesign of a B2E/B2C-like ecosystem for",
