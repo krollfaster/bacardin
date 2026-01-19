@@ -2,7 +2,7 @@
   "hero": {
     "name": "Эрнест фон Шульдайс",
     "status": "(Ищу работу)",
-    "description": "Staff Product Designer ⇢ Редизайн продукта для топ-менеджмента крупнейшего банка России"
+    "description": "Lead (Staff) Product Designer ⇢ Редизайн продукта для топ-менеджмента крупнейшего банка России"
   },
   "achievements": {
     "title": "Достижения",
@@ -30,7 +30,7 @@
     "titleHighlight": "6+",
     "items": {
       "sber": {
-        "position": "Staff Product Designer",
+        "position": "Lead (Staff) Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
         "desc_part1": "Лидировал редизайн B2E/B2C-like экосистемы для",
@@ -45,7 +45,7 @@
       "mid": {
         "position": "Lead UX Researcher",
         "company": "MEN IN DEV",
-        "dates": "2024",
+        "dates": "2024 (Проектная деятельность на 2 месяца)",
         "desc_part1": "Лидировал UX-исследование редизайна Litnet (MAU",
         "desc_highlight1": "40 млн",
         "desc_part2": ", bounce rate",
@@ -142,7 +142,7 @@
     "telegramButton": "Go to telegram?"
   },
   "cases": {
-    "title": "UI Кейсы",
+    "title": "UI Кейсы (Нажмите на карточку для просмотра)",
     "showMore": "Показать еще ({count})",
     "uiElement": "UI Элемент",
     "vibecodeCases": "Vibecode кейсы"

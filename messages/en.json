@@ -2,7 +2,7 @@
   "hero": {
     "name": "Ernest von Shuldays",
     "status": "(Looking for work)",
-    "description": "Staff Product Designer ⇢ Product redesign for the top management of Russia's largest bank"
+    "description": "Lead (Staff) Product Designer ⇢ Product redesign for the top management of Russia's largest bank"
   },
   "achievements": {
     "title": "Achievements",
@@ -30,7 +30,7 @@
     "titleHighlight": "6+",
     "items": {
       "sber": {
-        "position": "Staff Product Designer",
+        "position": "Lead (Staff) Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
         "desc_part1": "Led the redesign of a B2E/B2C-like ecosystem for",
@@ -45,7 +45,7 @@
       "mid": {
         "position": "Lead UX Researcher",
         "company": "MEN IN DEV",
-        "dates": "2024",
+        "dates": "2024 (Project)",
         "desc_part1": "Led UX research for Litnet redesign (MAU",
         "desc_highlight1": "40M",
         "desc_part2": ", bounce rate",
@@ -142,7 +142,7 @@
     "telegramButton": "Go to telegram?"
   },
   "cases": {
-    "title": "UI Cases",
+    "title": "UI Cases(Click on the card to view)",
     "showMore": "Show more ({count})",
     "uiElement": "UI Element",
     "vibecodeCases": "Vibecode cases"
