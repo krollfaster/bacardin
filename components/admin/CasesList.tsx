@@ -235,7 +235,9 @@ function CasesTable({ cases, onEdit, onDelete, formatDate }: {
             <Eye className="mx-auto w-4 h-4 text-muted-foreground" />
           </TableHead>
           <TableHead className="w-[50px] text-center">
-            <ImageIcon className="mx-auto w-4 h-4 text-muted-foreground" />
+            <div className="flex justify-center" title="Тип кейса">
+              <ImageIcon className="mx-auto w-4 h-4 text-muted-foreground" />
+            </div>
           </TableHead>
           <TableHead>Название</TableHead>
           <TableHead className="w-[120px]">Дата</TableHead>
@@ -267,15 +269,13 @@ function CasesTable({ cases, onEdit, onDelete, formatDate }: {
               <TableCell className="text-center">
                 <div className="flex justify-center">
                   {caseItem.type === "gallery" ? (
-                    <ImageIcon
-                      className="w-4 h-4 text-blue-500"
-                      title="Галерея"
-                    />
+                    <div title="Галерея">
+                      <ImageIcon className="w-4 h-4 text-blue-500" />
+                    </div>
                   ) : (
-                    <Link2
-                      className="w-4 h-4 text-purple-500"
-                      title="Компонент"
-                    />
+                    <div title="Компонент">
+                      <Link2 className="w-4 h-4 text-purple-500" />
+                    </div>
                   )}
                 </div>
               </TableCell>
