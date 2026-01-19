@@ -89,8 +89,8 @@ export interface AuthData {
   password: string;
 }
 
-// Категории кейсов
-export type CaseCategory = "design" | "development" | "branding" | "other";
+// Категория кейса (определяет где показывается)
+export type CaseCategory = "design" | "vibecode";
 
 // Статус публикации
 export type PublishStatus = "published" | "draft";

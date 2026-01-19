@@ -15,9 +15,8 @@ export const CasesList = ({ cases }: CasesListProps) => {
   const tCases = useTranslations("cases");
   const locale = useLocale();
   
-  const publishedCases = cases.filter((c) => c.published);
-
-  if (publishedCases.length === 0) {
+  // Кейсы уже отфильтрованы по category="vibecode" и published на уровне страницы
+  if (cases.length === 0) {
     return (
       <section className="pt-24">
         <div className="mx-auto px-6 max-w-[1000px]">
@@ -42,7 +41,7 @@ export const CasesList = ({ cases }: CasesListProps) => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
           variants={staggerContainer}
         >
-          {publishedCases.map((caseItem) => (
+          {cases.map((caseItem) => (
             <CaseCard 
               key={caseItem.id} 
               caseItem={caseItem} 

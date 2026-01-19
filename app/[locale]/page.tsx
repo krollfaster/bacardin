@@ -5,7 +5,7 @@ import { HomeCases } from "@/components/sections/HomeCases";
 import { Tags } from "@/components/sections/Tags";
 import { Traits } from "@/components/sections/Traits";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
-import { getFeaturedCases, getPublishedCases } from "@/lib/cases";
+import { getFeaturedCases, getVibecodeCases } from "@/lib/cases";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -14,9 +14,9 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const featuredCases = await getFeaturedCases();
-  const allPublishedCases = await getPublishedCases();
-  // Считаем только кейсы типа "component"
-  const componentCasesCount = allPublishedCases.filter(c => c.type === "component").length;
+  const vibecodeCases = await getVibecodeCases();
+  // Считаем вайбкод кейсы для кнопки
+  const vibecodeCasesCount = vibecodeCases.length;
 
   return (
     <main className="min-h-screen">
@@ -30,7 +30,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <HomeCases 
         cases={featuredCases} 
         locale={locale}
-        totalCasesCount={componentCasesCount}
+        totalCasesCount={vibecodeCasesCount}
       />
       <Tags />
       <Traits />

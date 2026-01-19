@@ -14,16 +14,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Plus, 
-  X, 
-  Image as ImageIcon, 
-  Link2, 
-  Folder, 
+import {
+  Plus,
+  X,
+  Image as ImageIcon,
+  Link2,
+  Folder,
   Edit3,
   Upload,
   Loader2,
-  GripVertical
+  GripVertical,
+  HelpCircle
 } from "lucide-react";
 import type { Case, CaseType, GalleryLayout } from "@/types";
 import { LayoutList, LayoutGrid } from "lucide-react";
@@ -92,7 +93,7 @@ export function CaseForm({
   const [isCustomPath, setIsCustomPath] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [isCoverUploading, setIsCoverUploading] = useState(false);
-  
+
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
 
@@ -199,7 +200,7 @@ export function CaseForm({
       setFormData((prev) => ({ ...prev, coverImage: path }));
     }
     setIsCoverUploading(false);
-    
+
     // Сбрасываем input для повторного выбора того же файла
     if (coverInputRef.current) {
       coverInputRef.current.value = "";
@@ -212,10 +213,10 @@ export function CaseForm({
     if (!files || files.length === 0) return;
 
     setIsUploading(true);
-    
+
     const uploadPromises = Array.from(files).map((file) => uploadFile(file));
     const paths = await Promise.all(uploadPromises);
-    
+
     const validPaths = paths.filter((p): p is string => p !== null);
     if (validPaths.length > 0) {
       setFormData((prev) => ({
@@ -223,9 +224,9 @@ export function CaseForm({
         images: [...prev.images, ...validPaths],
       }));
     }
-    
+
     setIsUploading(false);
-    
+
     // Сбрасываем input
     if (galleryInputRef.current) {
       galleryInputRef.current.value = "";
@@ -258,225 +259,126 @@ export function CaseForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Тип кейса */}
-      <div className="space-y-2">
-        <Label>Тип кейса</Label>
-        <Select
-          value={formData.type}
-          onValueChange={(value: CaseType) =>
-            setFormData((prev) => ({ ...prev, type: value }))
-          }
-        >
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="gallery">
-              <div className="flex items-center gap-2">
-                <ImageIcon className="w-4 h-4" />
-                Галерея
-              </div>
-            </SelectItem>
-            <SelectItem value="component">
-              <div className="flex items-center gap-2">
-                <Link2 className="w-4 h-4" />
-                Компонент
-              </div>
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Табы языка */}
-      <div className="flex gap-2 p-1 rounded-lg bg-muted/50 w-fit">
-        <button
-          type="button"
-          onClick={() => setActiveLang("ru")}
-          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-            activeLang === "ru"
-              ? "bg-background text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          🇷🇺 Русский
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveLang("en")}
-          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-            activeLang === "en"
-              ? "bg-background text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          🇬🇧 English
-        </button>
-      </div>
-
-      {/* Основные поля */}
-      <div className="grid grid-cols-2 gap-4">
+      {/* Тип кейса и Категория - основные характеристики */}
+      <div className="gap-4 grid grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="title">
-            Название {activeLang === "ru" ? "*" : "(опционально)"}
-          </Label>
-          <Input
-            id="title"
-            value={activeLang === "ru" ? formData.title : formData.title_en}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                [activeLang === "ru" ? "title" : "title_en"]: e.target.value,
-              }))
+          <Label>Тип кейса</Label>
+          <Select
+            value={formData.type}
+            onValueChange={(value: CaseType) =>
+              setFormData((prev) => ({ ...prev, type: value }))
             }
-            placeholder={activeLang === "ru" ? "Название кейса" : "Case title"}
-            required={activeLang === "ru"}
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="date">Дата *</Label>
-          <Input
-            id="date"
-            type="date"
-            value={formData.date}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, date: e.target.value }))
-            }
-            required
-          />
-        </div>
-      </div>
-
-      {/* Описание */}
-      <div className="space-y-2">
-        <Label htmlFor="description">
-          Описание {activeLang === "ru" ? "*" : "(опционально)"}
-        </Label>
-        <Textarea
-          id="description"
-          value={activeLang === "ru" ? formData.description : formData.description_en}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              [activeLang === "ru" ? "description" : "description_en"]: e.target.value,
-            }))
-          }
-          placeholder={
-            activeLang === "ru"
-              ? "Описание кейса с форматированием..."
-              : "Case description with formatting..."
-          }
-          rows={8}
-          required={activeLang === "ru"}
-          className="font-mono text-sm"
-        />
-        <div className="p-3 rounded-lg bg-muted/50 border border-border text-xs text-muted-foreground space-y-2">
-          <p className="font-medium text-foreground">Форматирование текста:</p>
-          <div className="grid grid-cols-2 gap-2">
-            <div><code className="bg-muted px-1 rounded">## Заголовок</code> — заголовок секции</div>
-            <div><code className="bg-muted px-1 rounded">**текст**</code> — выделенный белым</div>
-            <div><code className="bg-muted px-1 rounded">*текст*</code> — курсив</div>
-            <div><code className="bg-muted px-1 rounded">1. текст</code> — нумерованный список</div>
-            <div><code className="bg-muted px-1 rounded">- текст</code> — маркированный список</div>
-          </div>
-          <p className="text-muted-foreground/70">Пустая строка разделяет блоки текста</p>
-        </div>
-      </div>
-
-      {/* Категория */}
-      <div className="space-y-2">
-        <Label>Категория</Label>
-        <Select
-          value={formData.category}
-          onValueChange={(value) =>
-            setFormData((prev) => ({ ...prev, category: value }))
-          }
-        >
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="design">Дизайн</SelectItem>
-            <SelectItem value="development">Разработка</SelectItem>
-            <SelectItem value="branding">Брендинг</SelectItem>
-            <SelectItem value="other">Другое</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Обложка */}
-      <div className="space-y-2">
-        <Label>Обложка *</Label>
-        <input
-          ref={coverInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleCoverUpload}
-          className="hidden"
-        />
-        
-        {formData.coverImage ? (
-          <div className="relative group">
-            <div className="relative aspect-video rounded-lg overflow-hidden border border-border bg-muted">
-              <img
-                src={formData.coverImage}
-                alt="Обложка"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => coverInputRef.current?.click()}
-                  disabled={isCoverUploading}
-                >
-                  Заменить
-                </Button>
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setFormData((prev) => ({ ...prev, coverImage: "" }))}
-                >
-                  Удалить
-                </Button>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={() => coverInputRef.current?.click()}
-            disabled={isCoverUploading}
-            className="w-full aspect-video rounded-lg border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-2 text-muted-foreground hover:text-foreground"
           >
-            {isCoverUploading ? (
-              <>
-                <Loader2 className="w-8 h-8 animate-spin" />
-                <span className="text-sm">Загрузка...</span>
-              </>
-            ) : (
-              <>
-                <Upload className="w-8 h-8" />
-                <span className="text-sm">Нажмите для выбора обложки</span>
-                <span className="text-xs text-muted-foreground">JPG, PNG, GIF, WebP до 10MB</span>
-              </>
-            )}
-          </button>
-        )}
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="gallery">
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4" />
+                  Галерея
+                </div>
+              </SelectItem>
+              <SelectItem value="component">
+                <div className="flex items-center gap-2">
+                  <Link2 className="w-4 h-4" />
+                  Компонент
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label>Категория</Label>
+          <Select
+            value={formData.category}
+            onValueChange={(value) =>
+              setFormData((prev) => ({ ...prev, category: value }))
+            }
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="design">Дизайн (показ на главной)</SelectItem>
+              <SelectItem value="vibecode">Вайбкод (страница /cases)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      {/* Поля для типа Галерея */}
+      {/* Вторичные настройки - зависят от типа кейса */}
       <AnimatePresence mode="wait">
-        {formData.type === "gallery" && (
+        {formData.type === "component" ? (
           <motion.div
-            key="gallery-fields"
+            key="component-settings"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="space-y-4 overflow-hidden"
           >
-            {/* Вид отображения галереи */}
+            <div className="space-y-2">
+              <Label>Папка компонента</Label>
+              <Select value={selectedFolder} onValueChange={handleFolderSelect}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Выберите папку из Elements" />
+                </SelectTrigger>
+                <SelectContent>
+                  {elementFolders.map((folder) => (
+                    <SelectItem key={folder.path} value={folder.path}>
+                      <div className="flex items-center gap-2">
+                        <Folder className="w-4 h-4 text-muted-foreground" />
+                        {folder.name}
+                      </div>
+                    </SelectItem>
+                  ))}
+                  <SelectItem value={CUSTOM_PATH_VALUE}>
+                    <div className="flex items-center gap-2">
+                      <Edit3 className="w-4 h-4 text-muted-foreground" />
+                      Указать свой путь...
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Кастомный путь или выбранный путь */}
+            <div className="space-y-2">
+              {isCustomPath ? (
+                <>
+                  <Label htmlFor="componentUrl">Путь к компоненту *</Label>
+                  <Input
+                    id="componentUrl"
+                    value={formData.componentUrl}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        componentUrl: e.target.value,
+                      }))
+                    }
+                    placeholder="/Elements/MyWidget или https://..."
+                  />
+                </>
+              ) : selectedFolder ? (
+                <>
+                  <Label>Выбранный путь</Label>
+                  <div className="flex items-center gap-2 bg-muted/50 px-3 border border-border rounded-md h-10">
+                    <Folder className="w-4 h-4 text-primary" />
+                    <span className="font-mono text-sm truncate">{selectedFolder}</span>
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="gallery-settings"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="space-y-2 overflow-hidden"
+          >
             <div className="space-y-2">
               <Label>Вид галереи</Label>
               <Select
@@ -503,11 +405,200 @@ export function CaseForm({
                   </SelectItem>
                 </SelectContent>
               </Select>
-              <p className="text-xs text-muted-foreground">
-                Стек — картинки друг под другом. Сетка — в колонках с разной высотой.
-              </p>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
+
+      {/* Обложка */}
+      <div className="space-y-2">
+        <Label>Обложка *</Label>
+        <input
+          ref={coverInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleCoverUpload}
+          className="hidden"
+        />
+
+        {formData.coverImage ? (
+          <div className="group relative">
+            <div className="relative bg-muted border border-border rounded-lg aspect-video overflow-hidden">
+              <img
+                src={formData.coverImage}
+                alt="Обложка"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 flex justify-center items-center gap-2 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => coverInputRef.current?.click()}
+                  disabled={isCoverUploading}
+                >
+                  Заменить
+                </Button>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => setFormData((prev) => ({ ...prev, coverImage: "" }))}
+                >
+                  Удалить
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => coverInputRef.current?.click()}
+            disabled={isCoverUploading}
+            className="flex flex-col justify-center items-center gap-2 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full aspect-video text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {isCoverUploading ? (
+              <>
+                <Loader2 className="w-8 h-8 animate-spin" />
+                <span className="text-sm">Загрузка...</span>
+              </>
+            ) : (
+              <>
+                <Upload className="w-8 h-8" />
+                <span className="text-sm">Нажмите для выбора обложки</span>
+                <span className="text-muted-foreground text-xs">JPG, PNG, GIF, WebP до 10MB</span>
+              </>
+            )}
+          </button>
+        )}
+      </div>
+
+      {/* Основные поля и переключатель языка */}
+      <div className="flex items-end gap-4">
+        <div className="flex-1 space-y-2">
+          <Label htmlFor="title">
+            Название {activeLang === "ru" ? "*" : "(опционально)"}
+          </Label>
+          <Input
+            id="title"
+            value={activeLang === "ru" ? formData.title : formData.title_en}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                [activeLang === "ru" ? "title" : "title_en"]: e.target.value,
+              }))
+            }
+            placeholder={activeLang === "ru" ? "Название кейса" : "Case title"}
+            required={activeLang === "ru"}
+          />
+        </div>
+        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-lg h-10">
+          <button
+            type="button"
+            onClick={() => setActiveLang("ru")}
+            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${activeLang === "ru"
+              ? "bg-background shadow-sm"
+              : "hover:bg-background/50"
+              }`}
+            title="Русский"
+          >
+            🇷🇺
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveLang("en")}
+            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${activeLang === "en"
+              ? "bg-background shadow-sm"
+              : "hover:bg-background/50"
+              }`}
+            title="English"
+          >
+            🇬🇧
+          </button>
+        </div>
+      </div>
+
+
+
+      {/* Описание */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor="description">
+            Описание {activeLang === "ru" ? "*" : "(опционально)"}
+          </Label>
+          <div className="group relative">
+            <HelpCircle className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors cursor-help" />
+
+            {/* Tooltip Content */}
+            <div className="bottom-full left-0 z-50 absolute opacity-0 group-hover:opacity-100 mb-2 w-80 transition-all translate-y-2 group-hover:translate-y-0 duration-200 pointer-events-none group-hover:pointer-events-auto transform">
+              <div className="bg-popover shadow-xl p-4 border border-border rounded-lg text-xs">
+                <p className="mb-3 font-medium text-foreground">Форматирование текста:</p>
+                <div className="gap-x-4 gap-y-2 grid grid-cols-1">
+                  <div className="flex justify-between items-center">
+                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">## Заголовок</code>
+                    <span className="text-[11px] text-muted-foreground">заголовок секции</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">**текст**</code>
+                    <span className="text-[11px] text-muted-foreground">выделенный белым</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">*текст*</code>
+                    <span className="text-[11px] text-muted-foreground">курсив</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">1. текст</code>
+                    <span className="text-[11px] text-muted-foreground">нумерованный список</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">- текст</code>
+                    <span className="text-[11px] text-muted-foreground">маркированный список</span>
+                  </div>
+                </div>
+                <p className="mt-3 pt-2 border-border border-t text-[10px] text-muted-foreground/70">
+                  Пустая строка разделяет блоки текста
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Textarea
+          id="description"
+          value={activeLang === "ru" ? formData.description : formData.description_en}
+          onChange={(e) =>
+            setFormData((prev) => ({
+              ...prev,
+              [activeLang === "ru" ? "description" : "description_en"]: e.target.value,
+            }))
+          }
+          placeholder={
+            activeLang === "ru"
+              ? "Описание кейса..."
+              : "Case description..."
+          }
+          rows={8}
+          required={activeLang === "ru"}
+          className="font-mono text-sm"
+        />
+      </div>
+
+
+
+
+
+
+
+      {/* Поля для типа Галерея */}
+      <AnimatePresence mode="wait">
+        {formData.type === "gallery" && (
+          <motion.div
+            key="gallery-fields"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="space-y-4 overflow-hidden"
+          >
             <div className="space-y-2">
               <Label>Изображения галереи</Label>
               <input
@@ -518,12 +609,12 @@ export function CaseForm({
                 onChange={handleGalleryUpload}
                 className="hidden"
               />
-              
+
               <button
                 type="button"
                 onClick={() => galleryInputRef.current?.click()}
                 disabled={isUploading}
-                className="w-full p-4 rounded-lg border-2 border-dashed border-border hover:border-primary/50 transition-colors flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground"
+                className="flex justify-center items-center gap-2 p-4 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full text-muted-foreground hover:text-foreground transition-colors"
               >
                 {isUploading ? (
                   <>
@@ -537,16 +628,16 @@ export function CaseForm({
                   </>
                 )}
               </button>
-              
+
               {formData.images.length > 0 && (
                 <div className="mt-3">
-                  <p className="text-xs text-muted-foreground mb-2">
+                  <p className="mb-2 text-muted-foreground text-xs">
                     Перетаскивайте для изменения порядка
                   </p>
                   <Reorder.Group
                     axis="y"
                     values={formData.images}
-                    onReorder={(newOrder) => 
+                    onReorder={(newOrder) =>
                       setFormData((prev) => ({ ...prev, images: newOrder }))
                     }
                     className="space-y-2"
@@ -565,178 +656,109 @@ export function CaseForm({
           </motion.div>
         )}
 
-        {/* Поля для типа Компонент */}
-        {formData.type === "component" && (
-          <motion.div
-            key="component-fields"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="space-y-4 overflow-hidden"
-          >
-            {/* Выбор папки из Elements */}
-            <div className="space-y-2">
-              <Label>Папка компонента</Label>
-              <Select value={selectedFolder} onValueChange={handleFolderSelect}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Выберите папку из Elements" />
-                </SelectTrigger>
-                <SelectContent>
-                  {elementFolders.map((folder) => (
-                    <SelectItem key={folder.path} value={folder.path}>
-                      <div className="flex items-center gap-2">
-                        <Folder className="w-4 h-4 text-muted-foreground" />
-                        {folder.name}
-                      </div>
-                    </SelectItem>
-                  ))}
-                  <SelectItem value={CUSTOM_PATH_VALUE}>
-                    <div className="flex items-center gap-2">
-                      <Edit3 className="w-4 h-4 text-muted-foreground" />
-                      Указать свой путь...
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <p className="text-xs text-muted-foreground">
-                Выберите папку проекта из Elements или укажите свой путь
-              </p>
-            </div>
 
-            {/* Кастомный путь */}
-            <AnimatePresence>
-              {isCustomPath && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="space-y-2 overflow-hidden"
-                >
-                  <Label htmlFor="componentUrl">Путь к компоненту *</Label>
-                  <Input
-                    id="componentUrl"
-                    value={formData.componentUrl}
-                    onChange={(e) =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        componentUrl: e.target.value,
-                      }))
-                    }
-                    placeholder="/Elements/MyWidget или https://example.com/widget"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Укажите путь к папке или внешний URL для iframe
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Отображение выбранного пути */}
-            {!isCustomPath && selectedFolder && (
-              <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 border border-border">
-                <Folder className="w-4 h-4 text-primary" />
-                <span className="text-sm font-mono">{selectedFolder}</span>
-              </div>
-            )}
-          </motion.div>
-        )}
       </AnimatePresence>
 
-      {/* Теги */}
-      <div className="space-y-2">
-        <Label>Теги</Label>
-        <div className="flex gap-2">
+      <div className="gap-4 grid grid-cols-2">
+        {/* Дата */}
+        <div className="space-y-2">
+          <Label htmlFor="date">Дата *</Label>
           <Input
-            value={newTag}
-            onChange={(e) => setNewTag(e.target.value)}
-            placeholder="Добавить тег"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                addTag();
-              }
-            }}
+            id="date"
+            type="date"
+            value={formData.date}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, date: e.target.value }))
+            }
+            required
           />
-          <Button type="button" variant="outline" onClick={addTag}>
-            <Plus className="w-4 h-4" />
-          </Button>
         </div>
-        {formData.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
-            {formData.tags.map((tag) => (
-              <Badge
-                key={tag}
-                variant="secondary"
-                className="flex items-center gap-1 pr-1"
-              >
-                {tag}
-                <button
-                  type="button"
-                  onClick={() => removeTag(tag)}
-                  className="ml-1 hover:text-destructive"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </Badge>
-            ))}
+
+        {/* Теги */}
+        <div className="space-y-2">
+          <Label>Теги</Label>
+          <div className="flex gap-2">
+            <Input
+              value={newTag}
+              onChange={(e) => setNewTag(e.target.value)}
+              placeholder="Добавить тег"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  addTag();
+                }
+              }}
+            />
+            <Button type="button" variant="outline" onClick={addTag}>
+              <Plus className="w-4 h-4" />
+            </Button>
           </div>
-        )}
+          {formData.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-2">
+              {formData.tags.map((tag) => (
+                <Badge
+                  key={tag}
+                  variant="secondary"
+                  className="flex items-center gap-1 pr-1"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="ml-1 hover:text-destructive"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </Badge>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Контент */}
-      <div className="space-y-2">
-        <Label htmlFor="content">Контент (Markdown)</Label>
-        <Textarea
-          id="content"
-          value={formData.content}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, content: e.target.value }))
-          }
-          placeholder="# Заголовок&#10;&#10;Описание проекта..."
-          rows={6}
-          className="font-mono text-sm"
-        />
-      </div>
+
 
       {/* Публикация */}
-      <div className="flex items-center gap-3">
-        <input
-          type="checkbox"
-          id="published"
-          checked={formData.published}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, published: e.target.checked }))
-          }
-          className="w-4 h-4 rounded border-border"
-        />
-        <Label htmlFor="published" className="cursor-pointer">
-          Опубликовать кейс
-        </Label>
-      </div>
+      {/* Футер формы с публикацией и кнопками */}
+      <div className="flex justify-between items-center pt-6 border-border border-t">
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="published"
+            checked={formData.published}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, published: e.target.checked }))
+            }
+            className="border-border rounded w-4 h-4 accent-primary cursor-pointer"
+          />
+          <Label htmlFor="published" className="font-medium text-sm cursor-pointer">
+            Опубликовать кейс
+          </Label>
+        </div>
 
-      {/* Кнопки */}
-      <div className="flex justify-end gap-3 pt-4">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={onCancel}
-          disabled={isLoading}
-        >
-          Отмена
-        </Button>
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? (
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
-            />
-          ) : initialData ? (
-            "Сохранить"
-          ) : (
-            "Создать"
-          )}
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+            disabled={isLoading}
+          >
+            Отмена
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="border-2 border-current border-t-transparent rounded-full w-4 h-4"
+              />
+            ) : initialData ? (
+              "Сохранить"
+            ) : (
+              "Создать"
+            )}
+          </Button>
+        </div>
       </div>
     </form>
   );
@@ -758,9 +780,9 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
       dragControls={controls}
       className="group"
     >
-      <div className="flex items-center gap-3 p-2 rounded-lg border border-border bg-background hover:border-primary/50 transition-colors">
+      <div className="flex items-center gap-3 bg-background p-2 border border-border hover:border-primary/50 rounded-lg transition-colors">
         {/* Превью изображения */}
-        <div className="w-16 h-16 rounded-md overflow-hidden bg-muted flex-shrink-0">
+        <div className="flex-shrink-0 bg-muted rounded-md w-16 h-16 overflow-hidden">
           <img
             src={image}
             alt="Preview"
@@ -770,7 +792,7 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
 
         {/* Путь к файлу */}
         <div className="flex-1 min-w-0">
-          <p className="text-xs text-muted-foreground truncate font-mono">
+          <p className="font-mono text-muted-foreground text-xs truncate">
             {image.split('/').pop()}
           </p>
         </div>
@@ -779,7 +801,7 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
         <button
           type="button"
           onClick={onRemove}
-          className="p-1.5 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
+          className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -787,7 +809,7 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
         {/* Ручка перетаскивания */}
         <div
           onPointerDown={(e) => controls.start(e)}
-          className="cursor-grab active:cursor-grabbing p-1.5 hover:bg-muted rounded-md"
+          className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
         >
           <GripVertical className="w-4 h-4 text-muted-foreground" />
         </div>

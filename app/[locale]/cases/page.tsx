@@ -2,12 +2,11 @@ import { CasesHero } from "@/components/sections/CasesHero";
 import { CasesList } from "@/components/sections/CasesList";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { CaseNavigation } from "@/components/layout/CaseNavigation";
-import { getPublishedCases } from "@/lib/cases";
+import { getVibecodeCases } from "@/lib/cases";
 
 export default async function CasesPage() {
-  const allCases = await getPublishedCases();
-  // Показываем только кейсы типа "component"
-  const componentCases = allCases.filter(c => c.type === "component");
+  // Показываем только вайбкод кейсы
+  const vibecodeCases = await getVibecodeCases();
 
   return (
     <main className="min-h-screen">
@@ -19,7 +18,7 @@ export default async function CasesPage() {
         <LanguageSwitcher />
       </div>
       <CasesHero />
-      <CasesList cases={componentCases} />
+      <CasesList cases={vibecodeCases} />
     </main>
   );
 }

@@ -46,12 +46,18 @@ export async function getPublishedCases(): Promise<Case[]> {
   return cases.filter((c) => c.published);
 }
 
-// Получение кейсов для главной страницы (сортировка по homeOrder)
+// Получение кейсов для главной страницы (только design с homeOrder)
 export async function getFeaturedCases(): Promise<Case[]> {
   const cases = await getAllCases();
   return cases
-    .filter((c) => c.published && c.homeOrder !== null && c.homeOrder > 0)
+    .filter((c) => c.published && c.category === "design" && c.homeOrder !== null && c.homeOrder > 0)
     .sort((a, b) => (a.homeOrder ?? 99) - (b.homeOrder ?? 99));
+}
+
+// Получение вайбкод кейсов (для страницы /cases)
+export async function getVibecodeCases(): Promise<Case[]> {
+  const cases = await getAllCases();
+  return cases.filter((c) => c.published && c.category === "vibecode");
 }
 
 // Получение кейса по ID

@@ -115,10 +115,10 @@ export function CasesList({ cases, onRefresh }: CasesListProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Кейсы</h2>
-          <p className="text-muted-foreground mt-1">
+          <h2 className="font-bold text-foreground text-2xl">Кейсы</h2>
+          <p className="mt-1 text-muted-foreground">
             Управление портфолио проектов
           </p>
         </div>
@@ -128,127 +128,55 @@ export function CasesList({ cases, onRefresh }: CasesListProps) {
         </Button>
       </div>
 
-      {/* Table */}
-      <div className="border border-border rounded-xl overflow-hidden bg-card">
-        {cases.length === 0 ? (
-          <div className="py-16 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
-              <ImageIcon className="w-8 h-8 text-muted-foreground" />
-            </div>
-            <h3 className="text-lg font-medium text-foreground mb-2">
-              Нет кейсов
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Создайте первый кейс для портфолио
-            </p>
-            <Button onClick={handleCreate} variant="outline" className="gap-2">
-              <Plus className="w-4 h-4" />
-              Создать кейс
-            </Button>
+      {/* Sections */}
+      <div className="space-y-12">
+        {/* Дизайн */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 px-1">
+            <div className="bg-amber-500 rounded-full w-1.5 h-6" />
+            <h3 className="font-semibold text-foreground text-lg">Дизайн</h3>
+            <Badge variant="outline" className="ml-2 font-mono">
+              {cases.filter(c => c.category === "design").length}
+            </Badge>
           </div>
-        ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Тип</TableHead>
-                <TableHead>Название</TableHead>
-                <TableHead className="w-[120px]">Дата</TableHead>
-                <TableHead className="w-[100px]">Статус</TableHead>
-                <TableHead className="w-[120px] text-right">Действия</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <AnimatePresence mode="popLayout">
-                {cases.map((caseItem, index) => (
-                  <motion.tr
-                    key={caseItem.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="group"
-                  >
-                    <TableCell>
-                      <Badge
-                        variant="outline"
-                        className={cn(
-                          "gap-1",
-                          caseItem.type === "gallery"
-                            ? "border-blue-500/50 text-blue-500"
-                            : "border-purple-500/50 text-purple-500"
-                        )}
-                      >
-                        {caseItem.type === "gallery" ? (
-                          <>
-                            <ImageIcon className="w-3 h-3" />
-                            Галерея
-                          </>
-                        ) : (
-                          <>
-                            <Link2 className="w-3 h-3" />
-                            Компонент
-                          </>
-                        )}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {caseItem.title}
-                        </p>
-                        <p className="text-sm text-muted-foreground truncate max-w-[300px]">
-                          {caseItem.description}
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {formatDate(caseItem.date)}
-                    </TableCell>
-                    <TableCell>
-                      {caseItem.published ? (
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-500/10 text-green-500 border-green-500/20"
-                        >
-                          <Eye className="w-3 h-3 mr-1" />
-                          Опубликован
-                        </Badge>
-                      ) : (
-                        <Badge
-                          variant="secondary"
-                          className="bg-muted text-muted-foreground"
-                        >
-                          <EyeOff className="w-3 h-3 mr-1" />
-                          Черновик
-                        </Badge>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8"
-                          onClick={() => handleEdit(caseItem)}
-                        >
-                          <Pencil className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 hover:text-destructive"
-                          onClick={() => setDeletingCase(caseItem)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </motion.tr>
-                ))}
-              </AnimatePresence>
-            </TableBody>
-          </Table>
-        )}
+
+          <div className="bg-card border border-border rounded-xl overflow-hidden">
+            {cases.filter(c => c.category === "design").length === 0 ? (
+              <EmptyState category="design" onCreate={handleCreate} />
+            ) : (
+              <CasesTable
+                cases={cases.filter(c => c.category === "design")}
+                onEdit={handleEdit}
+                onDelete={(c) => setDeletingCase(c)}
+                formatDate={formatDate}
+              />
+            )}
+          </div>
+        </section>
+
+        {/* Вайбкод */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2 px-1">
+            <div className="bg-indigo-500 rounded-full w-1.5 h-6" />
+            <h3 className="font-semibold text-foreground text-lg">Вайбкод</h3>
+            <Badge variant="outline" className="ml-2 font-mono">
+              {cases.filter(c => c.category === "vibecode").length}
+            </Badge>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl overflow-hidden">
+            {cases.filter(c => c.category === "vibecode").length === 0 ? (
+              <EmptyState category="vibecode" onCreate={handleCreate} />
+            ) : (
+              <CasesTable
+                cases={cases.filter(c => c.category === "vibecode")}
+                onEdit={handleEdit}
+                onDelete={(c) => setDeletingCase(c)}
+                formatDate={formatDate}
+              />
+            )}
+          </div>
+        </section>
       </div>
 
       {/* Create/Edit Dialog */}
@@ -288,6 +216,124 @@ export function CasesList({ cases, onRefresh }: CasesListProps) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  );
+}
+
+// Вспомогательный компонент для таблицы
+function CasesTable({ cases, onEdit, onDelete, formatDate }: {
+  cases: Case[],
+  onEdit: (c: Case) => void,
+  onDelete: (c: Case) => void,
+  formatDate: (d: string) => string
+}) {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[50px] text-center">
+            <Eye className="mx-auto w-4 h-4 text-muted-foreground" />
+          </TableHead>
+          <TableHead className="w-[50px] text-center">
+            <ImageIcon className="mx-auto w-4 h-4 text-muted-foreground" />
+          </TableHead>
+          <TableHead>Название</TableHead>
+          <TableHead className="w-[120px]">Дата</TableHead>
+          <TableHead className="pr-6 w-[140px] text-right">Действия</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <AnimatePresence mode="popLayout">
+          {cases.map((caseItem, index) => (
+            <motion.tr
+              key={caseItem.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ delay: index * 0.05 }}
+              className="group"
+            >
+              <TableCell className="text-center">
+                {caseItem.published ? (
+                  <div className="flex justify-center" title="Опубликован">
+                    <Eye className="w-4 h-4 text-green-500" />
+                  </div>
+                ) : (
+                  <div className="flex justify-center" title="Черновик">
+                    <EyeOff className="w-4 h-4 text-muted-foreground/40" />
+                  </div>
+                )}
+              </TableCell>
+              <TableCell className="text-center">
+                <div className="flex justify-center">
+                  {caseItem.type === "gallery" ? (
+                    <ImageIcon
+                      className="w-4 h-4 text-blue-500"
+                      title="Галерея"
+                    />
+                  ) : (
+                    <Link2
+                      className="w-4 h-4 text-purple-500"
+                      title="Компонент"
+                    />
+                  )}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div>
+                  <p className="font-medium text-foreground">
+                    {caseItem.title}
+                  </p>
+                  <p className="max-w-[300px] text-muted-foreground text-sm truncate">
+                    {caseItem.description}
+                  </p>
+                </div>
+              </TableCell>
+              <TableCell className="text-muted-foreground">
+                {formatDate(caseItem.date)}
+              </TableCell>
+              <TableCell className="pr-6 text-right">
+                <div className="flex justify-end items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="w-8 h-8"
+                    onClick={() => onEdit(caseItem)}
+                  >
+                    <Pencil className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="w-8 h-8 hover:text-destructive"
+                    onClick={() => onDelete(caseItem)}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              </TableCell>
+            </motion.tr>
+          ))}
+        </AnimatePresence>
+      </TableBody>
+    </Table>
+  );
+}
+
+// Вспомогательный компонент для пустого состояния
+function EmptyState({ category, onCreate }: { category: string, onCreate: () => void }) {
+  return (
+    <div className="py-12 text-center">
+      <div className="inline-flex justify-center items-center bg-muted mb-3 rounded-full w-12 h-12">
+        <ImageIcon className="w-6 h-6 text-muted-foreground" />
+      </div>
+      <h3 className="mb-1 font-medium text-foreground text-sm">
+        Нет кейсов в категории &quot;{category === "design" ? "Дизайн" : "Вайбкод"}&quot;
+      </h3>
+      <Button onClick={onCreate} variant="ghost" size="sm" className="gap-2 text-xs">
+        <Plus className="w-3 h-3" />
+        Создать
+      </Button>
     </div>
   );
 }
