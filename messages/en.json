@@ -142,7 +142,8 @@
     "telegramButton": "Go to telegram?"
   },
   "cases": {
-    "title": "UI Cases (Click on the card to view)",
+    "title": "UI Cases",
+    "hint": "Click on the card to view",
     "showMore": "Show more ({count})",
     "uiElement": "UI Element",
     "vibecodeCases": "Vibecode cases"

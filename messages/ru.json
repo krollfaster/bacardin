@@ -142,7 +142,8 @@
     "telegramButton": "Go to telegram?"
   },
   "cases": {
-    "title": "UI Кейсы (Нажми на карточку для просмотра)",
+    "title": "UI Кейсы",
+    "hint": "Нажми на карточку для просмотра",
     "showMore": "Показать еще ({count})",
     "uiElement": "UI Элемент",
     "vibecodeCases": "Vibecode кейсы"
