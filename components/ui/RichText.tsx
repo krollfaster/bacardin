@@ -252,7 +252,7 @@ export function RichText({ content, className }: RichTextProps) {
                 )}
                 variants={itemVariants}
               >
-                {(block.listItems ?? block.items.map(text => ({ text }))).map((item, itemIndex) => (
+                {(block.listItems ?? block.items.map(text => ({ text })) as ListItem[]).map((item, itemIndex) => (
                   <li key={itemIndex} className="flex flex-col">
                     <div className="flex">
                       <span className="w-[32px] text-muted-foreground shrink-0">
