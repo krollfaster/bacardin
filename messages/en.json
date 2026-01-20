@@ -38,9 +38,7 @@
         "desc_part2": "C-level executives and",
         "desc_highlight2": "25,000+",
         "desc_part3": "employees of the largest bank. Results:",
-        "desc_highlight3": "NPS +6 pp, CSI +2 points",
-        "link": "Recommendation letter",
-        "linkUrl": "/recommendation-letter"
+        "desc_highlight3": "NPS +6 pp, CSI +2 points"
       },
       "mid": {
         "position": "Lead UX Researcher",
@@ -116,30 +114,22 @@
       "Design system"
     ]
   },
-  "traits": {
-    "title": "Traits",
-    "items": [
-      {
-        "title": "Business Thinking",
-        "text": "I understand how big business works and what it needs. Understanding of horizontal and vertical goal cascading and RCD initiatives"
+  "testimonials": {
+    "title": "Trust & Feedback",
+    "items": {
+      "denis": {
+        "name": "Denis Bolshakov",
+        "role": "Design Lead, SBER",
+        "text": "I confidently recommend Ernest for Senior/Lead Product Designer roles, especially in teams where a strong focus on hypotheses, data, and business outcomes is critical.",
+        "link": "Recommendation letter",
+        "linkUrl": "/recommendation-letter"
       },
-      {
-        "title": "Design Task Development",
-        "text": "I have a refined workflow for deep UX and UI development. Working in various methods (Data driven/Data informed) and verticals (B2C/B2E)"
-      },
-      {
-        "title": "Process Optimization",
-        "text": "I know how to make processes more efficient using methodologies: Agile (Scrum/Kanban), Triple diamond, LESS"
-      },
-      {
-        "title": "Working with AI",
-        "text": "I have experience and know how to work with AI. I'm aware of all trends and can think ahead about how AI will be useful. I integrate AI into my workflow to optimize work"
-      },
-      {
-        "title": "Strong Background",
-        "text": "I understand development well, as I studied HTML CSS MySQL JS PHP. Experience in implementing and improving Design systems. Experience in organizing and managing UX research"
+      "anton": {
+        "name": "Anton Nabiulin",
+        "role": "CEO UnitBean",
+        "text": "Thanks to Ernest, design stopped being a bottleneck. His ability to build working demos is especially valuable. The prototype he prepared for the exhibition brought us 2 new clients"
       }
-    ]
+    }
   },
   "nav": {
     "home": "Home",
