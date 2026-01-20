@@ -31,18 +31,12 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}
-        {/* Заголовок секции */}
-        <motion.div
+        <motion.h2
           variants={fadeIn}
-          className="flex justify-between items-baseline mb-8"
+          className="mb-8 font-medium text-[28px] text-muted-foreground leading-[36px]"
         >
-          <h2 className="font-medium text-[28px] text-muted-foreground leading-[36px]">
-            {t("title")}
-          </h2>
-          <span className="font-medium text-[28px] text-muted-foreground text-right leading-[36px]">
-            {t("hint")}
-          </span>
-        </motion.div>
+          {t("title")} <span className="text-white">({t("hint")})</span>
+        </motion.h2>
 
         {/* Сетка кейсов */}
         <motion.div

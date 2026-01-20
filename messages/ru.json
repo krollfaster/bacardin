@@ -96,7 +96,25 @@
   },
   "tags": {
     "title": "Теги",
-    "items": ["Leadership", "JTBD", "Бизнес-стратегия", "AI", "Метрики", "B2C", "AGILE", "SCRUM", "AI Agents", "Фасилитация", "CJM", "RICE/ICE", "AARRR", "SWOT-анализ", "DOR/DOT", "Семиотический анализ", "Design system"]
+    "items": [
+      "Leadership",
+      "JTBD",
+      "Бизнес-стратегия",
+      "AI",
+      "Метрики",
+      "B2C",
+      "AGILE",
+      "SCRUM",
+      "AI Agents",
+      "Фасилитация",
+      "CJM",
+      "RICE/ICE",
+      "AARRR",
+      "SWOT-анализ",
+      "DOR/DOT",
+      "Семиотический анализ",
+      "Design system"
+    ]
   },
   "traits": {
     "title": "Черты",

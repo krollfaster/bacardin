@@ -18,7 +18,7 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-17T15:22:18.640Z",
+    "updatedAt": "2026-01-20T12:54:34.085Z",
     "galleryLayout": "stack",
     "title_en": "Slider",
     "description_en": ""
@@ -56,9 +56,9 @@
     "content": "test",
     "published": true,
     "featuredOnHome": true,
-    "homeOrder": 3,
+    "homeOrder": 4,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-19T22:12:26.533Z",
+    "updatedAt": "2026-01-20T12:54:34.085Z",
     "galleryLayout": "masonry",
     "title_en": "IOS APP for Game club ",
     "description_en": "Product: THE HOOD (Cyber Club Superapp) | Role: Lead Product Designer (Studio) Goal: Digitalization of an offline business and creating a seamless O2O (Online-to-Offline) experience | Status: Release (MVP)\n## Problem\nAstana’s largest cyber club faced scaling limitations due to a disconnect between the digital and physical customer experience:\n1. Fragmented Service: Booking, payment, and club entry existed in separate planes, creating a high entry barrier for new users.\n2. Billing Complexity: The existing payment model required complex transactions and multiple accounts, which reduced conversion into package purchases.\n3. Lack of LTV Tools: There were no mechanics to retain users and return them to the club (retention).\n## Goals\nCreate a unified digital ecosystem (Mobile App + ERP), integrated into the business Service Blueprint.\n- **Financial Model:** Implementation of a unified in-club currency (\"Kidalloins\") to eliminate payment friction and unify accounts.\n- **Service Design:** Engineering an end-to-end user journey: from booking at home to sitting at a computer in the club.\n- **Architecture:** Real-time data synchronization between the Mobile App (client) and ERP (management).\n## Key Metrics\nSuccess was evaluated through the growth of % online bookings (reducing load on reception), increased ARPU (average check) via package offers, and session time (Time spent).\n## Work Process\nWork was structured as a full product cycle within tight studio development deadlines:\n1. **Discovery & Blueprint:** Mapped the service to understand at which points the Mobile App needs to interact with the ERP and physical club hardware.\n2. **System Design:** Developed a scalable design system considering dark mode (Dark Mode first) as an industry standard and the specific lighting in the club.\n3. **Economy UX:** Designed the flow for purchasing and using internal currency. This solved the technical pain of “different accounts” and laid the foundation for gamification.\n4. **Cross-platform Sync:** Parallel design of ERP and App to ensure data consistency (the user sees the same thing as the admin).\n## Risk Management\n- **Risk:** Complex verification and data collection might scare off users. Mitigation: Implemented “Deferred KYC”. The user enters the app immediately, and full data is requested only at the moment of booking/payment.\n- **Risk:** Users might not understand the internal currency system. Mitigation: Transparent conversion calculator and balance visualization on the main screen.\n## Results\nLaunched the ecosystem MVP, transforming a traditional gaming club into a Tech-driven business.\n- **Unified Experience:** Single user profile for App and ERP.\n- **Business Impact:** Implementation of internal currency simplified financial flows and created a base for a future loyalty program.\n- **Scalability:** App architecture is ready for the implementation of tournament mechanics and streaming services (Next Steps)."
@@ -93,9 +93,9 @@
     "content": "",
     "published": true,
     "featuredOnHome": true,
-    "homeOrder": 1,
+    "homeOrder": 2,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-18T15:37:50.479Z",
+    "updatedAt": "2026-01-20T12:54:34.085Z",
     "galleryLayout": "stack",
     "title_en": "Web APP for Top-Managers ",
     "description_en": "Product: POTOK (Sber’s Agile tool) | Role: Staff Product Designer Goal: UX Unification and reducing Time-to-Market | Status: Release & Scale\n## Problem\nThe product evolved from an add-on into a standalone tool, but it developed in a fragmented way. This led to three critical barriers:\n1. UX/Design Debt: The lack of a unified logic made the interface difficult to learn and operate.\n2. Architectural Dead End: The existing structure did not allow for the implementation of a critical new layer — \"Projects.\"\n3. Slow Development: The absence of a Design System (DS) slowed down the release of new features (Time-to-Market).\n## Goals\nConducted a full product redesign with a transition to an enterprise-grade design system.\n- Information Architecture: Implemented a new hierarchy (Bank Goals → Projects → Tasks → Notes). Connected previously disconnected modules.\n- Design System: Migration to the ANT Design System. This unified the UI and accelerated frontend development.\n- New Domains: Created the foundation for the \"Projects\" entity and the AI Assistant (automated meeting minutes, summaries).\n- Process: Incremental redesign ran parallel to product development (supporting both the old and new UI versions).\n## Key Metrics\nWe evaluated success through user satisfaction and qualitative validation from top management.\n## Timeline & Scope\nTo avoid halting product evolution, implementation was carried out in 4 stages:\n1. Foundation: Updating navigation and content structure (Sidebar).\n2. System: Implementing ANT Design System tokens and styles.\n3. Scale: Implementing the \"Projects\" layer (scalability).\n4. UX Polish: Sequential updates of modules (Tasks, Notes) and debt elimination.\n## Risks\n- Risk: Resistance to change from conservative users. Mitigation: Conducted a series of UX interviews prior to release and utilized rapid feedback loops post-release.\n- Risk: Misalignment with parallel feature development. Mitigation: Regular synchronization of the redesign plan with the feature backlog to ensure new features were built immediately using new components.\n## Outcome\n\"POTOK\" transformed from a scattered set of modules into a unified productivity platform for Agile teams.\n- Laid the foundation for the AI Assistant.\n- Ensured scalability (via the \"Projects\" layer).\n- Established a unified UI/UX code base across all modules."
@@ -152,9 +152,9 @@
     "content": "",
     "published": true,
     "featuredOnHome": true,
-    "homeOrder": 2,
+    "homeOrder": 1,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-18T20:36:09.479Z",
+    "updatedAt": "2026-01-20T12:54:34.085Z",
     "title_en": "APP for Fitness Emotion",
     "description_en": "A case study will be posted here soon! It's still in development..."
   },
@@ -187,7 +187,7 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-12T20:31:33.529Z",
-    "updatedAt": "2026-01-18T20:37:41.016Z",
+    "updatedAt": "2026-01-20T12:54:34.085Z",
     "title_en": "WMS for Armada",
     "description_en": "A case study will be posted here soon! It's still in development..."
   },
@@ -226,9 +226,9 @@
     "content": "",
     "published": true,
     "featuredOnHome": true,
-    "homeOrder": 4,
+    "homeOrder": 3,
     "createdAt": "2026-01-14T21:37:31.316Z",
-    "updatedAt": "2026-01-18T15:29:41.461Z",
+    "updatedAt": "2026-01-20T12:54:34.085Z",
     "title_en": "ERP for Game club",
     "description_en": "Product: THE HOOD OS (Desktop Shell + Admin Panel) | Role: Product Designer Goal: Operations automation and Service Upsell via desktop | Status: Release MVP\n## Problem\nThe classic cyber cafe model created a \"bottleneck\" at the Reception desk.\n1. **Operational Burden:** Administrators spent 80% of their time on manual time extensions and taking orders (food/drinks), creating queues.\n2. **Disconnected Experience:** Gamers had to leave their PCs to buy more time or food, interrupting their \"Flow\" and reducing revenue.\n3. **Complex Onboarding:** Low conversion to registration due to lengthy form filling at the register.\n## Goals\nTransforming a \"gaming computer\" into a \"self-service terminal.\"\n- **Self-Service Experience:** Shifting 90% of operations (extensions, food purchases, calling for help) inside the client interface on the PC.\n- **Cross-Platform Auth:** Seamless authorization via QR code (scanning from the mobile app), linking offline hardware with the digital profile.\n- **Omnichannel UI:** Unifying the visual language between the Mobile App and Desktop Shell to reduce cognitive load when switching devices.\n## Key Metrics\n- **Operational Efficiency:** Reduction in administrator Time-to-Serve per client.\n- **Upsell Conversion:** Growth in Average Order Value (AOV) via the internal PC store (Shop Module).\n- **Session Continuity:** Increase in average session duration (thanks to seamless time extension).\n## Work Process\nDevelopment was conducted in close coordination with Hardware constraints (Windows lockdown, file system access).\n1. **Architecture:** Designed a \"safe buffer\" logic (5 minutes of free time), allowing users to configure peripherals before paying. This reduced refund requests.\n2. **Ecosystem Sync:** Implemented real-time state synchronization. If a user extends time in the Mobile App, the Desktop Shell updates instantly without a reboot.\n3. **UI/UX Adaptation:** Adaptation of e-commerce patterns (cart, catalog) for desktop usage during gaming (minimap-friendly interface to avoid covering the game).\n4. **Admin Tools:** Designed an admin interface where orders from the \"Floor\" (from user PCs) land in a unified task backlog (Kitchen/Bar Management).\n## Risk Management\n- **Risk:** Users won't register due to the difficulty of typing on a keyboard. Mitigation: Implemented registration in a chatbot format (Conversational UI) and quick QR login without a password.\n- **Risk:** \"Blindness\" to additional services. Mitigation: Implementation of non-intrusive notifications and quick access to the store (Quick Actions) directly from the overlay.\n## Outcomes\nCreated a self-contained ecosystem where the PC is not just a gaming tool, but a point of sale.\n- **Automation:** Administrators are freed from routine tasks and focused on service and incident resolution.\n- **Revenue Growth:** Implementing the in-PC store increased bar sales (users order without getting up)."
   }
