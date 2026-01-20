@@ -96,7 +96,25 @@
   },
   "tags": {
     "title": "Tags",
-    "items": ["Leadership", "JTBD", "Business Strategy", "AI", "Metrics", "B2C", "AGILE", "SCRUM", "AI Agents", "Facilitation", "CJM", "RICE/ICE", "AARRR", "SWOT Analysis", "DOR/DOT", "Semiotic Analysis", "Design system"]
+    "items": [
+      "Leadership",
+      "JTBD",
+      "Business Strategy",
+      "AI",
+      "Metrics",
+      "B2C",
+      "AGILE",
+      "SCRUM",
+      "AI Agents",
+      "Facilitation",
+      "CJM",
+      "RICE/ICE",
+      "AARRR",
+      "SWOT Analysis",
+      "DOR/DOT",
+      "Semiotic Analysis",
+      "Design system"
+    ]
   },
   "traits": {
     "title": "Traits",
