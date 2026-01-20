@@ -34,7 +34,7 @@ export const ComponentCaseView = ({ componentUrl, title, description }: Componen
             fontWeight: 500,
           }}
         >
-          <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "800px", margin: "0 auto", paddingLeft: "16px", paddingRight: "16px" }}>
             {description}
           </div>
         </div>
