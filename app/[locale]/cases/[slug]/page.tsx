@@ -25,11 +25,11 @@ export default async function CasePage({ params }: CasePageProps) {
   const description = locale === "en" ? caseData.description_en : caseData.description;
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="bg-background min-h-screen">
       <CaseNavigation />
 
       {caseData.type === "component" && caseData.componentUrl && (
-        <ComponentCaseView componentUrl={caseData.componentUrl} title={title} />
+        <ComponentCaseView componentUrl={caseData.componentUrl} title={title} description={description} />
       )}
 
       {caseData.type === "gallery" && (

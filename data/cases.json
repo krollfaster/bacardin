@@ -4,7 +4,7 @@
     "slug": "slayder",
     "type": "component",
     "title": "Слайдер",
-    "description": " ",
+    "description": "Зажмите кнопку мыши на компоненте и сдвинте в сторону",
     "date": "2026-01-10",
     "category": "vibecode",
     "coverImage": "/images/cases/1768659658711-7f7wk6.png",
@@ -18,10 +18,10 @@
     "featuredOnHome": false,
     "homeOrder": null,
     "createdAt": "2026-01-11T14:04:02.477Z",
-    "updatedAt": "2026-01-20T13:07:52.849Z",
+    "updatedAt": "2026-01-20T22:04:39.058Z",
     "galleryLayout": "stack",
     "title_en": "Slider",
-    "description_en": ""
+    "description_en": "Hold down the mouse button on the component and move it to the side"
   },
   {
     "id": "mk9tmbkk8rtaei411o",
