@@ -31,22 +31,28 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}
-        <motion.h2
+        {/* Заголовок секции */}
+        <motion.div
           variants={fadeIn}
-          className="text-[28px] leading-[36px] font-medium text-muted-foreground mb-8"
+          className="flex justify-between items-baseline mb-8"
         >
-          {t("title")}
-        </motion.h2>
+          <h2 className="font-medium text-[28px] text-muted-foreground leading-[36px]">
+            {t("title")}
+          </h2>
+          <span className="font-medium text-[28px] text-muted-foreground text-right leading-[36px]">
+            {t("hint")}
+          </span>
+        </motion.div>
 
         {/* Сетка кейсов */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        <motion.div
+          className="gap-6 grid grid-cols-1 md:grid-cols-2"
           variants={staggerContainer}
         >
           {cases.map((caseItem) => (
-            <CaseCard 
-              key={caseItem.id} 
-              caseItem={caseItem} 
+            <CaseCard
+              key={caseItem.id}
+              caseItem={caseItem}
               locale={locale}
               uiElementLabel={t("uiElement")}
             />
@@ -54,7 +60,7 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
         </motion.div>
 
         {/* Кнопка перехода ко всем кейсам */}
-        <AllCasesButton 
+        <AllCasesButton
           locale={locale}
           totalCount={totalCasesCount}
           label={t("vibecodeCases")}
