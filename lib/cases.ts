@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { Case, CreateCaseData, UpdateCaseData, HomeOrderUpdate } from "@/types";
+import type { Case, CreateCaseData, UpdateCaseData, HomeOrderUpdate, VibecodeOrderUpdate } from "@/types";
 
 const DATA_FILE = path.join(process.cwd(), "data", "cases.json");
 
@@ -57,7 +57,19 @@ export async function getFeaturedCases(): Promise<Case[]> {
 // Получение вайбкод кейсов (для страницы /cases)
 export async function getVibecodeCases(): Promise<Case[]> {
   const cases = await getAllCases();
-  return cases.filter((c) => c.published && c.category === "vibecode");
+  const vibecodeCases = cases.filter((c) => c.published && c.category === "vibecode");
+
+  // Сортировка: сначала кейсы с vibecodeOrder (по порядку), затем остальные (по дате)
+  return vibecodeCases.sort((a, b) => {
+    const aOrder = a.vibecodeOrder ?? Infinity;
+    const bOrder = b.vibecodeOrder ?? Infinity;
+
+    if (aOrder !== bOrder) {
+      return aOrder - bOrder;
+    }
+    // Если порядок одинаковый или оба null — сортируем по дате
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
 }
 
 // Получение кейса по ID
@@ -94,6 +106,7 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
     published: data.published ?? false,
     featuredOnHome: data.featuredOnHome ?? false,
     homeOrder: data.homeOrder ?? null,
+    vibecodeOrder: data.vibecodeOrder ?? null,
     createdAt: now,
     updatedAt: now,
   };
@@ -152,6 +165,23 @@ export async function updateHomeOrder(updates: HomeOrderUpdate[]): Promise<boole
     if (index !== -1) {
       cases[index].homeOrder = update.homeOrder;
       cases[index].featuredOnHome = update.homeOrder !== null && update.homeOrder > 0;
+      cases[index].updatedAt = now;
+    }
+  }
+
+  await saveCases(cases);
+  return true;
+}
+
+// Массовое обновление порядка на странице /cases
+export async function updateVibecodeOrder(updates: VibecodeOrderUpdate[]): Promise<boolean> {
+  const cases = await getAllCases();
+  const now = new Date().toISOString();
+
+  for (const update of updates) {
+    const index = cases.findIndex((c) => c.id === update.id);
+    if (index !== -1) {
+      cases[index].vibecodeOrder = update.vibecodeOrder;
       cases[index].updatedAt = now;
     }
   }

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { CasesList } from "@/components/admin/CasesList";
 import { HomeOrderManager } from "@/components/admin/HomeOrderManager";
+import { VibecodeOrderManager } from "@/components/admin/VibecodeOrderManager";
 import { SoundSettings } from "@/components/admin/SoundSettings";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
@@ -59,7 +60,12 @@ export default function AdminPage() {
               <CasesList cases={cases} onRefresh={fetchCases} />
             )}
             {activeTab === "home" && (
-              <HomeOrderManager cases={cases} onUpdate={fetchCases} />
+              <div className="space-y-10">
+                <HomeOrderManager cases={cases} onUpdate={fetchCases} />
+                <div className="pt-10 border-border border-t">
+                  <VibecodeOrderManager cases={cases} onUpdate={fetchCases} />
+                </div>
+              </div>
             )}
             {activeTab === "sounds" && (
               <SoundSettings />

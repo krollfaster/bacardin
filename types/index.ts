@@ -26,6 +26,7 @@ export interface Case {
   published: boolean;
   featuredOnHome: boolean; // @deprecated - используйте homeOrder
   homeOrder: number | null; // null = не показывать, 1-6 = позиция на главной
+  vibecodeOrder: number | null; // null = без сортировки, 1+ = позиция на странице /cases
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
@@ -48,6 +49,7 @@ export interface CreateCaseData {
   published?: boolean;
   featuredOnHome?: boolean;
   homeOrder?: number | null;
+  vibecodeOrder?: number | null;
 }
 
 // Данные для обновления кейса
@@ -69,12 +71,19 @@ export interface UpdateCaseData {
   published?: boolean;
   featuredOnHome?: boolean;
   homeOrder?: number | null;
+  vibecodeOrder?: number | null;
 }
 
 // Тип для обновления порядка на главной
 export interface HomeOrderUpdate {
   id: string;
   homeOrder: number | null;
+}
+
+// Тип для обновления порядка на странице /cases
+export interface VibecodeOrderUpdate {
+  id: string;
+  vibecodeOrder: number | null;
 }
 
 // Ответ API
