@@ -26,11 +26,25 @@ export const CaseNavigation = () => {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    // Проверяем, пришёл ли пользователь с нашего сайта
+    if (typeof window !== "undefined") {
+      const referrer = document.referrer;
+      const currentHost = window.location.host;
+
+      // Если referrer с нашего домена — можно вернуться назад
+      if (referrer && referrer.includes(currentHost)) {
+        router.back();
+      } else {
+        // Иначе переходим на главную
+        router.push("/");
+      }
+    } else {
+      router.push("/");
+    }
   };
 
   return (
-    <div className="fixed top-[28px] left-0 right-0 z-50 flex justify-between px-[32px]">
+    <div className="top-[28px] right-0 left-0 z-50 fixed flex justify-between px-[32px]">
       {/* Кнопка назад */}
       <MagneticButton
         onClick={handleBack}
