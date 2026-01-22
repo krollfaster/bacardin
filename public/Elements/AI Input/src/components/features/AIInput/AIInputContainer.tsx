@@ -128,10 +128,9 @@ export const AIInputContainer = ({
                 </div>
             </div>
 
-            {/* Область инпута */}
             <motion.div
                 className={cn(
-                    'flex justify-center px-4 sm:px-0 pb-4 sm:pb-12 w-full'
+                    'relative flex justify-center px-4 sm:px-0 pb-4 sm:pb-12 w-full'
                 )}
                 animate={{
                     y: 0,
@@ -140,51 +139,56 @@ export const AIInputContainer = ({
                     y: { duration: 0.5, ease: [0.32, 0, 0.67, 0] },
                 }}
             >
-                <AnimatePresence mode="wait">
-                    {phase === 'idle' && variant === 'compact' && (
+                {/* CompactInput всегда в DOM чтобы держать фокус */}
+                {variant === 'compact' && (
+                    <div className={cn(
+                        'w-full max-w-[600px]',
+                        phase === 'submitting' && 'opacity-0 pointer-events-none'
+                    )}>
                         <CompactInput
-                            key="compact-idle"
                             ref={compactInputRef}
                             value={value}
                             onChange={handleChange}
                             onSubmit={handleSubmit}
                             placeholder={placeholder}
                         />
-                    )}
+                    </div>
+                )}
 
-                    {phase === 'submitting' && variant === 'compact' && (
+                {/* Анимация полета (CompactInputSplit) поверх инпута */}
+                {phase === 'submitting' && variant === 'compact' && (
+                    <div className="top-0 right-0 left-0 z-10 absolute flex justify-center px-4 sm:px-0">
                         <CompactInputSplit
-                            key="compact-submitting"
                             value={submittedValue}
                             onAnimationComplete={handleAnimationComplete}
                             onMessageFlightStart={handleMessageFlightStart}
                             onInputExpand={handleInputExpand}
                         />
-                    )}
+                    </div>
+                )}
 
-                    {/* TODO Этап 3: ExpandedInput */}
-                    {phase === 'idle' && variant === 'expanded' && (
-                        <CompactInput
-                            key="expanded-idle"
-                            ref={compactInputRef}
-                            value={value}
-                            onChange={handleChange}
-                            onSubmit={handleSubmit}
-                            placeholder={placeholder}
-                        />
-                    )}
+                {/* TODO Этап 3: ExpandedInput */}
+                {phase === 'idle' && variant === 'expanded' && (
+                    <CompactInput
+                        key="expanded-idle"
+                        ref={compactInputRef}
+                        value={value}
+                        onChange={handleChange}
+                        onSubmit={handleSubmit}
+                        placeholder={placeholder}
+                    />
+                )}
 
-                    {/* TODO Этап 3: ExpandedInputSplit */}
-                    {phase === 'submitting' && variant === 'expanded' && (
-                        <CompactInputSplit
-                            key="expanded-submitting"
-                            value={submittedValue}
-                            onAnimationComplete={handleAnimationComplete}
-                            onMessageFlightStart={handleMessageFlightStart}
-                            onInputExpand={handleInputExpand}
-                        />
-                    )}
-                </AnimatePresence>
+                {/* TODO Этап 3: ExpandedInputSplit */}
+                {phase === 'submitting' && variant === 'expanded' && (
+                    <CompactInputSplit
+                        key="expanded-submitting"
+                        value={submittedValue}
+                        onAnimationComplete={handleAnimationComplete}
+                        onMessageFlightStart={handleMessageFlightStart}
+                        onInputExpand={handleInputExpand}
+                    />
+                )}
             </motion.div>
         </div>
     )

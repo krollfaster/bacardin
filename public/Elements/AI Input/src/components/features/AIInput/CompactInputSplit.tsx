@@ -152,7 +152,7 @@ export const CompactInputSplit = ({
                     style={containerStyle}
                     initial={{ borderRadius: 999, marginLeft: 16 }}
                     animate={{
-                        borderRadius: 800,
+                        borderRadius: 999,
                         marginLeft:
                             phase === 'inputExpand' || phase === 'done' ? 0 : 16,
                     }}
