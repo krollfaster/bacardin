@@ -159,39 +159,6 @@
     "description_en": "Product: B2C Mobile App (Fitness & Mental Health) Role: Lead Product Designer (Contract) Status: Delivered for Development & Seed Funding Pitch\n## Problem\nThe client identified a high churn rate in the saturated fitness app market. Users were abandoning standard trackers because they felt utilitarian and ignored the psychological aspect of training.\n1. **The Gap:** Competitors focused on raw data (steps, calories), lacking empathy and leading to user burnout.\n2. **Business Risk:** Without a strong differentiator, the product risked failing to acquire and retain early adopters.\n3. **Goal:** Create a distinct Value Proposition by integrating physical tracking with emotional well-being.\n## Solution & Strategy\nDesigned a \"Mindful Fitness\" MVP ecosystem focused on reducing cognitive load and building habit-forming loops.\n1. **Strategic Discovery & UX**\n   - Insight: Qualitative research revealed that \"low mood\" is the #1 friction point preventing workout initiation.\n   - Feature: Introduced an \"Emotional Check-in\" pre-workout. This lowers the barrier to entry by acknowledging the user's state, directly aiming to improve Day-1 Retention\n   - Architecture: Prioritized a streamlined Core User Journey to ensure the MVP could be built with limited engineering resources.\n2. **Visual Language & UI System**\n   - Differentiation: Moved away from clinical \"health\" aesthetics to a \"Dark Mode & Neon\" energetic style.\n   - Function: Dark mode reduces eye strain during evening sessions, while color-coded data visualization allows users to scan progress without cognitive effort.\n3. **Laying the Foundation for AI**\n   - Data Strategy: Even at the MVP stage, the data collection flows (Mood + Activity correlation) were designed to structure datasets. This prepares the backend for future ML integration, enabling the system to predict optimal workout times based on historical emotional patterns.\n## Outcomes\n- **Investment Readiness:** Delivered a complete design system and Hi-Fi prototypes that successfully visualized the \"Emotional Fitness\" concept for stakeholder pitch decks.\n- **Scalability:** Created a component-based UI Kit to accelerate the development velocity for the post-MVP phase.\n- **Hand-off:** Ensured a seamless transition to the engineering team with comprehensive specifications."
   },
   {
-    "id": "mkbmbxy1ltw6szmy33",
-    "slug": "wms-modul-skladov",
-    "type": "gallery",
-    "title": "WMS модуль складов",
-    "description": "Скоро тут будет описание кейса! Пока в работе... ",
-    "date": "2026-01-12",
-    "category": "design",
-    "coverImage": "/images/cases/1768249881758-ccjxdn.png",
-    "images": [
-      "/images/cases/1768425483279-5ozlb8.png",
-      "/images/cases/1768425483284-32m37x.png",
-      "/images/cases/1768425483289-qtoa21.png",
-      "/images/cases/1768425483300-ak3ze6.png",
-      "/images/cases/1768425483301-dvij9u.png",
-      "/images/cases/1768425483306-7unre9.png",
-      "/images/cases/1768425483325-g9u5rk.png"
-    ],
-    "galleryLayout": "stack",
-    "componentUrl": "",
-    "tags": [
-      "WMS",
-      "B2E"
-    ],
-    "content": "",
-    "published": true,
-    "featuredOnHome": false,
-    "homeOrder": null,
-    "createdAt": "2026-01-12T20:31:33.529Z",
-    "updatedAt": "2026-01-20T13:07:52.849Z",
-    "title_en": "WMS for Armada",
-    "description_en": "A case study will be posted here soon! It's still in development..."
-  },
-  {
     "id": "mkejkh4k9ahs3yeqhrm",
     "slug": "erp-dlya-igrovogo-kluba",
     "type": "gallery",
@@ -231,5 +198,27 @@
     "updatedAt": "2026-01-20T13:07:52.849Z",
     "title_en": "ERP for Game club",
     "description_en": "Product: THE HOOD OS (Desktop Shell + Admin Panel) | Role: Product Designer Goal: Operations automation and Service Upsell via desktop | Status: Release MVP\n## Problem\nThe classic cyber cafe model created a \"bottleneck\" at the Reception desk.\n1. **Operational Burden:** Administrators spent 80% of their time on manual time extensions and taking orders (food/drinks), creating queues.\n2. **Disconnected Experience:** Gamers had to leave their PCs to buy more time or food, interrupting their \"Flow\" and reducing revenue.\n3. **Complex Onboarding:** Low conversion to registration due to lengthy form filling at the register.\n## Goals\nTransforming a \"gaming computer\" into a \"self-service terminal.\"\n- **Self-Service Experience:** Shifting 90% of operations (extensions, food purchases, calling for help) inside the client interface on the PC.\n- **Cross-Platform Auth:** Seamless authorization via QR code (scanning from the mobile app), linking offline hardware with the digital profile.\n- **Omnichannel UI:** Unifying the visual language between the Mobile App and Desktop Shell to reduce cognitive load when switching devices.\n## Key Metrics\n- **Operational Efficiency:** Reduction in administrator Time-to-Serve per client.\n- **Upsell Conversion:** Growth in Average Order Value (AOV) via the internal PC store (Shop Module).\n- **Session Continuity:** Increase in average session duration (thanks to seamless time extension).\n## Work Process\nDevelopment was conducted in close coordination with Hardware constraints (Windows lockdown, file system access).\n1. **Architecture:** Designed a \"safe buffer\" logic (5 minutes of free time), allowing users to configure peripherals before paying. This reduced refund requests.\n2. **Ecosystem Sync:** Implemented real-time state synchronization. If a user extends time in the Mobile App, the Desktop Shell updates instantly without a reboot.\n3. **UI/UX Adaptation:** Adaptation of e-commerce patterns (cart, catalog) for desktop usage during gaming (minimap-friendly interface to avoid covering the game).\n4. **Admin Tools:** Designed an admin interface where orders from the \"Floor\" (from user PCs) land in a unified task backlog (Kitchen/Bar Management).\n## Risk Management\n- **Risk:** Users won't register due to the difficulty of typing on a keyboard. Mitigation: Implemented registration in a chatbot format (Conversational UI) and quick QR login without a password.\n- **Risk:** \"Blindness\" to additional services. Mitigation: Implementation of non-intrusive notifications and quick access to the store (Quick Actions) directly from the overlay.\n## Outcomes\nCreated a self-contained ecosystem where the PC is not just a gaming tool, but a point of sale.\n- **Automation:** Administrators are freed from routine tasks and focused on service and incident resolution.\n- **Revenue Growth:** Implementing the in-PC store increased bar sales (users order without getting up)."
+  },
+  {
+    "id": "mkpkqt46mmjcwatqni",
+    "slug": "ii-pole-vvoda-01",
+    "type": "component",
+    "title": "ИИ поле ввода 01",
+    "description": " ",
+    "date": "2026-01-22",
+    "category": "vibecode",
+    "coverImage": "/images/cases/1769093712619-dm8b2m.png",
+    "images": [],
+    "galleryLayout": "stack",
+    "componentUrl": "/Elements/AI Input/dist/index.html",
+    "tags": [],
+    "content": "",
+    "published": true,
+    "featuredOnHome": false,
+    "homeOrder": null,
+    "createdAt": "2026-01-22T14:55:54.341Z",
+    "updatedAt": "2026-01-22T16:42:23.162Z",
+    "title_en": "",
+    "description_en": ""
   }
 ]

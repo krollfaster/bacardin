@@ -23,11 +23,11 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
           transition: { delay: index * 0.1, duration: 0.5 },
         },
       }}
-      className="rounded-4xl bg-card px-10 pb-[38px] pt-9"
+      className="bg-card px-10 pt-9 pb-[38px] rounded-4xl"
       style={{ boxShadow: 'inset 0 0 18px rgba(255, 255, 255, 0.04)' }}
     >
       <LaurelIcon size={64} className="mb-4" />
-      <p className="text-[28px] leading-[36px] font-[500] text-muted-foreground">
+      <p className="font-[500] text-[28px] text-muted-foreground leading-[36px]">
         {parts.map((part, i) => (
           <span key={i}>
             {part.type === "highlight" ? (
@@ -85,13 +85,13 @@ export const Achievements = () => {
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="text-[28px] leading-[36px] font-medium text-muted-foreground mb-8"
+          className="mb-8 font-medium text-[28px] text-muted-foreground leading-[36px]"
         >
           {t("title")}
         </motion.h2>
 
         {/* Сетка карточек */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="gap-6 md:gap-8 grid grid-cols-1 md:grid-cols-2">
           {achievements.map((parts, index) => (
             <AchievementCard key={index} parts={parts} index={index} />
           ))}
