@@ -107,6 +107,10 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
     featuredOnHome: data.featuredOnHome ?? false,
     homeOrder: data.homeOrder ?? null,
     vibecodeOrder: data.vibecodeOrder ?? null,
+    highlights: data.highlights,
+    highlights_en: data.highlights_en,
+    highlightFooter: data.highlightFooter,
+    highlightFooter_en: data.highlightFooter_en,
     createdAt: now,
     updatedAt: now,
   };

@@ -4,6 +4,12 @@ export type CaseType = "gallery" | "component";
 // Тип отображения галереи
 export type GalleryLayout = "stack" | "masonry";
 
+// Карточка хайлайта (инфографика)
+export interface HighlightCard {
+  title: string;
+  description: string;
+}
+
 // Интерфейс кейса портфолио
 export interface Case {
   id: string;
@@ -27,6 +33,10 @@ export interface Case {
   featuredOnHome: boolean; // @deprecated - используйте homeOrder
   homeOrder: number | null; // null = не показывать, 1-6 = позиция на главной
   vibecodeOrder: number | null; // null = без сортировки, 1+ = позиция на странице /cases
+  highlights?: HighlightCard[]; // Карточки хайлайтов для галереи
+  highlights_en?: HighlightCard[]; // Английская версия хайлайтов
+  highlightFooter?: string; // Подпись под хайлайтами RU
+  highlightFooter_en?: string; // Подпись под хайлайтами EN
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
@@ -50,6 +60,10 @@ export interface CreateCaseData {
   featuredOnHome?: boolean;
   homeOrder?: number | null;
   vibecodeOrder?: number | null;
+  highlights?: HighlightCard[];
+  highlights_en?: HighlightCard[];
+  highlightFooter?: string;
+  highlightFooter_en?: string;
 }
 
 // Данные для обновления кейса
@@ -72,6 +86,10 @@ export interface UpdateCaseData {
   featuredOnHome?: boolean;
   homeOrder?: number | null;
   vibecodeOrder?: number | null;
+  highlights?: HighlightCard[];
+  highlights_en?: HighlightCard[];
+  highlightFooter?: string;
+  highlightFooter_en?: string;
 }
 
 // Тип для обновления порядка на главной

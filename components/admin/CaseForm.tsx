@@ -26,7 +26,7 @@ import {
   GripVertical,
   HelpCircle
 } from "lucide-react";
-import type { Case, CaseType, GalleryLayout } from "@/types";
+import type { Case, CaseType, GalleryLayout, HighlightCard } from "@/types";
 import { LayoutList, LayoutGrid } from "lucide-react";
 
 interface CaseFormProps {
@@ -52,6 +52,10 @@ export interface CaseFormData {
   content: string;
   published: boolean;
   featuredOnHome: boolean;
+  highlights: HighlightCard[];
+  highlights_en: HighlightCard[];
+  highlightFooter: string;
+  highlightFooter_en: string;
 }
 
 interface ElementFolder {
@@ -83,6 +87,20 @@ export function CaseForm({
     content: "",
     published: false,
     featuredOnHome: false,
+    highlights: [
+      { title: "", description: "" },
+      { title: "", description: "" },
+      { title: "", description: "" },
+      { title: "", description: "" },
+    ],
+    highlights_en: [
+      { title: "", description: "" },
+      { title: "", description: "" },
+      { title: "", description: "" },
+      { title: "", description: "" },
+    ],
+    highlightFooter: "",
+    highlightFooter_en: "",
   });
 
   const [activeLang, setActiveLang] = useState<"ru" | "en">("ru");
@@ -132,6 +150,24 @@ export function CaseForm({
         content: initialData.content,
         published: initialData.published,
         featuredOnHome: initialData.featuredOnHome || false,
+        highlights: initialData.highlights?.length === 4
+          ? initialData.highlights
+          : [
+            { title: "", description: "" },
+            { title: "", description: "" },
+            { title: "", description: "" },
+            { title: "", description: "" },
+          ],
+        highlights_en: initialData.highlights_en?.length === 4
+          ? initialData.highlights_en
+          : [
+            { title: "", description: "" },
+            { title: "", description: "" },
+            { title: "", description: "" },
+            { title: "", description: "" },
+          ],
+        highlightFooter: initialData.highlightFooter || "",
+        highlightFooter_en: initialData.highlightFooter_en || "",
       });
 
       // Определяем, является ли componentUrl папкой из Elements или кастомным
@@ -588,6 +624,94 @@ export function CaseForm({
 
 
 
+      {/* Хайлайты - только для типа Галерея */}
+      <AnimatePresence mode="wait">
+        {formData.type === "gallery" && (
+          <motion.div
+            key="highlights-section"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="space-y-4 overflow-hidden"
+          >
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <div>
+                  <Label>Хайлайты (карточки инфографики)</Label>
+                  <p className="text-muted-foreground text-xs">
+                    4 карточки с ключевыми достижениями. Отображаются между описанием и галереей.
+                  </p>
+                </div>
+                <Badge variant="outline" className="ml-2">
+                  {activeLang === "ru" ? "Русская версия" : "English version"}
+                </Badge>
+              </div>
+
+              <div className="gap-3 grid grid-cols-1">
+                {(activeLang === "ru" ? formData.highlights : formData.highlights_en).map((highlight, index) => (
+                  <div
+                    key={`${activeLang}-${index}`}
+                    className="space-y-2 bg-muted/30 p-4 border border-border rounded-lg"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+                        {index + 1}
+                      </span>
+                      <span className="text-muted-foreground text-xs">
+                        {index === 0 || index === 3 ? "Во всю ширину" : "Половина ширины"}
+                      </span>
+                    </div>
+                    <Input
+                      value={highlight.title}
+                      onChange={(e) => {
+                        const targetField = activeLang === "ru" ? "highlights" : "highlights_en";
+                        const newHighlights = [...formData[targetField]];
+                        newHighlights[index] = { ...newHighlights[index], title: e.target.value };
+                        setFormData((prev) => ({ ...prev, [targetField]: newHighlights }));
+                      }}
+                      placeholder={activeLang === "ru" ? "Заголовок карточки" : "Card title"}
+                      className="text-sm"
+                    />
+                    <Textarea
+                      value={highlight.description}
+                      onChange={(e) => {
+                        const targetField = activeLang === "ru" ? "highlights" : "highlights_en";
+                        const newHighlights = [...formData[targetField]];
+                        newHighlights[index] = { ...newHighlights[index], description: e.target.value };
+                        setFormData((prev) => ({ ...prev, [targetField]: newHighlights }));
+                      }}
+                      placeholder={activeLang === "ru" ? "Описание карточки" : "Card description"}
+                      rows={2}
+                      className="text-sm"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Подпись под хайлайтами */}
+              <div className="space-y-2 mt-4 pt-4 border-border/50 border-t">
+                <Label>Подпись под хайлайтами</Label>
+                <Textarea
+                  value={activeLang === "ru" ? formData.highlightFooter : formData.highlightFooter_en}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      [activeLang === "ru" ? "highlightFooter" : "highlightFooter_en"]: e.target.value,
+                    }))
+                  }
+                  placeholder={
+                    activeLang === "ru"
+                      ? "Текст под блоком инфографики (например: 'Готов детально разобрать...')"
+                      : "Footer text below infographics (e.g. 'Ready to discuss...')"
+                  }
+                  rows={2}
+                  className="font-mono text-sm"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Поля для типа Галерея */}
       <AnimatePresence mode="wait">

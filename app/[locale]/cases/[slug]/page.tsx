@@ -24,6 +24,16 @@ export default async function CasePage({ params }: CasePageProps) {
   const title = locale === "en" && caseData.title_en ? caseData.title_en : caseData.title;
   const description = locale === "en" ? caseData.description_en : caseData.description;
 
+  // Определяем highlights по локали
+  const highlights = locale === "en" && caseData.highlights_en && caseData.highlights_en.length > 0
+    ? caseData.highlights_en
+    : caseData.highlights;
+
+  // Определяем подпись под хайлайтами по локали
+  const highlightFooter = locale === "en" && caseData.highlightFooter_en
+    ? caseData.highlightFooter_en
+    : caseData.highlightFooter;
+
   return (
     <main className="bg-background min-h-screen">
       <CaseNavigation />
@@ -38,6 +48,9 @@ export default async function CasePage({ params }: CasePageProps) {
           description={description}
           images={caseData.images}
           layout={caseData.galleryLayout}
+          highlights={highlights}
+          highlightFooter={highlightFooter}
+          locale={locale}
         />
       )}
     </main>

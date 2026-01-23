@@ -3,15 +3,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import type { GalleryLayout } from "@/types";
+import type { GalleryLayout, HighlightCard } from "@/types";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/components/ui/RichText";
 
 interface GalleryCaseViewProps {
   title: string;
-  description?: string; // Опционально - может отсутствовать для EN версии
+  description?: string;
   images: string[];
   layout?: GalleryLayout;
+  highlights?: HighlightCard[];
+  highlightFooter?: string;
+  locale?: string;
 }
 
 const containerVariants = {
@@ -36,23 +39,35 @@ const itemVariants = {
   },
 };
 
-export const GalleryCaseView = ({ 
-  title, 
-  description, 
+// Проверяем, есть ли заполненные хайлайты
+const hasHighlights = (highlights?: HighlightCard[]) => {
+  if (!highlights || highlights.length === 0) return false;
+  return highlights.some(h => h.title.trim() || h.description.trim());
+};
+
+export const GalleryCaseView = ({
+  title,
+  description,
   images,
-  layout = "stack" 
+  layout = "stack",
+  highlights,
+  highlightFooter,
+  locale = "ru"
 }: GalleryCaseViewProps) => {
+  const showHighlights = hasHighlights(highlights);
+  const isEnglish = locale === "en";
+
   return (
     <motion.div
-      className="min-h-screen pb-16"
+      className="pb-16 min-h-screen"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       {/* Текстовый блок */}
-      <div className="max-w-[860px] mx-auto pt-[240px] px-4 mb-16">
+      <div className="mx-auto mb-16 px-4 pt-[240px] max-w-[860px]">
         <motion.h1
-          className="text-[50px] leading-[54px] font-bold"
+          className="font-bold text-[50px] leading-[54px]"
           variants={itemVariants}
         >
           {title}
@@ -67,6 +82,132 @@ export const GalleryCaseView = ({
         )}
       </div>
 
+      {/* Блок инфографики (хайлайты) */}
+      {showHighlights && highlights && (
+        <div className="mx-auto px-4 max-w-[860px]">
+          {/* Заголовок "Хайлайты" */}
+          <motion.h2
+            className="mb-[32px] font-medium text-[28px] leading-[35px]"
+            style={{ color: "#9C9C9C", marginTop: "52px" }}
+            variants={itemVariants}
+          >
+            {isEnglish ? "Highlights" : "Хайлайты"}
+          </motion.h2>
+
+          {/* Сетка карточек */}
+          <div className="flex flex-col gap-[32px]">
+            {/* Карточка 1 - во всю ширину */}
+            {highlights[0] && (highlights[0].title || highlights[0].description) && (
+              <motion.div
+                className="border rounded-[24px]"
+                style={{
+                  borderColor: "#272727",
+                  borderWidth: "3px",
+                  padding: "36px 40px",
+                  boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
+                }}
+                variants={itemVariants}
+              >
+                <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
+                  {highlights[0].title}
+                </p>
+                {highlights[0].description && (
+                  <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
+                    {highlights[0].description}
+                  </p>
+                )}
+              </motion.div>
+            )}
+
+            {/* Карточки 2 и 3 - по половине ширины */}
+            <div className="gap-[32px] grid grid-cols-1 md:grid-cols-2">
+              {highlights[1] && (highlights[1].title || highlights[1].description) && (
+                <motion.div
+                  className="border rounded-[24px]"
+                  style={{
+                    borderColor: "#272727",
+                    borderWidth: "3px",
+                    padding: "36px 40px",
+                    boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
+                  }}
+                  variants={itemVariants}
+                >
+                  <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
+                    {highlights[1].title}
+                  </p>
+                  {highlights[1].description && (
+                    <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
+                      {highlights[1].description}
+                    </p>
+                  )}
+                </motion.div>
+              )}
+              {highlights[2] && (highlights[2].title || highlights[2].description) && (
+                <motion.div
+                  className="border rounded-[24px]"
+                  style={{
+                    borderColor: "#272727",
+                    borderWidth: "3px",
+                    padding: "36px 40px",
+                    boxShadow: "inset 0 0 32px rgba(255, 255, 255, 0.08)"
+                  }}
+                  variants={itemVariants}
+                >
+                  <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
+                    {highlights[2].title}
+                  </p>
+                  {highlights[2].description && (
+                    <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
+                      {highlights[2].description}
+                    </p>
+                  )}
+                </motion.div>
+              )}
+            </div>
+
+            {/* Карточка 4 - во всю ширину */}
+            {highlights[3] && (highlights[3].title || highlights[3].description) && (
+              <motion.div
+                className="border rounded-[24px]"
+                style={{
+                  borderColor: "#272727",
+                  borderWidth: "3px",
+                  padding: "36px 40px",
+                  boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
+                }}
+                variants={itemVariants}
+              >
+                <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
+                  {highlights[3].title}
+                </p>
+                {highlights[3].description && (
+                  <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
+                    {highlights[3].description}
+                  </p>
+                )}
+              </motion.div>
+            )}
+          </div>
+
+          {/* Статичный текст под блоком */}
+          <motion.p
+            className="font-medium text-[28px] leading-[35px]"
+            style={{
+              color: "#9C9C9C",
+              padding: "0 38px",
+              marginTop: "68px",
+              marginBottom: "68px"
+            }}
+            variants={itemVariants}
+          >
+            {highlightFooter || (isEnglish
+              ? "\"Ready to discuss product strategy, metrics, and trade-offs in detail during an interview\""
+              : "\"Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью\"")
+            }
+          </motion.p>
+        </div>
+      )}
+
       {/* Галерея изображений */}
       {layout === "stack" ? (
         <StackGallery images={images} title={title} />
@@ -78,13 +219,13 @@ export const GalleryCaseView = ({
 };
 
 // Компонент картинки с Scale + Opacity эффектом при скролле
-function ScaleOnScrollImage({ 
-  image, 
-  title, 
-  index 
-}: { 
-  image: string; 
-  title: string; 
+function ScaleOnScrollImage({
+  image,
+  title,
+  index
+}: {
+  image: string;
+  title: string;
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -92,15 +233,15 @@ function ScaleOnScrollImage({
     target: ref,
     offset: ["start end", "start 0.7"]
   });
-  
+
   const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
   const opacity = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
-  
+
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       style={{ scale, opacity }}
-      className="w-full rounded-2xl overflow-hidden origin-center"
+      className="rounded-2xl w-full overflow-hidden origin-center"
     >
       <Image
         src={image}
@@ -117,13 +258,13 @@ function ScaleOnScrollImage({
 // Стек - картинки друг под другом с Scale + Opacity эффектом
 function StackGallery({ images, title }: { images: string[]; title: string }) {
   return (
-    <div className="px-4 md:px-16 flex flex-col gap-8">
+    <div className="flex flex-col gap-8 px-4 md:px-16">
       {images.map((image, index) => (
-        <ScaleOnScrollImage 
-          key={index} 
-          image={image} 
-          title={title} 
-          index={index} 
+        <ScaleOnScrollImage
+          key={index}
+          image={image}
+          title={title}
+          index={index}
         />
       ))}
     </div>
@@ -145,7 +286,7 @@ function MasonryGallery({ images, title }: { images: string[]; title: string }) 
         <motion.div
           key={index}
           className={cn(
-            "break-inside-avoid mb-4 md:mb-6",
+            "mb-4 md:mb-6 break-inside-avoid",
             "overflow-hidden",
             "bg-transparent"
           )}

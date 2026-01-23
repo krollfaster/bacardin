@@ -29,7 +29,7 @@
     "slug": "ios-app-dlya-igrovogo-kluba",
     "type": "gallery",
     "title": "IOS APP для игрового клуба",
-    "description": "Продукт: THE HOOD (App для кибер-клуба) | Роль: Product Designer | Цель: Цифровизация оффлайн-бизнеса и создание бесшовного O2O (Online-to-Offline) опыта | Статус: Релиз МВП\n## Проблема\nКрупнейший кибер-клуб Астаны столкнулся с ограничениями масштабирования из-за разрыва между цифровым и физическим опытом клиента:\n1. **Фрагментарный сервис:** Бронирование, оплата и вход в клуб существовали в разных плоскостях, создавая высокий порог входа для новых пользователей.\n2. **Сложность биллинга:** Существующая модель оплаты требовала сложных транзакций и разных счетов, что снижало конверсию в покупку пакетов.\n3. **Отсутствие LTV-инструментов:** Не было механик для удержания пользователей и возврата их в клуб **(retention)**.\n## Цели\nСоздать единую цифровую экосистему **(Mobile App + ERP)**, интегрированную в **Service Blueprint** бизнеса. \n- **Финансовая модель:** Внедрение единой внутриклубной валюты («Кидалкоины») для устранения трения при оплате и унификации счетов. \n- **Сервисный дизайн:** Проектирование сквозного пути пользователя: от бронирования дома до посадки за компьютер в клубе. \n- **Архитектура:** Синхронизация данных между Mobile App (клиент) и ERP (менеджмент) в реальном времени.\n## Ключевые метрики\nУспех оценивался через рост % онлайн-бронирований (снижение нагрузки на ресепшн), увеличение ARPU (средний чек) за счет пакетных предложений и время сессии (Time spent).\n## Процесс работы\nРабота строилась как полноценный продуктовый цикл в сжатые сроки студийной разработки:\n1. **Ресерч и дискавери:** Составили карту сервиса, чтобы понять, в каких точках Mobile App должен взаимодействовать с ERP и физическим оборудованием клуба.\n2. **UI дизайн:** Разработана масштабируемая дизайн-система, учитывающая темную тему (Dark Mode first) как стандарт индустрии и специфику освещения в клубе.\n3. **Улучшение UX:** Спроектирован флоу покупки и использования внутренней валюты. Это решило техническую боль «разных счетов» и заложило фундамент для геймификации.\n4. **Синк между платформами:** Параллельное проектирование ERP и App для обеспечения консистентности данных (пользователь видит то же, что и админ).\n## Риск менеджмент\n- **Риск:** Сложная верификация и сбор данных отпугнут пользователей. Митигация: Внедрен «отложенный KYC». Пользователь попадает в приложение сразу, а полные данные запрашиваются только в момент бронирования/оплаты. \n- **Риск:** Пользователи не поймут систему внутренней валюты. Митигация: Прозрачный калькулятор конвертации и визуализация баланса на главном экране.\n## Итоги\nЗапущен MVP экосистемы, трансформировавший традиционный игровой клуб в технологичный подход. \n- **Общий UX:** Единый профиль пользователя для App и ERP. \n- **Польза для бизнеса:** Внедрение внутренней валюты упростило финансовые потоки и создало базу для будущей программы лояльности. \n- **Дизайн с учетом на будущее:** Архитектура приложения готова к внедрению турнирных механик и стриминговых сервисов (следующий шаг для бизнеса).",
+    "description": "Разработал B2C мобильное приложение для гостей кибер-клуба, которое стало «пультом управления» их физическим опытом. Спроектировал бесшовный флоу бронирования и внедрил единую валюту «Кидалкоины», решив проблему фрагментации счетов между разными клубами сети. Визуальный стиль адаптировал под ментальные модели геймеров (Discord/NFT aesthetics)",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768248153349-vozwes.png",
@@ -59,18 +59,56 @@
     "featuredOnHome": true,
     "homeOrder": 3,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-20T13:07:52.849Z",
+    "updatedAt": "2026-01-23T21:07:44.811Z",
     "galleryLayout": "masonry",
     "title_en": "IOS APP for Game club ",
-    "description_en": "Product: THE HOOD (Cyber Club Superapp) | Role: Lead Product Designer (Studio) Goal: Digitalization of an offline business and creating a seamless O2O (Online-to-Offline) experience | Status: Release (MVP)\n## Problem\nAstana’s largest cyber club faced scaling limitations due to a disconnect between the digital and physical customer experience:\n1. Fragmented Service: Booking, payment, and club entry existed in separate planes, creating a high entry barrier for new users.\n2. Billing Complexity: The existing payment model required complex transactions and multiple accounts, which reduced conversion into package purchases.\n3. Lack of LTV Tools: There were no mechanics to retain users and return them to the club (retention).\n## Goals\nCreate a unified digital ecosystem (Mobile App + ERP), integrated into the business Service Blueprint.\n- **Financial Model:** Implementation of a unified in-club currency (\"Kidalloins\") to eliminate payment friction and unify accounts.\n- **Service Design:** Engineering an end-to-end user journey: from booking at home to sitting at a computer in the club.\n- **Architecture:** Real-time data synchronization between the Mobile App (client) and ERP (management).\n## Key Metrics\nSuccess was evaluated through the growth of % online bookings (reducing load on reception), increased ARPU (average check) via package offers, and session time (Time spent).\n## Work Process\nWork was structured as a full product cycle within tight studio development deadlines:\n1. **Discovery & Blueprint:** Mapped the service to understand at which points the Mobile App needs to interact with the ERP and physical club hardware.\n2. **System Design:** Developed a scalable design system considering dark mode (Dark Mode first) as an industry standard and the specific lighting in the club.\n3. **Economy UX:** Designed the flow for purchasing and using internal currency. This solved the technical pain of “different accounts” and laid the foundation for gamification.\n4. **Cross-platform Sync:** Parallel design of ERP and App to ensure data consistency (the user sees the same thing as the admin).\n## Risk Management\n- **Risk:** Complex verification and data collection might scare off users. Mitigation: Implemented “Deferred KYC”. The user enters the app immediately, and full data is requested only at the moment of booking/payment.\n- **Risk:** Users might not understand the internal currency system. Mitigation: Transparent conversion calculator and balance visualization on the main screen.\n## Results\nLaunched the ecosystem MVP, transforming a traditional gaming club into a Tech-driven business.\n- **Unified Experience:** Single user profile for App and ERP.\n- **Business Impact:** Implementation of internal currency simplified financial flows and created a base for a future loyalty program.\n- **Scalability:** App architecture is ready for the implementation of tournament mechanics and streaming services (Next Steps).",
-    "vibecodeOrder": null
+    "description_en": "Designed the B2C mobile app serving as the primary touchpoint for cyber cafe guests. I engineered a seamless booking flow and introduced a unified currency (\"Kidalkoins\") to solve billing fragmentation across venue locations. The visual language was crafted to resonate with gamer mental models, leveraging Discord and NFT aesthetics",
+    "vibecodeOrder": null,
+    "highlights": [
+      {
+        "title": "Единая валюта 🪙",
+        "description": "Внедрена система «Кидалкоинов» для устранения трения при оплате в разных филиалах и роста LTV."
+      },
+      {
+        "title": "Бронирование 📅",
+        "description": "Полностью переработан флоу брони: от выбора визуальной зоны на карте до сравнения пакетных тарифов."
+      },
+      {
+        "title": "UI для геймеров 🎮",
+        "description": "Интерфейс спроектирован на основе привычных паттернов Discord и NFT-платформ (Темная тема)."
+      },
+      {
+        "title": "O2O синхронизация 🔄",
+        "description": "Приложение синхронизировано с ERP в реальном времени: юзер видит свободные места, админ — бронь."
+      }
+    ],
+    "highlights_en": [
+      {
+        "title": "Unified Currency 🪙",
+        "description": "Introduced \"Kidalkoins\" to eliminate payment friction across different venue locations and boost LTV"
+      },
+      {
+        "title": "Smart Booking 📅",
+        "description": "Re-engineered the reservation flow, featuring visual seat maps and transparent package rate comparisons"
+      },
+      {
+        "title": "Gamer-Native UI 🎮",
+        "description": "UI design based on familiar Discord and NFT platform patterns to match the target audience's mental model"
+      },
+      {
+        "title": "O2O Sync 🔄",
+        "description": "Real-time O2O synchronization with the ERP system ensuring accurate seat availability and booking data"
+      }
+    ],
+    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
+    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
     "slug": "web-app-dlya-top-menedzherov",
     "type": "gallery",
     "title": "Web APP для топ-менеджеров",
-    "description": "Продукт: ПОТОК (Agile-инструмент Сбера) | Роль: Staff Product Designer Цель: Унификация UX и сокращение Time-to-Market | Статус: Release & Scale\n## Проблема\nПродукт вырос из дополнения в самостоятельный инструмент, но развивался фрагментарно. Это привело к трем критическим барьерам:\n1. **UX/Дизайн долг:** Отсутствие единой логики делало интерфейс сложным для обучения и работы.\n2. **Архитектурный тупик:** Текущая структура не позволяла внедрить новый критичный слой — «Проекты».\n3. **Медленная разработка:** Отсутствие Дизайн-системы (DS) тормозило вывод новых фич (Time-to-Market).\n## Цели\nПроведен полный редизайн продукта с переходом на промышленную дизайн-систему.\n- **Информационная архитектура:** Внедрена новая иерархия (Цели банка → Проекты → Задачи → Заметки). Связаны разорванные модули.\n- **Дизайн-система:** Миграция на ANT Design System. Это унифицировало UI и ускорило верстку.\n- **Новые домены:** Создан фундамент для сущности «Проекты» и AI-ассистента (автопротоколы встреч, саммари).\n- **Процесс:** Инкрементальный редизайн параллельно с продуктовой разработкой (поддержка старой и новой версии UI).\n## Ключевые метрики\nМы оценивали успех через удовлетворенность пользователей и качественную валидацию от топ-менеджмента.\n## Процесс работы\nЧтобы не останавливать развитие продукта, внедрение шло в 4 этапа:\n1. **Фундамент:** Обновление навигации и структуры контента (Сайдбар).\n2. **Система:** Внедрение токенов и стилей ANT ДС.\n3. **Масшатбируемость:** Внедрение функционала «Проекты».\n4. **UX последовательность:** Последовательное обновление модулей (Задачи, Заметки) и устранение долга.\n## Риск менеджмент\n- **Риск:** Сопротивление изменениям со стороны консервативных пользователей. Митигация: Провели серию UX-интервью до релиза и быстрые циклы сбора ОС после.\n- **Риск:** Рассинхрон с параллельной разработкой фич. Митигация: Регулярная синхронизация плана редизайна с бэклогом фич, чтобы новые фичи сразу делались на новых компонентах.\n## Итоги\n«ПОТОК» трансформировался из разрозненного набора модулей в единую платформу для продуктивности Agile-команд.\n- Заложен фундамент для AI-ассистента.\n- Обеспечена масштабируемость (слой «Проекты»).\n- Единый UI/UX код во всех модулях.",
+    "description": "Залидил редизайн веб платформы и трасформировал из разрозненного набора утилит в единую B2E/B2C-like экосистему для топ-менеджмента Сбера",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768245632342-6iywil.png",
@@ -97,11 +135,49 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-20T13:07:52.849Z",
+    "updatedAt": "2026-01-23T20:41:56.323Z",
     "galleryLayout": "stack",
     "title_en": "Web APP for Top-Managers ",
-    "description_en": "Product: POTOK (Sber’s Agile tool) | Role: Staff Product Designer Goal: UX Unification and reducing Time-to-Market | Status: Release & Scale\n## Problem\nThe product evolved from an add-on into a standalone tool, but it developed in a fragmented way. This led to three critical barriers:\n1. UX/Design Debt: The lack of a unified logic made the interface difficult to learn and operate.\n2. Architectural Dead End: The existing structure did not allow for the implementation of a critical new layer — \"Projects.\"\n3. Slow Development: The absence of a Design System (DS) slowed down the release of new features (Time-to-Market).\n## Goals\nConducted a full product redesign with a transition to an enterprise-grade design system.\n- Information Architecture: Implemented a new hierarchy (Bank Goals → Projects → Tasks → Notes). Connected previously disconnected modules.\n- Design System: Migration to the ANT Design System. This unified the UI and accelerated frontend development.\n- New Domains: Created the foundation for the \"Projects\" entity and the AI Assistant (automated meeting minutes, summaries).\n- Process: Incremental redesign ran parallel to product development (supporting both the old and new UI versions).\n## Key Metrics\nWe evaluated success through user satisfaction and qualitative validation from top management.\n## Timeline & Scope\nTo avoid halting product evolution, implementation was carried out in 4 stages:\n1. Foundation: Updating navigation and content structure (Sidebar).\n2. System: Implementing ANT Design System tokens and styles.\n3. Scale: Implementing the \"Projects\" layer (scalability).\n4. UX Polish: Sequential updates of modules (Tasks, Notes) and debt elimination.\n## Risks\n- Risk: Resistance to change from conservative users. Mitigation: Conducted a series of UX interviews prior to release and utilized rapid feedback loops post-release.\n- Risk: Misalignment with parallel feature development. Mitigation: Regular synchronization of the redesign plan with the feature backlog to ensure new features were built immediately using new components.\n## Outcome\n\"POTOK\" transformed from a scattered set of modules into a unified productivity platform for Agile teams.\n- Laid the foundation for the AI Assistant.\n- Ensured scalability (via the \"Projects\" layer).\n- Established a unified UI/UX code base across all modules.",
-    "vibecodeOrder": null
+    "description_en": "Led the transformation of fragmented utilities into a unified B2E platform with a consumer-grade experience for Sber executives",
+    "vibecodeOrder": null,
+    "highlights": [
+      {
+        "title": "Time-to-Market  🚀",
+        "description": "Ускорен выпуск фич и внедрена работа с проектами за счет устранения архитектурного тупика"
+      },
+      {
+        "title": "AI в проекте 🤖",
+        "description": "Архитектура данных и UI перестроены под внедрение AI-ассистента и авто-саммари встреч"
+      },
+      {
+        "title": "Без потери времени 🛡️",
+        "description": "Инкрементальный редизайн внедрялся параллельно с разработкой, без заморозки релизов"
+      },
+      {
+        "title": "Унификация экосистемы 💠",
+        "description": "Миграция на ANT Design System. Единый UI/UX код связал разрозненные модули банка"
+      }
+    ],
+    "highlights_en": [
+      {
+        "title": "Time-to-Market  🚀",
+        "description": "Accelerated feature delivery and unlocked the «Projects» layer by resolving architectural deadlocks"
+      },
+      {
+        "title": "AI Foundation  🤖",
+        "description": "Reengineered data architecture and UI to support an AI Assistant and automated meeting summaries"
+      },
+      {
+        "title": "Zero Downtime 🛡️",
+        "description": "Executed incremental redesign parallel to product development without code freezes or delays"
+      },
+      {
+        "title": "Unified Ecosystem  💠",
+        "description": "Migrated to ANT Design System. Established a unified UI/UX codebase across disparate bank modules"
+      }
+    ],
+    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
+    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
@@ -131,7 +207,7 @@
     "slug": "ios-app-dlya-fitnesa",
     "type": "gallery",
     "title": "IOS APP для фитнеса",
-    "description": "Продукт: B2C Mobile App (Фитнес и Mental Health) | Роль: Lead Product Designer (Freelance, еще 2 дизайнера на проекте) Цель: Разработка визуального стиля и UX для MVP | Статус: Design Handoff (Готовность к разработке)\n## Проблема\nКлиент обратился с гипотезой, что стандартные фитнес-трекеры слишком утилитарны, что приводит к быстрому оттоку (Churn Rate) пользователей-новичков.\n1. **Отсутствие эмпатии:** Обычные приложения показывают сухие цифры (калории, шаги), игнорируя ментальное состояние пользователя.\n2. **Низкая мотивация:** Пользователи бросают тренировки из-за эмоционального выгорания, которое трекеры не фиксируют.\n3. **Потребность в дифференциации:** На перегретом рынке фитнес-приложений необходимо было уникальное ценностное предложение (USP) для запуска.\n## Цели\nСпроектировать интерфейс MVP, который объединяет физическую активность с эмоциональным трекингом.\n- **Гипотеза:** Отслеживание эмоций до и после тренировки повышает осознанность (Mindfulness) и увеличивает Retention.\n- **Визуальный язык:** Создать «энергичный», но не агрессивный стиль, который отличается от стерильных конкурентов.\n- **UX стратегия:** Максимально упростить вход в приложение, чтобы снизить когнитивную нагрузку перед тренировкой.\n## Процесс и Решения\nПоскольку ресурсы на разработку были ограничены, мы сфокусировались на качественной проработке ключевых сценариев\n1. **Исследование:** Проведен анализ тематических форумов и сбор обратной связи от целевой аудитории. \n   - Инсайт: Пользователи часто отмечали, что их «настроение» является главным блокером для начала тренировки. \n   - Решение: Внедрена функция «Check-in» эмоций, которая влияет на рекомендации по нагрузке.\n2. **Визуализация**: Разработана дизайн-концепция в темной теме (Dark Mode) с неоновыми акцентами. Темный фон снижает нагрузку на глаза и фокусирует внимание на контенте. Цветовое кодирование графиков помогает интуитивно считывать прогресс без вчитывания в цифры.\n3. **Функционал и AI-потенциал:** Заложен фундамент для персонализации. Спроектированы экраны сбора данных (настроение + активность), которые в будущем должны стать базой для ML-моделей, предсказывающих идеальное время для тренировки.\n## Итоги \nПроект был успешно передан клиенту для поиска инвестиций и дальнейшей реализации\n- Создан полный пакет макетов для основных флоу (Онбординг, Дашборд, Трекер активностей, Рецепты).\n- Разработан UI-кит для ускорения будущей разработки.\n- Визуализирована концепция «Эмоционального фитнеса», позволяющая продукту отстроиться от конкурентов на этапе питчинга.",
+    "description": "Залидил разработку B2C приложения на проекте и реализовал концепцию «Эмоционального фитнеса», управляя командой дизайнеров  от идеи до передачи в разработку",
     "date": "2026-01-12",
     "category": "design",
     "coverImage": "/images/cases/1768249470031-7esw3g.png",
@@ -158,17 +234,55 @@
     "featuredOnHome": true,
     "homeOrder": 2,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-20T21:19:02.777Z",
-    "title_en": "APP for Fitness Emotion",
-    "description_en": "Product: B2C Mobile App (Fitness & Mental Health) Role: Lead Product Designer (Contract) Status: Delivered for Development & Seed Funding Pitch\n## Problem\nThe client identified a high churn rate in the saturated fitness app market. Users were abandoning standard trackers because they felt utilitarian and ignored the psychological aspect of training.\n1. **The Gap:** Competitors focused on raw data (steps, calories), lacking empathy and leading to user burnout.\n2. **Business Risk:** Without a strong differentiator, the product risked failing to acquire and retain early adopters.\n3. **Goal:** Create a distinct Value Proposition by integrating physical tracking with emotional well-being.\n## Solution & Strategy\nDesigned a \"Mindful Fitness\" MVP ecosystem focused on reducing cognitive load and building habit-forming loops.\n1. **Strategic Discovery & UX**\n   - Insight: Qualitative research revealed that \"low mood\" is the #1 friction point preventing workout initiation.\n   - Feature: Introduced an \"Emotional Check-in\" pre-workout. This lowers the barrier to entry by acknowledging the user's state, directly aiming to improve Day-1 Retention\n   - Architecture: Prioritized a streamlined Core User Journey to ensure the MVP could be built with limited engineering resources.\n2. **Visual Language & UI System**\n   - Differentiation: Moved away from clinical \"health\" aesthetics to a \"Dark Mode & Neon\" energetic style.\n   - Function: Dark mode reduces eye strain during evening sessions, while color-coded data visualization allows users to scan progress without cognitive effort.\n3. **Laying the Foundation for AI**\n   - Data Strategy: Even at the MVP stage, the data collection flows (Mood + Activity correlation) were designed to structure datasets. This prepares the backend for future ML integration, enabling the system to predict optimal workout times based on historical emotional patterns.\n## Outcomes\n- **Investment Readiness:** Delivered a complete design system and Hi-Fi prototypes that successfully visualized the \"Emotional Fitness\" concept for stakeholder pitch decks.\n- **Scalability:** Created a component-based UI Kit to accelerate the development velocity for the post-MVP phase.\n- **Hand-off:** Ensured a seamless transition to the engineering team with comprehensive specifications.",
-    "vibecodeOrder": null
+    "updatedAt": "2026-01-23T21:11:03.295Z",
+    "title_en": "IOS Fitness App",
+    "description_en": "Led the B2C app design and delivered the 'Emotional Fitness' concept, managing the design team from ideation to handoff",
+    "vibecodeOrder": null,
+    "highlights": [
+      {
+        "title": "Снижение оттока пользователей 📉",
+        "description": "Внедрена механика «Emotional Check-in» для снижения оттока и повышения осознанности пользователей"
+      },
+      {
+        "title": "ML Адаптация 🤖",
+        "description": "UX спроектирован для сбора данных (настроение + нагрузка) для обучения AI-моделей рекомендаций"
+      },
+      {
+        "title": "Особенности УТП ⚡",
+        "description": "Визуальный язык и позиционирование отстроены от «сухих» конкурентов за счет эмоционального дизайна"
+      },
+      {
+        "title": "Собрал UI KIT 🎨",
+        "description": "Разработана темная тема и полный UI-кит для быстрой передачи в разработку "
+      }
+    ],
+    "highlights_en": [
+      {
+        "title": "Churn Reduction 📉",
+        "description": "Integrated \"Emotional Check-in\" mechanics to combat user churn and boost mindfulness"
+      },
+      {
+        "title": "ML Data Foundation 🤖",
+        "description": "Engineered data-entry flows to build datasets for training future AI recommendation models"
+      },
+      {
+        "title": "USP Differentiation ⚡",
+        "description": "Established a unique value proposition through emotional design to stand out in a saturated market"
+      },
+      {
+        "title": "Scalable UI Kit 🎨",
+        "description": "Delivered a Dark Mode design system and comprehensive assets for rapid engineering handoff"
+      }
+    ],
+    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
+    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
   },
   {
     "id": "mkejkh4k9ahs3yeqhrm",
     "slug": "erp-dlya-igrovogo-kluba",
     "type": "gallery",
     "title": "ERP для игрового клуба",
-    "description": "Продукт: THE HOOD OS (ПО на ПК + Админка) | Роль: Product Designer Цель: Автоматизация операционки и предложка услуг через десктоп | Статус: Релиз МВП\n## Проблема\nКлассическая модель работы компьютерного клуба создавала \"бутылочное горлышко\" на стойке регистрации.\n1. **Операционная нагрузка:** Администраторы тратили 80% времени на ручное продление времени и принятие заказов (еда/напитки), создавая очереди.\n2. **Разрыв опыта:** Геймеру приходилось вставать из-за ПК, чтобы докупить время или еду, что прерывало движение потока клиентов и снижало выручку.\n3. **Сложный онбординг:** Низкая конверсия в регистрацию из-за долгого заполнения форм на кассе.\n## Цели\nТрансформация \"компьютера для игр\" в \"терминал самообслуживания\". \n- **Автоматизация с помощью ПО:** Перенос 90% операций (продление, покупка еды, вызов помощи) внутрь клиентского интерфейса на ПК. \n- **Кроссплатформеная аутентификация:** Бесшовная авторизация через QR-код (сканирование из мобильного приложения), связывающая оффлайн-железо с цифровым профилем. \n- **Семиотический код UI:** Унификация визуального языка между Mobile App и Desktop Shell для снижения когнитивной нагрузки при переключении устройств.\n## Ключевые метрики\n- **Operational Efficiency:** Сокращение времени обслуживания одного клиента администратором (Time-to-Serve). \n- **Upsell Conversion:** Рост среднего чека за счет заказа товаров через внутренний магазин на ПК (Shop Module). \n- **Session Continuity:** Увеличение средней длительности сессии (благодаря бесшовному продлению).\n## Процесс работы\nРазработка велась в тесной связке с Софт-ограничениями (блокировка Windows, доступ к файловой системе).\n1. **Архитектура:** Спроектирована логика \"безопасного буфера\" (5 минут бесплатного времени), позволяющая пользователю настроить периферию до оплаты. Это снизило количество возвратов.\n2. **Межплатформеный синк:** Реализована синхронизация состояний в реальном времени. Если пользователь продлевает время в Мобильном приложении, Desktop Shell обновляется мгновенно без перезагрузки.\n3. **UI/UX Адаптация:** Адаптация паттернов e-commerce (корзина, каталог) под десктопное использование во время игры (Сворачиваемый интерфейс, чтобы не перекрывать игру).\n4. **Инструменты админа:** Спроектирован интерфейс для админа, где заказы из \"Зала\" (с ПК пользователей) падают в единый бэклог задач (Кухня/БАР).\n## Риск менеджмент\n- **Риск:** Пользователи не будут регистрироваться из-за сложности ввода данных на клавиатуре. Митигация: Внедрена регистрация в формате чат-бота (Conversational UI) и быстрый вход по QR без пароля. \n- **Риск:** \"Слепота\" к дополнительным услугам. Митигация: Внедрение ненавязчивых уведомлений и быстрый доступ к магазину (Quick Actions) прямо из оверлея.\n## Итоги\nСоздана замкнутая экосистема, где ПК является не просто инструментом игры, но и точкой продаж. \n- **Автоматизация:** Администраторы освобождены от рутины и сфокусированы на сервисе и разрешении инцидентов. \n- **Рост Revenue:** Внедрение магазина внутри ПК увеличило продажи бара (пользователи заказывают, не вставая). ",
+    "description": "Спроектировал комплексную ERP-систему управления кибер-клубом и клиентское приложение. В роли Lead Designer связал в единый Service Blueprint три точки контакта: админ-панель, мобильное приложение и интерфейс игрового ПК. Внедрил систему модерации «проблемных посетителей», чтобы снизить репутационные риски бизнеса",
     "date": "2026-01-14",
     "category": "design",
     "coverImage": "/images/cases/1768426629572-9wdjqp.png",
@@ -200,10 +314,48 @@
     "featuredOnHome": true,
     "homeOrder": 4,
     "createdAt": "2026-01-14T21:37:31.316Z",
-    "updatedAt": "2026-01-20T13:07:52.849Z",
+    "updatedAt": "2026-01-23T21:08:18.578Z",
     "title_en": "ERP for Game club",
-    "description_en": "Product: THE HOOD OS (Desktop Shell + Admin Panel) | Role: Product Designer Goal: Operations automation and Service Upsell via desktop | Status: Release MVP\n## Problem\nThe classic cyber cafe model created a \"bottleneck\" at the Reception desk.\n1. **Operational Burden:** Administrators spent 80% of their time on manual time extensions and taking orders (food/drinks), creating queues.\n2. **Disconnected Experience:** Gamers had to leave their PCs to buy more time or food, interrupting their \"Flow\" and reducing revenue.\n3. **Complex Onboarding:** Low conversion to registration due to lengthy form filling at the register.\n## Goals\nTransforming a \"gaming computer\" into a \"self-service terminal.\"\n- **Self-Service Experience:** Shifting 90% of operations (extensions, food purchases, calling for help) inside the client interface on the PC.\n- **Cross-Platform Auth:** Seamless authorization via QR code (scanning from the mobile app), linking offline hardware with the digital profile.\n- **Omnichannel UI:** Unifying the visual language between the Mobile App and Desktop Shell to reduce cognitive load when switching devices.\n## Key Metrics\n- **Operational Efficiency:** Reduction in administrator Time-to-Serve per client.\n- **Upsell Conversion:** Growth in Average Order Value (AOV) via the internal PC store (Shop Module).\n- **Session Continuity:** Increase in average session duration (thanks to seamless time extension).\n## Work Process\nDevelopment was conducted in close coordination with Hardware constraints (Windows lockdown, file system access).\n1. **Architecture:** Designed a \"safe buffer\" logic (5 minutes of free time), allowing users to configure peripherals before paying. This reduced refund requests.\n2. **Ecosystem Sync:** Implemented real-time state synchronization. If a user extends time in the Mobile App, the Desktop Shell updates instantly without a reboot.\n3. **UI/UX Adaptation:** Adaptation of e-commerce patterns (cart, catalog) for desktop usage during gaming (minimap-friendly interface to avoid covering the game).\n4. **Admin Tools:** Designed an admin interface where orders from the \"Floor\" (from user PCs) land in a unified task backlog (Kitchen/Bar Management).\n## Risk Management\n- **Risk:** Users won't register due to the difficulty of typing on a keyboard. Mitigation: Implemented registration in a chatbot format (Conversational UI) and quick QR login without a password.\n- **Risk:** \"Blindness\" to additional services. Mitigation: Implementation of non-intrusive notifications and quick access to the store (Quick Actions) directly from the overlay.\n## Outcomes\nCreated a self-contained ecosystem where the PC is not just a gaming tool, but a point of sale.\n- **Automation:** Administrators are freed from routine tasks and focused on service and incident resolution.\n- **Revenue Growth:** Implementing the in-PC store increased bar sales (users order without getting up).",
-    "vibecodeOrder": null
+    "description_en": "Designed a comprehensive ERP system and client app for a cyber arena. As Lead Designer, I utilized Service Blueprinting to bridge three touchpoints: the Admin Panel, Mobile App, and PC Shell. Engineered a user moderation system to mitigate business risks associated with toxic behavior",
+    "vibecodeOrder": null,
+    "highlights": [
+      {
+        "title": "Синхронизация платформ 💠",
+        "description": "Бесшовная синхронизация данных между ERP (Admin), Mobile App (Client) и ПО-оболочкой ПК."
+      },
+      {
+        "title": "Оффлайн боли 🛡️",
+        "description": "Внедрена система штрафов и рейтингов для сегментации «проблемных» посетителей и защиты LTV."
+      },
+      {
+        "title": "Service Blueprint 🗺️",
+        "description": "Спроектирован сквозной сценарий O2O взаимодействия: от брони дома до посадки за ПК в клубе."
+      },
+      {
+        "title": "UX для разных ролей 👥",
+        "description": "Спроектирована ролевая модель (Владелец / Менеджер / Админ) для разграничения прав доступа"
+      }
+    ],
+    "highlights_en": [
+      {
+        "title": "Multi-Platform Sync 💠",
+        "description": "Engineered real-time data sync across ERP (Admin), Mobile App (Client), and PC Shell interface."
+      },
+      {
+        "title": "Churn Control 🛡️",
+        "description": "Implemented a rating & penalty system to manage \"high-risk\" users and protect club atmosphere/LTV."
+      },
+      {
+        "title": "Service Blueprint 🗺️",
+        "description": "Mapped the end-to-end O2O journey: from remote booking to physical login at the club PC."
+      },
+      {
+        "title": "Multi-Role UX 👥",
+        "description": "Designed specific interfaces and permission flows for Owners, Managers, and Admins"
+      }
+    ],
+    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
+    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
   },
   {
     "id": "mkpkqt46mmjcwatqni",
