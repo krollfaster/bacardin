@@ -17,8 +17,8 @@ export async function generateMetadata({
 
   return {
     title: isRu
-      ? "Vibecode UI Кейсы — Интерактивные элементы | Эрнест фон Шульдайс"
-      : "Vibecode UI Cases — Interactive Elements | Ernest von Shuldays",
+      ? "Vibecode UI Кейсы — Интерактивные элементы"
+      : "Vibecode UI Cases — Interactive Elements",
     description: isRu
       ? "Интерактивные UI элементы и анимации, созданные с помощью кода. Примеры vibecoding от продуктового дизайнера."
       : "Interactive UI elements and animations created with code. Vibecoding examples by a product designer.",

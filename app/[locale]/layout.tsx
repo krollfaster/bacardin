@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     icon: "/icon.svg",
     apple: "/apple-icon.svg",
   },
+  verification: {
+    yandex: "f4eaaed6e44dd198",
+  },
   openGraph: {
     type: "website",
     locale: "ru_RU",
