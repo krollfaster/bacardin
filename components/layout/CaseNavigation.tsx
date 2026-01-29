@@ -26,19 +26,12 @@ export const CaseNavigation = () => {
   const router = useRouter();
 
   const handleBack = () => {
-    // Проверяем, пришёл ли пользователь с нашего сайта
-    if (typeof window !== "undefined") {
-      const referrer = document.referrer;
-      const currentHost = window.location.host;
-
-      // Если referrer с нашего домена — можно вернуться назад
-      if (referrer && referrer.includes(currentHost)) {
-        router.back();
-      } else {
-        // Иначе переходим на главную
-        router.push("/");
-      }
+    // Если в истории браузера больше 1 записи — возвращаемся назад
+    // Это работает корректно с клиент-сайд навигацией Next.js
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back();
     } else {
+      // Иначе переходим на главную
       router.push("/");
     }
   };

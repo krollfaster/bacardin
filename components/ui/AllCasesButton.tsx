@@ -74,10 +74,10 @@ export const AllCasesButton = ({ locale, totalCount, label }: AllCasesButtonProp
       className="mt-6"
     >
       <motion.div
-        style={{ 
-          rotateX, 
-          rotateY, 
-          transformStyle: "preserve-3d" 
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d"
         }}
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
@@ -85,22 +85,22 @@ export const AllCasesButton = ({ locale, totalCount, label }: AllCasesButtonProp
         whileTap={{ scale: 0.98 }}
       >
         <Link href={`/${locale}/cases`}>
-          <div 
-            className="relative h-[128px] rounded-[28px] p-3 cursor-pointer group bg-[#1F1C18] overflow-hidden"
+          <div
+            className="group relative bg-[#1F1C18] p-3 rounded-[28px] h-[128px] overflow-hidden cursor-pointer"
           >
             {/* Rainbow spotlight gradient overlay */}
             <motion.div
-              className="absolute inset-0 rounded-[28px] pointer-events-none z-0 transition-opacity duration-300"
-              style={{ 
+              className="z-0 absolute inset-0 rounded-[28px] transition-opacity duration-300 pointer-events-none"
+              style={{
                 background: rainbowSpotlightBackground,
                 opacity: isHovering ? 1 : 0,
               }}
             />
-            
+
             {/* Внутренний блок с контентом */}
-            <div 
-              className="relative h-full rounded-2xl px-9 flex items-center justify-between z-10"
-              style={{ 
+            <div
+              className="z-10 relative flex justify-between items-center px-9 rounded-2xl h-full"
+              style={{
                 backgroundColor: "#16130F",
                 boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)"
               }}
@@ -110,27 +110,27 @@ export const AllCasesButton = ({ locale, totalCount, label }: AllCasesButtonProp
                 {/* Иконка скрыта на мобильных */}
                 <Image
                   src="/images/icons/code.svg"
-                  alt="Code"
+                  alt="Vibecode кейсы"
                   width={54}
                   height={54}
-                  className="flex-shrink-0 hidden md:block"
+                  className="hidden md:block flex-shrink-0"
                 />
                 {/* Полный текст на десктопе, короткий на мобильных */}
-                <span 
-                  className="text-[50px] font-medium leading-[54px] text-muted-foreground hidden md:inline"
+                <span
+                  className="hidden md:inline font-medium text-[50px] text-muted-foreground leading-[54px]"
                 >
                   {label}
                 </span>
-                <span 
-                  className="text-[50px] font-medium leading-[54px] text-muted-foreground md:hidden"
+                <span
+                  className="md:hidden font-medium text-[50px] text-muted-foreground leading-[54px]"
                 >
                   Vibecode
                 </span>
               </div>
-              
+
               {/* Правая часть: количество */}
-              <span 
-                className="text-[50px] font-medium leading-[54px] text-muted-foreground/50"
+              <span
+                className="font-medium text-[50px] text-muted-foreground/50 leading-[54px]"
               >
                 ({totalCount})
               </span>

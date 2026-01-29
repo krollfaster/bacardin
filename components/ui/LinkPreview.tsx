@@ -10,6 +10,7 @@ interface LinkPreviewProps {
   children: React.ReactNode;
   href: string;
   previewImage: string;
+  altText?: string;
   isExternal?: boolean;
   className?: string;
   width?: number;
@@ -20,6 +21,7 @@ export const LinkPreview = ({
   children,
   href,
   previewImage,
+  altText,
   isExternal = false,
   className,
   width = 260,
@@ -43,14 +45,14 @@ export const LinkPreview = ({
   };
 
   const linkClasses = cn(
-    "inline-block text-[28px] leading-[36px] font-[500] text-[#96C7FB] underline underline-offset-4 hover:opacity-80 transition-opacity",
+    "inline-block hover:opacity-80 font-[500] text-[#96C7FB] text-[28px] underline underline-offset-4 leading-[36px] transition-opacity",
     className
   );
 
   return (
     <div
       ref={containerRef}
-      className="relative inline-block"
+      className="inline-block relative"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
       onMouseMove={handleMouseMove}
@@ -81,10 +83,10 @@ export const LinkPreview = ({
               x: springX,
               top: -height - 16,
             }}
-            className="absolute left-0 z-50 pointer-events-none"
+            className="left-0 z-50 absolute pointer-events-none"
           >
             <div
-              className="rounded-xl overflow-hidden shadow-2xl border border-white/10"
+              className="shadow-2xl border border-white/10 rounded-xl overflow-hidden"
               style={{
                 width,
                 height,
@@ -93,10 +95,10 @@ export const LinkPreview = ({
             >
               <Image
                 src={previewImage}
-                alt="Preview"
+                alt={altText || "Превью ссылки"}
                 width={width}
                 height={height}
-                className="object-cover w-full h-full"
+                className="w-full h-full object-cover"
               />
             </div>
           </motion.div>

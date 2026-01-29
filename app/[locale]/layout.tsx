@@ -22,13 +22,30 @@ const googleSans = Google_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Bacardin — Портфолио",
-  description: "Портфолио дизайнера и разработчика",
+  metadataBase: new URL("https://bacardin.vercel.app"),
+  title: {
+    default: "Эрнест фон Шульдайс — Lead Product Designer",
+    template: "%s | Bacardin",
+  },
+  description:
+    "Lead/Senior Product Designer. Редизайн продукта для топ-менеджмента Сбербанка. 6+ лет опыта в B2E/B2C продуктах.",
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.svg",
   },
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    alternateLocale: "en_US",
+    siteName: "Bacardin Portfolio",
+    images: [{ url: "/images/behance-preview.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: { index: true, follow: true },
 };
+
 
 interface LocaleLayoutProps {
   children: React.ReactNode;

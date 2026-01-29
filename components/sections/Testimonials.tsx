@@ -67,6 +67,7 @@ const TestimonialCard = ({
                     <LinkPreview
                         href={link.url}
                         previewImage={link.previewImage || "/images/preview-default.png"}
+                        altText={`Превью: ${link.text}`}
                         isExternal={!link.url.startsWith("/")}
                     >
                         {link.text}

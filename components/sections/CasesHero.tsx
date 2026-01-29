@@ -18,9 +18,9 @@ export const CasesHero = () => {
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Текст заголовка */}
         <motion.div variants={slideUp}>
-          <p className="text-[50px] leading-[1.1] font-medium text-muted-foreground">
+          <h1 className="font-medium text-[50px] text-muted-foreground leading-[1.1]">
             {t("title")}
-          </p>
+          </h1>
         </motion.div>
       </div>
     </motion.section>
