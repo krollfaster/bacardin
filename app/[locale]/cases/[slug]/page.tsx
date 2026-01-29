@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCaseBySlug } from "@/lib/cases";
 import { CaseNavigation } from "@/components/layout/CaseNavigation";
@@ -9,6 +10,42 @@ interface CasePageProps {
     locale: string;
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: CasePageProps): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const caseData = await getCaseBySlug(slug);
+
+  if (!caseData || !caseData.published) {
+    return {
+      title: locale === "ru" ? "Кейс не найден" : "Case not found",
+    };
+  }
+
+  const title = locale === "en" && caseData.title_en ? caseData.title_en : caseData.title;
+  const description = locale === "en" && caseData.description_en
+    ? caseData.description_en
+    : caseData.description;
+  const authorName = locale === "ru" ? "Эрнест фон Шульдайс" : "Ernest von Shuldays";
+
+  return {
+    title: `${title} | ${authorName}`,
+    description: description || undefined,
+    openGraph: {
+      title: `${title} | ${authorName}`,
+      description: description || undefined,
+      images: caseData.coverImage ? [{ url: caseData.coverImage }] : undefined,
+    },
+    alternates: {
+      canonical: `/${locale}/cases/${slug}`,
+      languages: {
+        ru: `/ru/cases/${slug}`,
+        en: `/en/cases/${slug}`,
+      },
+    },
+  };
 }
 
 export default async function CasePage({ params }: CasePageProps) {

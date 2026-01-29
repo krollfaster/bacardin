@@ -16,10 +16,15 @@ export const ComponentCaseView = ({ componentUrl, title, description }: Componen
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {/* H1 для SEO — скрыт визуально */}
+      <h1 className="sr-only">{title}</h1>
+
       <iframe
         src={componentUrl}
         title={title}
         className="border-0 w-full h-full"
+        width="100%"
+        height="100%"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />

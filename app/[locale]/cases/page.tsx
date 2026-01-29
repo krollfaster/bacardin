@@ -16,10 +16,12 @@ export async function generateMetadata({
   const isRu = locale === "ru";
 
   return {
-    title: isRu ? "Vibecode Кейсы" : "Vibecode Cases",
+    title: isRu
+      ? "Vibecode UI Кейсы — Интерактивные элементы | Эрнест фон Шульдайс"
+      : "Vibecode UI Cases — Interactive Elements | Ernest von Shuldays",
     description: isRu
-      ? "Интерактивные UI элементы и анимации, созданные с помощью кода"
-      : "Interactive UI elements and animations created with code",
+      ? "Интерактивные UI элементы и анимации, созданные с помощью кода. Примеры vibecoding от продуктового дизайнера."
+      : "Interactive UI elements and animations created with code. Vibecoding examples by a product designer.",
     alternates: {
       canonical: `/${locale}/cases`,
       languages: { ru: "/ru/cases", en: "/en/cases" },

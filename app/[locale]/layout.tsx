@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     alternateLocale: "en_US",
     siteName: "Bacardin Portfolio",
-    images: [{ url: "/images/behance-preview.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/Preview.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
