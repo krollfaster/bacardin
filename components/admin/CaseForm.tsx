@@ -24,9 +24,10 @@ import {
   Upload,
   Loader2,
   GripVertical,
-  HelpCircle
+  HelpCircle,
+  Trash2
 } from "lucide-react";
-import type { Case, CaseType, GalleryLayout, HighlightCard } from "@/types";
+import type { Case, CaseType, GalleryLayout, HighlightCard, InfoBlocks, InfoBlockCard, MetricsCard } from "@/types";
 import { LayoutList, LayoutGrid } from "lucide-react";
 
 interface CaseFormProps {
@@ -35,6 +36,14 @@ interface CaseFormProps {
   onCancel: () => void;
   isLoading?: boolean;
 }
+
+// Пустой инфо-блок для инициализации
+const emptyInfoBlocks: InfoBlocks = {
+  role: { cards: [] },
+  strategy: { cards: [] },
+  cases: { cards: [] },
+  metrics: { cards: [] },
+};
 
 export interface CaseFormData {
   type: CaseType;
@@ -56,6 +65,8 @@ export interface CaseFormData {
   highlights_en: HighlightCard[];
   highlightFooter: string;
   highlightFooter_en: string;
+  infoBlocks: InfoBlocks;
+  infoBlocks_en: InfoBlocks;
 }
 
 interface ElementFolder {
@@ -64,6 +75,22 @@ interface ElementFolder {
 }
 
 const CUSTOM_PATH_VALUE = "__custom__";
+
+const generateId = () => Math.random().toString(36).substr(2, 9);
+
+// Helper to ensure cards have IDs
+const ensureIds = (blocks?: InfoBlocks): InfoBlocks => {
+  if (!blocks) return { role: { cards: [] }, strategy: { cards: [] }, cases: { cards: [] }, metrics: { cards: [] } };
+
+  const processCards = (cards: any[]) => cards.map(c => ({ ...c, id: c.id || generateId() }));
+
+  return {
+    role: { cards: processCards(blocks.role?.cards || []) },
+    strategy: { cards: processCards(blocks.strategy?.cards || []) },
+    cases: { cards: processCards(blocks.cases?.cards || []) },
+    metrics: { cards: processCards(blocks.metrics?.cards || []) },
+  };
+};
 
 export function CaseForm({
   initialData,
@@ -101,9 +128,12 @@ export function CaseForm({
     ],
     highlightFooter: "",
     highlightFooter_en: "",
+    infoBlocks: { ...emptyInfoBlocks },
+    infoBlocks_en: { ...emptyInfoBlocks },
   });
 
   const [activeLang, setActiveLang] = useState<"ru" | "en">("ru");
+  const [activeInfoBlockTab, setActiveInfoBlockTab] = useState<"role" | "strategy" | "cases" | "metrics">("role");
 
   const [newTag, setNewTag] = useState("");
   const [elementFolders, setElementFolders] = useState<ElementFolder[]>([]);
@@ -168,6 +198,8 @@ export function CaseForm({
           ],
         highlightFooter: initialData.highlightFooter || "",
         highlightFooter_en: initialData.highlightFooter_en || "",
+        infoBlocks: ensureIds(initialData.infoBlocks),
+        infoBlocks_en: ensureIds(initialData.infoBlocks_en),
       });
 
       // Определяем, является ли componentUrl папкой из Elements или кастомным
@@ -624,73 +656,56 @@ export function CaseForm({
 
 
 
-      {/* Хайлайты - только для типа Галерея */}
+      {/* Инфо-блоки - только для типа Галерея и категории Дизайн */}
       <AnimatePresence mode="wait">
-        {formData.type === "gallery" && (
+        {formData.type === "gallery" && formData.category === "design" && (
           <motion.div
-            key="highlights-section"
+            key="info-blocks-section"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="space-y-4 overflow-hidden"
           >
             <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <div>
-                  <Label>Хайлайты (карточки инфографики)</Label>
-                  <p className="text-muted-foreground text-xs">
-                    4 карточки с ключевыми достижениями. Отображаются между описанием и галереей.
-                  </p>
-                </div>
-                <Badge variant="outline" className="ml-2">
-                  {activeLang === "ru" ? "Русская версия" : "English version"}
-                </Badge>
-              </div>
+              {/* Заголовок секции */}
+              <Label>Инфо-блоки</Label>
 
-              <div className="gap-3 grid grid-cols-1">
-                {(activeLang === "ru" ? formData.highlights : formData.highlights_en).map((highlight, index) => (
-                  <div
-                    key={`${activeLang}-${index}`}
-                    className="space-y-2 bg-muted/30 p-4 border border-border rounded-lg"
+              {/* Табы блоков */}
+              <div className="flex gap-2 bg-muted/30 p-1 rounded-lg">
+                {(["role", "strategy", "cases", "metrics"] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setActiveInfoBlockTab(tab)}
+                    className={`flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeInfoBlockTab === tab
+                      ? "bg-background shadow-sm"
+                      : "hover:bg-background/50 text-muted-foreground"
+                      }`}
                   >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
-                        {index + 1}
-                      </span>
-                      <span className="text-muted-foreground text-xs">
-                        {index === 0 || index === 3 ? "Во всю ширину" : "Половина ширины"}
-                      </span>
-                    </div>
-                    <Input
-                      value={highlight.title}
-                      onChange={(e) => {
-                        const targetField = activeLang === "ru" ? "highlights" : "highlights_en";
-                        const newHighlights = [...formData[targetField]];
-                        newHighlights[index] = { ...newHighlights[index], title: e.target.value };
-                        setFormData((prev) => ({ ...prev, [targetField]: newHighlights }));
-                      }}
-                      placeholder={activeLang === "ru" ? "Заголовок карточки" : "Card title"}
-                      className="text-sm"
-                    />
-                    <Textarea
-                      value={highlight.description}
-                      onChange={(e) => {
-                        const targetField = activeLang === "ru" ? "highlights" : "highlights_en";
-                        const newHighlights = [...formData[targetField]];
-                        newHighlights[index] = { ...newHighlights[index], description: e.target.value };
-                        setFormData((prev) => ({ ...prev, [targetField]: newHighlights }));
-                      }}
-                      placeholder={activeLang === "ru" ? "Описание карточки" : "Card description"}
-                      rows={2}
-                      className="text-sm"
-                    />
-                  </div>
+                    {tab === "role" ? "Контекст" : tab === "strategy" ? "Действия" : tab === "cases" ? "Влияние" : "Метрики"}
+                  </button>
                 ))}
               </div>
 
-              {/* Подпись под хайлайтами */}
+              {/* Карточки текущего блока */}
+              {activeInfoBlockTab === "metrics" ? (
+                <MetricsBlockEditor
+                  formData={formData}
+                  setFormData={setFormData}
+                  activeLang={activeLang}
+                />
+              ) : (
+                <InfoBlockEditor
+                  blockKey={activeInfoBlockTab}
+                  formData={formData}
+                  setFormData={setFormData}
+                  activeLang={activeLang}
+                />
+              )}
+
+              {/* Подпись под блоками */}
               <div className="space-y-2 mt-4 pt-4 border-border/50 border-t">
-                <Label>Подпись под хайлайтами</Label>
+                <Label>Подпись под блоками</Label>
                 <Textarea
                   value={activeLang === "ru" ? formData.highlightFooter : formData.highlightFooter_en}
                   onChange={(e) =>
@@ -888,6 +903,215 @@ export function CaseForm({
   );
 }
 
+// Редактор инфо-блока
+interface InfoBlockEditorProps {
+  blockKey: "role" | "strategy" | "cases";
+  formData: CaseFormData;
+  setFormData: React.Dispatch<React.SetStateAction<CaseFormData>>;
+  activeLang: "ru" | "en";
+}
+
+function InfoBlockEditor({ blockKey, formData, setFormData, activeLang }: InfoBlockEditorProps) {
+  const targetField = activeLang === "ru" ? "infoBlocks" : "infoBlocks_en";
+  const infoBlocks = formData[targetField];
+  const currentBlock = infoBlocks[blockKey];
+  const cards = currentBlock?.cards || [];
+
+  // Добавить карточку
+  const addCard = () => {
+    const newCard: InfoBlockCard = { title: "", description: "", fullWidth: false, id: generateId() };
+    const updatedCards = [...cards, newCard];
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        [blockKey]: { cards: updatedCards },
+      },
+    }));
+  };
+
+  // Удалить карточку
+  const removeCard = (index: number) => {
+    const updatedCards = cards.filter((_, i) => i !== index);
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        [blockKey]: { cards: updatedCards },
+      },
+    }));
+  };
+
+  // Обновить карточку
+  const updateCard = (index: number, field: keyof InfoBlockCard, value: string | boolean) => {
+    const updatedCards = [...cards];
+    updatedCards[index] = { ...updatedCards[index], [field]: value };
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        [blockKey]: { cards: updatedCards },
+      },
+    }));
+  };
+
+  // Обработка перетаскивания
+  const handleReorder = (newOrder: InfoBlockCard[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        [blockKey]: { cards: newOrder },
+      },
+    }));
+  };
+
+  return (
+    <div className="space-y-3">
+      {/* Список карточек */}
+      {cards.length === 0 ? (
+        <div className="flex flex-col justify-center items-center py-8 border-2 border-border border-dashed rounded-lg text-muted-foreground">
+          <p className="mb-2 text-sm">
+            {activeLang === "ru" ? "Нет карточек в этом блоке" : "No cards in this block"}
+          </p>
+          <Button type="button" variant="outline" size="sm" onClick={addCard}>
+            <Plus className="mr-1 w-4 h-4" />
+            {activeLang === "ru" ? "Добавить карточку" : "Add card"}
+          </Button>
+        </div>
+      ) : (
+        <Reorder.Group axis="y" values={cards} onReorder={handleReorder} className="space-y-3">
+          {cards.map((card, index) => (
+            <DraggableInfoBlockCard
+              key={card.id || index}
+              card={card}
+              index={index}
+              activeLang={activeLang}
+              onUpdate={(field, value) => updateCard(index, field, value)}
+              onRemove={() => removeCard(index)}
+            />
+          ))}
+        </Reorder.Group>
+      )}
+
+      {/* Кнопка добавления */}
+      {cards.length > 0 && (
+        <Button type="button" variant="outline" size="sm" onClick={addCard} className="w-full">
+          <Plus className="mr-1 w-4 h-4" />
+          {activeLang === "ru" ? "Добавить карточку" : "Add card"}
+        </Button>
+      )}
+    </div>
+  );
+}
+
+// Редактор блока метрик (только описание + span)
+interface MetricsBlockEditorProps {
+  formData: CaseFormData;
+  setFormData: React.Dispatch<React.SetStateAction<CaseFormData>>;
+  activeLang: "ru" | "en";
+}
+
+function MetricsBlockEditor({ formData, setFormData, activeLang }: MetricsBlockEditorProps) {
+  const targetField = activeLang === "ru" ? "infoBlocks" : "infoBlocks_en";
+  const infoBlocks = formData[targetField];
+  const metricsBlock = infoBlocks.metrics;
+  const cards = metricsBlock?.cards || [];
+
+  // Добавить карточку
+  const addCard = () => {
+    const newCard: MetricsCard = { description: "", span: 1, id: generateId() };
+    const updatedCards = [...cards, newCard];
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        metrics: { cards: updatedCards },
+      },
+    }));
+  };
+
+  // Удалить карточку
+  const removeCard = (index: number) => {
+    const updatedCards = cards.filter((_, i) => i !== index);
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        metrics: { cards: updatedCards },
+      },
+    }));
+  };
+
+  // Обновить карточку
+  const updateCard = (index: number, field: keyof MetricsCard, value: string | number) => {
+    const updatedCards = [...cards];
+    updatedCards[index] = { ...updatedCards[index], [field]: value };
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        metrics: { cards: updatedCards },
+      },
+    }));
+  };
+
+  // Обработка перетаскивания
+  const handleReorder = (newOrder: MetricsCard[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      [targetField]: {
+        ...prev[targetField],
+        metrics: { cards: newOrder },
+      },
+    }));
+  };
+
+  return (
+    <div className="space-y-3">
+      {/* Список карточек */}
+      {cards.length === 0 ? (
+        <div className="flex flex-col justify-center items-center py-8 border-2 border-border border-dashed rounded-lg text-muted-foreground">
+          <p className="mb-2 text-sm">
+            {activeLang === "ru" ? "Нет карточек метрик" : "No metrics cards"}
+          </p>
+          <Button type="button" variant="outline" size="sm" onClick={addCard}>
+            <Plus className="mr-1 w-4 h-4" />
+            {activeLang === "ru" ? "Добавить метрику" : "Add metric"}
+          </Button>
+        </div>
+      ) : (
+        <Reorder.Group axis="y" values={cards} onReorder={handleReorder} className="space-y-3">
+          {cards.map((card, index) => (
+            <DraggableMetricsCard
+              key={card.id || index}
+              card={card}
+              index={index}
+              activeLang={activeLang}
+              onUpdate={(field, value) => updateCard(index, field, value)}
+              onRemove={() => removeCard(index)}
+            />
+          ))}
+        </Reorder.Group>
+      )}
+
+      {/* Кнопка добавления */}
+      {cards.length > 0 && (
+        <Button type="button" variant="outline" size="sm" onClick={addCard} className="w-full">
+          <Plus className="mr-1 w-4 h-4" />
+          {activeLang === "ru" ? "Добавить метрику" : "Add metric"}
+        </Button>
+      )}
+    </div>
+  );
+}
+
 // Перетаскиваемый элемент изображения
 interface DraggableImageItemProps {
   image: string;
@@ -938,6 +1162,150 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
           <GripVertical className="w-4 h-4 text-muted-foreground" />
         </div>
       </div>
+    </Reorder.Item>
+  );
+}
+
+interface DraggableInfoBlockCardProps {
+  card: InfoBlockCard;
+  index: number;
+  activeLang: "ru" | "en";
+  onUpdate: (field: keyof InfoBlockCard, value: string | boolean) => void;
+  onRemove: () => void;
+}
+
+function DraggableInfoBlockCard({ card, index, activeLang, onUpdate, onRemove }: DraggableInfoBlockCardProps) {
+  const controls = useDragControls();
+
+  return (
+    <Reorder.Item
+      value={card}
+      dragListener={false}
+      dragControls={controls}
+      className="relative space-y-2 bg-muted/30 p-4 border border-border rounded-lg"
+    >
+      {/* Заголовок карточки с Drag Handle */}
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-2">
+          <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+            {index + 1}
+          </span>
+          <label className="flex items-center gap-2 text-muted-foreground text-xs cursor-pointer">
+            <input
+              type="checkbox"
+              checked={card.fullWidth ?? false}
+              onChange={(e) => onUpdate("fullWidth", e.target.checked)}
+              className="border-border rounded w-3.5 h-3.5 accent-primary cursor-pointer"
+            />
+            {activeLang === "ru" ? "Во всю ширину" : "Full width"}
+          </label>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onRemove}
+            className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+
+          <div
+            onPointerDown={(e) => controls.start(e)}
+            className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
+          >
+            <GripVertical className="w-4 h-4 text-muted-foreground" />
+          </div>
+        </div>
+      </div>
+
+      {/* Поля ввода */}
+      <Input
+        value={card.title}
+        onChange={(e) => onUpdate("title", e.target.value)}
+        placeholder={activeLang === "ru" ? "Заголовок карточки" : "Card title"}
+        className="bg-background text-sm"
+      />
+      <Textarea
+        value={card.description}
+        onChange={(e) => onUpdate("description", e.target.value)}
+        placeholder={activeLang === "ru" ? "Описание карточки" : "Card description"}
+        rows={2}
+        className="bg-background text-sm"
+      />
+    </Reorder.Item>
+  );
+}
+
+interface DraggableMetricsCardProps {
+  card: MetricsCard;
+  index: number;
+  activeLang: "ru" | "en";
+  onUpdate: (field: keyof MetricsCard, value: string | number) => void;
+  onRemove: () => void;
+}
+
+function DraggableMetricsCard({ card, index, activeLang, onUpdate, onRemove }: DraggableMetricsCardProps) {
+  const controls = useDragControls();
+
+  return (
+    <Reorder.Item
+      value={card}
+      dragListener={false}
+      dragControls={controls}
+      className="space-y-2 bg-muted/30 p-4 border border-border rounded-lg"
+    >
+      {/* Заголовок карточки с Drag Handle */}
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-3">
+          <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+            {index + 1}
+          </span>
+          <div className="flex items-center gap-2">
+            <label className="text-muted-foreground text-xs">
+              {activeLang === "ru" ? "Ширина:" : "Width:"}
+            </label>
+            <Select
+              value={String(card.span || 1)}
+              onValueChange={(value) => onUpdate("span", Number(value) as 1 | 2 | 3)}
+            >
+              <SelectTrigger className="bg-background w-20 h-7 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">1</SelectItem>
+                <SelectItem value="2">2</SelectItem>
+                <SelectItem value="3">3</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onRemove}
+            className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+          <div
+            onPointerDown={(e) => controls.start(e)}
+            className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
+          >
+            <GripVertical className="w-4 h-4 text-muted-foreground" />
+          </div>
+        </div>
+      </div>
+
+      {/* Только описание */}
+      <Textarea
+        value={card.description}
+        onChange={(e) => onUpdate("description", e.target.value)}
+        placeholder={activeLang === "ru" ? "Текст метрики (например: NPS: +6 p.p)" : "Metric text (e.g. NPS: +6 p.p)"}
+        rows={2}
+        className="bg-background text-sm"
+      />
     </Reorder.Item>
   );
 }

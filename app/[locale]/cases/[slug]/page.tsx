@@ -71,6 +71,27 @@ export default async function CasePage({ params }: CasePageProps) {
     ? caseData.highlightFooter_en
     : caseData.highlightFooter;
 
+  // Определяем инфо-блоки по локали с умным fallback
+  // Для каждого блока проверяем, есть ли контент в EN версии, иначе берем RU
+  const getInfoBlocks = () => {
+    const ruBlocks = caseData.infoBlocks;
+    const enBlocks = caseData.infoBlocks_en;
+
+    if (locale !== "en" || !enBlocks) {
+      return ruBlocks;
+    }
+
+    // Мержим блоки: EN имеет приоритет если есть карточки
+    return {
+      role: (enBlocks.role?.cards?.length ?? 0) > 0 ? enBlocks.role : ruBlocks?.role,
+      strategy: (enBlocks.strategy?.cards?.length ?? 0) > 0 ? enBlocks.strategy : ruBlocks?.strategy,
+      cases: (enBlocks.cases?.cards?.length ?? 0) > 0 ? enBlocks.cases : ruBlocks?.cases,
+      metrics: (enBlocks.metrics?.cards?.length ?? 0) > 0 ? enBlocks.metrics : ruBlocks?.metrics,
+    };
+  };
+
+  const infoBlocks = getInfoBlocks();
+
   return (
     <main className="bg-background min-h-screen">
       <CaseNavigation />
@@ -87,6 +108,7 @@ export default async function CasePage({ params }: CasePageProps) {
           layout={caseData.galleryLayout}
           highlights={highlights}
           highlightFooter={highlightFooter}
+          infoBlocks={infoBlocks}
           locale={locale}
         />
       )}

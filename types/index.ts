@@ -4,7 +4,40 @@ export type CaseType = "gallery" | "component";
 // Тип отображения галереи
 export type GalleryLayout = "stack" | "masonry";
 
-// Карточка хайлайта (инфографика)
+// Карточка инфо-блока с настройкой ширины
+export interface InfoBlockCard {
+  title: string;
+  description: string;
+  fullWidth?: boolean; // true = занимает всю ширину ряда
+  id?: string; // Для Drag-n-Drop
+}
+
+// Блок инфографики (Роль, Стратегия, Кейсы)
+export interface InfoBlock {
+  cards: InfoBlockCard[];
+}
+
+// Карточка метрики (без заголовка, только описание + настройка ширины)
+export interface MetricsCard {
+  description: string;
+  span?: 1 | 2 | 3; // Сколько ячеек занимает (1, 2 или 3), по умолчанию 1
+  id?: string; // Для Drag-n-Drop
+}
+
+// Блок метрик
+export interface MetricsBlock {
+  cards: MetricsCard[];
+}
+
+// Тип для набора блоков
+export interface InfoBlocks {
+  role?: InfoBlock;      // Блок "Контекст"
+  strategy?: InfoBlock;  // Блок "Действия"
+  cases?: InfoBlock;     // Блок "Влияние"
+  metrics?: MetricsBlock; // Блок "Метрики"
+}
+
+// Карточка хайлайта (инфографика) - legacy
 export interface HighlightCard {
   title: string;
   description: string;
@@ -33,10 +66,12 @@ export interface Case {
   featuredOnHome: boolean; // @deprecated - используйте homeOrder
   homeOrder: number | null; // null = не показывать, 1-6 = позиция на главной
   vibecodeOrder: number | null; // null = без сортировки, 1+ = позиция на странице /cases
-  highlights?: HighlightCard[]; // Карточки хайлайтов для галереи
-  highlights_en?: HighlightCard[]; // Английская версия хайлайтов
+  highlights?: HighlightCard[]; // @deprecated - используйте infoBlocks
+  highlights_en?: HighlightCard[]; // @deprecated
   highlightFooter?: string; // Подпись под хайлайтами RU
   highlightFooter_en?: string; // Подпись под хайлайтами EN
+  infoBlocks?: InfoBlocks; // Новые инфо-блоки (Контекст, Действия, Влияние)
+  infoBlocks_en?: InfoBlocks; // Английская версия инфо-блоков
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
@@ -64,6 +99,8 @@ export interface CreateCaseData {
   highlights_en?: HighlightCard[];
   highlightFooter?: string;
   highlightFooter_en?: string;
+  infoBlocks?: InfoBlocks;
+  infoBlocks_en?: InfoBlocks;
 }
 
 // Данные для обновления кейса
@@ -90,6 +127,8 @@ export interface UpdateCaseData {
   highlights_en?: HighlightCard[];
   highlightFooter?: string;
   highlightFooter_en?: string;
+  infoBlocks?: InfoBlocks;
+  infoBlocks_en?: InfoBlocks;
 }
 
 // Тип для обновления порядка на главной

@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import type { GalleryLayout, HighlightCard } from "@/types";
+import type { GalleryLayout, HighlightCard, InfoBlocks, InfoBlockCard, MetricsCard } from "@/types";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/components/ui/RichText";
 
@@ -12,8 +12,9 @@ interface GalleryCaseViewProps {
   description?: string;
   images: string[];
   layout?: GalleryLayout;
-  highlights?: HighlightCard[];
+  highlights?: HighlightCard[]; // @deprecated
   highlightFooter?: string;
+  infoBlocks?: InfoBlocks;
   locale?: string;
 }
 
@@ -39,11 +40,177 @@ const itemVariants = {
   },
 };
 
-// Проверяем, есть ли заполненные хайлайты
+// Проверяем, есть ли заполненные хайлайты (legacy)
 const hasHighlights = (highlights?: HighlightCard[]) => {
   if (!highlights || highlights.length === 0) return false;
   return highlights.some(h => h.title.trim() || h.description.trim());
 };
+
+// Проверяем, есть ли карточки в инфо-блоке
+const hasCards = (cards?: InfoBlockCard[]) => {
+  if (!cards || cards.length === 0) return false;
+  return cards.some(c => c.title.trim() || c.description.trim());
+};
+
+// Названия блоков для RU/EN
+const blockTitles = {
+  role: { ru: "Контекст", en: "Context" },
+  strategy: { ru: "Действия", en: "Actions" },
+  cases: { ru: "Влияние", en: "Impact" },
+  metrics: { ru: "Метрики", en: "Metrics" },
+} as const;
+
+// Компонент для рендеринга инфо-блока
+interface InfoBlockSectionProps {
+  blockKey: keyof typeof blockTitles;
+  cards: InfoBlockCard[];
+  isEnglish: boolean;
+}
+
+function InfoBlockSection({ blockKey, cards, isEnglish }: InfoBlockSectionProps) {
+  // Фильтруем только заполненные карточки
+  const filledCards = cards.filter(c => c.title.trim() || c.description.trim());
+  if (filledCards.length === 0) return null;
+
+  // Группируем карточки в ряды для правильного рендеринга
+  const rows: InfoBlockCard[][] = [];
+  let currentRow: InfoBlockCard[] = [];
+
+  filledCards.forEach((card, index) => {
+    const isLastCard = index === filledCards.length - 1;
+
+    if (card.fullWidth) {
+      // Если текущий ряд не пустой, сохраняем его
+      if (currentRow.length > 0) {
+        rows.push(currentRow);
+        currentRow = [];
+      }
+      // Карточка на всю ширину — отдельный ряд
+      rows.push([card]);
+    } else {
+      currentRow.push(card);
+      // Если в ряду 2 карточки или это последняя карточка — сохраняем ряд
+      if (currentRow.length === 2 || isLastCard) {
+        rows.push(currentRow);
+        currentRow = [];
+      }
+    }
+  });
+
+  const title = isEnglish ? blockTitles[blockKey].en : blockTitles[blockKey].ru;
+
+  return (
+    <div className="mt-[52px]">
+      {/* Заголовок блока */}
+      <motion.h2
+        className="mb-[32px] font-medium text-[28px] leading-[35px]"
+        style={{ color: "#9C9C9C" }}
+        variants={itemVariants}
+      >
+        {title}
+      </motion.h2>
+
+      {/* Ряды карточек */}
+      <div className="flex flex-col gap-[32px]">
+        {rows.map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className={cn(
+              "gap-[32px] grid",
+              // Если в ряду 1 карточка — на всю ширину, иначе 2 колонки
+              row.length === 1 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
+            )}
+          >
+            {row.map((card, cardIndex) => (
+              <motion.div
+                key={cardIndex}
+                className="border rounded-[24px]"
+                style={{
+                  borderColor: "#272727",
+                  borderWidth: "3px",
+                  padding: "36px 40px",
+                  boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
+                }}
+                variants={itemVariants}
+              >
+                <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
+                  {card.title}
+                </p>
+                {card.description && (
+                  <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
+                    {card.description}
+                  </p>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Проверяем, есть ли карточки в блоке метрик
+const hasMetricsCards = (cards?: MetricsCard[]) => {
+  if (!cards || cards.length === 0) return false;
+  return cards.some(c => c.description.trim());
+};
+
+// Компонент для рендеринга блока метрик (3 колонки, только описание)
+interface MetricsBlockSectionProps {
+  cards: MetricsCard[];
+  isEnglish: boolean;
+}
+
+function MetricsBlockSection({ cards, isEnglish }: MetricsBlockSectionProps) {
+  // Фильтруем только заполненные карточки
+  const filledCards = cards.filter(c => c.description.trim());
+  if (filledCards.length === 0) return null;
+
+  const title = isEnglish ? blockTitles.metrics.en : blockTitles.metrics.ru;
+
+  return (
+    <div className="mt-[52px]">
+      {/* Заголовок блока */}
+      <motion.h2
+        className="mb-[32px] font-medium text-[28px] leading-[35px]"
+        style={{ color: "#9C9C9C" }}
+        variants={itemVariants}
+      >
+        {title}
+      </motion.h2>
+
+      {/* Сетка карточек 3 колонки */}
+      <div className="gap-[32px] grid grid-cols-3">
+        {filledCards.map((card, index) => {
+          const span = card.span || 1;
+          return (
+            <motion.div
+              key={index}
+              className={cn(
+                "border rounded-[24px]",
+                span === 1 && "col-span-1",
+                span === 2 && "col-span-2",
+                span === 3 && "col-span-3"
+              )}
+              style={{
+                borderColor: "#272727",
+                borderWidth: "3px",
+                padding: "36px 40px",
+                boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
+              }}
+              variants={itemVariants}
+            >
+              <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
+                {card.description}
+              </p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 export const GalleryCaseView = ({
   title,
@@ -52,10 +219,19 @@ export const GalleryCaseView = ({
   layout = "stack",
   highlights,
   highlightFooter,
+  infoBlocks,
   locale = "ru"
 }: GalleryCaseViewProps) => {
   const showHighlights = hasHighlights(highlights);
   const isEnglish = locale === "en";
+
+  // Проверяем, есть ли хотя бы один инфо-блок с карточками
+  const hasAnyInfoBlock = infoBlocks && (
+    hasCards(infoBlocks.role?.cards) ||
+    hasCards(infoBlocks.strategy?.cards) ||
+    hasCards(infoBlocks.cases?.cards) ||
+    hasMetricsCards(infoBlocks.metrics?.cards)
+  );
 
   return (
     <motion.div
@@ -82,131 +258,64 @@ export const GalleryCaseView = ({
         )}
       </div>
 
-      {/* Блок инфографики (хайлайты) */}
-      {showHighlights && highlights && (
+      {/* Новые инфо-блоки (Контекст, Действия, Влияние) */}
+      {hasAnyInfoBlock && infoBlocks && (
         <div className="mx-auto px-4 max-w-[860px]">
-          {/* Заголовок "Хайлайты" */}
-          <motion.h2
-            className="mb-[32px] font-medium text-[28px] leading-[35px]"
-            style={{ color: "#9C9C9C", marginTop: "52px" }}
-            variants={itemVariants}
-          >
-            {isEnglish ? "Highlights" : "Хайлайты"}
-          </motion.h2>
+          {/* Блок Контекст */}
+          {infoBlocks.role?.cards && hasCards(infoBlocks.role.cards) && (
+            <InfoBlockSection
+              blockKey="role"
+              cards={infoBlocks.role.cards}
+              isEnglish={isEnglish}
+            />
+          )}
 
-          {/* Сетка карточек */}
-          <div className="flex flex-col gap-[32px]">
-            {/* Карточка 1 - во всю ширину */}
-            {highlights[0] && (highlights[0].title || highlights[0].description) && (
-              <motion.div
-                className="border rounded-[24px]"
-                style={{
-                  borderColor: "#272727",
-                  borderWidth: "3px",
-                  padding: "36px 40px",
-                  boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
-                }}
-                variants={itemVariants}
-              >
-                <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
-                  {highlights[0].title}
-                </p>
-                {highlights[0].description && (
-                  <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
-                    {highlights[0].description}
-                  </p>
-                )}
-              </motion.div>
-            )}
+          {/* Блок Действия */}
+          {infoBlocks.strategy?.cards && hasCards(infoBlocks.strategy.cards) && (
+            <InfoBlockSection
+              blockKey="strategy"
+              cards={infoBlocks.strategy.cards}
+              isEnglish={isEnglish}
+            />
+          )}
 
-            {/* Карточки 2 и 3 - по половине ширины */}
-            <div className="gap-[32px] grid grid-cols-1 md:grid-cols-2">
-              {highlights[1] && (highlights[1].title || highlights[1].description) && (
-                <motion.div
-                  className="border rounded-[24px]"
-                  style={{
-                    borderColor: "#272727",
-                    borderWidth: "3px",
-                    padding: "36px 40px",
-                    boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
-                  }}
-                  variants={itemVariants}
-                >
-                  <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
-                    {highlights[1].title}
-                  </p>
-                  {highlights[1].description && (
-                    <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
-                      {highlights[1].description}
-                    </p>
-                  )}
-                </motion.div>
-              )}
-              {highlights[2] && (highlights[2].title || highlights[2].description) && (
-                <motion.div
-                  className="border rounded-[24px]"
-                  style={{
-                    borderColor: "#272727",
-                    borderWidth: "3px",
-                    padding: "36px 40px",
-                    boxShadow: "inset 0 0 32px rgba(255, 255, 255, 0.08)"
-                  }}
-                  variants={itemVariants}
-                >
-                  <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
-                    {highlights[2].title}
-                  </p>
-                  {highlights[2].description && (
-                    <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
-                      {highlights[2].description}
-                    </p>
-                  )}
-                </motion.div>
-              )}
-            </div>
+          {/* Блок Влияние */}
+          {infoBlocks.cases?.cards && hasCards(infoBlocks.cases.cards) && (
+            <InfoBlockSection
+              blockKey="cases"
+              cards={infoBlocks.cases.cards}
+              isEnglish={isEnglish}
+            />
+          )}
 
-            {/* Карточка 4 - во всю ширину */}
-            {highlights[3] && (highlights[3].title || highlights[3].description) && (
-              <motion.div
-                className="border rounded-[24px]"
-                style={{
-                  borderColor: "#272727",
-                  borderWidth: "3px",
-                  padding: "36px 40px",
-                  boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
-                }}
-                variants={itemVariants}
-              >
-                <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
-                  {highlights[3].title}
-                </p>
-                {highlights[3].description && (
-                  <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
-                    {highlights[3].description}
-                  </p>
-                )}
-              </motion.div>
-            )}
-          </div>
-
-          {/* Статичный текст под блоком */}
-          <motion.p
-            className="font-medium text-[28px] leading-[35px]"
-            style={{
-              color: "#9C9C9C",
-              padding: "0 38px",
-              marginTop: "68px",
-              marginBottom: "68px"
-            }}
-            variants={itemVariants}
-          >
-            {highlightFooter || (isEnglish
-              ? "\"Ready to discuss product strategy, metrics, and trade-offs in detail during an interview\""
-              : "\"Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью\"")
-            }
-          </motion.p>
+          {/* Блок Метрики */}
+          {infoBlocks.metrics?.cards && hasMetricsCards(infoBlocks.metrics.cards) && (
+            <MetricsBlockSection
+              cards={infoBlocks.metrics.cards}
+              isEnglish={isEnglish}
+            />
+          )}
         </div>
       )}
+
+      {/* Статичный текст под блоками — показывается всегда */}
+      <div className="mx-auto px-4 max-w-[860px]">
+        <motion.p
+          className="font-medium text-[28px] text-center leading-[35px]"
+          style={{
+            color: "#9C9C9C",
+            padding: "0 100px",
+            marginTop: "176px",
+            marginBottom: "176px"
+          }}
+          variants={itemVariants}
+        >
+          {highlightFooter || (isEnglish
+            ? "\"Ready to discuss product strategy, metrics, and trade-offs in detail during an interview\""
+            : "\"Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью\""
+          )}
+        </motion.p>
+      </div>
 
       {/* Галерея изображений */}
       {layout === "stack" ? (

@@ -26,10 +26,10 @@
   },
   {
     "id": "mk9tmbkk8rtaei411o",
-    "slug": "ios-app-dlya-igrovogo-kluba",
+    "slug": "app-dlya-igrovogo-kluba",
     "type": "gallery",
-    "title": "IOS APP для игрового клуба",
-    "description": "Разработал B2C мобильное приложение для гостей кибер-клуба, которое стало «пультом управления» их физическим опытом. Спроектировал бесшовный флоу бронирования и внедрил единую валюту «Кидалкоины», решив проблему фрагментации счетов между разными клубами сети. Визуальный стиль адаптировал под ментальные модели геймеров (Discord/NFT aesthetics)",
+    "title": "APP для игрового клуба",
+    "description": "Конкурентное преимущество в формате мобильного приложения. B2C-продукт, созданный для подтверждения премиального статуса THE HOOD и удержания лояльности аудитории через исключительное удобство сервиса",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768248153349-vozwes.png",
@@ -51,7 +51,7 @@
     ],
     "componentUrl": "",
     "tags": [
-      "IOS APP",
+      "Booking",
       "B2C"
     ],
     "content": "test",
@@ -59,10 +59,10 @@
     "featuredOnHome": true,
     "homeOrder": 3,
     "createdAt": "2026-01-11T14:20:02.708Z",
-    "updatedAt": "2026-01-29T11:20:00.102Z",
+    "updatedAt": "2026-01-31T21:57:05.452Z",
     "galleryLayout": "masonry",
-    "title_en": "IOS APP for Game club ",
-    "description_en": "Designed the B2C mobile app serving as the primary touchpoint for cyber cafe guests. I engineered a seamless booking flow and introduced a unified currency (\"Kidalkoins\") to solve billing fragmentation across venue locations. The visual language was crafted to resonate with gamer mental models, leveraging Discord and NFT aesthetics",
+    "title_en": "APP for Game club ",
+    "description_en": "Competitive Advantage in mobile app format. A B2C product designed to affirm THE HOOD's premium status and secure user loyalty through exceptional service convenience",
     "vibecodeOrder": null,
     "highlights": [
       {
@@ -100,15 +100,157 @@
         "description": "Real-time O2O synchronization with the ERP system ensuring accurate seat availability and booking data"
       }
     ],
-    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
-    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
+    "highlightFooter": "Остались вопрос и есть желание поговорить? Предлагаю обсудить все кейсы лично! ",
+    "highlightFooter_en": "Still have questions and want to chat? I invite you to discuss all cases in person!",
+    "infoBlocks": {
+      "role": {
+        "cards": [
+          {
+            "title": "Ожидания 🔎",
+            "description": "Ожидание что я реализую дизайн мобильного приложения с премиальным вайбом \"The Hood\" и синхронизирую UX пути пользователя и работу приложения с работой ERP",
+            "fullWidth": true,
+            "id": "4w20k88id"
+          },
+          {
+            "title": "Ответственность 🎯 ",
+            "description": "Отвечал за дизайн решения в MVP версии мобильного приложения и дальнейшую ее поддержку",
+            "fullWidth": false,
+            "id": "0rzjmhl9m"
+          },
+          {
+            "title": "Коммуникация 🤝 ",
+            "description": "Большую часть времени синхронизировал ERP и мобильное приложение с продакт менеджером",
+            "fullWidth": false,
+            "id": "5c9qg6864"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "User Flow 🔄 ",
+            "description": "Спроектировал детальные User Flow для всех сценариев (Бронь, Оплата, Вход), чтобы исключить тупиковые ветви и логические ошибки на старте",
+            "fullWidth": true,
+            "id": "cyok8f4gg"
+          },
+          {
+            "title": "Дизайн-коды ✍️",
+            "description": "Через семиотический анализ конкурентов выявил паттерны \"дешевого гейминга\". Для премиального вайба использовал дизайн-коды NFT и Discord",
+            "fullWidth": false,
+            "id": "2jlw6uvdp"
+          },
+          {
+            "title": "Исследования 🔬",
+            "description": "Провел бенчмаркинг конкурентов (Langames, SmartShell) и собрал цифры из открытых источников. Валидировал решения через UX-тесты прототипов",
+            "fullWidth": false,
+            "id": "11i2oazye"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Единый счет 🪙 ",
+            "description": "Внедрение внутренней валюты решило проблему раздельных счетов. Это объединит несколько клубов и даст преимущество перед конкурентами",
+            "fullWidth": false,
+            "id": "5jib2e3k6"
+          },
+          {
+            "title": "QR-Код 🔳",
+            "description": "Внедрил логику единого QR-ключа: он используется и для быстрой оплаты на кассе, и для мгновенной авторизации на игровом ПК",
+            "fullWidth": false,
+            "id": "nb5s4nnr4"
+          },
+          {
+            "title": "Регистрация в виде чата 💬",
+            "description": "Внедрил сценарий регистрации в формате чат-интерфейса. Это снизило порог входа и сделало процесс онбординга более нативным для геймеров",
+            "fullWidth": false,
+            "id": "tq1ive0sr"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": []
+      }
+    },
+    "infoBlocks_en": {
+      "role": {
+        "cards": [
+          {
+            "title": "Expectations 🔎 ",
+            "description": "Deliver a mobile app design with the premium \"The Hood\" vibe. Synchronize user UX paths with the core ERP system logic",
+            "fullWidth": true,
+            "id": "i9t8mkg5b"
+          },
+          {
+            "title": "Responsibility 🎯 ",
+            "description": "Responsible for all design decisions in the MVP version: from concept to UI Kit. Provided ongoing design support post-launch",
+            "fullWidth": false,
+            "id": "cw0jdkofn"
+          },
+          {
+            "title": "Communication 🤝 ",
+            "description": "Close collaboration with the Product Manager to ensure seamless synchronization between the Mobile App and the ERP backend",
+            "fullWidth": false,
+            "id": "uc9qcs4mg"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "User Flow 🔄 ",
+            "description": "Designed detailed User Flows for all key scenarios (Booking, Payment, Login) to eliminate dead-ends and logic errors early on",
+            "fullWidth": false,
+            "id": "oy25eycls"
+          },
+          {
+            "title": "Design Codes ✍️ ",
+            "description": "Used semiotic analysis to identify \"cheap gaming\" patterns. Adapted NFT and Discord design codes to create a premium brand vibe",
+            "fullWidth": false,
+            "id": "k8wbkrqrc"
+          },
+          {
+            "title": "Research 🔬 ",
+            "description": "Conducted competitor benchmarking and gamer interviews. Validated design decisions through prototype UX testing",
+            "fullWidth": false,
+            "id": "ca5yyx6kl"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Unified Account 🪙 ",
+            "description": "Introduced \"Cybercoins\" (internal currency) to solve the split-account issue. This unified the branch network and boosted user LTV",
+            "fullWidth": false,
+            "id": "h6a3joi1i"
+          },
+          {
+            "title": "QR-Code 🔳 ",
+            "description": "Implemented a single QR-key logic: used for both quick payments at the register and instant authorization on the gaming PC",
+            "fullWidth": false,
+            "id": "rzz58e5w7"
+          },
+          {
+            "title": "Chat Registration 💬 ",
+            "description": "Conversational Onboarding. Implemented a chat-based registration flow. This lowered the entry barrier and made the onboarding process more native to the gaming community",
+            "fullWidth": false,
+            "id": "7i494zyiu"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": []
+      }
+    }
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
-    "slug": "web-app-dlya-top-menedzherov",
+    "slug": "superapp-isu-rukovoditelya",
     "type": "gallery",
-    "title": "Web APP для топ-менеджеров",
-    "description": "Залидил редизайн веб платформы и трасформировал из разрозненного набора утилит в единую B2E/B2C-like экосистему для топ-менеджмента Сбера",
+    "title": "SuperApp \"ИСУ руководителя\"",
+    "description": "B2C-like Экосистема для продуктивности Топ-менеджмента. Внутренний стартап, который конкурировал за внимание пользователей на внутреннем рынке банка, используя подходы B2C-продуктов (Retention, Engagement, Viral Growth)",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768245632342-6iywil.png",
@@ -127,18 +269,18 @@
     ],
     "componentUrl": "",
     "tags": [
-      "Web",
-      "B2C/B2E"
+      "Productivity",
+      "B2C"
     ],
     "content": "",
     "published": true,
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-01-23T20:41:56.323Z",
+    "updatedAt": "2026-01-31T22:50:05.387Z",
     "galleryLayout": "stack",
-    "title_en": "Web APP for Top-Managers ",
-    "description_en": "Led the transformation of fragmented utilities into a unified B2E platform with a consumer-grade experience for Sber executives",
+    "title_en": "SuperApp \"ISU\"",
+    "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
     "vibecodeOrder": null,
     "highlights": [
       {
@@ -176,8 +318,221 @@
         "description": "Migrated to ANT Design System. Established a unified UI/UX codebase across disparate bank modules"
       }
     ],
-    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
-    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
+    "highlightFooter": "Остались вопрос и есть желание поговорить? Предлагаю обсудить все кейсы лично! ",
+    "highlightFooter_en": "Still have questions and want to chat? I invite you to discuss all cases in person!",
+    "infoBlocks": {
+      "role": {
+        "cards": [
+          {
+            "title": "Ожидания 🔎",
+            "description": "Бизнес ждал, что я наведу порядок в текущих пользовательских флоу и подниму планку дизайна продукта, выросшего из стартапа",
+            "fullWidth": true,
+            "id": "rzu4sslib"
+          },
+          {
+            "title": "Ответственность 🎯",
+            "description": "Полная ответственность за UX/UI всех веб-модулей экосистемы. Финальное слово по всем дизайн-решениям и архитектуре интерфейсов",
+            "fullWidth": false,
+            "id": "bbluadsvy"
+          },
+          {
+            "title": "Коммуникация  🤝",
+            "description": "Синхронизировал решения с 3-мя Продактами и смежным продуктом ИСУ (общий бэкенд). Регулярные синки с Principle Designer и Dev-лидом",
+            "fullWidth": false,
+            "id": "x24cj3o4z"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "UX стратегия  🧩",
+            "description": "Разработал B2C-Like стратегию редизайна под-продуктов (Задачи, Заметки, Цели и др) в единую бесшовную среду, чтоб поднять ключевые метрики",
+            "fullWidth": false,
+            "id": "iw9zfg4he"
+          },
+          {
+            "title": "Работа руками  ✍️",
+            "description": "В отсутствии подчиненных, самостоятельно реализовывал весь скоуп: от верхнеуровневой архитектуры до Pixel Perfect макетов",
+            "fullWidth": false,
+            "id": "a6w4q54t8"
+          },
+          {
+            "title": "Новые идеи 💡",
+            "description": "Проектировал концепты идей, таких как встраивание банковских OKR (Целей) в таск-трекер, с логикой вертикального и горизотального каскадирования",
+            "fullWidth": true,
+            "id": "mb2a4g6ck"
+          },
+          {
+            "title": "Scrum master  🔄",
+            "description": "В роли Скрам-мастера (14 чел) улучшил прозрачность процессов, Agile менторство, Питчи перед командой, фасилитация",
+            "fullWidth": false,
+            "id": "935tjefwv"
+          },
+          {
+            "title": "Дискавери фаза  🔬",
+            "description": "Внедрил регулярные исследования: сбор обратной связи, тестирование гипотез, сформировал базу для инсайтов (JTBD карта)",
+            "fullWidth": false,
+            "id": "d24ub7bgr"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Time-to-Market  🚀",
+            "description": "Миграция на ANT Design System ускорила верстку и обеспечила консистентность, позволив выпускать фичи быстрее",
+            "fullWidth": true,
+            "id": "1qs96qe9u"
+          },
+          {
+            "title": "Архитектура  🏗 ",
+            "description": "Спроектировал гибкую структуру для функционала «Проекты», защитив продукт от слома логики при \"влетающих\" срочных задачах",
+            "fullWidth": false,
+            "id": "7mv3989v5"
+          },
+          {
+            "title": "Когнитивная нагрузка 🧠",
+            "description": "Редизайн упростил интерфейс за счет проработки UI, снизив когнитивную нагрузку на пользователей во всем приложении",
+            "fullWidth": false,
+            "id": "pkdhg79tm"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": [
+          {
+            "description": "NPS: +6 p.p",
+            "span": 1,
+            "id": "6m7gxglrp"
+          },
+          {
+            "description": "CSI: +2.0",
+            "span": 1,
+            "id": "2zqs05n3a"
+          },
+          {
+            "description": "TTM: -40%",
+            "span": 1,
+            "id": "13h9ctret"
+          },
+          {
+            "description": "Pixel Perfect: 98% (KPI>90%)",
+            "span": 3,
+            "id": "68baqgiij"
+          }
+        ]
+      }
+    },
+    "infoBlocks_en": {
+      "role": {
+        "cards": [
+          {
+            "title": "Expectations 🔎",
+            "description": "The business expected me to bring order to current user flows and raise the design bar for a product that had outgrown its startup roots",
+            "fullWidth": true,
+            "id": "zknbpjyxv"
+          },
+          {
+            "title": "Responsibility 🎯",
+            "description": "Full ownership of UX/UI for all web modules within the ecosystem. I had the final word on all design decisions and interface architecture",
+            "fullWidth": false,
+            "id": "ok1gj4e07"
+          },
+          {
+            "title": "Communication 🤝",
+            "description": "Synchronized decisions with 3 Product Owners and the ISU platform (shared backend). Regular syncs with the Principle Designer and Dev Lead",
+            "fullWidth": false,
+            "id": "knj61zgwk"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "UX Strategy 🧩 ",
+            "description": "Developed a B2C-Like redesign strategy for sub-products (Tasks, Notes, Goals, etc.) into a single seamless environment to boost key metrics",
+            "fullWidth": false,
+            "id": "xv130ji1a"
+          },
+          {
+            "title": "Hands-on Work ✍️ ",
+            "description": "With no direct reports, I personally implemented the entire scope: from high-level information architecture to pixel-perfect mockups",
+            "fullWidth": false,
+            "id": "nvd5osgpe"
+          },
+          {
+            "title": "New Ideas 💡 ",
+            "description": "Designed concepts for new features, such as embedding bank OKRs (Goals) into the task tracker with vertical and horizontal cascading logic",
+            "fullWidth": true,
+            "id": "rh0g6rxo8"
+          },
+          {
+            "title": "Scrum Master 🔄 ",
+            "description": "As a Scrum Master (14 people), I improved process transparency, provided Agile mentoring, pitched to the team, and handled facilitation",
+            "fullWidth": false,
+            "id": "t95zl0wq7"
+          },
+          {
+            "title": "Discovery 🔬 ",
+            "description": "Established regular research: gathering feedback, testing hypotheses, and building a foundation for user insights (JTBD map)",
+            "fullWidth": false,
+            "id": "6rtf8ktx0"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Time-to-Market 🚀 ",
+            "description": "Migration to the ANT Design System accelerated UI development and ensured consistency, allowing the team to ship features 2x faster",
+            "fullWidth": false,
+            "id": "c4g9mdfy5"
+          },
+          {
+            "title": "Architecture 🏗",
+            "description": "Designed a flexible structure for the \"Projects\" feature, shielding the product from logic breaks during \"rush\" urgent tasks",
+            "fullWidth": false,
+            "id": "rzgdw1peo"
+          },
+          {
+            "title": "Cognitive Load 🧠 ",
+            "description": "Simplified the interface by refining the UI, significantly reducing cognitive load for users across the entire application",
+            "fullWidth": true,
+            "id": "47m3q82bg"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": [
+          {
+            "description": "NPS: +6 p.p",
+            "span": 1,
+            "id": "4fzna0a3n"
+          },
+          {
+            "description": "CSI: +2.0",
+            "span": 1,
+            "id": "zk0yn1zrm"
+          },
+          {
+            "description": "TTM: -40%",
+            "span": 1,
+            "id": "8djo4ey8x"
+          },
+          {
+            "description": "Pixel Perfect: 98% (KPI>90%)",
+            "span": 2,
+            "id": "172p25vg4"
+          },
+          {
+            "description": "MAU: +43%",
+            "span": 1,
+            "id": "2e62s5ioz"
+          }
+        ]
+      }
+    }
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
@@ -204,10 +559,10 @@
   },
   {
     "id": "mkb6qlltgq9abjbichq",
-    "slug": "ios-app-dlya-fitnesa",
+    "slug": "fitnes-treker",
     "type": "gallery",
-    "title": "IOS APP для фитнеса",
-    "description": "Залидил разработку B2C приложения на проекте и реализовал концепцию «Эмоционального фитнеса», управляя командой дизайнеров  от идеи до передачи в разработку",
+    "title": "Фитнес трекер",
+    "description": "Mindful Fitness App для осознанных тренировок. B2C-стартап, объединяющий физическую активность с трекингом ментального здоровья для снижения оттока пользователей",
     "date": "2026-01-12",
     "category": "design",
     "coverImage": "/images/cases/1768249470031-7esw3g.png",
@@ -226,7 +581,7 @@
     "galleryLayout": "masonry",
     "componentUrl": "",
     "tags": [
-      "IOS APP",
+      "HealthTech",
       "B2C"
     ],
     "content": "",
@@ -234,9 +589,9 @@
     "featuredOnHome": true,
     "homeOrder": 2,
     "createdAt": "2026-01-12T13:15:03.521Z",
-    "updatedAt": "2026-01-23T21:11:03.295Z",
-    "title_en": "IOS Fitness App",
-    "description_en": "Led the B2C app design and delivered the 'Emotional Fitness' concept, managing the design team from ideation to handoff",
+    "updatedAt": "2026-02-01T10:38:12.757Z",
+    "title_en": "Fitness Tracker",
+    "description_en": "Mindful Fitness App for conscious workouts. A B2C startup integrating physical activity with mental health tracking to reduce user churn",
     "vibecodeOrder": null,
     "highlights": [
       {
@@ -274,15 +629,133 @@
         "description": "Delivered a Dark Mode design system and comprehensive assets for rapid engineering handoff"
       }
     ],
-    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
-    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
+    "highlightFooter": "Остались вопрос и есть желание поговорить? Предлагаю обсудить все кейсы лично! ",
+    "highlightFooter_en": "Still have questions and want to chat? I invite you to discuss all cases in person!",
+    "infoBlocks": {
+      "role": {
+        "cards": [
+          {
+            "title": "Ожидания 🔎 ",
+            "description": "Клиент ждал не просто \"еще один трекер\", а уникальное продуктовое предложение (УТП) для отстройки от конкурентов на этапе поиска инвестиций",
+            "fullWidth": true,
+            "id": "5m7sa73nu"
+          },
+          {
+            "title": "Ответственность 🎯 ",
+            "description": "Отвечал за создание концепции и визуального языка MVP. Управлял работой дизайнера-исполнителя, обеспечивая качество и целостность решения",
+            "fullWidth": false,
+            "id": "hnd003ubz"
+          },
+          {
+            "title": "Коммуникация 🤝 ",
+            "description": "Прямая работа с фаундером стартапа. Перевод абстрактных идей \"об эмоциях\" в конкретные UX-механики и интерфейсные решения",
+            "fullWidth": false,
+            "id": "efmglh53d"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "Лидирование 🗓 ",
+            "description": "Спланировал этапы работы в условиях сжатого срока (3 недели). Распределил задачи между собой и дизайнером (UI-продакшн)",
+            "fullWidth": false,
+            "id": "pcxsuys8c"
+          },
+          {
+            "title": "Концепт 🎨",
+            "description": "Разработал ключевой визуальный концепт (Look & Feel). Контролировал качество через регулярные дизайн-ревью дизайнера",
+            "fullWidth": false,
+            "id": "cvonosog7"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Market Fit 🚀",
+            "description": "В перегретой нише фитнес-аппов мы создали продукт, который выделяется за счет эмпатии и темной эстетики",
+            "fullWidth": false,
+            "id": "p7di7igmi"
+          },
+          {
+            "title": "Design Ops 📦",
+            "description": "Передал клиенту не просто картинки, а структурированный UI-кит, готовый для масштабирования и быстрой верстки MVP",
+            "fullWidth": false,
+            "id": "lq04ke4xr"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": []
+      }
+    },
+    "infoBlocks_en": {
+      "role": {
+        "cards": [
+          {
+            "title": "🔎 Expectations",
+            "description": "The client needed more than \"just another tracker\"; they required a Unique Value Proposition (UVP) to stand out during investment pitches",
+            "fullWidth": true,
+            "id": "6gbmcdhth"
+          },
+          {
+            "title": "🎯 Responsibility ",
+            "description": "In charge of creating the product concept and the MVP's visual language. Managed a mid designer to ensure high-quality execution",
+            "fullWidth": false,
+            "id": "govbzfk7q"
+          },
+          {
+            "title": "🤝 Communication",
+            "description": "Worked directly with the startup founder. Translated abstract ideas about \"emotions\" into concrete UX mechanics and interface solutions",
+            "fullWidth": false,
+            "id": "cgloxrqxs"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "🗓 Leadership",
+            "description": "Planned the project timeline under a tight 3-week deadline. Distributed tasks between strategic art direction (my part) and UI production (designer)",
+            "fullWidth": false,
+            "id": "t2lz08r0k"
+          },
+          {
+            "title": "🎨 Concept",
+            "description": "Developed the core visual concept (Look & Feel) and delegated the asset creation. Maintained quality through regular design reviews",
+            "fullWidth": false,
+            "id": "ltk7hjsu4"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "🚀 Market fit",
+            "description": "In a saturated fitness app market, we created a product that stands out through empathy and a refined dark aesthetic",
+            "fullWidth": false,
+            "id": "z3b8r53mr"
+          },
+          {
+            "title": "📦 Design Ops",
+            "description": "Delivered a structured UI Kit, not just mockups, enabling the client to scale and develop the MVP rapidly",
+            "fullWidth": false,
+            "id": "2duwla22x"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": []
+      }
+    }
   },
   {
     "id": "mkejkh4k9ahs3yeqhrm",
     "slug": "erp-dlya-igrovogo-kluba",
     "type": "gallery",
     "title": "ERP для игрового клуба",
-    "description": "Спроектировал комплексную ERP-систему управления кибер-клубом и клиентское приложение. В роли Lead Designer связал в единый Service Blueprint три точки контакта: админ-панель, мобильное приложение и интерфейс игрового ПК. Внедрил систему модерации «проблемных посетителей», чтобы снизить репутационные риски бизнеса",
+    "description": "Реализовать полную цифровую трансформацию бизнеса (Offline ⇢ Online). Нужна ERP-система, чтобы заменить «ручное» управление и хаос в учете на прозрачные цифровые процессы. Это решило критические проблемы: «слепые зоны» в финансах, простой оборудования и постоянный рассинхрон между бронированием в приложении и реальной посадкой в зале",
     "date": "2026-01-14",
     "category": "design",
     "coverImage": "/images/cases/1768426629572-9wdjqp.png",
@@ -305,7 +778,7 @@
     "galleryLayout": "stack",
     "componentUrl": "",
     "tags": [
-      "ERP",
+      "Service",
       "B2B"
     ],
     "content": "",
@@ -313,9 +786,9 @@
     "featuredOnHome": true,
     "homeOrder": 4,
     "createdAt": "2026-01-14T21:37:31.316Z",
-    "updatedAt": "2026-01-29T11:18:10.911Z",
+    "updatedAt": "2026-02-01T11:01:15.140Z",
     "title_en": "ERP for Game club",
-    "description_en": "Designed a comprehensive ERP system and client app for a cyber arena. As Lead Designer, I utilized Service Blueprinting to bridge three touchpoints: the Admin Panel, Mobile App, and PC Shell. Engineered a user moderation system to mitigate business risks associated with toxic behavior",
+    "description_en": "Execute a complete digital transformation (Offline ⇢ Online). I designed a comprehensive ERP system to replace manual management and accounting chaos with transparent digital workflows. This solved critical business pain points: financial \"blind spots,\" equipment idle time, and the constant desync between app-based bookings and real-world availability",
     "vibecodeOrder": null,
     "highlights": [
       {
@@ -353,8 +826,150 @@
         "description": "Designed specific interfaces and permission flows for Owners, Managers, and Admins"
       }
     ],
-    "highlightFooter": "Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью",
-    "highlightFooter_en": "Ready to discuss product strategy, metrics, and trade-offs in detail during an interview"
+    "highlightFooter": "Остались вопрос и есть желание поговорить? Предлагаю обсудить все кейсы лично! ",
+    "highlightFooter_en": "Still have questions and want to chat? I invite you to discuss all cases in person!",
+    "infoBlocks": {
+      "role": {
+        "cards": [
+          {
+            "title": "Ожидания 🔎 ",
+            "description": "От меня ожидали полного погружения в операционку: бизнес хотел, чтобы я не просто «нарисовал UI», а спроектировал архитектуру системы с нуля, разобравшись в хаотичных процессах офлайн-клубов",
+            "fullWidth": true,
+            "id": "3uhb194gu"
+          },
+          {
+            "title": "Ответственность 🎯 ",
+            "description": "Полная ответственность за дизайн решения (UX/UI) всей B2B-системы. В мою зону влияния входило принятие финальных решений по логике работы админки и её визуальному стилю",
+            "fullWidth": false,
+            "id": "9ce3i8b64"
+          },
+          {
+            "title": "Коммуникация 🤝 ",
+            "description": "Совместно с CTO и PO прорабатывали сложные технические ограничения ERP-системы, чтобы найти баланс между идеальным UX и возможностями бэкенда",
+            "fullWidth": false,
+            "id": "rmxeg5x8k"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "Service Blueprint 🧩 ",
+            "description": "Использовал Service Blueprint как основной инструмент для синхронизации сценариев между тремя точками контакта: Мобильным приложением (Клиент), ERP (Админ) и ПО на ПК (Игрок)",
+            "fullWidth": false,
+            "id": "o63rihssl"
+          },
+          {
+            "title": "User flow 🔄",
+            "description": "Спроектировал детальные пути (User Flow) для администратора зала: от открытия смены и кассовых операций до разрешения конфликтов и закрытия дня",
+            "fullWidth": false,
+            "id": "i43t50nn2"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Система штрафов 🛡️",
+            "description": "Внедрил фичи «Проблемных посетителей». Это позволило сегментировать клиентов, выставлять рейтинги и защитить оборудование клуба от вандалов",
+            "fullWidth": true,
+            "id": "r7hydlgbk"
+          },
+          {
+            "title": "Синхронизация 🔗",
+            "description": "Добился эффекта единого организма: любые действия клиента в приложении (бронь) или за ПК (вход в игру) мгновенно отображаются на дашборде администратора в ERP",
+            "fullWidth": false,
+            "id": "et179k67g"
+          },
+          {
+            "title": "Гибкость настройки ⚙️",
+            "description": "Разработал гибкий конструктор клуба, который позволяет владельцу самостоятельно настраивать зоны, количество ПК и сложные тарифные сетки без участия разработчиков",
+            "fullWidth": false,
+            "id": "jvf6i3vmh"
+          },
+          {
+            "title": "Автоматизация покупок 🛒",
+            "description": "Спроектировал систему заказов «не вставая с кресла». Игрок заказывает напитки через интерфейс ПК, админ получает уведомление в ERP и просто приносит заказ",
+            "fullWidth": true,
+            "id": "2ec5q5qnq"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": []
+      }
+    },
+    "infoBlocks_en": {
+      "role": {
+        "cards": [
+          {
+            "title": "Expectations 🔎 ",
+            "description": "I was expected to fully immerse myself in operations: the business wanted me to design the system architecture from scratch, untangling the chaotic processes of offline clubs, rather than just \"drawing a UI",
+            "fullWidth": true,
+            "id": "z8psvu0f2"
+          },
+          {
+            "title": "Responsibility 🎯 ",
+            "description": "Full ownership of Product Design (UX/UI) for the entire B2E system. My sphere of influence included final decision-making on the admin panel's logic and its visual identity",
+            "fullWidth": false,
+            "id": "gleyo1m7t"
+          },
+          {
+            "title": "Communication 🤝 ",
+            "description": "Worked closely with the CTO and Product Manager. We jointly navigated complex technical constraints of the ERP system to find the perfect balance between ideal UX and backend capabilities",
+            "fullWidth": false,
+            "id": "7n66b7c7h"
+          }
+        ]
+      },
+      "strategy": {
+        "cards": [
+          {
+            "title": "Service Blueprint 🧩 ",
+            "description": "Utilized a Service Blueprint as the core tool to synchronize scenarios across three touchpoints: Mobile App (Client), ERP (Admin), and PC Shell (Gamer)",
+            "fullWidth": false,
+            "id": "o0ocy2a7d"
+          },
+          {
+            "title": "User Flow 🔄 ",
+            "description": "Mapped out detailed User Flows for the floor administrator, covering everything from shift opening and cash operations to conflict resolution and end-of-day reporting",
+            "fullWidth": false,
+            "id": "j7ldy0l7l"
+          }
+        ]
+      },
+      "cases": {
+        "cards": [
+          {
+            "title": "Penalty System 🛡️ ",
+            "description": "Implemented a moderation module for \"Problematic Visitors.\" This allowed for client segmentation and rating systems, protecting the club's equipment from vandals while securing the LTV of the core audience",
+            "fullWidth": true,
+            "id": "orr50quec"
+          },
+          {
+            "title": "Synchronization 🔗 ",
+            "description": "Achieved a \"single organism\" effect: any client action in the app (booking) or at the PC (starting a session) is instantly reflected on the administrator's dashboard in the ERP",
+            "fullWidth": false,
+            "id": "ox612khf5"
+          },
+          {
+            "title": "Purchase  🛒 ",
+            "description": "Designed an \"order from your seat\" system. Players order snacks and drinks directly via the PC interface; the admin receives an alert in the ERP and simply delivers the order.",
+            "fullWidth": false,
+            "id": "uqbosr887"
+          },
+          {
+            "title": "Configuration ⚙️ ",
+            "description": "Developed a flexible club configurator that allows owners to independently set up zones, hardware counts, and complex tariff grids without any developer intervention.",
+            "fullWidth": true,
+            "id": "fvgadag2y"
+          }
+        ]
+      },
+      "metrics": {
+        "cards": []
+      }
+    }
   },
   {
     "id": "mkpkqt46mmjcwatqni",

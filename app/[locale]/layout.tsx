@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Bacardin",
   },
   description:
-    "Lead/Senior Product Designer. Редизайн продукта для топ-менеджмента Сбербанка. 6+ лет опыта в B2E/B2C продуктах.",
+    "Lead Product Designer. Редизайн продукта для топ-менеджмента Сбербанка. 6+ лет опыта в B2E/B2C продуктах.",
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.svg",

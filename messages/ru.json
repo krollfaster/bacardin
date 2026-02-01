@@ -2,7 +2,7 @@
   "hero": {
     "name": "Эрнест фон Шульдайс",
     "status": "(Ищу работу)",
-    "description": "Lead/Senior Product Designer ⇢ Редизайн продукта для топ-менеджмента крупнейшего банка России"
+    "description": "Lead Product Designer ⇢ Редизайн продукта для топ-менеджмента крупнейшего банка России"
   },
   "achievements": {
     "title": "Достижения",
@@ -33,7 +33,7 @@
         "position": "Staff Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
-        "desc_part1": "Лидировал редизайн B2E/B2C-like экосистемы для",
+        "desc_part1": "Лидировал редизайн B2C-like экосистемы для",
         "desc_highlight1": "80+",
         "desc_part2": "топ-менеджеров и",
         "desc_highlight2": "25\u00A0000+",
@@ -58,11 +58,11 @@
         "dates": "2022 → 2024",
         "desc_part1": "Запустил и поддерживал",
         "desc_highlight1": "3",
-        "desc_part2": "комплексных продукта:",
-        "desc_highlight2": "B2C",
-        "desc_part3": "мобильные приложения и высоконагруженные",
-        "desc_highlight3": "B2E",
-        "desc_part4": "ERP/CRM системы для разных индустрий",
+        "desc_part2": "больших продукта:",
+        "desc_highlight2": "B2C APP",
+        "desc_part3": "с высоконагруженными",
+        "desc_highlight3": "B2B",
+        "desc_part4": "ERP/CRM для Автоматизации производства, Сервиса химчистки, Игрового клуба",
         "link": "Behance кейсы",
         "linkUrl": "https://www.behance.net/bacardin"
       }
