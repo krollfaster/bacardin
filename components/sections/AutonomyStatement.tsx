@@ -15,6 +15,15 @@ export const AutonomyStatement = () => {
       className="mt-[52px] mb-20"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
+        {/* Заголовок секции */}
+        <motion.h2
+          variants={fadeIn}
+          className="mb-8 font-medium text-[28px] leading-[36px]"
+          style={{ color: "#9C9C9C" }}
+        >
+          {t("title")}
+        </motion.h2>
+
         <motion.div
           variants={fadeIn}
           className="rounded-[24px]"
