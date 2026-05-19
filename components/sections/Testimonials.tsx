@@ -113,7 +113,7 @@ export const Testimonials = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="mt-[52px] mb-20"
+            className="mt-[52px]"
         >
             <div className="mx-auto px-6 max-w-[1000px]">
                 {/* Заголовок секции */}
