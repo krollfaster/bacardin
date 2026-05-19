@@ -14,7 +14,7 @@ export const AutonomyStatement = () => {
       viewport={{ once: true, margin: "-100px" }}
       className="mt-[52px] mb-20"
     >
-      <div className="mx-auto px-4 max-w-[860px]">
+      <div className="mx-auto px-6 max-w-[1000px]">
         <motion.div
           variants={fadeIn}
           className="rounded-[24px]"
