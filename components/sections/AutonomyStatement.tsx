@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Sparkles } from "lucide-react";
 import { fadeIn } from "@/lib/animations";
 
 export const AutonomyStatement = () => {
@@ -15,22 +14,20 @@ export const AutonomyStatement = () => {
       viewport={{ once: true, margin: "-100px" }}
       className="mt-[52px] mb-20"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-4 max-w-[860px]">
         <motion.div
           variants={fadeIn}
-          className="bg-card px-10 pt-9 pb-[38px] rounded-4xl"
-          style={{ boxShadow: "inset 0 0 18px rgba(255, 255, 255, 0.04)" }}
+          className="rounded-[24px]"
+          style={{
+            border: "3px solid #272727",
+            padding: "36px 40px",
+            boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
+          }}
         >
-          {/* Icon + Heading Row */}
-          <div className="flex items-center gap-4 mb-6">
-            <Sparkles size={32} className="text-[#afce90] flex-shrink-0" />
-            <h2 className="font-medium text-[28px] text-foreground leading-[36px]">
-              {t("title")}
-            </h2>
-          </div>
-
-          {/* Description */}
-          <p className="font-[500] text-[20px] text-muted-foreground leading-[32px]">
+          <p
+            className="font-medium text-[28px] leading-[35px]"
+            style={{ color: "#9C9C9C" }}
+          >
             {t("description")}
           </p>
         </motion.div>
