@@ -148,5 +148,9 @@
     "showMore": "Show more ({count})",
     "uiElement": "UI Element",
     "vibecodeCases": "Vibecode cases"
+  },
+  "autonomy": {
+    "title": "Autonomous Portfolio",
+    "description": "Design, code and deployment of this portfolio are fully handled by Hermes AI agents — no development team required. The owner only approves the final result."
   }
 }
