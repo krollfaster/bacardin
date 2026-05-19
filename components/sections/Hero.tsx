@@ -42,7 +42,7 @@ export const Hero = () => {
           <h1 className="font-medium text-[50px] leading-[1.1]">
             <span className="text-foreground">{t("name")}</span>
             {" "}
-            <span className="text-[#afce90]">{t("status")}</span>
+            <span className="text-[#C4B8F8]">{t("status")}</span>
           </h1>
         </motion.div>
 
