@@ -52,12 +52,13 @@
         "dates": "2022 → 2024",
         "desc_part1": "Led ",
         "desc_highlight1": "3",
-        "desc_part2": " products through the full ",
+        "desc_part2": " products through ",
         "desc_highlight2": "0→1",
-        "desc_part3": " path in 2 years: from PMF discovery to scaling — each improved a business process: from factory floor to customer service — ",
+        "desc_part3": " in 2 years — each improved a business process: ",
         "desc_highlight3": "ERP, CRM, mobile B2B/B2C",
         "link": "Behance кейсы",
-        "linkUrl": "https://www.behance.net/bacardin"
+        "linkUrl": "https://www.behance.net/bacardin",
+        "desc_part4": ""
       }
     }
   },
