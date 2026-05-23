@@ -24,15 +24,15 @@
     "titleHighlight": "6+",
     "items": {
       "sber": {
-        "position": "Senior Product Designer",
+        "position": "Principal Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
         "desc_part1": "Led the redesign of a B2B ecosystem for",
         "desc_highlight1": "80+",
-        "desc_part2": "C-level executives and",
         "desc_highlight2": "25,000+",
         "desc_part3": "employees of the largest bank. Results:",
-        "desc_highlight3": "NPS +6 pp, CSI +2 points"
+        "desc_highlight3": "NPS +6 pp, CSI +2 points",
+        "desc_part2": "C-level executives and"
       },
       "mid": {
         "position": "Lead UX Researcher",
@@ -46,7 +46,7 @@
         "desc_highlight3": "30+",
         "desc_part4": "interviews, A/B and usability testing, presented findings to stakeholders"
       },
-"unitbean": {
+      "unitbean": {
         "position": "Senior Product Designer",
         "company": "UNITBEAN",
         "dates": "2022 → 2024",
