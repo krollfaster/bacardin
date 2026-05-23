@@ -46,18 +46,17 @@
         "desc_highlight3": "30+",
         "desc_part4": "interviews, A/B and usability testing, presented findings to stakeholders"
       },
-      "unitbean": {
+"unitbean": {
         "position": "Senior Product Designer",
         "company": "UNITBEAN",
         "dates": "2022 → 2024",
-        "desc_part1": "Launched and maintained",
+        "desc_part1": "Led ",
         "desc_highlight1": "3",
-        "desc_part2": "big products:",
-        "desc_highlight2": "B2C APP",
-        "desc_part3": "with high-load",
-        "desc_highlight3": "B2B",
-        "desc_part4": "ERP/CRM for Manufacturing Automation, Dry Cleaning, and Gaming Club",
-        "link": "Behance cases",
+        "desc_part2": " products through the full ",
+        "desc_highlight2": "0→1",
+        "desc_part3": " path in 2 years: from PMF discovery to scaling — each improved a business process: from factory floor to customer service — ",
+        "desc_highlight3": "ERP, CRM, mobile B2B/B2C",
+        "link": "Behance кейсы",
         "linkUrl": "https://www.behance.net/bacardin"
       }
     }
