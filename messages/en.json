@@ -5,24 +5,18 @@
     "description": "B2B product redesign for Sber's Management Board and 300+ Agile teams"
   },
   "achievements": {
-    "title": "Achievements",
+    "title": "Strengths",
     "items": {
-      "okr_part1": "Worked on OKR cascading in a product for",
-      "okr_highlight1": "25,000+",
-      "okr_part2": "employees, ensuring goal transparency for",
-      "okr_highlight2": "300+",
-      "okr_part3": "Agile teams",
-      "redesign_part1": "Redesigned a web platform with",
-      "redesign_highlight1": "4",
-      "redesign_part2": "domains making them interconnected, increasing manager efficiency by",
-      "redesign_highlight2": "40%",
-      "agile_part1": "Facilitated events and improved Agile processes in a team of",
-      "agile_highlight1": "14 people",
-      "agile_part2": "as a",
-      "agile_highlight2": "Scrum Master",
-      "ai_part1": "Implemented and designed",
-      "ai_highlight1": "12 AI",
-      "ai_part2": "features to optimize manager workflow"
+      "card1": {
+        "part1": "Experience across ",
+        "highlight": "4 roles",
+        "part2": ": design, development, research and management. Like a chess player who's played every piece — I see the whole board and know which move strengthens the entire game."
+      },
+      "card2": {
+        "part1": "Like a conductor, I remove friction between people, ",
+        "highlight": "AI agents",
+        "part2": ", and processes. I tune the orchestra so each element amplifies the others — and efficiency grows exponentially."
+      }
     }
   },
   "experience": {

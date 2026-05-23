@@ -46,30 +46,16 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
 export const Achievements = () => {
   const t = useTranslations("achievements");
 
-  const achievements: TextPart[][] = [
+  const strengths: TextPart[][] = [
     [
-      { type: "text", value: t("items.okr_part1") },
-      { type: "highlight", value: t("items.okr_highlight1") },
-      { type: "text", value: t("items.okr_part2") },
-      { type: "highlight", value: t("items.okr_highlight2") },
-      { type: "text", value: t("items.okr_part3") },
+      { type: "text", value: t("items.card1.part1") },
+      { type: "highlight", value: t("items.card1.highlight") },
+      { type: "text", value: t("items.card1.part2") },
     ],
     [
-      { type: "text", value: t("items.redesign_part1") },
-      { type: "highlight", value: t("items.redesign_highlight1") },
-      { type: "text", value: t("items.redesign_part2") },
-      { type: "highlight", value: t("items.redesign_highlight2") },
-    ],
-    [
-      { type: "text", value: t("items.agile_part1") },
-      { type: "highlight", value: t("items.agile_highlight1") },
-      { type: "text", value: t("items.agile_part2") },
-      { type: "highlight", value: t("items.agile_highlight2") },
-    ],
-    [
-      { type: "text", value: t("items.ai_part1") },
-      { type: "highlight", value: t("items.ai_highlight1") },
-      { type: "text", value: t("items.ai_part2") },
+      { type: "text", value: t("items.card2.part1") },
+      { type: "highlight", value: t("items.card2.highlight") },
+      { type: "text", value: t("items.card2.part2") },
     ],
   ];
 
@@ -92,7 +78,7 @@ export const Achievements = () => {
 
         {/* Сетка карточек */}
         <div className="gap-6 md:gap-8 grid grid-cols-1 md:grid-cols-2">
-          {achievements.map((parts, index) => (
+          {strengths.map((parts, index) => (
             <AchievementCard key={index} parts={parts} index={index} />
           ))}
         </div>
