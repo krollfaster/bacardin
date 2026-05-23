@@ -8,7 +8,6 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { YandexMetrika } from "@/components/analytics/YandexMetrika";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactButtons } from "@/components/layout/ContactButtons";
-import { AutonomyStatement } from "@/components/sections/AutonomyStatement";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -82,7 +81,6 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ContactButtons />
           {children}
-          <AutonomyStatement />
           <Toaster />
         </NextIntlClientProvider>
         <Analytics />

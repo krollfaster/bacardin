@@ -5,6 +5,7 @@ import { Experience } from "@/components/sections/Experience";
 import { HomeCases } from "@/components/sections/HomeCases";
 import { Tags } from "@/components/sections/Tags";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { AutonomyStatement } from "@/components/sections/AutonomyStatement";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { getFeaturedCases, getVibecodeCases } from "@/lib/cases";
 
@@ -56,6 +57,7 @@ export default async function HomePage({ params }: HomePageProps) {
       />
       <Tags />
       <Testimonials />
+      <AutonomyStatement />
     </main>
   );
 }
