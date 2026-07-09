@@ -12,13 +12,13 @@ export const AutonomyStatement = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="mt-[52px] mb-20"
+      className="mt-[49px] mb-[75px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-8 font-medium text-[28px] leading-[36px]"
+          className="mb-8 font-medium text-[26px] leading-[34px]"
           style={{ color: "#9C9C9C" }}
         >
           {t("title")}
@@ -29,12 +29,12 @@ export const AutonomyStatement = () => {
           className="rounded-[24px]"
           style={{
             border: "3px solid #272727",
-            padding: "36px 40px",
+            padding: "34px 38px",
             boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
           }}
         >
           <p
-            className="font-medium text-[28px] leading-[35px]"
+            className="font-medium text-[26px] leading-[33px]"
             style={{ color: "#9C9C9C" }}
           >
             {t("description")}

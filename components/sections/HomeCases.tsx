@@ -27,20 +27,20 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerContainer}
-      className="mt-[52px]"
+      className="mt-[49px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-8 font-medium text-[28px] text-muted-foreground leading-[36px]"
+          className="mb-[30px] font-medium text-[26px] text-muted-foreground leading-[34px]"
         >
           {t("title")} <span className="text-white">({t("hint")})</span>
         </motion.h2>
 
         {/* Сетка кейсов */}
         <motion.div
-          className="gap-6 grid grid-cols-1 md:grid-cols-2"
+          className="gap-[23px] grid grid-cols-1 md:grid-cols-2"
           variants={staggerContainer}
         >
           {cases.map((caseItem) => (

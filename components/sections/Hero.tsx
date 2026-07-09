@@ -12,23 +12,23 @@ export const Hero = () => {
       initial="hidden"
       animate="visible"
       variants={fadeIn}
-      className="pt-24 md:pt-56"
+      className="pt-[90px] md:pt-[211px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Аватарка / Видео */}
         <motion.div
           variants={slideUp}
-          className="mb-9"
+          className="mb-[34px]"
         >
-          <div className="rounded-2xl w-[300px] h-[240px] overflow-hidden">
+          <div className="rounded-2xl w-[282px] h-[226px] overflow-hidden">
             <video
               src="/ava.mp4"
               autoPlay
               loop
               muted
               playsInline
-              width={300}
-              height={240}
+              width={282}
+              height={226}
               className="w-full h-full object-cover"
             />
           </div>
@@ -39,7 +39,7 @@ export const Hero = () => {
           variants={slideUp}
           className="mb-4.5"
         >
-          <h1 className="font-medium text-[50px] leading-[1.1]">
+          <h1 className="font-medium text-[47px] leading-[1.1]">
             <span className="text-foreground">{t("name")}</span>
             {" "}
             <span className="text-[#C4B8F8]">{t("status")}</span>
@@ -50,7 +50,7 @@ export const Hero = () => {
         <motion.div
           variants={slideUp}
         >
-          <p className="font-medium text-[50px] text-muted-foreground leading-[1.1]">
+          <p className="font-medium text-[47px] text-muted-foreground leading-[1.1]">
             {t("description")}
           </p>
         </motion.div>

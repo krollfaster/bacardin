@@ -33,37 +33,37 @@ const TestimonialCard = ({
                     transition: { delay: index * 0.1, duration: 0.5 },
                 },
             }}
-            className="bg-card px-10 pt-9 pb-[38px] rounded-4xl"
+            className="bg-card px-[38px] pt-[34px] pb-[36px] rounded-4xl"
             style={{ boxShadow: "inset 0 0 18px rgba(255, 255, 255, 0.04)" }}
         >
             {/* Верхний блок с аватаром и информацией */}
-            <div className="flex items-center gap-6 mb-6">
+            <div className="flex items-center gap-[23px] mb-[23px]">
                 <Image
                     src={avatar}
                     alt={name}
-                    width={54}
-                    height={54}
+                    width={51}
+                    height={51}
                     className="flex-shrink-0 rounded-lg object-cover"
-                    style={{ width: 54, height: 54, borderRadius: 8 }}
+                    style={{ width: 51, height: 51, borderRadius: 8 }}
                 />
                 <div className="flex flex-col flex-1 min-w-0">
-                    <h3 className="font-medium text-[28px] text-foreground truncate leading-[26px]">
+                    <h3 className="font-medium text-[26px] text-foreground truncate leading-[24px]">
                         {name}
                     </h3>
-                    <span className="mt-3 font-medium text-[28px] text-muted-foreground truncate leading-[26px]">
+                    <span className="mt-3 font-medium text-[26px] text-muted-foreground truncate leading-[24px]">
                         {role}
                     </span>
                 </div>
             </div>
 
             {/* Текст отзыва */}
-            <p className="font-[500] text-[28px] text-muted-foreground leading-[36px]">
+            <p className="font-[500] text-[26px] text-muted-foreground leading-[34px]">
                 {text}
             </p>
 
             {/* Ссылка на рекомендательное письмо */}
             {link && (
-                <div className="mt-6">
+                <div className="mt-[23px]">
                     <LinkPreview
                         href={link.url}
                         previewImage={link.previewImage || "/images/preview-default.png"}
@@ -113,19 +113,19 @@ export const Testimonials = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="mt-[52px]"
+            className="mt-[49px]"
         >
             <div className="mx-auto px-6 max-w-[1000px]">
                 {/* Заголовок секции */}
                 <motion.h2
                     variants={fadeIn}
-                    className="mb-8 font-medium text-[28px] text-muted-foreground leading-[36px]"
+                    className="mb-[30px] font-medium text-[26px] text-muted-foreground leading-[34px]"
                 >
                     {t("title")}
                 </motion.h2>
 
                 {/* Сетка карточек */}
-                <div className="gap-6 md:gap-8 grid grid-cols-1 md:grid-cols-2">
+                <div className="gap-[23px] md:gap-[30px] grid grid-cols-1 md:grid-cols-2">
                     {testimonials.map((item, index) => (
                         <TestimonialCard
                             key={index}
