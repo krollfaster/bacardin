@@ -3,18 +3,27 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import type { GalleryLayout, HighlightCard, InfoBlocks, InfoBlockCard, MetricsCard } from "@/types";
+import type {
+  GalleryLayout,
+  HighlightCard,
+  InfoBlocks,
+  CaseItem,
+  CaseHeadingItem,
+  CaseCardItem,
+  CaseMetricsItem,
+} from "@/types";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/components/ui/RichText";
 
 interface GalleryCaseViewProps {
   title: string;
   description?: string;
+  logo?: string;
   images: string[];
   layout?: GalleryLayout;
+  items?: CaseItem[];
   highlights?: HighlightCard[]; // @deprecated
-  highlightFooter?: string;
-  infoBlocks?: InfoBlocks;
+  infoBlocks?: InfoBlocks; // @deprecated
   locale?: string;
 }
 
@@ -23,234 +32,224 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.12,
     },
   },
 } as const;
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: "easeOut" as const,
     },
   },
 };
 
-// Проверяем, есть ли заполненные хайлайты (legacy)
-const hasHighlights = (highlights?: HighlightCard[]) => {
-  if (!highlights || highlights.length === 0) return false;
-  return highlights.some(h => h.title.trim() || h.description.trim());
-};
+type RenderSegment =
+  | { type: "heading"; item: CaseHeadingItem }
+  | { type: "metrics"; item: CaseMetricsItem }
+  | { type: "card-group"; cards: CaseCardItem[] };
 
-// Проверяем, есть ли карточки в инфо-блоке
-const hasCards = (cards?: InfoBlockCard[]) => {
-  if (!cards || cards.length === 0) return false;
-  return cards.some(c => c.title.trim() || c.description.trim());
-};
+// Разбивка элементов на сегменты для правильного отображения рядов карточек
+function segmentItems(items: CaseItem[]): RenderSegment[] {
+  const segments: RenderSegment[] = [];
+  let currentCardGroup: CaseCardItem[] = [];
 
-// Названия блоков для RU/EN
-const blockTitles = {
-  role: { ru: "Контекст", en: "Context" },
-  strategy: { ru: "Действия", en: "Actions" },
-  cases: { ru: "Влияние", en: "Impact" },
-  metrics: { ru: "Метрики", en: "Metrics" },
-} as const;
+  const flushCardGroup = () => {
+    if (currentCardGroup.length > 0) {
+      segments.push({ type: "card-group", cards: currentCardGroup });
+      currentCardGroup = [];
+    }
+  };
 
-// Компонент для рендеринга инфо-блока
-interface InfoBlockSectionProps {
-  blockKey: keyof typeof blockTitles;
-  cards: InfoBlockCard[];
-  isEnglish: boolean;
-}
-
-function InfoBlockSection({ blockKey, cards, isEnglish }: InfoBlockSectionProps) {
-  // Фильтруем только заполненные карточки
-  const filledCards = cards.filter(c => c.title.trim() || c.description.trim());
-  if (filledCards.length === 0) return null;
-
-  // Группируем карточки в ряды для правильного рендеринга
-  const rows: InfoBlockCard[][] = [];
-  let currentRow: InfoBlockCard[] = [];
-
-  filledCards.forEach((card, index) => {
-    const isLastCard = index === filledCards.length - 1;
-
-    if (card.fullWidth) {
-      // Если текущий ряд не пустой, сохраняем его
-      if (currentRow.length > 0) {
-        rows.push(currentRow);
-        currentRow = [];
+  items.forEach((item) => {
+    if (item.type === "heading") {
+      flushCardGroup();
+      if (item.title && item.title.trim()) {
+        segments.push({ type: "heading", item });
       }
-      // Карточка на всю ширину — отдельный ряд
-      rows.push([card]);
-    } else {
-      currentRow.push(card);
-      // Если в ряду 2 карточки или это последняя карточка — сохраняем ряд
-      if (currentRow.length === 2 || isLastCard) {
-        rows.push(currentRow);
-        currentRow = [];
+    } else if (item.type === "metrics") {
+      flushCardGroup();
+      const validCards = (item.cards || []).filter((c) => c.description && c.description.trim());
+      if (validCards.length > 0) {
+        segments.push({ type: "metrics", item: { ...item, cards: validCards } });
+      }
+    } else if (item.type === "card") {
+      const isCardFilled = (item.title && item.title.trim()) || (item.description && item.description.trim());
+      if (!isCardFilled) return;
+
+      if (item.fullWidth) {
+        flushCardGroup();
+        segments.push({ type: "card-group", cards: [item] });
+      } else {
+        currentCardGroup.push(item);
+        if (currentCardGroup.length === 2) {
+          flushCardGroup();
+        }
       }
     }
   });
 
-  const title = isEnglish ? blockTitles[blockKey].en : blockTitles[blockKey].ru;
-
-  return (
-    <div className="mt-[52px]">
-      {/* Заголовок блока */}
-      <motion.h2
-        className="mb-[32px] font-medium text-[28px] leading-[35px]"
-        style={{ color: "#9C9C9C" }}
-        variants={itemVariants}
-      >
-        {title}
-      </motion.h2>
-
-      {/* Ряды карточек */}
-      <div className="flex flex-col gap-[32px]">
-        {rows.map((row, rowIndex) => (
-          <div
-            key={rowIndex}
-            className={cn(
-              "gap-[32px] grid",
-              // Если в ряду 1 карточка — на всю ширину, иначе 2 колонки
-              row.length === 1 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
-            )}
-          >
-            {row.map((card, cardIndex) => (
-              <motion.div
-                key={cardIndex}
-                className="border rounded-[24px]"
-                style={{
-                  borderColor: "#272727",
-                  borderWidth: "3px",
-                  padding: "36px 40px",
-                  boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
-                }}
-                variants={itemVariants}
-              >
-                <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
-                  {card.title}
-                </p>
-                {card.description && (
-                  <p className="mt-[20px] font-medium text-[28px] leading-[35px]" style={{ color: "#FFFFFF" }}>
-                    {card.description}
-                  </p>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  flushCardGroup();
+  return segments;
 }
 
-// Проверяем, есть ли карточки в блоке метрик
-const hasMetricsCards = (cards?: MetricsCard[]) => {
-  if (!cards || cards.length === 0) return false;
-  return cards.some(c => c.description.trim());
-};
+// Fallback конвертер старых блоков в ленту
+function buildFallbackItems(infoBlocks?: InfoBlocks, highlights?: HighlightCard[], isEnglish = false): CaseItem[] {
+  const items: CaseItem[] = [];
 
-// Компонент для рендеринга блока метрик (3 колонки, только описание)
-interface MetricsBlockSectionProps {
-  cards: MetricsCard[];
-  isEnglish: boolean;
-}
+  if (infoBlocks) {
+    if (infoBlocks.role?.cards && infoBlocks.role.cards.length > 0) {
+      items.push({
+        id: "fb-role",
+        type: "heading",
+        title: isEnglish ? "Context" : "Контекст",
+      });
+      infoBlocks.role.cards.forEach((c, idx) => {
+        items.push({
+          id: `fb-role-${idx}`,
+          type: "card",
+          title: c.title,
+          description: c.description,
+          fullWidth: c.fullWidth ?? false,
+        });
+      });
+    }
 
-function MetricsBlockSection({ cards, isEnglish }: MetricsBlockSectionProps) {
-  // Фильтруем только заполненные карточки
-  const filledCards = cards.filter(c => c.description.trim());
-  if (filledCards.length === 0) return null;
+    if (infoBlocks.strategy?.cards && infoBlocks.strategy.cards.length > 0) {
+      items.push({
+        id: "fb-strat",
+        type: "heading",
+        title: isEnglish ? "Actions" : "Действия",
+      });
+      infoBlocks.strategy.cards.forEach((c, idx) => {
+        items.push({
+          id: `fb-strat-${idx}`,
+          type: "card",
+          title: c.title,
+          description: c.description,
+          fullWidth: c.fullWidth ?? false,
+        });
+      });
+    }
 
-  const title = isEnglish ? blockTitles.metrics.en : blockTitles.metrics.ru;
+    if (infoBlocks.cases?.cards && infoBlocks.cases.cards.length > 0) {
+      items.push({
+        id: "fb-cases",
+        type: "heading",
+        title: isEnglish ? "Impact" : "Влияние",
+      });
+      infoBlocks.cases.cards.forEach((c, idx) => {
+        items.push({
+          id: `fb-cases-${idx}`,
+          type: "card",
+          title: c.title,
+          description: c.description,
+          fullWidth: c.fullWidth ?? false,
+        });
+      });
+    }
 
-  return (
-    <div className="mt-[52px]">
-      {/* Заголовок блока */}
-      <motion.h2
-        className="mb-[32px] font-medium text-[28px] leading-[35px]"
-        style={{ color: "#9C9C9C" }}
-        variants={itemVariants}
-      >
-        {title}
-      </motion.h2>
+    if (infoBlocks.metrics?.cards && infoBlocks.metrics.cards.length > 0) {
+      items.push({
+        id: "fb-metrics-head",
+        type: "heading",
+        title: isEnglish ? "Metrics" : "Метрики",
+      });
+      items.push({
+        id: "fb-metrics",
+        type: "metrics",
+        cards: infoBlocks.metrics.cards.map((m, idx) => ({
+          id: `fb-m-${idx}`,
+          description: m.description,
+          span: m.span || 1,
+        })),
+      });
+    }
+  }
 
-      {/* Сетка карточек 3 колонки */}
-      <div className="gap-[32px] grid grid-cols-3">
-        {filledCards.map((card, index) => {
-          const span = card.span || 1;
-          return (
-            <motion.div
-              key={index}
-              className={cn(
-                "border rounded-[24px]",
-                span === 1 && "col-span-1",
-                span === 2 && "col-span-2",
-                span === 3 && "col-span-3"
-              )}
-              style={{
-                borderColor: "#272727",
-                borderWidth: "3px",
-                padding: "36px 40px",
-                boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)"
-              }}
-              variants={itemVariants}
-            >
-              <p className="font-medium text-[28px] leading-[35px]" style={{ color: "#9C9C9C" }}>
-                {card.description}
-              </p>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  );
+  if (items.length === 0 && highlights && highlights.length > 0) {
+    const validHighlights = highlights.filter((h) => h.title.trim() || h.description.trim());
+    if (validHighlights.length > 0) {
+      items.push({
+        id: "fb-hl-head",
+        type: "heading",
+        title: isEnglish ? "Case" : "Кейс",
+      });
+      validHighlights.forEach((h, idx) => {
+        items.push({
+          id: `fb-hl-${idx}`,
+          type: "card",
+          title: h.title,
+          description: h.description,
+          fullWidth: false,
+        });
+      });
+    }
+  }
+
+  return items;
 }
 
 export const GalleryCaseView = ({
   title,
   description,
+  logo,
   images,
   layout = "stack",
+  items,
   highlights,
-  highlightFooter,
   infoBlocks,
-  locale = "ru"
+  locale = "ru",
 }: GalleryCaseViewProps) => {
-  const showHighlights = hasHighlights(highlights);
   const isEnglish = locale === "en";
 
-  // Проверяем, есть ли хотя бы один инфо-блок с карточками
-  const hasAnyInfoBlock = infoBlocks && (
-    hasCards(infoBlocks.role?.cards) ||
-    hasCards(infoBlocks.strategy?.cards) ||
-    hasCards(infoBlocks.cases?.cards) ||
-    hasMetricsCards(infoBlocks.metrics?.cards)
-  );
+  const effectiveItems =
+    items && items.length > 0
+      ? items
+      : buildFallbackItems(infoBlocks, highlights, isEnglish);
+
+  const segments = segmentItems(effectiveItems);
 
   return (
     <motion.div
-      className="pb-16 min-h-screen"
+      className="pb-24 min-h-screen"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      {/* Текстовый блок */}
-      <div className="mx-auto mb-16 px-4 pt-[240px] max-w-[860px]">
+      {/* Шапка кейса: Логотип + Заголовок + Описание */}
+      <div className="mx-auto px-4 pt-[200px] md:pt-[240px] max-w-[860px]">
+        {/* Логотип кейса слева над заголовком */}
+        {logo && (
+          <motion.div
+            className="mb-8 flex justify-start"
+            variants={itemVariants}
+          >
+            <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center bg-[#1A1A1A] border border-[#272727] p-2 shadow-[inset_0_0_15px_rgba(255,255,255,0.05)]">
+              <img
+                src={logo}
+                alt={`${title} logo`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </motion.div>
+        )}
+
         <motion.h1
-          className="font-bold text-[50px] leading-[54px]"
+          className="font-bold text-[42px] md:text-[50px] leading-[46px] md:leading-[54px] text-foreground tracking-tight"
           variants={itemVariants}
         >
           {title}
         </motion.h1>
+
         {description && description.trim() && (
           <motion.div
-            className="mt-[18px]"
+            className="mt-[20px]"
             variants={itemVariants}
           >
             <RichText content={description} />
@@ -258,70 +257,138 @@ export const GalleryCaseView = ({
         )}
       </div>
 
-      {/* Новые инфо-блоки (Контекст, Действия, Влияние) */}
-      {hasAnyInfoBlock && infoBlocks && (
+      {/* Лента контента: Заголовки, Карточки, Метрики */}
+      {segments.length > 0 && (
         <div className="mx-auto px-4 max-w-[860px]">
-          {/* Блок Контекст */}
-          {infoBlocks.role?.cards && hasCards(infoBlocks.role.cards) && (
-            <InfoBlockSection
-              blockKey="role"
-              cards={infoBlocks.role.cards}
-              isEnglish={isEnglish}
-            />
-          )}
+          {segments.map((segment, segIdx) => {
+            if (segment.type === "heading") {
+              return (
+                <motion.h2
+                  key={`heading-${segIdx}`}
+                  className="mt-[56px] mb-[32px] font-medium text-[28px] leading-[35px]"
+                  style={{ color: "#9C9C9C" }}
+                  variants={itemVariants}
+                >
+                  {segment.item.title}
+                </motion.h2>
+              );
+            }
 
-          {/* Блок Действия */}
-          {infoBlocks.strategy?.cards && hasCards(infoBlocks.strategy.cards) && (
-            <InfoBlockSection
-              blockKey="strategy"
-              cards={infoBlocks.strategy.cards}
-              isEnglish={isEnglish}
-            />
-          )}
+            if (segment.type === "card-group") {
+              return (
+                <div
+                  key={`card-group-${segIdx}`}
+                  className={cn(
+                    "gap-[32px] grid mb-[32px]",
+                    segment.cards.length === 1 && segment.cards[0].fullWidth
+                      ? "grid-cols-1"
+                      : segment.cards.length === 1
+                      ? "grid-cols-1"
+                      : "grid-cols-1 md:grid-cols-2"
+                  )}
+                >
+                  {segment.cards.map((card, cardIdx) => (
+                    <motion.div
+                      key={card.id || cardIdx}
+                      className="border rounded-[24px]"
+                      style={{
+                        borderColor: "#272727",
+                        borderWidth: "3px",
+                        padding: "36px 40px",
+                        boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
+                        backgroundColor: "rgba(18, 18, 18, 0.4)",
+                      }}
+                      variants={itemVariants}
+                    >
+                      {card.title && (
+                        <p
+                          className="font-medium text-[28px] leading-[35px]"
+                          style={{ color: "#9C9C9C" }}
+                        >
+                          {card.title}
+                        </p>
+                      )}
+                      {card.description && (
+                        <p
+                          className={cn(
+                            "font-medium text-[28px] leading-[35px] whitespace-pre-line",
+                            card.title ? "mt-[20px]" : ""
+                          )}
+                          style={{ color: "#FFFFFF" }}
+                        >
+                          {card.description}
+                        </p>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+              );
+            }
 
-          {/* Блок Влияние */}
-          {infoBlocks.cases?.cards && hasCards(infoBlocks.cases.cards) && (
-            <InfoBlockSection
-              blockKey="cases"
-              cards={infoBlocks.cases.cards}
-              isEnglish={isEnglish}
-            />
-          )}
+            if (segment.type === "metrics") {
+              return (
+                <div
+                  key={`metrics-${segIdx}`}
+                  className="gap-[20px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-[32px]"
+                >
+                  {segment.item.cards.map((metric, metricIdx) => {
+                    const span = metric.span || 1;
+                    return (
+                      <motion.div
+                        key={metric.id || metricIdx}
+                        className={cn(
+                          "border rounded-[20px] flex items-center",
+                          span === 1 && "col-span-1",
+                          span === 2 && "col-span-1 md:col-span-2",
+                          span === 3 && "col-span-1 md:col-span-3"
+                        )}
+                        style={{
+                          borderColor: "#272727",
+                          borderWidth: "3px",
+                          padding: "24px 28px",
+                          boxShadow: "inset 0 0 25px rgba(255, 255, 255, 0.06)",
+                          backgroundColor: "rgba(22, 22, 22, 0.5)",
+                        }}
+                        variants={itemVariants}
+                      >
+                        <p
+                          className="font-medium text-[22px] md:text-[24px] leading-[30px]"
+                          style={{ color: "#FFFFFF" }}
+                        >
+                          {metric.description}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              );
+            }
 
-          {/* Блок Метрики */}
-          {infoBlocks.metrics?.cards && hasMetricsCards(infoBlocks.metrics.cards) && (
-            <MetricsBlockSection
-              cards={infoBlocks.metrics.cards}
-              isEnglish={isEnglish}
-            />
-          )}
+            return null;
+          })}
         </div>
       )}
 
-      {/* Статичный текст под блоками — показывается всегда */}
-      <div className="mx-auto px-4 max-w-[860px]">
-        <motion.p
-          className="font-medium text-[28px] text-center leading-[35px]"
-          style={{
-            color: "#9C9C9C",
-            padding: "0 100px",
-            marginTop: "176px",
-            marginBottom: "176px"
-          }}
+      {/* Кнопка CTA: "Появился вопрос?" */}
+      <div className="mx-auto px-4 max-w-[860px] flex justify-center mt-[56px] mb-[100px]">
+        <motion.a
+          href="https://t.me/RickBacardin"
+          target="_blank"
+          rel="noopener noreferrer"
           variants={itemVariants}
+          className="w-full text-center py-5 rounded-[24px] border border-[#272727] bg-[#161616] hover:bg-[#202020] hover:border-[#383838] transition-all text-white font-medium text-[26px] leading-[32px] shadow-[inset_0_0_24px_rgba(255,255,255,0.06)] cursor-pointer"
         >
-          {highlightFooter || (isEnglish
-            ? "\"Ready to discuss product strategy, metrics, and trade-offs in detail during an interview\""
-            : "\"Готов детально разобрать продуктовую стратегию, метрики и trade-offs решений на интервью\""
-          )}
-        </motion.p>
+          {isEnglish ? "Got a question?" : "Появился вопрос?"}
+        </motion.a>
       </div>
 
       {/* Галерея изображений */}
-      {layout === "stack" ? (
-        <StackGallery images={images} title={title} />
-      ) : (
-        <MasonryGallery images={images} title={title} />
+      {images && images.length > 0 && (
+        layout === "stack" ? (
+          <StackGallery images={images} title={title} />
+        ) : (
+          <MasonryGallery images={images} title={title} />
+        )
       )}
     </motion.div>
   );
@@ -331,7 +398,7 @@ export const GalleryCaseView = ({
 function ScaleOnScrollImage({
   image,
   title,
-  index
+  index,
 }: {
   image: string;
   title: string;
@@ -340,7 +407,7 @@ function ScaleOnScrollImage({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "start 0.7"]
+    offset: ["start end", "start 0.7"],
   });
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);

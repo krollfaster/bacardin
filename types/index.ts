@@ -12,30 +12,60 @@ export interface InfoBlockCard {
   id?: string; // Для Drag-n-Drop
 }
 
-// Блок инфографики (Роль, Стратегия, Кейсы)
+// Блок инфографики (Роль, Стратегия, Кейсы) - legacy
 export interface InfoBlock {
   cards: InfoBlockCard[];
 }
 
-// Карточка метрики (без заголовка, только описание + настройка ширины)
+// Карточка метрики (микрокарточка внутри группы метрик)
 export interface MetricsCard {
   description: string;
   span?: 1 | 2 | 3; // Сколько ячеек занимает (1, 2 или 3), по умолчанию 1
   id?: string; // Для Drag-n-Drop
 }
 
-// Блок метрик
+export type MetricSubCard = MetricsCard;
+
+// Блок метрик - legacy
 export interface MetricsBlock {
   cards: MetricsCard[];
 }
 
-// Тип для набора блоков
+// Тип для набора блоков - legacy
 export interface InfoBlocks {
   role?: InfoBlock;      // Блок "Контекст"
   strategy?: InfoBlock;  // Блок "Действия"
   cases?: InfoBlock;     // Блок "Влияние"
   metrics?: MetricsBlock; // Блок "Метрики"
 }
+
+// === НОВЫЕ ТИПЫ ДЛЯ ГИБКОЙ ЛЕНТЫ ЭЛЕМЕНТОВ КЕЙСА ===
+
+// Заголовок секции между карточками (с отступом 56px сверху)
+export interface CaseHeadingItem {
+  id: string;
+  type: "heading";
+  title: string;
+}
+
+// Обычная карточка контента
+export interface CaseCardItem {
+  id: string;
+  type: "card";
+  title: string;
+  description: string;
+  fullWidth?: boolean;
+}
+
+// Карточка/Блок группы метрик
+export interface CaseMetricsItem {
+  id: string;
+  type: "metrics";
+  cards: MetricSubCard[];
+}
+
+// Полиморфный элемент кейса
+export type CaseItem = CaseHeadingItem | CaseCardItem | CaseMetricsItem;
 
 // Карточка хайлайта (инфографика) - legacy
 export interface HighlightCard {
@@ -52,6 +82,7 @@ export interface Case {
   title_en?: string; // Английская версия названия
   description: string;
   description_en?: string; // Английская версия описания
+  logo?: string; // Логотип кейса (отображается слева над заголовком)
   date: string; // Дата кейса
   category: string;
   coverImage: string;
@@ -66,12 +97,16 @@ export interface Case {
   featuredOnHome: boolean; // @deprecated - используйте homeOrder
   homeOrder: number | null; // null = не показывать, 1-6 = позиция на главной
   vibecodeOrder: number | null; // null = без сортировки, 1+ = позиция на странице /cases
-  highlights?: HighlightCard[]; // @deprecated - используйте infoBlocks
+  // Новая лента элементов
+  items?: CaseItem[];
+  items_en?: CaseItem[];
+  // Legacy-поля для обратной совместимости
+  highlights?: HighlightCard[]; // @deprecated - используйте items
   highlights_en?: HighlightCard[]; // @deprecated
-  highlightFooter?: string; // Подпись под хайлайтами RU
-  highlightFooter_en?: string; // Подпись под хайлайтами EN
-  infoBlocks?: InfoBlocks; // Новые инфо-блоки (Контекст, Действия, Влияние)
-  infoBlocks_en?: InfoBlocks; // Английская версия инфо-блоков
+  highlightFooter?: string; // @deprecated
+  highlightFooter_en?: string; // @deprecated
+  infoBlocks?: InfoBlocks; // @deprecated - используйте items
+  infoBlocks_en?: InfoBlocks; // @deprecated
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
@@ -83,6 +118,7 @@ export interface CreateCaseData {
   title_en?: string;
   description: string;
   description_en?: string;
+  logo?: string;
   date: string;
   category: string;
   coverImage: string;
@@ -95,6 +131,8 @@ export interface CreateCaseData {
   featuredOnHome?: boolean;
   homeOrder?: number | null;
   vibecodeOrder?: number | null;
+  items?: CaseItem[];
+  items_en?: CaseItem[];
   highlights?: HighlightCard[];
   highlights_en?: HighlightCard[];
   highlightFooter?: string;
@@ -111,6 +149,7 @@ export interface UpdateCaseData {
   slug?: string;
   description?: string;
   description_en?: string;
+  logo?: string;
   date?: string;
   category?: string;
   coverImage?: string;
@@ -123,6 +162,8 @@ export interface UpdateCaseData {
   featuredOnHome?: boolean;
   homeOrder?: number | null;
   vibecodeOrder?: number | null;
+  items?: CaseItem[];
+  items_en?: CaseItem[];
   highlights?: HighlightCard[];
   highlights_en?: HighlightCard[];
   highlightFooter?: string;

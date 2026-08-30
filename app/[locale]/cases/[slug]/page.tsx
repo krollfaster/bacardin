@@ -66,31 +66,16 @@ export default async function CasePage({ params }: CasePageProps) {
     ? caseData.highlights_en
     : caseData.highlights;
 
-  // Определяем подпись под хайлайтами по локали
-  const highlightFooter = locale === "en" && caseData.highlightFooter_en
-    ? caseData.highlightFooter_en
-    : caseData.highlightFooter;
-
-  // Определяем инфо-блоки по локали с умным fallback
-  // Для каждого блока проверяем, есть ли контент в EN версии, иначе берем RU
-  const getInfoBlocks = () => {
-    const ruBlocks = caseData.infoBlocks;
-    const enBlocks = caseData.infoBlocks_en;
-
-    if (locale !== "en" || !enBlocks) {
-      return ruBlocks;
+  // Определяем ленту элементов по локали с fallback
+  const getItems = () => {
+    if (locale === "en" && caseData.items_en && caseData.items_en.length > 0) {
+      return caseData.items_en;
     }
-
-    // Мержим блоки: EN имеет приоритет если есть карточки
-    return {
-      role: (enBlocks.role?.cards?.length ?? 0) > 0 ? enBlocks.role : ruBlocks?.role,
-      strategy: (enBlocks.strategy?.cards?.length ?? 0) > 0 ? enBlocks.strategy : ruBlocks?.strategy,
-      cases: (enBlocks.cases?.cards?.length ?? 0) > 0 ? enBlocks.cases : ruBlocks?.cases,
-      metrics: (enBlocks.metrics?.cards?.length ?? 0) > 0 ? enBlocks.metrics : ruBlocks?.metrics,
-    };
+    return caseData.items;
   };
 
-  const infoBlocks = getInfoBlocks();
+  const items = getItems();
+  const infoBlocks = locale === "en" && caseData.infoBlocks_en ? caseData.infoBlocks_en : caseData.infoBlocks;
 
   return (
     <main className="bg-background min-h-screen">
@@ -104,10 +89,11 @@ export default async function CasePage({ params }: CasePageProps) {
         <GalleryCaseView
           title={title}
           description={description}
+          logo={caseData.logo}
           images={caseData.images}
           layout={caseData.galleryLayout}
+          items={items}
           highlights={highlights}
-          highlightFooter={highlightFooter}
           infoBlocks={infoBlocks}
           locale={locale}
         />

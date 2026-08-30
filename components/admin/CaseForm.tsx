@@ -25,10 +25,23 @@ import {
   Loader2,
   GripVertical,
   HelpCircle,
-  Trash2
+  Trash2,
+  Heading as HeadingIcon,
+  Layers,
+  BarChart2,
+  LayoutList,
+  LayoutGrid
 } from "lucide-react";
-import type { Case, CaseType, GalleryLayout, HighlightCard, InfoBlocks, InfoBlockCard, MetricsCard } from "@/types";
-import { LayoutList, LayoutGrid } from "lucide-react";
+import type {
+  Case,
+  CaseType,
+  GalleryLayout,
+  CaseItem,
+  CaseHeadingItem,
+  CaseCardItem,
+  CaseMetricsItem,
+  MetricSubCard
+} from "@/types";
 
 interface CaseFormProps {
   initialData?: Case | null;
@@ -37,20 +50,13 @@ interface CaseFormProps {
   isLoading?: boolean;
 }
 
-// Пустой инфо-блок для инициализации
-const emptyInfoBlocks: InfoBlocks = {
-  role: { cards: [] },
-  strategy: { cards: [] },
-  cases: { cards: [] },
-  metrics: { cards: [] },
-};
-
 export interface CaseFormData {
   type: CaseType;
   title: string;
   title_en: string;
   description: string;
   description_en: string;
+  logo?: string;
   date: string;
   category: string;
   coverImage: string;
@@ -61,12 +67,8 @@ export interface CaseFormData {
   content: string;
   published: boolean;
   featuredOnHome: boolean;
-  highlights: HighlightCard[];
-  highlights_en: HighlightCard[];
-  highlightFooter: string;
-  highlightFooter_en: string;
-  infoBlocks: InfoBlocks;
-  infoBlocks_en: InfoBlocks;
+  items: CaseItem[];
+  items_en: CaseItem[];
 }
 
 interface ElementFolder {
@@ -78,19 +80,115 @@ const CUSTOM_PATH_VALUE = "__custom__";
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
-// Helper to ensure cards have IDs
-const ensureIds = (blocks?: InfoBlocks): InfoBlocks => {
-  if (!blocks) return { role: { cards: [] }, strategy: { cards: [] }, cases: { cards: [] }, metrics: { cards: [] } };
+// Хелпер конвертации старых данных (infoBlocks / highlights) в новую плоскую ленту
+function convertLegacyToItems(caseData?: Case | null, lang: "ru" | "en" = "ru"): CaseItem[] {
+  if (!caseData) return [];
 
-  const processCards = (cards: any[]) => cards.map(c => ({ ...c, id: c.id || generateId() }));
+  // Если уже сохранены items нового формата — используем их
+  const existingItems = lang === "ru" ? caseData.items : caseData.items_en;
+  if (existingItems && existingItems.length > 0) {
+    return existingItems.map((item) => ({ ...item, id: item.id || generateId() }));
+  }
 
-  return {
-    role: { cards: processCards(blocks.role?.cards || []) },
-    strategy: { cards: processCards(blocks.strategy?.cards || []) },
-    cases: { cards: processCards(blocks.cases?.cards || []) },
-    metrics: { cards: processCards(blocks.metrics?.cards || []) },
-  };
-};
+  const items: CaseItem[] = [];
+  const blocks = lang === "ru" ? caseData.infoBlocks : caseData.infoBlocks_en;
+  const fallbackBlocks = caseData.infoBlocks;
+  const targetBlocks = blocks || fallbackBlocks;
+
+  if (targetBlocks) {
+    if (targetBlocks.role?.cards && targetBlocks.role.cards.length > 0) {
+      items.push({
+        id: generateId(),
+        type: "heading",
+        title: lang === "ru" ? "Контекст" : "Context",
+      });
+      targetBlocks.role.cards.forEach((c) => {
+        items.push({
+          id: c.id || generateId(),
+          type: "card",
+          title: c.title,
+          description: c.description,
+          fullWidth: c.fullWidth ?? false,
+        });
+      });
+    }
+
+    if (targetBlocks.strategy?.cards && targetBlocks.strategy.cards.length > 0) {
+      items.push({
+        id: generateId(),
+        type: "heading",
+        title: lang === "ru" ? "Действия" : "Actions",
+      });
+      targetBlocks.strategy.cards.forEach((c) => {
+        items.push({
+          id: c.id || generateId(),
+          type: "card",
+          title: c.title,
+          description: c.description,
+          fullWidth: c.fullWidth ?? false,
+        });
+      });
+    }
+
+    if (targetBlocks.cases?.cards && targetBlocks.cases.cards.length > 0) {
+      items.push({
+        id: generateId(),
+        type: "heading",
+        title: lang === "ru" ? "Влияние" : "Impact",
+      });
+      targetBlocks.cases.cards.forEach((c) => {
+        items.push({
+          id: c.id || generateId(),
+          type: "card",
+          title: c.title,
+          description: c.description,
+          fullWidth: c.fullWidth ?? false,
+        });
+      });
+    }
+
+    if (targetBlocks.metrics?.cards && targetBlocks.metrics.cards.length > 0) {
+      items.push({
+        id: generateId(),
+        type: "heading",
+        title: lang === "ru" ? "Метрики" : "Metrics",
+      });
+      items.push({
+        id: generateId(),
+        type: "metrics",
+        cards: targetBlocks.metrics.cards.map((m) => ({
+          id: m.id || generateId(),
+          description: m.description,
+          span: m.span || 1,
+        })),
+      });
+    }
+  }
+
+  // Если infoBlocks не было, но были legacy highlights
+  const highlights = lang === "ru" ? caseData.highlights : caseData.highlights_en;
+  if (items.length === 0 && highlights && highlights.length > 0) {
+    const validHighlights = highlights.filter((h) => h.title.trim() || h.description.trim());
+    if (validHighlights.length > 0) {
+      items.push({
+        id: generateId(),
+        type: "heading",
+        title: lang === "ru" ? "Кейс" : "Case",
+      });
+      validHighlights.forEach((h) => {
+        items.push({
+          id: generateId(),
+          type: "card",
+          title: h.title,
+          description: h.description,
+          fullWidth: false,
+        });
+      });
+    }
+  }
+
+  return items;
+}
 
 export function CaseForm({
   initialData,
@@ -104,6 +202,7 @@ export function CaseForm({
     title_en: "",
     description: "",
     description_en: "",
+    logo: "",
     date: new Date().toISOString().split("T")[0],
     category: "design",
     coverImage: "",
@@ -114,36 +213,22 @@ export function CaseForm({
     content: "",
     published: false,
     featuredOnHome: false,
-    highlights: [
-      { title: "", description: "" },
-      { title: "", description: "" },
-      { title: "", description: "" },
-      { title: "", description: "" },
-    ],
-    highlights_en: [
-      { title: "", description: "" },
-      { title: "", description: "" },
-      { title: "", description: "" },
-      { title: "", description: "" },
-    ],
-    highlightFooter: "",
-    highlightFooter_en: "",
-    infoBlocks: { ...emptyInfoBlocks },
-    infoBlocks_en: { ...emptyInfoBlocks },
+    items: [],
+    items_en: [],
   });
 
   const [activeLang, setActiveLang] = useState<"ru" | "en">("ru");
-  const [activeInfoBlockTab, setActiveInfoBlockTab] = useState<"role" | "strategy" | "cases" | "metrics">("role");
-
   const [newTag, setNewTag] = useState("");
   const [elementFolders, setElementFolders] = useState<ElementFolder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<string>("");
   const [isCustomPath, setIsCustomPath] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [isCoverUploading, setIsCoverUploading] = useState(false);
+  const [isLogoUploading, setIsLogoUploading] = useState(false);
 
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
 
   // Загрузка списка папок Elements
   useEffect(() => {
@@ -163,57 +248,39 @@ export function CaseForm({
 
   // Инициализация данных формы
   useEffect(() => {
-    if (initialData) {
-      setFormData({
-        type: initialData.type || "gallery",
-        title: initialData.title,
-        title_en: initialData.title_en || "",
-        description: initialData.description,
-        description_en: initialData.description_en || "",
-        date: initialData.date || new Date().toISOString().split("T")[0],
-        category: initialData.category,
-        coverImage: initialData.coverImage,
-        images: initialData.images || [],
-        galleryLayout: initialData.galleryLayout || "stack",
-        componentUrl: initialData.componentUrl || "",
-        tags: initialData.tags || [],
-        content: initialData.content,
-        published: initialData.published,
-        featuredOnHome: initialData.featuredOnHome || false,
-        highlights: initialData.highlights?.length === 4
-          ? initialData.highlights
-          : [
-            { title: "", description: "" },
-            { title: "", description: "" },
-            { title: "", description: "" },
-            { title: "", description: "" },
-          ],
-        highlights_en: initialData.highlights_en?.length === 4
-          ? initialData.highlights_en
-          : [
-            { title: "", description: "" },
-            { title: "", description: "" },
-            { title: "", description: "" },
-            { title: "", description: "" },
-          ],
-        highlightFooter: initialData.highlightFooter || "",
-        highlightFooter_en: initialData.highlightFooter_en || "",
-        infoBlocks: ensureIds(initialData.infoBlocks),
-        infoBlocks_en: ensureIds(initialData.infoBlocks_en),
-      });
+    if (!initialData) return;
 
-      // Определяем, является ли componentUrl папкой из Elements или кастомным
-      if (initialData.componentUrl) {
-        const matchingFolder = elementFolders.find(
-          (f) => f.path === initialData.componentUrl
-        );
-        if (matchingFolder) {
-          setSelectedFolder(matchingFolder.path);
-          setIsCustomPath(false);
-        } else {
-          setSelectedFolder(CUSTOM_PATH_VALUE);
-          setIsCustomPath(true);
-        }
+    setFormData({
+      type: initialData.type || "gallery",
+      title: initialData.title,
+      title_en: initialData.title_en || "",
+      description: initialData.description,
+      description_en: initialData.description_en || "",
+      logo: initialData.logo || "",
+      date: initialData.date || new Date().toISOString().split("T")[0],
+      category: initialData.category,
+      coverImage: initialData.coverImage,
+      images: initialData.images || [],
+      galleryLayout: initialData.galleryLayout || "stack",
+      componentUrl: initialData.componentUrl || "",
+      tags: initialData.tags || [],
+      content: initialData.content || "",
+      published: initialData.published,
+      featuredOnHome: initialData.featuredOnHome || false,
+      items: convertLegacyToItems(initialData, "ru"),
+      items_en: convertLegacyToItems(initialData, "en"),
+    });
+
+    if (initialData.componentUrl) {
+      const matchingFolder = elementFolders.find(
+        (f) => f.path === initialData.componentUrl
+      );
+      if (matchingFolder) {
+        setSelectedFolder(matchingFolder.path);
+        setIsCustomPath(false);
+      } else {
+        setSelectedFolder(CUSTOM_PATH_VALUE);
+        setIsCustomPath(true);
       }
     }
   }, [initialData, elementFolders]);
@@ -249,7 +316,6 @@ export function CaseForm({
       if (data.success) {
         return data.data.path;
       }
-      console.error("Upload failed:", data.error);
       return null;
     } catch (error) {
       console.error("Upload error:", error);
@@ -257,45 +323,56 @@ export function CaseForm({
     }
   };
 
-  // Обработка выбора обложки
+  // Загрузка логотипа
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsLogoUploading(true);
+    const path = await uploadFile(file);
+    setIsLogoUploading(false);
+
+    if (path) {
+      setFormData((prev) => ({ ...prev, logo: path }));
+    }
+    if (logoInputRef.current) {
+      logoInputRef.current.value = "";
+    }
+  };
+
+  // Загрузка обложки
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setIsCoverUploading(true);
     const path = await uploadFile(file);
+    setIsCoverUploading(false);
+
     if (path) {
       setFormData((prev) => ({ ...prev, coverImage: path }));
     }
-    setIsCoverUploading(false);
-
-    // Сбрасываем input для повторного выбора того же файла
     if (coverInputRef.current) {
       coverInputRef.current.value = "";
     }
   };
 
-  // Обработка выбора изображений галереи
+  // Загрузка галереи
   const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
     setIsUploading(true);
-
     const uploadPromises = Array.from(files).map((file) => uploadFile(file));
     const paths = await Promise.all(uploadPromises);
-
     const validPaths = paths.filter((p): p is string => p !== null);
-    if (validPaths.length > 0) {
-      setFormData((prev) => ({
-        ...prev,
-        images: [...prev.images, ...validPaths],
-      }));
-    }
+
+    setFormData((prev) => ({
+      ...prev,
+      images: [...prev.images, ...validPaths],
+    }));
 
     setIsUploading(false);
-
-    // Сбрасываем input
     if (galleryInputRef.current) {
       galleryInputRef.current.value = "";
     }
@@ -325,9 +402,59 @@ export function CaseForm({
     }));
   };
 
+  // Работа с лентой элементов
+  const currentItems = activeLang === "ru" ? formData.items : formData.items_en;
+  const targetItemsField = activeLang === "ru" ? "items" : "items_en";
+
+  const addItem = (type: "heading" | "card" | "metrics") => {
+    let newItem: CaseItem;
+    if (type === "heading") {
+      newItem = { id: generateId(), type: "heading", title: "" };
+    } else if (type === "card") {
+      newItem = { id: generateId(), type: "card", title: "", description: "", fullWidth: false };
+    } else {
+      newItem = {
+        id: generateId(),
+        type: "metrics",
+        cards: [
+          { id: generateId(), description: "", span: 1 },
+          { id: generateId(), description: "", span: 1 },
+          { id: generateId(), description: "", span: 1 },
+        ],
+      };
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [targetItemsField]: [...prev[targetItemsField], newItem],
+    }));
+  };
+
+  const updateItem = (index: number, updatedItem: CaseItem) => {
+    setFormData((prev) => {
+      const list = [...prev[targetItemsField]];
+      list[index] = updatedItem;
+      return { ...prev, [targetItemsField]: list };
+    });
+  };
+
+  const removeItem = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      [targetItemsField]: prev[targetItemsField].filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleReorderItems = (newOrder: CaseItem[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      [targetItemsField]: newOrder,
+    }));
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Тип кейса и Категория - основные характеристики */}
+      {/* Тип кейса и Категория */}
       <div className="gap-4 grid grid-cols-2">
         <div className="space-y-2">
           <Label>Тип кейса</Label>
@@ -411,7 +538,6 @@ export function CaseForm({
               </Select>
             </div>
 
-            {/* Кастомный путь или выбранный путь */}
             <div className="space-y-2">
               {isCustomPath ? (
                 <>
@@ -478,68 +604,143 @@ export function CaseForm({
         )}
       </AnimatePresence>
 
+      {/* Медиа-блоки: Логотип и Обложка */}
+      <div className="gap-6 grid grid-cols-1 md:grid-cols-3">
+        {/* Логотип кейса */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <Label>Логотип кейса</Label>
+            <span className="text-xs text-muted-foreground">слева над заголовком</span>
+          </div>
+          <input
+            ref={logoInputRef}
+            type="file"
+            accept="image/*,.svg"
+            onChange={handleLogoUpload}
+            className="hidden"
+          />
 
-      {/* Обложка */}
-      <div className="space-y-2">
-        <Label>Обложка *</Label>
-        <input
-          ref={coverInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleCoverUpload}
-          className="hidden"
-        />
-
-        {formData.coverImage ? (
-          <div className="group relative">
-            <div className="relative bg-muted border border-border rounded-lg aspect-video overflow-hidden">
-              <img
-                src={formData.coverImage}
-                alt="Обложка"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex justify-center items-center gap-2 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => coverInputRef.current?.click()}
-                  disabled={isCoverUploading}
-                >
-                  Заменить
-                </Button>
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setFormData((prev) => ({ ...prev, coverImage: "" }))}
-                >
-                  Удалить
-                </Button>
+          {formData.logo ? (
+            <div className="flex items-center gap-4 bg-muted/30 p-3 border border-border rounded-lg">
+              <div className="flex items-center justify-center bg-background border border-border rounded-full w-14 h-14 overflow-hidden shrink-0">
+                <img
+                  src={formData.logo}
+                  alt="Логотип"
+                  className="w-10 h-10 object-contain"
+                />
+              </div>
+              <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+                <p className="font-mono text-muted-foreground text-xs truncate">
+                  {formData.logo.split("/").pop()}
+                </p>
+                <div className="flex items-center gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-7 text-xs px-2"
+                    onClick={() => logoInputRef.current?.click()}
+                    disabled={isLogoUploading}
+                  >
+                    Заменить
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-xs px-2 text-destructive hover:text-destructive"
+                    onClick={() => setFormData((prev) => ({ ...prev, logo: "" }))}
+                  >
+                    Удалить
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={() => coverInputRef.current?.click()}
-            disabled={isCoverUploading}
-            className="flex flex-col justify-center items-center gap-2 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full aspect-video text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {isCoverUploading ? (
-              <>
-                <Loader2 className="w-8 h-8 animate-spin" />
-                <span className="text-sm">Загрузка...</span>
-              </>
-            ) : (
-              <>
-                <Upload className="w-8 h-8" />
-                <span className="text-sm">Нажмите для выбора обложки</span>
-                <span className="text-muted-foreground text-xs">JPG, PNG, GIF, WebP до 10MB</span>
-              </>
-            )}
-          </button>
-        )}
+          ) : (
+            <button
+              type="button"
+              onClick={() => logoInputRef.current?.click()}
+              disabled={isLogoUploading}
+              className="flex flex-col justify-center items-center gap-1.5 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full h-[120px] text-muted-foreground hover:text-foreground transition-colors p-2 text-center"
+            >
+              {isLogoUploading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <span className="text-xs">Загрузка...</span>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-5 h-5" />
+                  <span className="text-xs font-medium">Выбрать логотип</span>
+                  <span className="text-[10px] text-muted-foreground">SVG, PNG до 5MB</span>
+                </>
+              )}
+            </button>
+          )}
+        </div>
+
+        {/* Обложка */}
+        <div className="space-y-2 md:col-span-2">
+          <Label>Обложка *</Label>
+          <input
+            ref={coverInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleCoverUpload}
+            className="hidden"
+          />
+
+          {formData.coverImage ? (
+            <div className="group relative">
+              <div className="relative bg-muted border border-border rounded-lg h-[120px] overflow-hidden">
+                <img
+                  src={formData.coverImage}
+                  alt="Обложка"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 flex justify-center items-center gap-2 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => coverInputRef.current?.click()}
+                    disabled={isCoverUploading}
+                  >
+                    Заменить
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => setFormData((prev) => ({ ...prev, coverImage: "" }))}
+                  >
+                    Удалить
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => coverInputRef.current?.click()}
+              disabled={isCoverUploading}
+              className="flex flex-col justify-center items-center gap-1.5 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full h-[120px] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {isCoverUploading ? (
+                <>
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                  <span className="text-xs">Загрузка...</span>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-6 h-6" />
+                  <span className="text-xs font-medium">Нажмите для выбора обложки</span>
+                  <span className="text-[10px] text-muted-foreground">JPG, PNG, WebP до 10MB</span>
+                </>
+              )}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Основные поля и переключатель языка */}
@@ -565,10 +766,11 @@ export function CaseForm({
           <button
             type="button"
             onClick={() => setActiveLang("ru")}
-            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${activeLang === "ru"
-              ? "bg-background shadow-sm"
-              : "hover:bg-background/50"
-              }`}
+            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${
+              activeLang === "ru"
+                ? "bg-background shadow-sm"
+                : "hover:bg-background/50"
+            }`}
             title="Русский"
           >
             🇷🇺
@@ -576,18 +778,17 @@ export function CaseForm({
           <button
             type="button"
             onClick={() => setActiveLang("en")}
-            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${activeLang === "en"
-              ? "bg-background shadow-sm"
-              : "hover:bg-background/50"
-              }`}
+            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${
+              activeLang === "en"
+                ? "bg-background shadow-sm"
+                : "hover:bg-background/50"
+            }`}
             title="English"
           >
             🇬🇧
           </button>
         </div>
       </div>
-
-
 
       {/* Описание */}
       <div className="space-y-2">
@@ -597,8 +798,6 @@ export function CaseForm({
           </Label>
           <div className="group relative">
             <HelpCircle className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors cursor-help" />
-
-            {/* Tooltip Content */}
             <div className="bottom-full left-0 z-50 absolute opacity-0 group-hover:opacity-100 mb-2 w-80 transition-all translate-y-2 group-hover:translate-y-0 duration-200 pointer-events-none group-hover:pointer-events-auto transform">
               <div className="bg-popover shadow-xl p-4 border border-border rounded-lg text-xs">
                 <p className="mb-3 font-medium text-foreground">Форматирование текста:</p>
@@ -615,18 +814,7 @@ export function CaseForm({
                     <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">*текст*</code>
                     <span className="text-[11px] text-muted-foreground">курсив</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">1. текст</code>
-                    <span className="text-[11px] text-muted-foreground">нумерованный список</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-[10px] whitespace-nowrap">- текст</code>
-                    <span className="text-[11px] text-muted-foreground">маркированный список</span>
-                  </div>
                 </div>
-                <p className="mt-3 pt-2 border-border border-t text-[10px] text-muted-foreground/70">
-                  Пустая строка разделяет блоки текста
-                </p>
               </div>
             </div>
           </div>
@@ -645,84 +833,108 @@ export function CaseForm({
               ? "Описание кейса..."
               : "Case description..."
           }
-          rows={8}
+          rows={5}
           required={activeLang === "ru"}
           className="font-mono text-sm"
         />
       </div>
 
-
-
-
-
-
-      {/* Инфо-блоки - только для типа Галерея и категории Дизайн */}
+      {/* НОВАЯ ЛЕНТА ЭЛЕМЕНТОВ (КАРТОЧКИ, ЗАГОЛОВКИ, МЕТРИКИ) */}
       <AnimatePresence mode="wait">
         {formData.type === "gallery" && formData.category === "design" && (
           <motion.div
-            key="info-blocks-section"
+            key="stream-items-section"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="space-y-4 overflow-hidden"
+            className="space-y-4 pt-2 border-border/50 border-t overflow-hidden"
           >
             <div className="space-y-3">
-              {/* Заголовок секции */}
-              <Label>Инфо-блоки</Label>
+              <div className="flex flex-wrap justify-between items-center gap-2">
+                <div>
+                  <Label className="text-base font-semibold">
+                    Карточки и структура кейса ({activeLang.toUpperCase()})
+                  </Label>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    Добавляйте заголовки, карточки и блоки метрик. Перетаскивайте для изменения порядка.
+                  </p>
+                </div>
 
-              {/* Табы блоков */}
-              <div className="flex gap-2 bg-muted/30 p-1 rounded-lg">
-                {(["role", "strategy", "cases", "metrics"] as const).map((tab) => (
-                  <button
-                    key={tab}
+                {/* Кнопки добавления */}
+                <div className="flex items-center gap-2">
+                  <Button
                     type="button"
-                    onClick={() => setActiveInfoBlockTab(tab)}
-                    className={`flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeInfoBlockTab === tab
-                      ? "bg-background shadow-sm"
-                      : "hover:bg-background/50 text-muted-foreground"
-                      }`}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => addItem("card")}
+                    className="h-8 text-xs gap-1.5"
                   >
-                    {tab === "role" ? "Контекст" : tab === "strategy" ? "Действия" : tab === "cases" ? "Влияние" : "Метрики"}
-                  </button>
-                ))}
+                    <Layers className="w-3.5 h-3.5 text-primary" />
+                    + Карточка
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => addItem("heading")}
+                    className="h-8 text-xs gap-1.5"
+                  >
+                    <HeadingIcon className="w-3.5 h-3.5 text-primary" />
+                    + Заголовок
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => addItem("metrics")}
+                    className="h-8 text-xs gap-1.5"
+                  >
+                    <BarChart2 className="w-3.5 h-3.5 text-primary" />
+                    + Метрика
+                  </Button>
+                </div>
               </div>
 
-              {/* Карточки текущего блока */}
-              {activeInfoBlockTab === "metrics" ? (
-                <MetricsBlockEditor
-                  formData={formData}
-                  setFormData={setFormData}
-                  activeLang={activeLang}
-                />
+              {/* Список элементов с Drag & Drop */}
+              {currentItems.length === 0 ? (
+                <div className="flex flex-col justify-center items-center py-10 border-2 border-border border-dashed rounded-xl text-muted-foreground bg-muted/10">
+                  <p className="mb-3 text-sm font-medium">
+                    {activeLang === "ru" ? "В кейсе пока нет карточек и заголовков" : "No cards or headings yet"}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button type="button" variant="secondary" size="sm" onClick={() => addItem("card")}>
+                      <Plus className="mr-1.5 w-3.5 h-3.5" />
+                      Добавить карточку
+                    </Button>
+                    <Button type="button" variant="secondary" size="sm" onClick={() => addItem("heading")}>
+                      <Plus className="mr-1.5 w-3.5 h-3.5" />
+                      Добавить заголовок
+                    </Button>
+                    <Button type="button" variant="secondary" size="sm" onClick={() => addItem("metrics")}>
+                      <Plus className="mr-1.5 w-3.5 h-3.5" />
+                      Добавить метрику
+                    </Button>
+                  </div>
+                </div>
               ) : (
-                <InfoBlockEditor
-                  blockKey={activeInfoBlockTab}
-                  formData={formData}
-                  setFormData={setFormData}
-                  activeLang={activeLang}
-                />
+                <Reorder.Group
+                  axis="y"
+                  values={currentItems}
+                  onReorder={handleReorderItems}
+                  className="space-y-3"
+                >
+                  {currentItems.map((item, index) => (
+                    <DraggableStreamItem
+                      key={item.id || index}
+                      item={item}
+                      index={index}
+                      activeLang={activeLang}
+                      onUpdate={(updated) => updateItem(index, updated)}
+                      onRemove={() => removeItem(index)}
+                    />
+                  ))}
+                </Reorder.Group>
               )}
-
-              {/* Подпись под блоками */}
-              <div className="space-y-2 mt-4 pt-4 border-border/50 border-t">
-                <Label>Подпись под блоками</Label>
-                <Textarea
-                  value={activeLang === "ru" ? formData.highlightFooter : formData.highlightFooter_en}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      [activeLang === "ru" ? "highlightFooter" : "highlightFooter_en"]: e.target.value,
-                    }))
-                  }
-                  placeholder={
-                    activeLang === "ru"
-                      ? "Текст под блоком инфографики (например: 'Готов детально разобрать...')"
-                      : "Footer text below infographics (e.g. 'Ready to discuss...')"
-                  }
-                  rows={2}
-                  className="font-mono text-sm"
-                />
-              </div>
             </div>
           </motion.div>
         )}
@@ -736,7 +948,7 @@ export function CaseForm({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="space-y-4 overflow-hidden"
+            className="space-y-4 pt-2 border-border/50 border-t overflow-hidden"
           >
             <div className="space-y-2">
               <Label>Изображения галереи</Label>
@@ -794,8 +1006,6 @@ export function CaseForm({
             </div>
           </motion.div>
         )}
-
-
       </AnimatePresence>
 
       <div className="gap-4 grid grid-cols-2">
@@ -855,9 +1065,6 @@ export function CaseForm({
         </div>
       </div>
 
-
-
-      {/* Публикация */}
       {/* Футер формы с публикацией и кнопками */}
       <div className="flex justify-between items-center pt-6 border-border border-t">
         <div className="flex items-center gap-2">
@@ -903,212 +1110,245 @@ export function CaseForm({
   );
 }
 
-// Редактор инфо-блока
-interface InfoBlockEditorProps {
-  blockKey: "role" | "strategy" | "cases";
-  formData: CaseFormData;
-  setFormData: React.Dispatch<React.SetStateAction<CaseFormData>>;
+// Универсальный перетаскиваемый элемент ленты
+interface DraggableStreamItemProps {
+  item: CaseItem;
+  index: number;
   activeLang: "ru" | "en";
+  onUpdate: (item: CaseItem) => void;
+  onRemove: () => void;
 }
 
-function InfoBlockEditor({ blockKey, formData, setFormData, activeLang }: InfoBlockEditorProps) {
-  const targetField = activeLang === "ru" ? "infoBlocks" : "infoBlocks_en";
-  const infoBlocks = formData[targetField];
-  const currentBlock = infoBlocks[blockKey];
-  const cards = currentBlock?.cards || [];
+function DraggableStreamItem({
+  item,
+  index,
+  activeLang,
+  onUpdate,
+  onRemove,
+}: DraggableStreamItemProps) {
+  const controls = useDragControls();
 
-  // Добавить карточку
-  const addCard = () => {
-    const newCard: InfoBlockCard = { title: "", description: "", fullWidth: false, id: generateId() };
-    const updatedCards = [...cards, newCard];
+  if (item.type === "heading") {
+    return (
+      <Reorder.Item
+        value={item}
+        dragListener={false}
+        dragControls={controls}
+        className="bg-muted/40 border border-border hover:border-primary/40 rounded-xl p-4 transition-colors space-y-3"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+              {index + 1}
+            </span>
+            <Badge variant="outline" className="bg-background text-xs gap-1 py-0.5">
+              <HeadingIcon className="w-3 h-3 text-primary" />
+              Заголовок секции (отступ 56px)
+            </Badge>
+          </div>
 
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        [blockKey]: { cards: updatedCards },
-      },
-    }));
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={onRemove}
+              className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+            <div
+              onPointerDown={(e) => controls.start(e)}
+              className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
+            >
+              <GripVertical className="w-4 h-4 text-muted-foreground" />
+            </div>
+          </div>
+        </div>
+
+        <Input
+          value={item.title}
+          onChange={(e) => onUpdate({ ...item, title: e.target.value })}
+          placeholder={activeLang === "ru" ? "Например: Кейс, Что пошло не так?..." : "e.g. Case, What went wrong?..."}
+          className="bg-background font-medium text-sm"
+        />
+      </Reorder.Item>
+    );
+  }
+
+  if (item.type === "card") {
+    return (
+      <Reorder.Item
+        value={item}
+        dragListener={false}
+        dragControls={controls}
+        className="bg-muted/30 border border-border hover:border-primary/40 rounded-xl p-4 transition-colors space-y-3"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+              {index + 1}
+            </span>
+            <Badge variant="outline" className="bg-background text-xs gap-1 py-0.5">
+              <Layers className="w-3 h-3 text-primary" />
+              Карточка
+            </Badge>
+            <label className="flex items-center gap-1.5 text-muted-foreground text-xs cursor-pointer ml-2">
+              <input
+                type="checkbox"
+                checked={item.fullWidth ?? false}
+                onChange={(e) => onUpdate({ ...item, fullWidth: e.target.checked })}
+                className="border-border rounded w-3.5 h-3.5 accent-primary cursor-pointer"
+              />
+              {activeLang === "ru" ? "Во всю ширину" : "Full width"}
+            </label>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={onRemove}
+              className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+            <div
+              onPointerDown={(e) => controls.start(e)}
+              className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
+            >
+              <GripVertical className="w-4 h-4 text-muted-foreground" />
+            </div>
+          </div>
+        </div>
+
+        <Input
+          value={item.title}
+          onChange={(e) => onUpdate({ ...item, title: e.target.value })}
+          placeholder={activeLang === "ru" ? "Заголовок карточки (например: Ситуация, Задача, Результат)" : "Card title"}
+          className="bg-background text-sm font-medium"
+        />
+        <Textarea
+          value={item.description}
+          onChange={(e) => onUpdate({ ...item, description: e.target.value })}
+          placeholder={activeLang === "ru" ? "Текст и описание карточки..." : "Card description..."}
+          rows={3}
+          className="bg-background text-sm"
+        />
+      </Reorder.Item>
+    );
+  }
+
+  // item.type === "metrics"
+  const addMetricCard = () => {
+    const newCards = [...item.cards, { id: generateId(), description: "", span: 1 as const }];
+    onUpdate({ ...item, cards: newCards });
   };
 
-  // Удалить карточку
-  const removeCard = (index: number) => {
-    const updatedCards = cards.filter((_, i) => i !== index);
-
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        [blockKey]: { cards: updatedCards },
-      },
-    }));
+  const updateMetricCard = (cardIndex: number, field: keyof MetricSubCard, value: any) => {
+    const newCards = [...item.cards];
+    newCards[cardIndex] = { ...newCards[cardIndex], [field]: value };
+    onUpdate({ ...item, cards: newCards });
   };
 
-  // Обновить карточку
-  const updateCard = (index: number, field: keyof InfoBlockCard, value: string | boolean) => {
-    const updatedCards = [...cards];
-    updatedCards[index] = { ...updatedCards[index], [field]: value };
-
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        [blockKey]: { cards: updatedCards },
-      },
-    }));
-  };
-
-  // Обработка перетаскивания
-  const handleReorder = (newOrder: InfoBlockCard[]) => {
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        [blockKey]: { cards: newOrder },
-      },
-    }));
+  const removeMetricCard = (cardIndex: number) => {
+    const newCards = item.cards.filter((_, i) => i !== cardIndex);
+    onUpdate({ ...item, cards: newCards });
   };
 
   return (
-    <div className="space-y-3">
-      {/* Список карточек */}
-      {cards.length === 0 ? (
-        <div className="flex flex-col justify-center items-center py-8 border-2 border-border border-dashed rounded-lg text-muted-foreground">
-          <p className="mb-2 text-sm">
-            {activeLang === "ru" ? "Нет карточек в этом блоке" : "No cards in this block"}
-          </p>
-          <Button type="button" variant="outline" size="sm" onClick={addCard}>
-            <Plus className="mr-1 w-4 h-4" />
-            {activeLang === "ru" ? "Добавить карточку" : "Add card"}
-          </Button>
+    <Reorder.Item
+      value={item}
+      dragListener={false}
+      dragControls={controls}
+      className="bg-muted/20 border-2 border-primary/20 hover:border-primary/40 rounded-xl p-4 transition-colors space-y-3"
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+            {index + 1}
+          </span>
+          <Badge variant="outline" className="bg-background text-xs gap-1 py-0.5">
+            <BarChart2 className="w-3 h-3 text-primary" />
+            Блок метрик ({item.cards.length} микрокарточек)
+          </Badge>
         </div>
-      ) : (
-        <Reorder.Group axis="y" values={cards} onReorder={handleReorder} className="space-y-3">
-          {cards.map((card, index) => (
-            <DraggableInfoBlockCard
-              key={card.id || index}
-              card={card}
-              index={index}
-              activeLang={activeLang}
-              onUpdate={(field, value) => updateCard(index, field, value)}
-              onRemove={() => removeCard(index)}
-            />
-          ))}
-        </Reorder.Group>
-      )}
 
-      {/* Кнопка добавления */}
-      {cards.length > 0 && (
-        <Button type="button" variant="outline" size="sm" onClick={addCard} className="w-full">
-          <Plus className="mr-1 w-4 h-4" />
-          {activeLang === "ru" ? "Добавить карточку" : "Add card"}
-        </Button>
-      )}
-    </div>
-  );
-}
-
-// Редактор блока метрик (только описание + span)
-interface MetricsBlockEditorProps {
-  formData: CaseFormData;
-  setFormData: React.Dispatch<React.SetStateAction<CaseFormData>>;
-  activeLang: "ru" | "en";
-}
-
-function MetricsBlockEditor({ formData, setFormData, activeLang }: MetricsBlockEditorProps) {
-  const targetField = activeLang === "ru" ? "infoBlocks" : "infoBlocks_en";
-  const infoBlocks = formData[targetField];
-  const metricsBlock = infoBlocks.metrics;
-  const cards = metricsBlock?.cards || [];
-
-  // Добавить карточку
-  const addCard = () => {
-    const newCard: MetricsCard = { description: "", span: 1, id: generateId() };
-    const updatedCards = [...cards, newCard];
-
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        metrics: { cards: updatedCards },
-      },
-    }));
-  };
-
-  // Удалить карточку
-  const removeCard = (index: number) => {
-    const updatedCards = cards.filter((_, i) => i !== index);
-
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        metrics: { cards: updatedCards },
-      },
-    }));
-  };
-
-  // Обновить карточку
-  const updateCard = (index: number, field: keyof MetricsCard, value: string | number) => {
-    const updatedCards = [...cards];
-    updatedCards[index] = { ...updatedCards[index], [field]: value };
-
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        metrics: { cards: updatedCards },
-      },
-    }));
-  };
-
-  // Обработка перетаскивания
-  const handleReorder = (newOrder: MetricsCard[]) => {
-    setFormData((prev) => ({
-      ...prev,
-      [targetField]: {
-        ...prev[targetField],
-        metrics: { cards: newOrder },
-      },
-    }));
-  };
-
-  return (
-    <div className="space-y-3">
-      {/* Список карточек */}
-      {cards.length === 0 ? (
-        <div className="flex flex-col justify-center items-center py-8 border-2 border-border border-dashed rounded-lg text-muted-foreground">
-          <p className="mb-2 text-sm">
-            {activeLang === "ru" ? "Нет карточек метрик" : "No metrics cards"}
-          </p>
-          <Button type="button" variant="outline" size="sm" onClick={addCard}>
-            <Plus className="mr-1 w-4 h-4" />
-            {activeLang === "ru" ? "Добавить метрику" : "Add metric"}
-          </Button>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onRemove}
+            className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+          <div
+            onPointerDown={(e) => controls.start(e)}
+            className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
+          >
+            <GripVertical className="w-4 h-4 text-muted-foreground" />
+          </div>
         </div>
-      ) : (
-        <Reorder.Group axis="y" values={cards} onReorder={handleReorder} className="space-y-3">
-          {cards.map((card, index) => (
-            <DraggableMetricsCard
-              key={card.id || index}
-              card={card}
-              index={index}
-              activeLang={activeLang}
-              onUpdate={(field, value) => updateCard(index, field, value)}
-              onRemove={() => removeCard(index)}
-            />
-          ))}
-        </Reorder.Group>
-      )}
+      </div>
 
-      {/* Кнопка добавления */}
-      {cards.length > 0 && (
-        <Button type="button" variant="outline" size="sm" onClick={addCard} className="w-full">
-          <Plus className="mr-1 w-4 h-4" />
-          {activeLang === "ru" ? "Добавить метрику" : "Add metric"}
+      {/* Список микрокарточек метрик */}
+      <div className="space-y-2.5 bg-background/50 p-3 rounded-lg border border-border/60">
+        <div className="gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {item.cards.map((metric, mIndex) => (
+            <div
+              key={metric.id || mIndex}
+              className="bg-background p-3 rounded-lg border border-border space-y-2 relative group/metric"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold text-muted-foreground">
+                  Метрика #{mIndex + 1}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <Select
+                    value={String(metric.span || 1)}
+                    onValueChange={(val) =>
+                      updateMetricCard(mIndex, "span", Number(val) as 1 | 2 | 3)
+                    }
+                  >
+                    <SelectTrigger className="h-6 w-16 text-[11px] px-1.5 bg-muted/40">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1/3</SelectItem>
+                      <SelectItem value="2">2/3</SelectItem>
+                      <SelectItem value="3">3/3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <button
+                    type="button"
+                    onClick={() => removeMetricCard(mIndex)}
+                    className="p-1 rounded text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              <Textarea
+                value={metric.description}
+                onChange={(e) => updateMetricCard(mIndex, "description", e.target.value)}
+                placeholder={activeLang === "ru" ? "TTG: < 12 ч или CSI: +3.7" : "TTG: < 12 h"}
+                rows={2}
+                className="text-xs resize-none"
+              />
+            </div>
+          ))}
+        </div>
+
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={addMetricCard}
+          className="w-full text-xs h-8 border-dashed"
+        >
+          <Plus className="mr-1.5 w-3.5 h-3.5" />
+          Добавить микрокарточку метрики
         </Button>
-      )}
-    </div>
+      </div>
+    </Reorder.Item>
   );
 }
 
@@ -1129,7 +1369,6 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
       className="group"
     >
       <div className="flex items-center gap-3 bg-background p-2 border border-border hover:border-primary/50 rounded-lg transition-colors">
-        {/* Превью изображения */}
         <div className="flex-shrink-0 bg-muted rounded-md w-16 h-16 overflow-hidden">
           <img
             src={image}
@@ -1138,14 +1377,12 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
           />
         </div>
 
-        {/* Путь к файлу */}
         <div className="flex-1 min-w-0">
           <p className="font-mono text-muted-foreground text-xs truncate">
-            {image.split('/').pop()}
+            {image.split("/").pop()}
           </p>
         </div>
 
-        {/* Кнопка удаления */}
         <button
           type="button"
           onClick={onRemove}
@@ -1154,7 +1391,6 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
           <X className="w-4 h-4" />
         </button>
 
-        {/* Ручка перетаскивания */}
         <div
           onPointerDown={(e) => controls.start(e)}
           className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
@@ -1162,150 +1398,6 @@ function DraggableImageItem({ image, onRemove }: DraggableImageItemProps) {
           <GripVertical className="w-4 h-4 text-muted-foreground" />
         </div>
       </div>
-    </Reorder.Item>
-  );
-}
-
-interface DraggableInfoBlockCardProps {
-  card: InfoBlockCard;
-  index: number;
-  activeLang: "ru" | "en";
-  onUpdate: (field: keyof InfoBlockCard, value: string | boolean) => void;
-  onRemove: () => void;
-}
-
-function DraggableInfoBlockCard({ card, index, activeLang, onUpdate, onRemove }: DraggableInfoBlockCardProps) {
-  const controls = useDragControls();
-
-  return (
-    <Reorder.Item
-      value={card}
-      dragListener={false}
-      dragControls={controls}
-      className="relative space-y-2 bg-muted/30 p-4 border border-border rounded-lg"
-    >
-      {/* Заголовок карточки с Drag Handle */}
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2">
-          <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
-            {index + 1}
-          </span>
-          <label className="flex items-center gap-2 text-muted-foreground text-xs cursor-pointer">
-            <input
-              type="checkbox"
-              checked={card.fullWidth ?? false}
-              onChange={(e) => onUpdate("fullWidth", e.target.checked)}
-              className="border-border rounded w-3.5 h-3.5 accent-primary cursor-pointer"
-            />
-            {activeLang === "ru" ? "Во всю ширину" : "Full width"}
-          </label>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={onRemove}
-            className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-
-          <div
-            onPointerDown={(e) => controls.start(e)}
-            className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
-          >
-            <GripVertical className="w-4 h-4 text-muted-foreground" />
-          </div>
-        </div>
-      </div>
-
-      {/* Поля ввода */}
-      <Input
-        value={card.title}
-        onChange={(e) => onUpdate("title", e.target.value)}
-        placeholder={activeLang === "ru" ? "Заголовок карточки" : "Card title"}
-        className="bg-background text-sm"
-      />
-      <Textarea
-        value={card.description}
-        onChange={(e) => onUpdate("description", e.target.value)}
-        placeholder={activeLang === "ru" ? "Описание карточки" : "Card description"}
-        rows={2}
-        className="bg-background text-sm"
-      />
-    </Reorder.Item>
-  );
-}
-
-interface DraggableMetricsCardProps {
-  card: MetricsCard;
-  index: number;
-  activeLang: "ru" | "en";
-  onUpdate: (field: keyof MetricsCard, value: string | number) => void;
-  onRemove: () => void;
-}
-
-function DraggableMetricsCard({ card, index, activeLang, onUpdate, onRemove }: DraggableMetricsCardProps) {
-  const controls = useDragControls();
-
-  return (
-    <Reorder.Item
-      value={card}
-      dragListener={false}
-      dragControls={controls}
-      className="space-y-2 bg-muted/30 p-4 border border-border rounded-lg"
-    >
-      {/* Заголовок карточки с Drag Handle */}
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-3">
-          <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
-            {index + 1}
-          </span>
-          <div className="flex items-center gap-2">
-            <label className="text-muted-foreground text-xs">
-              {activeLang === "ru" ? "Ширина:" : "Width:"}
-            </label>
-            <Select
-              value={String(card.span || 1)}
-              onValueChange={(value) => onUpdate("span", Number(value) as 1 | 2 | 3)}
-            >
-              <SelectTrigger className="bg-background w-20 h-7 text-xs">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">1</SelectItem>
-                <SelectItem value="2">2</SelectItem>
-                <SelectItem value="3">3</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={onRemove}
-            className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-          <div
-            onPointerDown={(e) => controls.start(e)}
-            className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
-          >
-            <GripVertical className="w-4 h-4 text-muted-foreground" />
-          </div>
-        </div>
-      </div>
-
-      {/* Только описание */}
-      <Textarea
-        value={card.description}
-        onChange={(e) => onUpdate("description", e.target.value)}
-        placeholder={activeLang === "ru" ? "Текст метрики (например: NPS: +6 p.p)" : "Metric text (e.g. NPS: +6 p.p)"}
-        rows={2}
-        className="bg-background text-sm"
-      />
     </Reorder.Item>
   );
 }
