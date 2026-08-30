@@ -28,7 +28,7 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
     >
       <div className="mb-4 w-[115px] h-[56px] relative">
         <Image
-          src="/images/Achive.png"
+          src="/images/Achive3.png"
           alt="Achievement icon"
           width={115}
           height={56}
