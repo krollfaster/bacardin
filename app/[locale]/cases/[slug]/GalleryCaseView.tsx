@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useMotionTemplate } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, MouseEvent } from "react";
+import { useHoverSound } from "@/hooks/useHoverSound";
 import type {
   GalleryLayout,
   HighlightCard,
@@ -370,16 +371,8 @@ export const GalleryCaseView = ({
       )}
 
       {/* Кнопка CTA: "Появился вопрос?" */}
-      <div className="mx-auto px-4 max-w-[860px] flex justify-center mt-[56px] mb-[100px]">
-        <motion.a
-          href="https://t.me/RickBacardin"
-          target="_blank"
-          rel="noopener noreferrer"
-          variants={itemVariants}
-          className="w-full text-center py-5 rounded-[24px] border border-[#272727] bg-[#161616] hover:bg-[#202020] hover:border-[#383838] transition-all text-white font-medium text-[26px] leading-[32px] shadow-[inset_0_0_24px_rgba(255,255,255,0.06)] cursor-pointer"
-        >
-          {isEnglish ? "Got a question?" : "Появился вопрос?"}
-        </motion.a>
+      <div className="mx-auto px-4 max-w-[860px] flex justify-center mt-[56px] mb-[120px]">
+        <QuestionCTAButton isEnglish={isEnglish} />
       </div>
 
       {/* Галерея изображений */}
@@ -479,5 +472,60 @@ function MasonryGallery({ images, title }: { images: string[]; title: string }) 
         </motion.div>
       ))}
     </motion.div>
+  );
+}
+
+// Интерактивная кнопка "Появился вопрос?" с ховер-эффектом spotlight
+function QuestionCTAButton({ isEnglish }: { isEnglish: boolean }) {
+  const { playHoverSound } = useHoverSound();
+  const [isHovering, setIsHovering] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Градиент spotlight, следующий за положением мышки
+  const spotlightBackground = useMotionTemplate`
+    radial-gradient(
+      600px circle at ${mouseX}px ${mouseY}px,
+      rgba(255, 255, 255, 0.16),
+      transparent 65%
+    )
+  `;
+
+  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  return (
+    <motion.a
+      href="https://t.me/RickBacardin"
+      target="_blank"
+      rel="noopener noreferrer"
+      variants={itemVariants}
+      onHoverStart={playHoverSound}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      onMouseMove={handleMouseMove}
+      className="relative w-full h-[107px] rounded-[24px] flex items-center justify-center overflow-hidden cursor-pointer select-none transition-colors"
+      style={{
+        backgroundColor: "#1F1C18",
+      }}
+    >
+      {/* Spotlight слой при наведении */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
+        style={{
+          background: spotlightBackground,
+          opacity: isHovering ? 1 : 0,
+        }}
+      />
+
+      {/* Текст кнопки */}
+      <span className="relative z-10 font-medium text-[32px] md:text-[50px] leading-[1] text-white tracking-tight">
+        {isEnglish ? "Got a question?" : "Появился вопрос?"}
+      </span>
+    </motion.a>
   );
 }
