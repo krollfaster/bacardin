@@ -297,7 +297,7 @@ export const GalleryCaseView = ({
                         borderWidth: "3px",
                         padding: "36px 40px",
                         boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
-                        backgroundColor: "rgba(18, 18, 18, 0.4)",
+                        backgroundColor: "#16130F",
                       }}
                       variants={itemVariants}
                     >
@@ -330,7 +330,7 @@ export const GalleryCaseView = ({
               return (
                 <div
                   key={`metrics-${segIdx}`}
-                  className="gap-[20px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-[32px]"
+                  className="gap-[32px] grid grid-cols-1 md:grid-cols-3 mb-[32px]"
                 >
                   {segment.item.cards.map((metric, metricIdx) => {
                     const span = metric.span || 1;
@@ -338,7 +338,7 @@ export const GalleryCaseView = ({
                       <motion.div
                         key={metric.id || metricIdx}
                         className={cn(
-                          "border rounded-[20px] flex items-center",
+                          "border rounded-[24px]",
                           span === 1 && "col-span-1",
                           span === 2 && "col-span-1 md:col-span-2",
                           span === 3 && "col-span-1 md:col-span-3"
@@ -346,15 +346,15 @@ export const GalleryCaseView = ({
                         style={{
                           borderColor: "#272727",
                           borderWidth: "3px",
-                          padding: "24px 28px",
-                          boxShadow: "inset 0 0 25px rgba(255, 255, 255, 0.06)",
-                          backgroundColor: "rgba(22, 22, 22, 0.5)",
+                          padding: "36px 40px",
+                          boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
+                          backgroundColor: "#16130F",
                         }}
                         variants={itemVariants}
                       >
                         <p
-                          className="font-medium text-[22px] md:text-[24px] leading-[30px]"
-                          style={{ color: "#FFFFFF" }}
+                          className="font-medium text-[28px] leading-[35px]"
+                          style={{ color: "#9C9C9C" }}
                         >
                           {metric.description}
                         </p>
