@@ -1,21 +1,21 @@
 {
   "hero": {
     "name": "Ernest von Shuldays",
-    "status": "(Design Lead)",
-    "description": "B2B product redesign for Sber's Management Board and 300+ Agile teams"
+    "status": "(Open to work)",
+    "description": "Rebuilt from scratch the B2E platform for Sber's Management Board and 300+ Agile teams"
   },
   "achievements": {
-    "title": "Strengths",
+    "title": "Skills",
     "items": {
       "card1": {
-        "part1": "Experience across ",
-        "highlight": "4 roles",
-        "part2": ": design, development, research and management. Like a chess player who's played every piece — I see the whole board and know which move strengthens the entire game"
+        "part1": "Soft skills are when you've already learned all about AI, and six months later you see a friend just starting out on the hype — so you help them and genuinely enjoy watching them grow",
+        "highlight": "",
+        "part2": ""
       },
       "card2": {
-        "part1": "Like a conductor, I remove friction between people, ",
-        "highlight": "AI agents",
-        "part2": ", and processes. I tune the orchestra so each element amplifies the others and efficiency grows exponentially"
+        "part1": "Hard skills are when a designer approaches you with a question, you know all the answers, and can always bring value as a T-shaped specialist on the team",
+        "highlight": "",
+        "part2": ""
       }
     }
   },
@@ -27,7 +27,7 @@
         "position": "Principal Product Designer",
         "company": "SBERBANK",
         "dates": "2024 → 2025",
-        "desc_part1": "Led the redesign of a B2B ecosystem for",
+        "desc_part1": "Led the redesign of a B2E ecosystem for",
         "desc_highlight1": "80+",
         "desc_highlight2": "25,000+",
         "desc_part3": "employees of the largest bank. Results:",
@@ -137,7 +137,7 @@
     "telegramButton": "Go to telegram?"
   },
   "cases": {
-    "title": "UI Cases",
+    "title": "Cases",
     "hint": "Click on the card to view",
     "showMore": "Show more ({count})",
     "uiElement": "UI Element",
