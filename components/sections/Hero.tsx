@@ -23,7 +23,7 @@ export const Hero = () => {
         >
           <div className="rounded-2xl w-[330px] h-[330px] overflow-hidden relative">
             <Image
-              src="/images/avatar.jpg"
+              src="/images/avatar.png"
               alt={t("name")}
               width={330}
               height={330}
