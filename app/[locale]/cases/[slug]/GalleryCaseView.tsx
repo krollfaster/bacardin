@@ -346,7 +346,7 @@ export const GalleryCaseView = ({
                         style={{
                           borderColor: "#272727",
                           borderWidth: "3px",
-                          padding: "24px",
+                          padding: "36px 40px",
                           boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
                           backgroundColor: "#16130F",
                         }}
