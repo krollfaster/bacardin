@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { LaurelIcon } from "@/components/ui/icons/LaurelIcon";
 import { fadeIn, staggerContainer } from "@/lib/animations";
 
 type TextPart = { type: "text"; value: string } | { type: "highlight"; value: string };
@@ -26,15 +26,7 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
       className="bg-card px-[38px] pt-[34px] pb-[36px] rounded-4xl"
       style={{ boxShadow: 'inset 0 0 18px rgba(255, 255, 255, 0.04)' }}
     >
-      <div className="mb-4 w-[115px] h-[56px] relative">
-        <Image
-          src="/images/Achive3.png"
-          alt="Achievement icon"
-          width={115}
-          height={56}
-          className="w-auto h-[56px] object-contain opacity-80"
-        />
-      </div>
+      <LaurelIcon size={81} className="mb-4" />
       <p className="font-[500] text-[26px] text-muted-foreground leading-[34px]">
         {parts.map((part, i) => (
           <span key={i}>
