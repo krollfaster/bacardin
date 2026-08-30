@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { fadeIn, slideUp } from "@/lib/animations";
 
 export const Hero = () => {
@@ -15,20 +16,18 @@ export const Hero = () => {
       className="pt-[90px] md:pt-[211px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
-        {/* Аватарка / Видео */}
+        {/* Аватарка */}
         <motion.div
           variants={slideUp}
-          className="mb-[34px]"
+          className="mb-[44px]"
         >
-          <div className="rounded-2xl w-[282px] h-[226px] overflow-hidden">
-            <video
-              src="/ava.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              width={282}
-              height={226}
+          <div className="rounded-2xl w-[330px] h-[330px] overflow-hidden relative">
+            <Image
+              src="/images/avatar.jpg"
+              alt={t("name")}
+              width={330}
+              height={330}
+              priority
               className="w-full h-full object-cover"
             />
           </div>
@@ -42,7 +41,7 @@ export const Hero = () => {
           <h1 className="font-medium text-[47px] leading-[1.1]">
             <span className="text-foreground">{t("name")}</span>
             {" "}
-            <span className="text-[#C4B8F8]">{t("status")}</span>
+            <span className="text-[#AFCE90]">{t("status")}</span>
           </h1>
         </motion.div>
 
