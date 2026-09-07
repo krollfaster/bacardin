@@ -34,11 +34,26 @@ export async function POST(request: Request) {
       );
     }
 
-    // Проверяем тип файла
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-    if (!allowedTypes.includes(file.type)) {
+    // Проверяем тип файла (включая SVG)
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "image/svg+xml",
+      "image/svg",
+      "image/x-icon",
+      "image/vnd.microsoft.icon",
+    ];
+    const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico"];
+    const ext = path.extname(file.name).toLowerCase();
+
+    const isTypeAllowed = allowedTypes.includes(file.type);
+    const isExtAllowed = allowedExtensions.includes(ext);
+
+    if (!isTypeAllowed && !isExtAllowed) {
       return NextResponse.json(
-        { success: false, error: "Недопустимый тип файла. Разрешены: JPG, PNG, GIF, WebP" },
+        { success: false, error: "Недопустимый тип файла. Разрешены: JPG, PNG, GIF, WebP, SVG" },
         { status: 400 }
       );
     }

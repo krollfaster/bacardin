@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 import {
   Plus,
   X,
@@ -325,11 +326,14 @@ export function CaseForm({
 
       const data = await response.json();
       if (data.success) {
+        toast.success(`Файл ${file.name} загружен`);
         return data.data.path;
       }
+      toast.error(data.error || "Ошибка загрузки файла");
       return null;
     } catch (error) {
       console.error("Upload error:", error);
+      toast.error("Ошибка сети при загрузке файла");
       return null;
     }
   };
@@ -644,61 +648,71 @@ export function CaseForm({
           />
 
           {formData.logo ? (
-            <div className="flex items-center gap-4 bg-muted/30 p-3 border border-border rounded-lg">
-              <div className="flex items-center justify-center bg-background border border-border rounded-full w-14 h-14 overflow-hidden shrink-0">
-                <img
-                  src={formData.logo}
-                  alt="Логотип"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                <p className="font-mono text-muted-foreground text-xs truncate">
-                  {formData.logo.split("/").pop()}
-                </p>
-                <div className="flex items-center gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="h-7 text-xs px-2"
-                    onClick={() => logoInputRef.current?.click()}
-                    disabled={isLogoUploading}
-                  >
-                    Заменить
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 text-xs px-2 text-destructive hover:text-destructive"
-                    onClick={() => setFormData((prev) => ({ ...prev, logo: "" }))}
-                  >
-                    Удалить
-                  </Button>
+            <div className="space-y-2">
+              <div className="flex items-center gap-4 bg-muted/30 p-3 border border-border rounded-lg">
+                <div className="flex items-center justify-center bg-background border border-border rounded-full w-14 h-14 overflow-hidden shrink-0">
+                  <img
+                    src={formData.logo}
+                    alt="Логотип"
+                    className="w-10 h-10 object-contain"
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+                  <p className="font-mono text-muted-foreground text-xs truncate">
+                    {formData.logo}
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="h-7 text-xs px-2"
+                      onClick={() => logoInputRef.current?.click()}
+                      disabled={isLogoUploading}
+                    >
+                      Заменить
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 text-xs px-2 text-destructive hover:text-destructive"
+                      onClick={() => setFormData((prev) => ({ ...prev, logo: "" }))}
+                    >
+                      Удалить
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           ) : (
-            <button
-              type="button"
-              onClick={() => logoInputRef.current?.click()}
-              disabled={isLogoUploading}
-              className="flex flex-col justify-center items-center gap-1.5 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full h-[120px] text-muted-foreground hover:text-foreground transition-colors p-2 text-center"
-            >
-              {isLogoUploading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span className="text-xs">Загрузка...</span>
-                </>
-              ) : (
-                <>
-                  <Upload className="w-5 h-5" />
-                  <span className="text-xs font-medium">Выбрать логотип</span>
-                  <span className="text-[10px] text-muted-foreground">SVG, PNG до 5MB</span>
-                </>
-              )}
-            </button>
+            <div className="space-y-2">
+              <button
+                type="button"
+                onClick={() => logoInputRef.current?.click()}
+                disabled={isLogoUploading}
+                className="flex flex-col justify-center items-center gap-1.5 border-2 border-border hover:border-primary/50 border-dashed rounded-lg w-full h-[95px] text-muted-foreground hover:text-foreground transition-colors p-2 text-center"
+              >
+                {isLogoUploading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span className="text-xs">Загрузка...</span>
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-5 h-5" />
+                    <span className="text-xs font-medium">Выбрать логотип</span>
+                    <span className="text-[10px] text-muted-foreground">SVG, PNG, JPG, WebP до 10MB</span>
+                  </>
+                )}
+              </button>
+              <Input
+                value={formData.logo || ""}
+                onChange={(e) => setFormData((prev) => ({ ...prev, logo: e.target.value }))}
+                placeholder="Или путь/URL: /images/logo.svg"
+                className="text-xs h-8 font-mono bg-background"
+              />
+            </div>
           )}
         </div>
 
