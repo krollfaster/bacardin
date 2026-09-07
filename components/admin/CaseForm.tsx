@@ -1274,6 +1274,8 @@ function DraggableStreamItem({
   }
 
   if (item.type === "preview") {
+    const isComparison = item.variant === "comparison";
+
     const updatePreviewImage = (
       imgIndex: number,
       field: keyof PreviewImage,
@@ -1297,6 +1299,45 @@ function DraggableStreamItem({
       onUpdate({ ...item, images: updatedImages });
     };
 
+    const handleVariantChange = (val: "tabs" | "slideshow" | "comparison") => {
+      if (val === "comparison") {
+        const currentImgs = item.images || [];
+        const beforeImg: PreviewImage = {
+          id: currentImgs[0]?.id || generateId(),
+          url: currentImgs[0]?.url || "",
+          title: activeLang === "ru" ? "До" : "Before",
+        };
+        const afterImg: PreviewImage = {
+          id: currentImgs[1]?.id || generateId(),
+          url: currentImgs[1]?.url || "",
+          title: activeLang === "ru" ? "После" : "After",
+        };
+        onUpdate({
+          ...item,
+          variant: val,
+          images: [beforeImg, afterImg],
+        });
+      } else {
+        onUpdate({ ...item, variant: val });
+      }
+    };
+
+    // Гарантируем 2 картинки для режима сравнения
+    const displayImages: PreviewImage[] = isComparison
+      ? [
+          item.images?.[0] || {
+            id: generateId(),
+            url: "",
+            title: activeLang === "ru" ? "До" : "Before",
+          },
+          item.images?.[1] || {
+            id: generateId(),
+            url: "",
+            title: activeLang === "ru" ? "После" : "After",
+          },
+        ]
+      : item.images || [];
+
     return (
       <Reorder.Item
         value={item}
@@ -1311,7 +1352,7 @@ function DraggableStreamItem({
             </span>
             <Badge variant="outline" className="gap-1 bg-background py-0.5 text-xs">
               <Eye className="w-3 h-3 text-primary" />
-              Превью ({item.variant === "slideshow" ? "Гифка" : "Табы"})
+              Превью ({item.variant === "slideshow" ? "Гифка" : isComparison ? "Сравнение" : "Табы"})
             </Badge>
           </div>
 
@@ -1348,9 +1389,7 @@ function DraggableStreamItem({
             <Label className="text-muted-foreground text-xs">Режим переключения</Label>
             <Select
               value={item.variant || "tabs"}
-              onValueChange={(val: "tabs" | "slideshow") =>
-                onUpdate({ ...item, variant: val })
-              }
+              onValueChange={handleVariantChange}
             >
               <SelectTrigger className="bg-background h-9 text-xs">
                 <SelectValue />
@@ -1358,6 +1397,7 @@ function DraggableStreamItem({
               <SelectContent>
                 <SelectItem value="tabs">Табы (по клику)</SelectItem>
                 <SelectItem value="slideshow">Гифка (авто)</SelectItem>
+                <SelectItem value="comparison">Сравнение (До / После)</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -1387,86 +1427,114 @@ function DraggableStreamItem({
 
         {/* Список картинок */}
         <div className="space-y-2 bg-background/50 p-3 border border-border/60 rounded-lg">
-          <Label className="font-semibold text-muted-foreground text-xs">
-            Картинки превью ({item.images?.length || 0})
-          </Label>
-
-          <div className="space-y-2">
-            {(item.images || []).map((img, imgIdx) => (
-              <div
-                key={img.id || imgIdx}
-                className="flex sm:flex-row flex-col items-start sm:items-center gap-2 bg-background p-2.5 border border-border rounded-lg"
-              >
-                {/* Превью миниатюра */}
-                <div className="flex flex-shrink-0 justify-center items-center bg-muted/60 border border-border rounded-md w-14 h-14 overflow-hidden">
-                  {img.url ? (
-                    <img src={img.url} alt="Preview" className="w-full h-full object-contain" />
-                  ) : (
-                    <ImageIcon className="w-5 h-5 text-muted-foreground/40" />
-                  )}
-                </div>
-
-                {/* Название таба */}
-                <div className="w-full sm:w-36">
-                  <Input
-                    value={img.title || ""}
-                    onChange={(e) => updatePreviewImage(imgIdx, "title", e.target.value)}
-                    placeholder="Таб (APP)..."
-                    className="bg-background h-8 text-xs"
-                  />
-                </div>
-
-                {/* URL картинки */}
-                <div className="flex-1 w-full">
-                  <Input
-                    value={img.url}
-                    onChange={(e) => updatePreviewImage(imgIdx, "url", e.target.value)}
-                    placeholder="/uploads/preview.png или https://..."
-                    className="bg-background h-8 font-mono text-xs"
-                  />
-                </div>
-
-                {/* Кнопка загрузки файла */}
-                <label className="inline-flex justify-center items-center bg-muted hover:bg-muted/80 px-2.5 rounded-md h-8 font-medium text-xs whitespace-nowrap transition-colors cursor-pointer">
-                  <Upload className="mr-1 w-3.5 h-3.5 text-muted-foreground" />
-                  Загрузить
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={async (e) => {
-                      const file = e.target.files?.[0];
-                      if (!file || !uploadFile) return;
-                      const path = await uploadFile(file);
-                      if (path) {
-                        updatePreviewImage(imgIdx, "url", path);
-                      }
-                    }}
-                  />
-                </label>
-
-                {/* Кнопка удаления */}
-                <button
-                  type="button"
-                  onClick={() => removePreviewImage(imgIdx)}
-                  className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            ))}
+          <div className="flex justify-between items-center">
+            <Label className="font-semibold text-muted-foreground text-xs">
+              {isComparison ? "Картинки для сравнения (До и После)" : `Картинки превью (${displayImages.length})`}
+            </Label>
+            {isComparison && (
+              <span className="text-muted-foreground/80 text-xs">
+                {activeLang === "ru" ? "Активно всегда «После»" : "Default active is «After»"}
+              </span>
+            )}
           </div>
 
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={addPreviewImage}
-            className="mt-2 border-dashed w-full h-8 text-xs"
-          >
-            <Plus className="mr-1.5 w-3.5 h-3.5" />
-            Добавить еще картинку
-          </Button>
+          <div className="space-y-2">
+            {displayImages.map((img, imgIdx) => {
+              const labelText = isComparison
+                ? imgIdx === 0
+                  ? (activeLang === "ru" ? "До" : "Before")
+                  : (activeLang === "ru" ? "После" : "After")
+                : img.title || "";
+
+              return (
+                <div
+                  key={img.id || imgIdx}
+                  className="flex sm:flex-row flex-col items-start sm:items-center gap-2 bg-background p-2.5 border border-border rounded-lg"
+                >
+                  {/* Превью миниатюра */}
+                  <div className="flex flex-shrink-0 justify-center items-center bg-muted/60 border border-border rounded-md w-14 h-14 overflow-hidden">
+                    {img.url ? (
+                      <img src={img.url} alt="Preview" className="w-full h-full object-contain" />
+                    ) : (
+                      <ImageIcon className="w-5 h-5 text-muted-foreground/40" />
+                    )}
+                  </div>
+
+                  {/* Название таба */}
+                  <div className="w-full sm:w-36">
+                    {isComparison ? (
+                      <div className="flex items-center bg-muted/50 px-3 border border-border rounded-md h-8 font-medium text-xs">
+                        <span className="text-primary font-semibold mr-1.5">
+                          {imgIdx === 0 ? "1." : "2."}
+                        </span>
+                        {labelText}
+                      </div>
+                    ) : (
+                      <Input
+                        value={img.title || ""}
+                        onChange={(e) => updatePreviewImage(imgIdx, "title", e.target.value)}
+                        placeholder="Таб (APP)..."
+                        className="bg-background h-8 text-xs"
+                      />
+                    )}
+                  </div>
+
+                  {/* URL картинки */}
+                  <div className="flex-1 w-full">
+                    <Input
+                      value={img.url}
+                      onChange={(e) => updatePreviewImage(imgIdx, "url", e.target.value)}
+                      placeholder="/uploads/preview.png или https://..."
+                      className="bg-background h-8 font-mono text-xs"
+                    />
+                  </div>
+
+                  {/* Кнопка загрузки файла */}
+                  <label className="inline-flex justify-center items-center bg-muted hover:bg-muted/80 px-2.5 rounded-md h-8 font-medium text-xs whitespace-nowrap transition-colors cursor-pointer">
+                    <Upload className="mr-1 w-3.5 h-3.5 text-muted-foreground" />
+                    Загрузить
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (!file || !uploadFile) return;
+                        const path = await uploadFile(file);
+                        if (path) {
+                          updatePreviewImage(imgIdx, "url", path);
+                        }
+                      }}
+                    />
+                  </label>
+
+                  {/* Кнопка удаления (только для обычных табов/гифок) */}
+                  {!isComparison && (
+                    <button
+                      type="button"
+                      onClick={() => removePreviewImage(imgIdx)}
+                      className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {!isComparison && (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={addPreviewImage}
+              className="mt-2 border-dashed w-full h-8 text-xs"
+            >
+              <Plus className="mr-1.5 w-3.5 h-3.5" />
+              Добавить еще картинку
+            </Button>
+          )}
         </div>
       </Reorder.Item>
     );
