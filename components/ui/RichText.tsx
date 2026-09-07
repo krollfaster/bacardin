@@ -219,7 +219,7 @@ export function RichText({ content, className }: RichTextProps) {
               <motion.h2
                 key={index}
                 className={cn(
-                  "mb-[10px] font-bold text-[28px] text-foreground leading-[35px]",
+                  "mb-[10px] font-bold text-[28px] text-foreground leading-[36px]",
                   marginTop
                 )}
                 variants={itemVariants}
@@ -233,7 +233,7 @@ export function RichText({ content, className }: RichTextProps) {
               <motion.p
                 key={index}
                 className={cn(
-                  "font-medium text-[28px] text-muted-foreground leading-[35px]",
+                  "font-medium text-[28px] text-muted-foreground leading-[36px]",
                   marginTop
                 )}
                 variants={itemVariants}
@@ -247,7 +247,7 @@ export function RichText({ content, className }: RichTextProps) {
               <motion.ol
                 key={index}
                 className={cn(
-                  "space-y-[14px] font-medium text-[28px] text-muted-foreground leading-[35px]",
+                  "space-y-[14px] font-medium text-[28px] text-muted-foreground leading-[36px]",
                   marginTop
                 )}
                 variants={itemVariants}
@@ -281,7 +281,7 @@ export function RichText({ content, className }: RichTextProps) {
               <motion.ul
                 key={index}
                 className={cn(
-                  "space-y-[14px] font-medium text-[28px] text-muted-foreground leading-[35px]",
+                  "space-y-[14px] font-medium text-[28px] text-muted-foreground leading-[36px]",
                   marginTop
                 )}
                 variants={itemVariants}

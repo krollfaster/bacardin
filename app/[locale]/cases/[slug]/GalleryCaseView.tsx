@@ -224,14 +224,14 @@ export const GalleryCaseView = ({
       variants={containerVariants}
     >
       {/* Шапка кейса: Логотип + Заголовок + Описание */}
-      <div className="mx-auto px-4 pt-[200px] md:pt-[240px] max-w-[860px]">
+      <div className="mx-auto px-6 pt-[300px] max-w-[956px] box-content">
         {/* Логотип кейса слева над заголовком */}
         {logo && (
           <motion.div
-            className="mb-8 flex justify-start"
+            className="mb-[36px] flex justify-start"
             variants={itemVariants}
           >
-            <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center bg-[#1A1A1A] border border-[#272727] p-2 shadow-[inset_0_0_15px_rgba(255,255,255,0.05)]">
+            <div className="w-[120px] h-[120px] rounded-full overflow-hidden flex items-center justify-center bg-[#1A1A1A] border border-[#272727] p-3 shadow-[inset_0_0_15px_rgba(255,255,255,0.05)]">
               <img
                 src={logo}
                 alt={`${title} logo`}
@@ -250,7 +250,7 @@ export const GalleryCaseView = ({
 
         {description && description.trim() && (
           <motion.div
-            className="mt-[20px]"
+            className="mt-[24px] mb-[12px]"
             variants={itemVariants}
           >
             <RichText content={description} />
@@ -260,7 +260,7 @@ export const GalleryCaseView = ({
 
       {/* Лента контента: Заголовки, Карточки, Метрики */}
       {segments.length > 0 && (
-        <div className="mx-auto px-4 max-w-[860px]">
+        <div className="mx-auto px-6 max-w-[956px] box-content">
           {segments.map((segment, segIdx) => {
             if (segment.type === "heading") {
               return (
@@ -371,7 +371,7 @@ export const GalleryCaseView = ({
       )}
 
       {/* Кнопка CTA: "Появился вопрос?" */}
-      <div className="mx-auto px-4 max-w-[860px] flex justify-center mb-[120px]">
+      <div className="mx-auto px-6 max-w-[956px] box-content flex justify-center mb-[120px]">
         <QuestionCTAButton isEnglish={isEnglish} />
       </div>
 
