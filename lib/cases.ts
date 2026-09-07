@@ -136,6 +136,7 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
     featuredOnHome: data.featuredOnHome ?? false,
     homeOrder: data.homeOrder ?? null,
     vibecodeOrder: data.vibecodeOrder ?? null,
+    inProgress: data.inProgress ?? false,
     items: data.items,
     items_en: data.items_en,
     highlights: data.highlights,

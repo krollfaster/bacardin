@@ -287,9 +287,21 @@ function CasesTable({ cases, onEdit, onDelete, formatDate }: {
               </TableCell>
               <TableCell>
                 <div>
-                  <p className="font-medium text-foreground">
-                    {caseItem.title}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium text-foreground">
+                      {caseItem.title}
+                    </p>
+                    {caseItem.inProgress && (
+                      <Badge variant="outline" className="bg-amber-500/10 text-amber-500 border-amber-500/30 text-[11px] py-0 px-1.5 h-5 font-normal">
+                        В работе
+                      </Badge>
+                    )}
+                    {caseItem.homeOrder !== null && caseItem.homeOrder !== undefined && caseItem.homeOrder > 0 && (
+                      <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30 text-[11px] py-0 px-1.5 h-5 font-normal">
+                        Главная #{caseItem.homeOrder}
+                      </Badge>
+                    )}
+                  </div>
                   <p className="max-w-[300px] text-muted-foreground text-sm truncate">
                     {caseItem.description}
                   </p>

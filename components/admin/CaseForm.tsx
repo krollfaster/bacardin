@@ -74,6 +74,8 @@ export interface CaseFormData {
   content: string;
   published: boolean;
   featuredOnHome: boolean;
+  homeOrder?: number | null;
+  inProgress?: boolean;
   items: CaseItem[];
   items_en: CaseItem[];
 }
@@ -223,6 +225,8 @@ export function CaseForm({
     content: "",
     published: false,
     featuredOnHome: false,
+    homeOrder: null,
+    inProgress: false,
     items: [],
     items_en: [],
   });
@@ -279,6 +283,8 @@ export function CaseForm({
       content: initialData.content || "",
       published: initialData.published,
       featuredOnHome: initialData.featuredOnHome || false,
+      homeOrder: initialData.homeOrder ?? null,
+      inProgress: initialData.inProgress || false,
       items: convertLegacyToItems(initialData, "ru"),
       items_en: convertLegacyToItems(initialData, "en"),
     });
@@ -1101,20 +1107,60 @@ export function CaseForm({
       </div>
 
       {/* Футер формы с публикацией и кнопками */}
-      <div className="flex justify-between items-center pt-6 border-border border-t">
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="published"
-            checked={formData.published}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, published: e.target.checked }))
-            }
-            className="border-border rounded w-4 h-4 accent-primary cursor-pointer"
-          />
-          <Label htmlFor="published" className="font-medium text-sm cursor-pointer">
-            Опубликовать кейс
-          </Label>
+      <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 pt-6 border-border border-t">
+        <div className="flex flex-wrap items-center gap-5">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="published"
+              checked={formData.published}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, published: e.target.checked }))
+              }
+              className="border-border rounded w-4 h-4 accent-primary cursor-pointer"
+            />
+            <Label htmlFor="published" className="font-medium text-sm cursor-pointer">
+              Опубликовать кейс
+            </Label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="inProgress"
+              checked={formData.inProgress || false}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, inProgress: e.target.checked }))
+              }
+              className="border-border rounded w-4 h-4 accent-primary cursor-pointer"
+            />
+            <Label htmlFor="inProgress" className="font-medium text-sm cursor-pointer flex items-center gap-1.5">
+              <span>В работе</span>
+              <span className="text-muted-foreground text-xs font-normal">
+                (некликабельный)
+              </span>
+            </Label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="featuredOnHome"
+              checked={formData.featuredOnHome || false}
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setFormData((prev) => ({
+                  ...prev,
+                  featuredOnHome: checked,
+                  homeOrder: checked ? (prev.homeOrder || 1) : null,
+                }));
+              }}
+              className="border-border rounded w-4 h-4 accent-primary cursor-pointer"
+            />
+            <Label htmlFor="featuredOnHome" className="font-medium text-sm cursor-pointer">
+              На главной
+            </Label>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">

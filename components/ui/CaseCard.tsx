@@ -96,10 +96,76 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
     setIsHovering(false);
   };
 
+  const isInProgress = !!caseItem.inProgress;
+
+  const cardContent = (
+    <article 
+      className={`relative h-[380px] rounded-[28px] p-3 flex flex-col gap-3 group bg-[#1F1C18] overflow-hidden ${
+        isInProgress ? "cursor-default select-none" : "cursor-pointer"
+      }`}
+    >
+      {/* Spotlight gradient overlay - радужный для component карточек */}
+      <motion.div
+        className="absolute inset-0 rounded-[28px] pointer-events-none z-0 transition-opacity duration-300"
+        style={{ 
+          background: currentSpotlight,
+          opacity: isHovering ? 1 : 0,
+        }}
+      />
+      {/* Блок с превью картинкой */}
+      <div 
+        className="flex-1 rounded-2xl overflow-hidden relative z-10"
+        style={{ backgroundColor: "#16130F" }}
+      >
+        {caseItem.coverImage ? (
+          <motion.div
+            style={{ x: imageX, y: imageY }}
+            className="absolute inset-[-20px]"
+          >
+            <Image
+              src={caseItem.coverImage}
+              alt={title}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-muted-foreground">No image</span>
+          </div>
+        )}
+        {/* Overlay для внутренней тени поверх изображения */}
+        <div 
+          className="absolute inset-0 pointer-events-none rounded-2xl z-10"
+          style={{ boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)" }}
+        />
+      </div>
+
+      {/* Блок с текстом */}
+      <div 
+        className="h-[54px] rounded-2xl px-5 flex items-center justify-between z-10"
+        style={{ 
+          backgroundColor: "#16130F",
+          boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)"
+        }}
+      >
+        <span className="text-lg font-medium text-muted-foreground truncate">
+          {title}
+        </span>
+        <span className="text-lg font-medium text-muted-foreground whitespace-nowrap ml-4">
+          {caseItem.type === "component" 
+            ? (subtitle || uiElementLabel || "UI Element")
+            : (subtitle || null)
+          }
+        </span>
+      </div>
+    </article>
+  );
+
   return (
     <motion.div
       variants={staggerItem}
-      onHoverStart={playHoverSound}
+      onHoverStart={isInProgress ? undefined : playHoverSound}
       style={{ perspective: 1000 }}
     >
       <motion.div
@@ -111,69 +177,15 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        whileTap={{ scale: 0.98 }}
+        whileTap={isInProgress ? undefined : { scale: 0.98 }}
       >
-        <Link href={`/${locale}/cases/${caseItem.slug}`}>
-          <article 
-            className="relative h-[380px] rounded-[28px] p-3 flex flex-col gap-3 cursor-pointer group bg-[#1F1C18] overflow-hidden"
-          >
-            {/* Spotlight gradient overlay - радужный для component карточек */}
-            <motion.div
-              className="absolute inset-0 rounded-[28px] pointer-events-none z-0 transition-opacity duration-300"
-              style={{ 
-                background: currentSpotlight,
-                opacity: isHovering ? 1 : 0,
-              }}
-            />
-            {/* Блок с превью картинкой */}
-            <div 
-              className="flex-1 rounded-2xl overflow-hidden relative z-10"
-              style={{ backgroundColor: "#16130F" }}
-            >
-              {caseItem.coverImage ? (
-                <motion.div
-                  style={{ x: imageX, y: imageY }}
-                  className="absolute inset-[-20px]"
-                >
-                  <Image
-                    src={caseItem.coverImage}
-                    alt={title}
-                    fill
-                    className="object-cover"
-                  />
-                </motion.div>
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-muted-foreground">No image</span>
-                </div>
-              )}
-              {/* Overlay для внутренней тени поверх изображения */}
-              <div 
-                className="absolute inset-0 pointer-events-none rounded-2xl z-10"
-                style={{ boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)" }}
-              />
-            </div>
-
-            {/* Блок с текстом */}
-            <div 
-              className="h-[54px] rounded-2xl px-5 flex items-center justify-between z-10"
-              style={{ 
-                backgroundColor: "#16130F",
-                boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)"
-              }}
-            >
-              <span className="text-lg font-medium text-muted-foreground truncate">
-                {title}
-              </span>
-              <span className="text-lg font-medium text-muted-foreground whitespace-nowrap ml-4">
-                {caseItem.type === "component" 
-                  ? (subtitle || uiElementLabel || "UI Element")
-                  : (subtitle || null)
-                }
-              </span>
-            </div>
-          </article>
-        </Link>
+        {isInProgress ? (
+          <div>{cardContent}</div>
+        ) : (
+          <Link href={`/${locale}/cases/${caseItem.slug}`}>
+            {cardContent}
+          </Link>
+        )}
       </motion.div>
     </motion.div>
   );
