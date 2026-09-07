@@ -12,7 +12,7 @@ export const AutonomyStatement = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="mt-[49px] mb-[75px]"
+      className="mt-[40px] mb-[75px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}

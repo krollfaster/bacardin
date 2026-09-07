@@ -113,19 +113,19 @@ export const Testimonials = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="mt-[49px]"
+            className="mt-[40px]"
         >
             <div className="mx-auto px-6 max-w-[1000px]">
                 {/* Заголовок секции */}
                 <motion.h2
                     variants={fadeIn}
-                    className="mb-[30px] font-medium text-[26px] text-muted-foreground leading-[34px]"
+                    className="mb-[32px] font-medium text-[26px] text-muted-foreground leading-[34px]"
                 >
                     {t("title")}
                 </motion.h2>
 
                 {/* Сетка карточек */}
-                <div className="gap-[23px] md:gap-[30px] grid grid-cols-1 md:grid-cols-2">
+                <div className="gap-[32px] grid grid-cols-1 md:grid-cols-2">
                     {testimonials.map((item, index) => (
                         <TestimonialCard
                             key={index}

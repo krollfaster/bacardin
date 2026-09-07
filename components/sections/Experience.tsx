@@ -153,19 +153,19 @@ export const Experience = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerContainer}
-      className="mt-[49px]"
+      className="mt-[40px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-[30px] font-medium text-[26px] text-muted-foreground leading-[34px]"
+          className="mb-[32px] font-medium text-[26px] text-muted-foreground leading-[34px]"
         >
           {t("title")} <span className="text-foreground">{t("titleHighlight")}</span>
         </motion.h2>
 
         {/* Карточки опыта */}
-        <div className="flex flex-col gap-[23px] md:gap-[30px]">
+        <div className="flex flex-col gap-[32px]">
           {experiences.map((exp, index) => (
             <ExperienceCard
               key={index}

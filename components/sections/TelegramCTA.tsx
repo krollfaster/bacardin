@@ -35,7 +35,7 @@ export const TelegramCTA = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerContainer}
-      className="mt-[49px] mb-[120px]"
+      className="mt-[40px] mb-[286px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         <motion.a

@@ -33,13 +33,13 @@ export const Tags = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerContainer}
-      className="mt-[49px]"
+      className="mt-[40px]"
     >
       <div className="mx-auto px-6 max-w-[1000px]">
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="text-[26px] leading-[34px] font-medium text-muted-foreground mb-[30px]"
+          className="text-[26px] leading-[34px] font-medium text-muted-foreground mb-[32px]"
         >
           {t("title")}
         </motion.h2>
