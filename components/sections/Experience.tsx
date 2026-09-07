@@ -35,7 +35,7 @@ const ExperienceCard = ({
           transition: { delay: index * 0.1, duration: 0.5 },
         },
       }}
-      className="bg-card px-[38px] pt-[34px] pb-[36px] rounded-4xl"
+      className="bg-card px-[40px] pt-[30px] pb-[31px] rounded-4xl"
       style={{ boxShadow: "inset 0 0 18px rgba(255, 255, 255, 0.04)" }}
     >
       {/* Область с компанией */}
@@ -165,7 +165,7 @@ export const Experience = () => {
         </motion.h2>
 
         {/* Карточки опыта */}
-        <div className="flex flex-col gap-[24px]">
+        <div className="flex flex-col gap-[36px]">
           {experiences.map((exp, index) => (
             <ExperienceCard
               key={index}
