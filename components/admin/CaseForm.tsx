@@ -1112,7 +1112,7 @@ function DraggableStreamItem({
             </span>
             <Badge variant="outline" className="bg-background text-xs gap-1 py-0.5">
               <HeadingIcon className="w-3 h-3 text-primary" />
-              Заголовок секции (отступ 56px)
+              Заголовок секции (отступ 52px)
             </Badge>
           </div>
 

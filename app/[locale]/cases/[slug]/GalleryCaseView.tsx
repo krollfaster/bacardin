@@ -15,6 +15,7 @@ import type {
 } from "@/types";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/components/ui/RichText";
+import { CaseHeading } from "@/components/case/CaseHeading";
 
 interface GalleryCaseViewProps {
   title: string;
@@ -224,14 +225,14 @@ export const GalleryCaseView = ({
       variants={containerVariants}
     >
       {/* Шапка кейса: Логотип + Заголовок + Описание */}
-      <div className="mx-auto px-6 pt-[300px] max-w-[956px] box-content">
+      <div className="box-content mx-auto px-6 pt-[300px] max-w-[956px]">
         {/* Логотип кейса слева над заголовком */}
         {logo && (
           <motion.div
-            className="mb-[36px] flex justify-start"
+            className="flex justify-start mb-[36px]"
             variants={itemVariants}
           >
-            <div className="w-[120px] h-[120px] rounded-full overflow-hidden flex items-center justify-center bg-[#1A1A1A] border border-[#272727] p-3 shadow-[inset_0_0_15px_rgba(255,255,255,0.05)]">
+            <div className="flex justify-center items-center bg-[#1A1A1A] shadow-[inset_0_0_15px_rgba(255,255,255,0.05)] p-3 border border-[#272727] rounded-full w-[120px] h-[120px] overflow-hidden">
               <img
                 src={logo}
                 alt={`${title} logo`}
@@ -242,7 +243,7 @@ export const GalleryCaseView = ({
         )}
 
         <motion.h1
-          className="font-bold text-[42px] md:text-[50px] leading-[46px] md:leading-[54px] text-foreground tracking-tight"
+          className="font-bold text-[42px] text-foreground md:text-[50px] leading-[46px] md:leading-[54px] tracking-tight"
           variants={itemVariants}
         >
           {title}
@@ -260,18 +261,15 @@ export const GalleryCaseView = ({
 
       {/* Лента контента: Заголовки, Карточки, Метрики */}
       {segments.length > 0 && (
-        <div className="mx-auto px-6 max-w-[956px] box-content">
+        <div className="box-content mx-auto px-6 max-w-[956px]">
           {segments.map((segment, segIdx) => {
             if (segment.type === "heading") {
               return (
-                <motion.h2
+                <CaseHeading
                   key={`heading-${segIdx}`}
-                  className="mt-[56px] mb-[32px] font-medium text-[28px] leading-[35px]"
-                  style={{ color: "#9C9C9C" }}
+                  title={segment.item.title}
                   variants={itemVariants}
-                >
-                  {segment.item.title}
-                </motion.h2>
+                />
               );
             }
 
@@ -284,8 +282,8 @@ export const GalleryCaseView = ({
                     segment.cards.length === 1 && segment.cards[0].fullWidth
                       ? "grid-cols-1"
                       : segment.cards.length === 1
-                      ? "grid-cols-1"
-                      : "grid-cols-1 md:grid-cols-2"
+                        ? "grid-cols-1"
+                        : "grid-cols-1 md:grid-cols-2"
                   )}
                 >
                   {segment.cards.map((card, cardIdx) => (
@@ -371,7 +369,7 @@ export const GalleryCaseView = ({
       )}
 
       {/* Кнопка CTA: "Появился вопрос?" */}
-      <div className="mx-auto px-6 max-w-[956px] box-content flex justify-center mb-[120px]">
+      <div className="box-content flex justify-center mx-auto mb-[120px] px-6 max-w-[956px]">
         <QuestionCTAButton isEnglish={isEnglish} />
       </div>
 
@@ -508,14 +506,14 @@ function QuestionCTAButton({ isEnglish }: { isEnglish: boolean }) {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-[107px] rounded-[24px] flex items-center justify-center overflow-hidden cursor-pointer select-none transition-colors"
+      className="relative flex justify-center items-center rounded-[24px] w-full h-[107px] overflow-hidden transition-colors cursor-pointer select-none"
       style={{
         backgroundColor: "#1F1C18",
       }}
     >
       {/* Spotlight слой при наведении */}
       <motion.div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
+        className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
         style={{
           background: spotlightBackground,
           opacity: isHovering ? 1 : 0,
@@ -523,7 +521,7 @@ function QuestionCTAButton({ isEnglish }: { isEnglish: boolean }) {
       />
 
       {/* Текст кнопки */}
-      <span className="relative z-10 font-medium text-[32px] md:text-[50px] leading-[1] text-white tracking-tight">
+      <span className="z-10 relative font-medium text-[32px] text-white md:text-[50px] leading-[1] tracking-tight">
         {isEnglish ? "Got a question?" : "Появился вопрос?"}
       </span>
     </motion.a>
