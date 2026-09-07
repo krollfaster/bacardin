@@ -18,7 +18,7 @@ export const AutonomyStatement = () => {
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-8 font-medium text-[26px] leading-[34px]"
+          className="mb-8 font-medium text-[28px] leading-[36px]"
           style={{ color: "#9C9C9C" }}
         >
           {t("title")}

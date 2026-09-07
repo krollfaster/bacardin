@@ -159,7 +159,7 @@ export const Experience = () => {
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-[32px] font-medium text-[26px] text-muted-foreground leading-[34px]"
+          className="mb-[32px] font-medium text-[28px] text-muted-foreground leading-[36px]"
         >
           {t("title")} <span className="text-foreground">{t("titleHighlight")}</span>
         </motion.h2>

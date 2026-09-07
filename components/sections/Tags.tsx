@@ -39,7 +39,7 @@ export const Tags = () => {
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="text-[26px] leading-[34px] font-medium text-muted-foreground mb-[32px]"
+          className="text-[28px] leading-[36px] font-medium text-muted-foreground mb-[32px]"
         >
           {t("title")}
         </motion.h2>

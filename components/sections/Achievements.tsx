@@ -73,7 +73,7 @@ export const Achievements = () => {
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-[32px] font-medium text-[26px] text-muted-foreground leading-[34px]"
+          className="mb-[32px] font-medium text-[28px] text-muted-foreground leading-[36px]"
         >
           {t("title")}
         </motion.h2>

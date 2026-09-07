@@ -33,7 +33,7 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}
-          className="mb-[32px] font-medium text-[26px] text-muted-foreground leading-[34px]"
+          className="mb-[32px] font-medium text-[28px] text-muted-foreground leading-[36px]"
         >
           {t("title")} <span className="text-white">({t("hint")})</span>
         </motion.h2>
