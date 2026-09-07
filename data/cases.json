@@ -244,10 +244,10 @@
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
-    "slug": "superapp-isu-rukovoditelya",
+    "slug": "redizayn-isu-rukovoditelya-",
     "type": "gallery",
-    "title": "SuperApp \"ИСУ руководителя\"",
-    "description": "B2C-like Экосистема для продуктивности Топ-менеджмента. Внутренний стартап, который конкурировал за внимание пользователей на внутреннем рынке банка, используя подходы B2C-продуктов (Retention, Engagement, Viral Growth)",
+    "title": "Редизайн ИСУ руководителя ",
+    "description": "ИСУ — B2E-продукт из 5 модулей, в которой руководители сбера управляет задачами, знаниями, целями и стратегическим планированием для всего топ-менеджмента ",
     "date": "2026-01-11",
     "category": "design",
     "coverImage": "/images/cases/1768245632342-6iywil.png",
@@ -270,7 +270,7 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-03-24T21:07:04.375Z",
+    "updatedAt": "2026-09-07T16:59:07.750Z",
     "galleryLayout": "stack",
     "title_en": "SuperApp \"ISU\"",
     "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
@@ -526,8 +526,266 @@
         ]
       }
     },
-    "subtitle": "Productivity, B2C",
-    "subtitle_en": "Productivity, B2C"
+    "subtitle": "Лидировал редизайн",
+    "subtitle_en": "Productivity, B2C",
+    "accentColor": "#8BCBF7",
+    "logo": "/images/cases/1788800224431-6q0lb0.svg",
+    "tags": [],
+    "items": [
+      {
+        "id": "rxk005h1e",
+        "type": "heading",
+        "title": "Контекст"
+      },
+      {
+        "id": "rzu4sslib",
+        "type": "card",
+        "title": "Ожидания 🔎",
+        "description": "Бизнес ждал, что я наведу порядок в текущих пользовательских флоу и подниму планку дизайна продукта, выросшего из стартапа",
+        "fullWidth": true
+      },
+      {
+        "id": "bbluadsvy",
+        "type": "card",
+        "title": "Ответственность 🎯",
+        "description": "Полная ответственность за UX/UI всех веб-модулей экосистемы. Финальное слово по всем дизайн-решениям и архитектуре интерфейсов",
+        "fullWidth": false
+      },
+      {
+        "id": "x24cj3o4z",
+        "type": "card",
+        "title": "Коммуникация  🤝",
+        "description": "Синхронизировал решения с 3-мя Продактами и смежным продуктом ИСУ (общий бэкенд). Регулярные синки с Principle Designer и Dev-лидом",
+        "fullWidth": false
+      },
+      {
+        "id": "3el411fbf",
+        "type": "heading",
+        "title": "Действия"
+      },
+      {
+        "id": "iw9zfg4he",
+        "type": "card",
+        "title": "UX стратегия  🧩",
+        "description": "Разработал B2C-Like стратегию редизайна под-продуктов (Задачи, Заметки, Цели и др) в единую бесшовную среду, чтоб поднять ключевые метрики",
+        "fullWidth": false
+      },
+      {
+        "id": "a6w4q54t8",
+        "type": "card",
+        "title": "Работа руками  ✍️",
+        "description": "В отсутствии подчиненных, самостоятельно реализовывал весь скоуп: от верхнеуровневой архитектуры до Pixel Perfect макетов",
+        "fullWidth": false
+      },
+      {
+        "id": "mb2a4g6ck",
+        "type": "card",
+        "title": "Новые идеи 💡",
+        "description": "Проектировал концепты идей, таких как встраивание банковских OKR (Целей) в таск-трекер, с логикой вертикального и горизотального каскадирования",
+        "fullWidth": true
+      },
+      {
+        "id": "935tjefwv",
+        "type": "card",
+        "title": "Scrum master  🔄",
+        "description": "В роли Скрам-мастера (14 чел) улучшил прозрачность процессов, Agile менторство, Питчи перед командой, фасилитация",
+        "fullWidth": false
+      },
+      {
+        "id": "d24ub7bgr",
+        "type": "card",
+        "title": "Дискавери фаза  🔬",
+        "description": "Внедрил регулярные исследования: сбор обратной связи, тестирование гипотез, сформировал базу для инсайтов (JTBD карта)",
+        "fullWidth": false
+      },
+      {
+        "id": "hbbe3k7ym",
+        "type": "heading",
+        "title": "Влияние"
+      },
+      {
+        "id": "1qs96qe9u",
+        "type": "card",
+        "title": "Time-to-Market  🚀",
+        "description": "Миграция на ANT Design System ускорила верстку и обеспечила консистентность, позволив выпускать фичи быстрее",
+        "fullWidth": true
+      },
+      {
+        "id": "7mv3989v5",
+        "type": "card",
+        "title": "Архитектура  🏗 ",
+        "description": "Спроектировал гибкую структуру для функционала «Проекты», защитив продукт от слома логики при \"влетающих\" срочных задачах",
+        "fullWidth": false
+      },
+      {
+        "id": "pkdhg79tm",
+        "type": "card",
+        "title": "Когнитивная нагрузка 🧠",
+        "description": "Редизайн упростил интерфейс за счет проработки UI, снизив когнитивную нагрузку на пользователей во всем приложении",
+        "fullWidth": false
+      },
+      {
+        "id": "4bdvgdx4k",
+        "type": "heading",
+        "title": "Метрики"
+      },
+      {
+        "id": "nw9p53xt0",
+        "type": "metrics",
+        "cards": [
+          {
+            "id": "6m7gxglrp",
+            "description": "NPS: +6 p.p",
+            "span": 1
+          },
+          {
+            "id": "2zqs05n3a",
+            "description": "CSI: +2.0",
+            "span": 1
+          },
+          {
+            "id": "13h9ctret",
+            "description": "TTM: -40%",
+            "span": 1
+          },
+          {
+            "id": "68baqgiij",
+            "description": "Pixel Perfect: 98% (KPI>90%)",
+            "span": 3
+          }
+        ]
+      }
+    ],
+    "items_en": [
+      {
+        "id": "65wr9wilc",
+        "type": "heading",
+        "title": "Context"
+      },
+      {
+        "id": "zknbpjyxv",
+        "type": "card",
+        "title": "Expectations 🔎",
+        "description": "The business expected me to bring order to current user flows and raise the design bar for a product that had outgrown its startup roots",
+        "fullWidth": true
+      },
+      {
+        "id": "ok1gj4e07",
+        "type": "card",
+        "title": "Responsibility 🎯",
+        "description": "Full ownership of UX/UI for all web modules within the ecosystem. I had the final word on all design decisions and interface architecture",
+        "fullWidth": false
+      },
+      {
+        "id": "knj61zgwk",
+        "type": "card",
+        "title": "Communication 🤝",
+        "description": "Synchronized decisions with 3 Product Owners and the ISU platform (shared backend). Regular syncs with the Principle Designer and Dev Lead",
+        "fullWidth": false
+      },
+      {
+        "id": "tnpaqr04p",
+        "type": "heading",
+        "title": "Actions"
+      },
+      {
+        "id": "xv130ji1a",
+        "type": "card",
+        "title": "UX Strategy 🧩 ",
+        "description": "Developed a B2C-Like redesign strategy for sub-products (Tasks, Notes, Goals, etc.) into a single seamless environment to boost key metrics",
+        "fullWidth": false
+      },
+      {
+        "id": "nvd5osgpe",
+        "type": "card",
+        "title": "Hands-on Work ✍️ ",
+        "description": "With no direct reports, I personally implemented the entire scope: from high-level information architecture to pixel-perfect mockups",
+        "fullWidth": false
+      },
+      {
+        "id": "rh0g6rxo8",
+        "type": "card",
+        "title": "New Ideas 💡 ",
+        "description": "Designed concepts for new features, such as embedding bank OKRs (Goals) into the task tracker with vertical and horizontal cascading logic",
+        "fullWidth": true
+      },
+      {
+        "id": "t95zl0wq7",
+        "type": "card",
+        "title": "Scrum Master 🔄 ",
+        "description": "As a Scrum Master (14 people), I improved process transparency, provided Agile mentoring, pitched to the team, and handled facilitation",
+        "fullWidth": false
+      },
+      {
+        "id": "6rtf8ktx0",
+        "type": "card",
+        "title": "Discovery 🔬 ",
+        "description": "Established regular research: gathering feedback, testing hypotheses, and building a foundation for user insights (JTBD map)",
+        "fullWidth": false
+      },
+      {
+        "id": "62kxxudyl",
+        "type": "heading",
+        "title": "Impact"
+      },
+      {
+        "id": "c4g9mdfy5",
+        "type": "card",
+        "title": "Time-to-Market 🚀 ",
+        "description": "Migration to the ANT Design System accelerated UI development and ensured consistency, allowing the team to ship features 2x faster",
+        "fullWidth": false
+      },
+      {
+        "id": "rzgdw1peo",
+        "type": "card",
+        "title": "Architecture 🏗",
+        "description": "Designed a flexible structure for the \"Projects\" feature, shielding the product from logic breaks during \"rush\" urgent tasks",
+        "fullWidth": false
+      },
+      {
+        "id": "47m3q82bg",
+        "type": "card",
+        "title": "Cognitive Load 🧠 ",
+        "description": "Simplified the interface by refining the UI, significantly reducing cognitive load for users across the entire application",
+        "fullWidth": true
+      },
+      {
+        "id": "5zdsoohrz",
+        "type": "heading",
+        "title": "Metrics"
+      },
+      {
+        "id": "5rxikvcin",
+        "type": "metrics",
+        "cards": [
+          {
+            "id": "4fzna0a3n",
+            "description": "NPS: +6 p.p",
+            "span": 1
+          },
+          {
+            "id": "zk0yn1zrm",
+            "description": "CSI: +2.0",
+            "span": 1
+          },
+          {
+            "id": "8djo4ey8x",
+            "description": "TTM: -40%",
+            "span": 1
+          },
+          {
+            "id": "172p25vg4",
+            "description": "Pixel Perfect: 98% (KPI>90%)",
+            "span": 2
+          },
+          {
+            "id": "2e62s5ioz",
+            "description": "MAU: +43%",
+            "span": 1
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
