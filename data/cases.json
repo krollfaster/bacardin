@@ -270,7 +270,7 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-09-07T17:08:45.751Z",
+    "updatedAt": "2026-09-07T17:30:18.023Z",
     "galleryLayout": "stack",
     "title_en": "SuperApp \"ISU\"",
     "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
@@ -536,13 +536,18 @@
         "id": "fguk32ulj",
         "type": "preview",
         "title": "Превью",
-        "variant": "tabs",
+        "variant": "comparison",
         "interval": 3,
         "images": [
           {
             "id": "in0f5lxf6",
-            "url": "/images/cases/1788800694223-6g2q7z.png",
-            "title": ""
+            "url": "/images/cases/1788802204514-jnety9.png",
+            "title": "До"
+          },
+          {
+            "id": "weel3rt7f",
+            "url": "/images/cases/1788802208906-t1ssyh.png",
+            "title": "После"
           }
         ]
       },
