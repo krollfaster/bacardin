@@ -270,7 +270,7 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-09-07T16:59:07.750Z",
+    "updatedAt": "2026-09-07T17:08:45.751Z",
     "galleryLayout": "stack",
     "title_en": "SuperApp \"ISU\"",
     "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
@@ -533,127 +533,98 @@
     "tags": [],
     "items": [
       {
-        "id": "rxk005h1e",
-        "type": "heading",
-        "title": "Контекст"
+        "id": "fguk32ulj",
+        "type": "preview",
+        "title": "Превью",
+        "variant": "tabs",
+        "interval": 3,
+        "images": [
+          {
+            "id": "in0f5lxf6",
+            "url": "/images/cases/1788800694223-6g2q7z.png",
+            "title": ""
+          }
+        ]
       },
       {
-        "id": "rzu4sslib",
+        "id": "3rfg4q93j",
+        "type": "heading",
+        "title": "Кейс"
+      },
+      {
+        "id": "o5531wnuv",
         "type": "card",
-        "title": "Ожидания 🔎",
-        "description": "Бизнес ждал, что я наведу порядок в текущих пользовательских флоу и подниму планку дизайна продукта, выросшего из стартапа",
+        "title": "Контекст",
+        "description": "Продукт стадии Seed для топ-менеджмента Сбера находился в точке перехода от закрытого пилота для правления к массовому релизу на все Agile-команды банка",
         "fullWidth": true
       },
       {
-        "id": "bbluadsvy",
+        "id": "ts8x1nk3s",
         "type": "card",
-        "title": "Ответственность 🎯",
-        "description": "Полная ответственность за UX/UI всех веб-модулей экосистемы. Финальное слово по всем дизайн-решениям и архитектуре интерфейсов",
-        "fullWidth": false
-      },
-      {
-        "id": "x24cj3o4z",
-        "type": "card",
-        "title": "Коммуникация  🤝",
-        "description": "Синхронизировал решения с 3-мя Продактами и смежным продуктом ИСУ (общий бэкенд). Регулярные синки с Principle Designer и Dev-лидом",
-        "fullWidth": false
-      },
-      {
-        "id": "3el411fbf",
-        "type": "heading",
-        "title": "Действия"
-      },
-      {
-        "id": "iw9zfg4he",
-        "type": "card",
-        "title": "UX стратегия  🧩",
-        "description": "Разработал B2C-Like стратегию редизайна под-продуктов (Задачи, Заметки, Цели и др) в единую бесшовную среду, чтоб поднять ключевые метрики",
-        "fullWidth": false
-      },
-      {
-        "id": "a6w4q54t8",
-        "type": "card",
-        "title": "Работа руками  ✍️",
-        "description": "В отсутствии подчиненных, самостоятельно реализовывал весь скоуп: от верхнеуровневой архитектуры до Pixel Perfect макетов",
-        "fullWidth": false
-      },
-      {
-        "id": "mb2a4g6ck",
-        "type": "card",
-        "title": "Новые идеи 💡",
-        "description": "Проектировал концепты идей, таких как встраивание банковских OKR (Целей) в таск-трекер, с логикой вертикального и горизотального каскадирования",
+        "title": "Ситуация",
+        "description": "Вместо резких изменений я посвятил первую неделю личным разговорам с разработчиками и аналитиками, бережно встраивая новые процессы в уже привычные и комфортные для них рельсы",
         "fullWidth": true
       },
       {
-        "id": "935tjefwv",
+        "id": "cmd1pjwcn",
         "type": "card",
-        "title": "Scrum master  🔄",
-        "description": "В роли Скрам-мастера (14 чел) улучшил прозрачность процессов, Agile менторство, Питчи перед командой, фасилитация",
-        "fullWidth": false
-      },
-      {
-        "id": "d24ub7bgr",
-        "type": "card",
-        "title": "Дискавери фаза  🔬",
-        "description": "Внедрил регулярные исследования: сбор обратной связи, тестирование гипотез, сформировал базу для инсайтов (JTBD карта)",
-        "fullWidth": false
-      },
-      {
-        "id": "hbbe3k7ym",
-        "type": "heading",
-        "title": "Влияние"
-      },
-      {
-        "id": "1qs96qe9u",
-        "type": "card",
-        "title": "Time-to-Market  🚀",
-        "description": "Миграция на ANT Design System ускорила верстку и обеспечила консистентность, позволив выпускать фичи быстрее",
+        "title": "Задача",
+        "description": "Нам нужно было объединиться с продактом и техлидом, чтобы переплавить тяжелую логику 5 модулей ИСУ в лаконичный сквозной сценарий, бережно удерживая баланс между вижном бизнеса и ограничениями разработки",
         "fullWidth": true
       },
       {
-        "id": "7mv3989v5",
+        "id": "7c53i5dgw",
         "type": "card",
-        "title": "Архитектура  🏗 ",
-        "description": "Спроектировал гибкую структуру для функционала «Проекты», защитив продукт от слома логики при \"влетающих\" срочных задачах",
-        "fullWidth": false
+        "title": "Результат",
+        "description": "Продукт готов к масштабированию, сокращен TTM за счет снижения техдолга и успешно защищен дизайн перед C-level банка",
+        "fullWidth": true
       },
       {
-        "id": "pkdhg79tm",
-        "type": "card",
-        "title": "Когнитивная нагрузка 🧠",
-        "description": "Редизайн упростил интерфейс за счет проработки UI, снизив когнитивную нагрузку на пользователей во всем приложении",
-        "fullWidth": false
-      },
-      {
-        "id": "4bdvgdx4k",
-        "type": "heading",
-        "title": "Метрики"
-      },
-      {
-        "id": "nw9p53xt0",
+        "id": "gywo7cayn",
         "type": "metrics",
         "cards": [
           {
-            "id": "6m7gxglrp",
-            "description": "NPS: +6 p.p",
+            "id": "kupvjvryt",
+            "description": "NPS: + 6 п.п.",
             "span": 1
           },
           {
-            "id": "2zqs05n3a",
-            "description": "CSI: +2.0",
+            "id": "yyz6lq5u5",
+            "description": "CSI: + 2.0",
             "span": 1
           },
           {
-            "id": "13h9ctret",
-            "description": "TTM: -40%",
+            "id": "f2qf2bdk5",
+            "description": "MAU: + 15%",
             "span": 1
-          },
-          {
-            "id": "68baqgiij",
-            "description": "Pixel Perfect: 98% (KPI>90%)",
-            "span": 3
           }
         ]
+      },
+      {
+        "id": "8atqgzmpp",
+        "type": "card",
+        "title": "Что бы сделал иначе?",
+        "description": "Я бы предложил продакту внедрить кастомные метрики под сценарии каждого модуля, чтобы подкрепить симпатию C-level к новому дизайну цифрами ускорения работы правления Сбера",
+        "fullWidth": true
+      },
+      {
+        "id": "1tvitopw8",
+        "type": "heading",
+        "title": "Вызовы"
+      },
+      {
+        "id": "r1szs6sug",
+        "type": "card",
+        "title": "Паралельные задачи ",
+        "description": "В периоды \"влетных\" задач от первых лиц банка мы с командой не паниковали, оперативно перераспределяя нагрузку, чтобы не сорвать ни одного основного спринта редизайна, но это было тяжело",
+        "fullWidth": true
+      },
+      {
+        "id": "43y7qhu13",
+        "type": "card",
+        "title": "Ненужная проактивность",
+        "description": "Пробуя себя в роли скрам-мастера при поддержке Agile-коуча, я запустил серию фасилитационных встреч, но этот опыт научил меня — не пытаться \"чинить\" процессы, которые и так стабильно работают и приносят результат",
+        "fullWidth": true
       }
     ],
     "items_en": [
