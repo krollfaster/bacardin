@@ -128,9 +128,9 @@ export const AllCasesButton = ({ locale, totalCount, label }: AllCasesButtonProp
                 </span>
               </div>
 
-              {/* Правая часть: количество */}
+              {/* Правая часть: количество (всегда английский шрифт Space Grotesk) */}
               <span
-                className="font-medium text-[50px] text-muted-foreground/50 leading-[54px]"
+                className="font-sans font-medium text-[50px] text-muted-foreground/50 leading-[54px]"
               >
                 ({totalCount})
               </span>
