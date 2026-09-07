@@ -21,6 +21,9 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
   // Выбираем title по локали
   const title = locale === "en" && caseItem.title_en ? caseItem.title_en : caseItem.title;
 
+  // Выбираем subtitle (текст на карточке) по локали
+  const subtitle = locale === "en" && caseItem.subtitle_en ? caseItem.subtitle_en : (caseItem.subtitle || (caseItem.tags && caseItem.tags.length > 0 ? caseItem.tags.join(", ") : ""));
+
   // Motion values для отслеживания позиции курсора (0-1)
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
@@ -164,8 +167,8 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
               </span>
               <span className="text-lg text-muted-foreground whitespace-nowrap ml-4">
                 {caseItem.type === "component" 
-                  ? (uiElementLabel || "UI Element")
-                  : (caseItem.tags && caseItem.tags.length > 0 ? caseItem.tags.join(", ") : null)
+                  ? (subtitle || uiElementLabel || "UI Element")
+                  : (subtitle || null)
                 }
               </span>
             </div>

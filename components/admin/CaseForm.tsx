@@ -54,6 +54,8 @@ export interface CaseFormData {
   type: CaseType;
   title: string;
   title_en: string;
+  subtitle?: string;
+  subtitle_en?: string;
   description: string;
   description_en: string;
   logo?: string;
@@ -63,7 +65,7 @@ export interface CaseFormData {
   images: string[];
   galleryLayout: GalleryLayout;
   componentUrl?: string;
-  tags: string[];
+  tags?: string[];
   content: string;
   published: boolean;
   featuredOnHome: boolean;
@@ -200,6 +202,8 @@ export function CaseForm({
     type: "gallery",
     title: "",
     title_en: "",
+    subtitle: "",
+    subtitle_en: "",
     description: "",
     description_en: "",
     logo: "",
@@ -218,7 +222,6 @@ export function CaseForm({
   });
 
   const [activeLang, setActiveLang] = useState<"ru" | "en">("ru");
-  const [newTag, setNewTag] = useState("");
   const [elementFolders, setElementFolders] = useState<ElementFolder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<string>("");
   const [isCustomPath, setIsCustomPath] = useState(false);
@@ -254,6 +257,8 @@ export function CaseForm({
       type: initialData.type || "gallery",
       title: initialData.title,
       title_en: initialData.title_en || "",
+      subtitle: initialData.subtitle || (initialData.tags && initialData.tags.length > 0 ? initialData.tags.join(", ") : ""),
+      subtitle_en: initialData.subtitle_en || "",
       description: initialData.description,
       description_en: initialData.description_en || "",
       logo: initialData.logo || "",
@@ -382,23 +387,6 @@ export function CaseForm({
     setFormData((prev) => ({
       ...prev,
       images: prev.images.filter((_, i) => i !== index),
-    }));
-  };
-
-  const addTag = () => {
-    if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
-      setFormData((prev) => ({
-        ...prev,
-        tags: [...prev.tags, newTag.trim()],
-      }));
-      setNewTag("");
-    }
-  };
-
-  const removeTag = (tag: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      tags: prev.tags.filter((t) => t !== tag),
     }));
   };
 
@@ -744,8 +732,8 @@ export function CaseForm({
       </div>
 
       {/* Основные поля и переключатель языка */}
-      <div className="flex items-end gap-4">
-        <div className="flex-1 space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+        <div className="space-y-2">
           <Label htmlFor="title">
             Название {activeLang === "ru" ? "*" : "(опционально)"}
           </Label>
@@ -762,31 +750,51 @@ export function CaseForm({
             required={activeLang === "ru"}
           />
         </div>
-        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-lg h-10">
-          <button
-            type="button"
-            onClick={() => setActiveLang("ru")}
-            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${
-              activeLang === "ru"
-                ? "bg-background shadow-sm"
-                : "hover:bg-background/50"
-            }`}
-            title="Русский"
-          >
-            🇷🇺
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveLang("en")}
-            className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${
-              activeLang === "en"
-                ? "bg-background shadow-sm"
-                : "hover:bg-background/50"
-            }`}
-            title="English"
-          >
-            🇬🇧
-          </button>
+
+        <div className="flex items-end gap-3">
+          <div className="flex-1 space-y-2">
+            <Label htmlFor="subtitle">
+              {activeLang === "ru" ? "Текст на карточке" : "Card text"}
+            </Label>
+            <Input
+              id="subtitle"
+              value={activeLang === "ru" ? (formData.subtitle || "") : (formData.subtitle_en || "")}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  [activeLang === "ru" ? "subtitle" : "subtitle_en"]: e.target.value,
+                }))
+              }
+              placeholder={activeLang === "ru" ? "Например: Productivity, B2C" : "e.g. Productivity, B2C"}
+            />
+          </div>
+
+          <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-lg h-10 flex-shrink-0">
+            <button
+              type="button"
+              onClick={() => setActiveLang("ru")}
+              className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${
+                activeLang === "ru"
+                  ? "bg-background shadow-sm"
+                  : "hover:bg-background/50"
+              }`}
+              title="Русский"
+            >
+              🇷🇺
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveLang("en")}
+              className={`w-10 h-8 flex items-center justify-center rounded-md text-base transition-colors ${
+                activeLang === "en"
+                  ? "bg-background shadow-sm"
+                  : "hover:bg-background/50"
+              }`}
+              title="English"
+            >
+              🇬🇧
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1023,46 +1031,7 @@ export function CaseForm({
           />
         </div>
 
-        {/* Теги */}
-        <div className="space-y-2">
-          <Label>Теги</Label>
-          <div className="flex gap-2">
-            <Input
-              value={newTag}
-              onChange={(e) => setNewTag(e.target.value)}
-              placeholder="Добавить тег"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  addTag();
-                }
-              }}
-            />
-            <Button type="button" variant="outline" onClick={addTag}>
-              <Plus className="w-4 h-4" />
-            </Button>
-          </div>
-          {formData.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
-              {formData.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="flex items-center gap-1 pr-1"
-                >
-                  {tag}
-                  <button
-                    type="button"
-                    onClick={() => removeTag(tag)}
-                    className="ml-1 hover:text-destructive"
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
-                </Badge>
-              ))}
-            </div>
-          )}
-        </div>
+
       </div>
 
       {/* Футер формы с публикацией и кнопками */}

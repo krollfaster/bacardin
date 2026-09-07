@@ -10,9 +10,6 @@
     "coverImage": "/images/cases/1768659658711-7f7wk6.png",
     "images": [],
     "componentUrl": "/Elements/text show/index.html",
-    "tags": [
-      "test"
-    ],
     "content": "test slider",
     "published": true,
     "featuredOnHome": false,
@@ -22,7 +19,9 @@
     "galleryLayout": "stack",
     "title_en": "Slider",
     "description_en": "Hold down the mouse button on the component and move it to the side",
-    "vibecodeOrder": null
+    "vibecodeOrder": null,
+    "subtitle": "test",
+    "subtitle_en": "test"
   },
   {
     "id": "mk9tmbkk8rtaei411o",
@@ -50,10 +49,6 @@
       "/images/cases/1769685587755-r8uyfj.png"
     ],
     "componentUrl": "",
-    "tags": [
-      "Booking",
-      "B2C"
-    ],
     "content": "test",
     "published": true,
     "featuredOnHome": false,
@@ -243,7 +238,9 @@
       "metrics": {
         "cards": []
       }
-    }
+    },
+    "subtitle": "Booking, B2C",
+    "subtitle_en": "Booking, B2C"
   },
   {
     "id": "mk9uetxnue3k2wwpk3",
@@ -268,10 +265,6 @@
       "/images/cases/1768425221750-l9paa7.png"
     ],
     "componentUrl": "",
-    "tags": [
-      "Productivity",
-      "B2C"
-    ],
     "content": "",
     "published": true,
     "featuredOnHome": true,
@@ -532,7 +525,9 @@
           }
         ]
       }
-    }
+    },
+    "subtitle": "Productivity, B2C",
+    "subtitle_en": "Productivity, B2C"
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
@@ -545,7 +540,6 @@
     "coverImage": "/images/cases/1768659579828-ex311s.png",
     "images": [],
     "componentUrl": "/Elements/Slider/standalone_preview.html",
-    "tags": [],
     "content": "",
     "published": false,
     "featuredOnHome": false,
@@ -555,7 +549,9 @@
     "galleryLayout": "stack",
     "title_en": "Graph cursor",
     "description_en": "",
-    "vibecodeOrder": null
+    "vibecodeOrder": null,
+    "subtitle": "",
+    "subtitle_en": ""
   },
   {
     "id": "mkb6qlltgq9abjbichq",
@@ -580,10 +576,6 @@
     ],
     "galleryLayout": "masonry",
     "componentUrl": "",
-    "tags": [
-      "HealthTech",
-      "B2C"
-    ],
     "content": "",
     "published": true,
     "featuredOnHome": true,
@@ -748,7 +740,9 @@
       "metrics": {
         "cards": []
       }
-    }
+    },
+    "subtitle": "HealthTech, B2C",
+    "subtitle_en": "HealthTech, B2C"
   },
   {
     "id": "mkejkh4k9ahs3yeqhrm",
@@ -777,10 +771,6 @@
     ],
     "galleryLayout": "stack",
     "componentUrl": "",
-    "tags": [
-      "Service",
-      "B2B"
-    ],
     "content": "",
     "published": true,
     "featuredOnHome": false,
@@ -969,7 +959,9 @@
       "metrics": {
         "cards": []
       }
-    }
+    },
+    "subtitle": "Service, B2B",
+    "subtitle_en": "Service, B2B"
   },
   {
     "id": "mkpkqt46mmjcwatqni",
@@ -983,7 +975,6 @@
     "images": [],
     "galleryLayout": "stack",
     "componentUrl": "/Elements/AI Input/index.html",
-    "tags": [],
     "content": "",
     "published": true,
     "featuredOnHome": false,
@@ -992,6 +983,8 @@
     "updatedAt": "2026-03-24T21:07:04.375Z",
     "title_en": "",
     "description_en": "",
-    "vibecodeOrder": null
+    "vibecodeOrder": null,
+    "subtitle": "",
+    "subtitle_en": ""
   }
 ]

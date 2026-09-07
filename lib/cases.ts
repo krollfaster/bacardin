@@ -95,6 +95,8 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
     type: data.type,
     title: data.title,
     title_en: data.title_en,
+    subtitle: data.subtitle || "",
+    subtitle_en: data.subtitle_en || "",
     description: data.description,
     description_en: data.description_en,
     logo: data.logo,

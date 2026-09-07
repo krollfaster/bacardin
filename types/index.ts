@@ -80,6 +80,8 @@ export interface Case {
   type: CaseType;
   title: string;
   title_en?: string; // Английская версия названия
+  subtitle?: string; // Текст карточки / подзаголовок (вместо тегов)
+  subtitle_en?: string; // Английская версия текста карточки
   description: string;
   description_en?: string; // Английская версия описания
   logo?: string; // Логотип кейса (отображается слева над заголовком)
@@ -91,7 +93,7 @@ export interface Case {
   galleryLayout?: GalleryLayout; // "stack" по умолчанию
   // Для компонента (iframe URL)
   componentUrl?: string;
-  tags: string[];
+  tags?: string[];
   content: string; // Markdown или HTML
   published: boolean;
   featuredOnHome: boolean; // @deprecated - используйте homeOrder
@@ -116,6 +118,8 @@ export interface CreateCaseData {
   type: CaseType;
   title: string;
   title_en?: string;
+  subtitle?: string;
+  subtitle_en?: string;
   description: string;
   description_en?: string;
   logo?: string;
@@ -146,6 +150,8 @@ export interface UpdateCaseData {
   type?: CaseType;
   title?: string;
   title_en?: string;
+  subtitle?: string;
+  subtitle_en?: string;
   slug?: string;
   description?: string;
   description_en?: string;

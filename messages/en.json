@@ -8,14 +8,14 @@
     "title": "Skills",
     "items": {
       "card1": {
-        "part1": "Soft skills are when you've already learned all about AI, and six months later you see a friend just starting out on the hype — so you help them and genuinely enjoy watching them grow",
-        "highlight": "",
-        "part2": ""
+        "part1": "",
+        "highlight": "Soft skills",
+        "part2": "This is when you've already integrated AI into workflows, but notice a confused teammate, grab them a coffee, patiently explain the logic, and celebrate their first win like your own"
       },
       "card2": {
-        "part1": "Hard skills are when a designer approaches you with a question, you know all the answers, and can always bring value as a T-shaped specialist on the team",
-        "highlight": "",
-        "part2": ""
+        "part1": "",
+        "highlight": "Hard T-Shaped",
+        "part2": "This is when you bridge design, code, and business through AI: building working prototypes, speeding up Time-to-Market, and freeing the team from mundane tasks"
       }
     }
   },
@@ -102,7 +102,7 @@
     ]
   },
   "testimonials": {
-    "title": "Trust & Feedback",
+    "title": "Recommendations",
     "items": {
       "denis": {
         "name": "Denis Bolshakov",
@@ -127,7 +127,8 @@
   "common": {
     "viewCase": "View case",
     "allCases": "All cases",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "writeToTg": "Message me on TG"
   },
   "casesPage": {
     "title": "I love when interfaces feel alive. Here are a few elements I vibecoded:",

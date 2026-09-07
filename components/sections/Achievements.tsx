@@ -13,6 +13,8 @@ interface AchievementCardProps {
 }
 
 const AchievementCard = ({ parts, index }: AchievementCardProps) => {
+  const validParts = parts.filter((part) => part.value && part.value.trim().length > 0);
+
   return (
     <motion.div
       variants={{
@@ -28,14 +30,14 @@ const AchievementCard = ({ parts, index }: AchievementCardProps) => {
     >
       <LaurelIcon size={81} className="mb-4" />
       <p className="font-[500] text-[26px] text-muted-foreground leading-[34px]">
-        {parts.map((part, i) => (
+        {validParts.map((part, i) => (
           <span key={i}>
             {part.type === "highlight" ? (
-              <span className="text-foreground">{part.value}</span>
+              <span className="text-white">{part.value}</span>
             ) : (
               part.value
             )}
-            {i < parts.length - 1 ? " " : ""}
+            {i < validParts.length - 1 ? " " : ""}
           </span>
         ))}
       </p>
