@@ -270,7 +270,7 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-09-07T17:30:18.023Z",
+    "updatedAt": "2026-09-07T17:38:28.335Z",
     "galleryLayout": "stack",
     "title_en": "SuperApp \"ISU\"",
     "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
@@ -611,6 +611,40 @@
         "title": "Что бы сделал иначе?",
         "description": "Я бы предложил продакту внедрить кастомные метрики под сценарии каждого модуля, чтобы подкрепить симпатию C-level к новому дизайну цифрами ускорения работы правления Сбера",
         "fullWidth": true
+      },
+      {
+        "id": "uhu0936o6",
+        "type": "preview",
+        "title": "Процесс",
+        "variant": "slideshow",
+        "interval": 0.5,
+        "images": [
+          {
+            "id": "nep137rda",
+            "url": "/images/cases/1788802652181-c4h0f3.png",
+            "title": "1"
+          },
+          {
+            "id": "i30t59jtp",
+            "url": "/images/cases/1788802664913-xxksp4.png",
+            "title": "2"
+          },
+          {
+            "id": "2p6npr7wo",
+            "url": "/images/cases/1788802668230-vz49h4.png",
+            "title": "3"
+          },
+          {
+            "id": "055v1hicu",
+            "url": "/images/cases/1788802673221-lssvh3.png",
+            "title": "4"
+          },
+          {
+            "id": "aabf3ee66",
+            "url": "/images/cases/1788802676818-2lmzcu.png",
+            "title": "5"
+          }
+        ]
       },
       {
         "id": "1tvitopw8",
