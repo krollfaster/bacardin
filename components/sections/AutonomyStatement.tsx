@@ -14,7 +14,7 @@ export const AutonomyStatement = () => {
       viewport={{ once: true, margin: "-100px" }}
       className="mt-[40px] mb-[75px]"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-6 max-w-[1000px] box-content">
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}

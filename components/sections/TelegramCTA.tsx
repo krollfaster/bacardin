@@ -37,7 +37,7 @@ export const TelegramCTA = () => {
       variants={staggerContainer}
       className="mt-[40px] mb-[286px]"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-6 max-w-[1000px] box-content">
         <motion.a
           href="https://t.me/RickBacardin"
           target="_blank"

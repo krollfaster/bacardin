@@ -69,7 +69,7 @@ export const Achievements = () => {
       variants={staggerContainer}
       className="mt-[40px]"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-6 max-w-[1000px] box-content">
         {/* Заголовок секции */}
         <motion.h2
           variants={fadeIn}

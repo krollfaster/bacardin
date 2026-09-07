@@ -15,7 +15,7 @@ export const Hero = () => {
       variants={fadeIn}
       className="pt-[90px] md:pt-[211px]"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-6 max-w-[1000px] box-content">
         {/* Аватарка */}
         <motion.div
           variants={slideUp}

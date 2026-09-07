@@ -19,7 +19,7 @@ export const CasesList = ({ cases }: CasesListProps) => {
   if (cases.length === 0) {
     return (
       <section className="pt-24">
-        <div className="mx-auto px-6 max-w-[1000px]">
+        <div className="mx-auto px-6 max-w-[1000px] box-content">
           <p className="text-muted-foreground text-center">
             {t("noCases")}
           </p>
@@ -35,7 +35,7 @@ export const CasesList = ({ cases }: CasesListProps) => {
       variants={staggerContainer}
       className="pt-16 pb-64"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-6 max-w-[1000px] box-content">
         {/* Сетка кейсов */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-6"

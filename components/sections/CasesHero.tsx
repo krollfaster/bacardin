@@ -15,7 +15,7 @@ export const CasesHero = () => {
       variants={fadeIn}
       className="pt-60"
     >
-      <div className="mx-auto px-6 max-w-[1000px]">
+      <div className="mx-auto px-6 max-w-[1000px] box-content">
         {/* Текст заголовка */}
         <motion.div variants={slideUp}>
           <h1 className="font-medium text-[50px] text-muted-foreground leading-[1.1]">
