@@ -107,20 +107,32 @@ export const CasePreview = ({
           accentColor={activeColor}
           title={item.title}
         />
-      ) : (
+      ) : item.variant === "slideshow" ? (
+        /* Режим "Гифка": мгновенное переключение без фейдов и без схлопывания высоты */
         <div className="relative w-full overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={activeImage.id || `${activeImage.url}-${activeIndex}`}
-              src={activeImage.url}
-              alt={activeImage.title || item.title || "Preview image"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="w-full h-auto object-contain select-none"
+          {images.map((img, idx) => (
+            <img
+              key={img.id || `${img.url}-${idx}`}
+              src={img.url}
+              alt={img.title || item.title || "Preview image"}
+              className={cn(
+                "w-full h-auto object-contain select-none",
+                idx === activeIndex
+                  ? "relative block"
+                  : "absolute inset-0 invisible pointer-events-none"
+              )}
+              loading="eager"
             />
-          </AnimatePresence>
+          ))}
+        </div>
+      ) : (
+        /* Режим табов: прямое отображение активной картинки */
+        <div className="relative w-full overflow-hidden">
+          <img
+            src={activeImage.url}
+            alt={activeImage.title || item.title || "Preview image"}
+            className="w-full h-auto object-contain select-none block"
+          />
         </div>
       )}
     </motion.div>
@@ -218,17 +230,6 @@ function CaseComparisonSlider({
         </div>
       )}
 
-      {/* 4. Мягкие плашки-подсказки "До" и "После" при наведении */}
-      {isHovering && (
-        <>
-          <div className="absolute bottom-4 left-4 z-10 pointer-events-none bg-black/60 backdrop-blur-md text-white/90 text-xs font-medium px-3 py-1.5 rounded-lg border border-white/10 shadow-lg">
-            {beforeImage.title || "До"}
-          </div>
-          <div className="absolute bottom-4 right-4 z-10 pointer-events-none bg-black/60 backdrop-blur-md text-white/90 text-xs font-medium px-3 py-1.5 rounded-lg border border-white/10 shadow-lg">
-            {afterImage.title || "После"}
-          </div>
-        </>
-      )}
     </div>
   );
 }
