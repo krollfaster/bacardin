@@ -39,7 +39,7 @@ const ExperienceCard = ({
       style={{ boxShadow: "inset 0 0 18px rgba(255, 255, 255, 0.04)" }}
     >
       {/* Область с компанией */}
-      <div className="flex items-center gap-[23px] mb-[23px] h-[58px]">
+      <div className="flex items-center gap-[24px] mb-[22px]">
         <Image
           src={icon}
           alt={company}
@@ -48,17 +48,17 @@ const ExperienceCard = ({
           className="flex-shrink-0"
         />
         <div className="flex flex-col flex-1 min-w-0">
-          <h3 className="font-medium text-[26px] text-foreground truncate leading-[24px]">
+          <h3 className="font-medium text-[28px] text-foreground truncate leading-[26px]">
             {position} · {company}
           </h3>
-          <span className="mt-3 font-medium text-[26px] text-muted-foreground truncate leading-[24px]">
+          <span className="mt-3 font-medium text-[28px] text-muted-foreground truncate leading-[26px]">
             {dates}
           </span>
         </div>
       </div>
 
       {/* Область с описанием */}
-      <p className="font-[500] text-[26px] text-muted-foreground leading-[34px]">
+      <p className="font-[500] text-[28px] text-muted-foreground leading-[36px]">
         {description}
       </p>
 
