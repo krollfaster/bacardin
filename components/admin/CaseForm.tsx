@@ -30,7 +30,8 @@ import {
   Layers,
   BarChart2,
   LayoutList,
-  LayoutGrid
+  LayoutGrid,
+  Eye,
 } from "lucide-react";
 import type {
   Case,
@@ -40,7 +41,9 @@ import type {
   CaseHeadingItem,
   CaseCardItem,
   CaseMetricsItem,
-  MetricSubCard
+  CasePreviewItem,
+  PreviewImage,
+  MetricSubCard,
 } from "@/types";
 
 interface CaseFormProps {
@@ -59,6 +62,7 @@ export interface CaseFormData {
   description: string;
   description_en: string;
   logo?: string;
+  accentColor?: string;
   date: string;
   category: string;
   coverImage: string;
@@ -207,6 +211,7 @@ export function CaseForm({
     description: "",
     description_en: "",
     logo: "",
+    accentColor: "#F99B7D",
     date: new Date().toISOString().split("T")[0],
     category: "design",
     coverImage: "",
@@ -262,6 +267,7 @@ export function CaseForm({
       description: initialData.description,
       description_en: initialData.description_en || "",
       logo: initialData.logo || "",
+      accentColor: initialData.accentColor || "#F99B7D",
       date: initialData.date || new Date().toISOString().split("T")[0],
       category: initialData.category,
       coverImage: initialData.coverImage,
@@ -394,12 +400,21 @@ export function CaseForm({
   const currentItems = activeLang === "ru" ? formData.items : formData.items_en;
   const targetItemsField = activeLang === "ru" ? "items" : "items_en";
 
-  const addItem = (type: "heading" | "card" | "metrics") => {
+  const addItem = (type: "heading" | "card" | "metrics" | "preview") => {
     let newItem: CaseItem;
     if (type === "heading") {
       newItem = { id: generateId(), type: "heading", title: "" };
     } else if (type === "card") {
       newItem = { id: generateId(), type: "card", title: "", description: "", fullWidth: false };
+    } else if (type === "preview") {
+      newItem = {
+        id: generateId(),
+        type: "preview",
+        title: "",
+        variant: "tabs",
+        interval: 3,
+        images: [{ id: generateId(), url: "", title: "" }],
+      };
     } else {
       newItem = {
         id: generateId(),
@@ -442,8 +457,8 @@ export function CaseForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Тип кейса и Категория */}
-      <div className="gap-4 grid grid-cols-2">
+      {/* Тип кейса, Категория и Акцентный цвет */}
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
         <div className="space-y-2">
           <Label>Тип кейса</Label>
           <Select
@@ -488,6 +503,26 @@ export function CaseForm({
               <SelectItem value="vibecode">Вайбкод (страница /cases)</SelectItem>
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="accentColor">Акцентный цвет кейса</Label>
+          <div className="flex items-center gap-2">
+            <input
+              type="color"
+              id="accentColorPicker"
+              value={formData.accentColor && formData.accentColor.startsWith("#") ? formData.accentColor : "#F99B7D"}
+              onChange={(e) => setFormData((prev) => ({ ...prev, accentColor: e.target.value }))}
+              className="w-10 h-10 rounded-md border border-border cursor-pointer bg-transparent p-1"
+            />
+            <Input
+              id="accentColor"
+              value={formData.accentColor || ""}
+              onChange={(e) => setFormData((prev) => ({ ...prev, accentColor: e.target.value }))}
+              placeholder="#F99B7D"
+              className="font-mono text-sm"
+            />
+          </div>
         </div>
       </div>
 
@@ -869,7 +904,7 @@ export function CaseForm({
                 </div>
 
                 {/* Кнопки добавления */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <Button
                     type="button"
                     variant="outline"
@@ -894,6 +929,16 @@ export function CaseForm({
                     type="button"
                     variant="outline"
                     size="sm"
+                    onClick={() => addItem("preview")}
+                    className="h-8 text-xs gap-1.5"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-primary" />
+                    + Превью
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
                     onClick={() => addItem("metrics")}
                     className="h-8 text-xs gap-1.5"
                   >
@@ -909,7 +954,7 @@ export function CaseForm({
                   <p className="mb-3 text-sm font-medium">
                     {activeLang === "ru" ? "В кейсе пока нет карточек и заголовков" : "No cards or headings yet"}
                   </p>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap justify-center">
                     <Button type="button" variant="secondary" size="sm" onClick={() => addItem("card")}>
                       <Plus className="mr-1.5 w-3.5 h-3.5" />
                       Добавить карточку
@@ -917,6 +962,10 @@ export function CaseForm({
                     <Button type="button" variant="secondary" size="sm" onClick={() => addItem("heading")}>
                       <Plus className="mr-1.5 w-3.5 h-3.5" />
                       Добавить заголовок
+                    </Button>
+                    <Button type="button" variant="secondary" size="sm" onClick={() => addItem("preview")}>
+                      <Plus className="mr-1.5 w-3.5 h-3.5" />
+                      Добавить превью
                     </Button>
                     <Button type="button" variant="secondary" size="sm" onClick={() => addItem("metrics")}>
                       <Plus className="mr-1.5 w-3.5 h-3.5" />
@@ -937,6 +986,7 @@ export function CaseForm({
                       item={item}
                       index={index}
                       activeLang={activeLang}
+                      uploadFile={uploadFile}
                       onUpdate={(updated) => updateItem(index, updated)}
                       onRemove={() => removeItem(index)}
                     />
@@ -1084,6 +1134,7 @@ interface DraggableStreamItemProps {
   item: CaseItem;
   index: number;
   activeLang: "ru" | "en";
+  uploadFile?: (file: File) => Promise<string | null>;
   onUpdate: (item: CaseItem) => void;
   onRemove: () => void;
 }
@@ -1092,6 +1143,7 @@ function DraggableStreamItem({
   item,
   index,
   activeLang,
+  uploadFile,
   onUpdate,
   onRemove,
 }: DraggableStreamItemProps) {
@@ -1201,6 +1253,205 @@ function DraggableStreamItem({
           rows={3}
           className="bg-background text-sm"
         />
+      </Reorder.Item>
+    );
+  }
+
+  if (item.type === "preview") {
+    const updatePreviewImage = (
+      imgIndex: number,
+      field: keyof PreviewImage,
+      value: string
+    ) => {
+      const updatedImages = [...(item.images || [])];
+      updatedImages[imgIndex] = { ...updatedImages[imgIndex], [field]: value };
+      onUpdate({ ...item, images: updatedImages });
+    };
+
+    const addPreviewImage = () => {
+      const updatedImages = [
+        ...(item.images || []),
+        { id: generateId(), url: "", title: "" },
+      ];
+      onUpdate({ ...item, images: updatedImages });
+    };
+
+    const removePreviewImage = (imgIndex: number) => {
+      const updatedImages = (item.images || []).filter((_, i) => i !== imgIndex);
+      onUpdate({ ...item, images: updatedImages });
+    };
+
+    return (
+      <Reorder.Item
+        value={item}
+        dragListener={false}
+        dragControls={controls}
+        className="bg-muted/40 border border-border hover:border-primary/40 rounded-xl p-4 transition-colors space-y-3"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="flex justify-center items-center bg-primary/10 rounded-full w-6 h-6 font-medium text-primary text-xs">
+              {index + 1}
+            </span>
+            <Badge variant="outline" className="bg-background text-xs gap-1 py-0.5">
+              <Eye className="w-3 h-3 text-primary" />
+              Превью ({item.variant === "slideshow" ? "Гифка" : "Табы"})
+            </Badge>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={onRemove}
+              className="hover:bg-destructive/10 p-1.5 rounded-md text-muted-foreground hover:text-destructive transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+            <div
+              onPointerDown={(e) => controls.start(e)}
+              className="hover:bg-muted p-1.5 rounded-md cursor-grab active:cursor-grabbing"
+            >
+              <GripVertical className="w-4 h-4 text-muted-foreground" />
+            </div>
+          </div>
+        </div>
+
+        {/* Заголовок секции и выбор режима */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+          <div className="md:col-span-2 space-y-1">
+            <Label className="text-xs text-muted-foreground">Заголовок секции</Label>
+            <Input
+              value={item.title}
+              onChange={(e) => onUpdate({ ...item, title: e.target.value })}
+              placeholder={activeLang === "ru" ? "Например: Превью..." : "e.g. Preview..."}
+              className="bg-background font-medium text-sm"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <Label className="text-xs text-muted-foreground">Режим переключения</Label>
+            <Select
+              value={item.variant || "tabs"}
+              onValueChange={(val: "tabs" | "slideshow") =>
+                onUpdate({ ...item, variant: val })
+              }
+            >
+              <SelectTrigger className="bg-background text-xs h-9">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="tabs">Табы (по клику)</SelectItem>
+                <SelectItem value="slideshow">Гифка (авто)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Настройка интервала для гифки */}
+        {item.variant === "slideshow" && (
+          <div className="flex items-center gap-3 bg-background/60 p-2.5 rounded-lg border border-border/60">
+            <Label className="text-xs text-muted-foreground whitespace-nowrap">
+              Интервал смены картинок:
+            </Label>
+            <div className="flex items-center gap-1.5">
+              <Input
+                type="number"
+                min="0.5"
+                step="0.5"
+                value={item.interval ?? 3}
+                onChange={(e) =>
+                  onUpdate({ ...item, interval: parseFloat(e.target.value) || 3 })
+                }
+                className="w-20 h-8 text-xs bg-background"
+              />
+              <span className="text-xs text-muted-foreground">сек</span>
+            </div>
+          </div>
+        )}
+
+        {/* Список картинок */}
+        <div className="space-y-2 bg-background/50 p-3 rounded-lg border border-border/60">
+          <Label className="text-xs font-semibold text-muted-foreground">
+            Картинки превью ({item.images?.length || 0})
+          </Label>
+
+          <div className="space-y-2">
+            {(item.images || []).map((img, imgIdx) => (
+              <div
+                key={img.id || imgIdx}
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-background p-2.5 rounded-lg border border-border"
+              >
+                {/* Превью миниатюра */}
+                <div className="w-14 h-14 bg-muted/60 rounded-md border border-border overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  {img.url ? (
+                    <img src={img.url} alt="Preview" className="w-full h-full object-contain" />
+                  ) : (
+                    <ImageIcon className="w-5 h-5 text-muted-foreground/40" />
+                  )}
+                </div>
+
+                {/* Название таба */}
+                <div className="w-full sm:w-36">
+                  <Input
+                    value={img.title || ""}
+                    onChange={(e) => updatePreviewImage(imgIdx, "title", e.target.value)}
+                    placeholder="Таб (APP)..."
+                    className="text-xs h-8 bg-background"
+                  />
+                </div>
+
+                {/* URL картинки */}
+                <div className="flex-1 w-full">
+                  <Input
+                    value={img.url}
+                    onChange={(e) => updatePreviewImage(imgIdx, "url", e.target.value)}
+                    placeholder="/uploads/preview.png или https://..."
+                    className="text-xs h-8 font-mono bg-background"
+                  />
+                </div>
+
+                {/* Кнопка загрузки файла */}
+                <label className="cursor-pointer inline-flex items-center justify-center h-8 px-2.5 text-xs font-medium bg-muted hover:bg-muted/80 rounded-md transition-colors whitespace-nowrap">
+                  <Upload className="w-3.5 h-3.5 mr-1 text-muted-foreground" />
+                  Загрузить
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (!file || !uploadFile) return;
+                      const path = await uploadFile(file);
+                      if (path) {
+                        updatePreviewImage(imgIdx, "url", path);
+                      }
+                    }}
+                  />
+                </label>
+
+                {/* Кнопка удаления */}
+                <button
+                  type="button"
+                  onClick={() => removePreviewImage(imgIdx)}
+                  className="p-1.5 rounded-md text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={addPreviewImage}
+            className="w-full text-xs h-8 border-dashed mt-2"
+          >
+            <Plus className="mr-1.5 w-3.5 h-3.5" />
+            Добавить еще картинку
+          </Button>
+        </div>
       </Reorder.Item>
     );
   }

@@ -12,17 +12,20 @@ import type {
   CaseHeadingItem,
   CaseCardItem,
   CaseMetricsItem,
+  CasePreviewItem,
 } from "@/types";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/components/ui/RichText";
 import { CaseHeading } from "@/components/case/CaseHeading";
 import { CaseCard } from "@/components/case/CaseCard";
 import { CaseMetricCard } from "@/components/case/CaseMetricCard";
+import { CasePreview } from "@/components/case/CasePreview";
 
 interface GalleryCaseViewProps {
   title: string;
   description?: string;
   logo?: string;
+  accentColor?: string;
   images: string[];
   layout?: GalleryLayout;
   items?: CaseItem[];
@@ -56,6 +59,7 @@ const itemVariants = {
 type RenderSegment =
   | { type: "heading"; item: CaseHeadingItem }
   | { type: "metrics"; item: CaseMetricsItem }
+  | { type: "preview"; item: CasePreviewItem }
   | { type: "card-group"; cards: CaseCardItem[] };
 
 // Разбивка элементов на сегменты для правильного отображения рядов карточек
@@ -81,6 +85,12 @@ function segmentItems(items: CaseItem[]): RenderSegment[] {
       const validCards = (item.cards || []).filter((c) => c.description && c.description.trim());
       if (validCards.length > 0) {
         segments.push({ type: "metrics", item: { ...item, cards: validCards } });
+      }
+    } else if (item.type === "preview") {
+      flushCardGroup();
+      const validImages = (item.images || []).filter((img) => img.url && img.url.trim());
+      if (validImages.length > 0) {
+        segments.push({ type: "preview", item: { ...item, images: validImages } });
       }
     } else if (item.type === "card") {
       const isCardFilled = (item.title && item.title.trim()) || (item.description && item.description.trim());
@@ -203,6 +213,7 @@ export const GalleryCaseView = ({
   title,
   description,
   logo,
+  accentColor,
   images,
   layout = "stack",
   items,
@@ -312,6 +323,18 @@ export const GalleryCaseView = ({
                       variants={itemVariants}
                     />
                   ))}
+                </div>
+              );
+            }
+
+            if (segment.type === "preview") {
+              return (
+                <div key={`preview-${segIdx}`} className="mb-[36px]">
+                  <CasePreview
+                    item={segment.item}
+                    accentColor={accentColor}
+                    variants={itemVariants}
+                  />
                 </div>
               );
             }

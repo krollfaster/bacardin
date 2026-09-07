@@ -100,6 +100,7 @@ export async function createCase(data: CreateCaseData): Promise<Case> {
     description: data.description,
     description_en: data.description_en,
     logo: data.logo,
+    accentColor: data.accentColor,
     date: data.date,
     category: data.category,
     coverImage: data.coverImage,

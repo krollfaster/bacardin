@@ -90,6 +90,7 @@ export default async function CasePage({ params }: CasePageProps) {
           title={title}
           description={description}
           logo={caseData.logo}
+          accentColor={caseData.accentColor}
           images={caseData.images}
           layout={caseData.galleryLayout}
           items={items}

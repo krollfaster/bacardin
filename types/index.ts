@@ -64,8 +64,32 @@ export interface CaseMetricsItem {
   cards: MetricSubCard[];
 }
 
+// Элемент картинки внутри блока превью
+export interface PreviewImage {
+  id: string;
+  url: string;
+  title?: string; // Название для переключателя справа, например "APP", "ERP"
+}
+
+// Режимы отображения превью
+export type PreviewVariant = "tabs" | "slideshow" | "comparison";
+
+// Блок превью (с табами или автопереключением/гифкой)
+export interface CasePreviewItem {
+  id: string;
+  type: "preview";
+  title: string; // Заголовок слева (например, "Превью")
+  variant?: PreviewVariant; // "tabs" по умолчанию, "slideshow" для гифки
+  images: PreviewImage[];
+  interval?: number; // Интервал переключения в секундах для гифки (по умолчанию 3)
+}
+
 // Полиморфный элемент кейса
-export type CaseItem = CaseHeadingItem | CaseCardItem | CaseMetricsItem;
+export type CaseItem =
+  | CaseHeadingItem
+  | CaseCardItem
+  | CaseMetricsItem
+  | CasePreviewItem;
 
 // Карточка хайлайта (инфографика) - legacy
 export interface HighlightCard {
@@ -85,6 +109,7 @@ export interface Case {
   description: string;
   description_en?: string; // Английская версия описания
   logo?: string; // Логотип кейса (отображается слева над заголовком)
+  accentColor?: string; // Акцентный цвет кейса (например, "#F99B7D")
   date: string; // Дата кейса
   category: string;
   coverImage: string;
@@ -123,6 +148,7 @@ export interface CreateCaseData {
   description: string;
   description_en?: string;
   logo?: string;
+  accentColor?: string;
   date: string;
   category: string;
   coverImage: string;
@@ -156,6 +182,7 @@ export interface UpdateCaseData {
   description?: string;
   description_en?: string;
   logo?: string;
+  accentColor?: string;
   date?: string;
   category?: string;
   coverImage?: string;
