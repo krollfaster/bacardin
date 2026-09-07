@@ -16,6 +16,7 @@ import type {
 import { cn } from "@/lib/utils";
 import { RichText } from "@/components/ui/RichText";
 import { CaseHeading } from "@/components/case/CaseHeading";
+import { CaseCard } from "@/components/case/CaseCard";
 
 interface GalleryCaseViewProps {
   title: string;
@@ -278,7 +279,7 @@ export const GalleryCaseView = ({
                 <div
                   key={`card-group-${segIdx}`}
                   className={cn(
-                    "gap-[32px] grid mb-[32px]",
+                    "gap-[36px] grid mb-[36px]",
                     segment.cards.length === 1 && segment.cards[0].fullWidth
                       ? "grid-cols-1"
                       : segment.cards.length === 1
@@ -287,38 +288,11 @@ export const GalleryCaseView = ({
                   )}
                 >
                   {segment.cards.map((card, cardIdx) => (
-                    <motion.div
+                    <CaseCard
                       key={card.id || cardIdx}
-                      className="border rounded-[24px]"
-                      style={{
-                        borderColor: "#272727",
-                        borderWidth: "3px",
-                        padding: "36px 40px",
-                        boxShadow: "inset 0 0 30px rgba(255, 255, 255, 0.08)",
-                        backgroundColor: "#16130F",
-                      }}
+                      card={card}
                       variants={itemVariants}
-                    >
-                      {card.title && (
-                        <p
-                          className="font-medium text-[28px] leading-[35px]"
-                          style={{ color: "#9C9C9C" }}
-                        >
-                          {card.title}
-                        </p>
-                      )}
-                      {card.description && (
-                        <p
-                          className={cn(
-                            "font-medium text-[28px] leading-[35px] whitespace-pre-line",
-                            card.title ? "mt-[20px]" : ""
-                          )}
-                          style={{ color: "#FFFFFF" }}
-                        >
-                          {card.description}
-                        </p>
-                      )}
-                    </motion.div>
+                    />
                   ))}
                 </div>
               );
