@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 import {
   Table,
   TableBody,
@@ -89,12 +90,17 @@ export function CasesList({ cases, onRefresh }: CasesListProps) {
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      const resData = await response.json().catch(() => ({}));
+      if (response.ok && resData.success) {
+        toast.success(editingCase ? "Кейс успешно обновлён" : "Кейс успешно создан");
         onRefresh();
         setIsDialogOpen(false);
+      } else {
+        toast.error(resData.error || "Ошибка сохранения кейса");
       }
     } catch (error) {
       console.error("Submit error:", error);
+      toast.error("Ошибка сети при сохранении кейса");
     } finally {
       setIsLoading(false);
     }

@@ -67,18 +67,24 @@ export async function POST(request: Request) {
       );
     }
 
-    // Создаём директорию если не существует
-    await fs.mkdir(UPLOAD_DIR, { recursive: true });
+    // Генерируем уникальное имя файла
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substring(2, 8);
+    const fileName = `${timestamp}-${random}${ext}`;
 
-    // Генерируем имя файла и сохраняем
-    const fileName = generateFileName(file.name);
-    const filePath = path.join(UPLOAD_DIR, fileName);
-    
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await fs.writeFile(filePath, buffer);
-
-    // Возвращаем публичный путь
-    const publicPath = `/images/cases/${fileName}`;
+    // Сохраняем файл на диск (на localhost), либо fallback в base64 Data URL (на Vercel read-only файловой системе)
+    let publicPath = `/images/cases/${fileName}`;
+    try {
+      await fs.mkdir(UPLOAD_DIR, { recursive: true });
+      const filePath = path.join(UPLOAD_DIR, fileName);
+      const buffer = Buffer.from(await file.arrayBuffer());
+      await fs.writeFile(filePath, buffer);
+    } catch (fsErr) {
+      console.warn("Filesystem write failed (read-only environment), falling back to base64 Data URL:", fsErr);
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const mime = file.type || (ext === ".svg" ? "image/svg+xml" : "image/png");
+      publicPath = `data:${mime};base64,${buffer.toString("base64")}`;
+    }
 
     return NextResponse.json({ 
       success: true, 

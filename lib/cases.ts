@@ -3,6 +3,10 @@ import path from "path";
 import type { Case, CreateCaseData, UpdateCaseData, HomeOrderUpdate, VibecodeOrderUpdate } from "@/types";
 
 const DATA_FILE = path.join(process.cwd(), "data", "cases.json");
+const TMP_DATA_FILE = path.join("/tmp", "cases.json");
+
+// Кэш в оперативной памяти для serverless среды (Vercel)
+let memoryCasesCache: Case[] | null = null;
 
 // Генерация уникального ID
 function generateId(): string {
@@ -32,9 +36,28 @@ function generateSlug(title: string): string {
 
 // Чтение всех кейсов
 export async function getAllCases(): Promise<Case[]> {
+  if (memoryCasesCache && memoryCasesCache.length > 0) {
+    return memoryCasesCache;
+  }
+
+  // 1. Попытка прочитать из /tmp (если работаем в serverless)
+  try {
+    const tmpData = await fs.readFile(TMP_DATA_FILE, "utf-8");
+    const parsed = JSON.parse(tmpData) as Case[];
+    if (parsed && parsed.length > 0) {
+      memoryCasesCache = parsed;
+      return parsed;
+    }
+  } catch {
+    // /tmp не существует или пуст — читаем из основного файла
+  }
+
+  // 2. Чтение из data/cases.json
   try {
     const data = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(data) as Case[];
+    const parsed = JSON.parse(data) as Case[];
+    memoryCasesCache = parsed;
+    return parsed;
   } catch {
     return [];
   }
@@ -204,7 +227,18 @@ export async function updateVibecodeOrder(updates: VibecodeOrderUpdate[]): Promi
   return true;
 }
 
-// Сохранение кейсов в файл
+// Сохранение кейсов в файл с поддержкой serverless (Vercel)
 async function saveCases(cases: Case[]): Promise<void> {
-  await fs.writeFile(DATA_FILE, JSON.stringify(cases, null, 2), "utf-8");
+  memoryCasesCache = cases;
+
+  try {
+    await fs.writeFile(DATA_FILE, JSON.stringify(cases, null, 2), "utf-8");
+  } catch (fsErr) {
+    console.warn("Writing to data/cases.json failed (read-only filesystem), writing to /tmp:", fsErr);
+    try {
+      await fs.writeFile(TMP_DATA_FILE, JSON.stringify(cases, null, 2), "utf-8");
+    } catch (tmpErr) {
+      console.error("Failed to write to /tmp/cases.json:", tmpErr);
+    }
+  }
 }

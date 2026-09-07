@@ -29,7 +29,6 @@ export function CaseDialog({
 
   const handleSubmit = async (data: CaseFormData) => {
     await onSubmit(data);
-    onOpenChange(false);
   };
 
   return (

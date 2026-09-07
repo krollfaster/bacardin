@@ -515,9 +515,13 @@ export function CaseForm({
             <input
               type="color"
               id="accentColorPicker"
-              value={formData.accentColor && formData.accentColor.startsWith("#") ? formData.accentColor : "#F99B7D"}
+              value={
+                formData.accentColor && /^#[0-9A-Fa-f]{6}$/.test(formData.accentColor)
+                  ? formData.accentColor
+                  : "#F99B7D"
+              }
               onChange={(e) => setFormData((prev) => ({ ...prev, accentColor: e.target.value }))}
-              className="w-10 h-10 rounded-md border border-border cursor-pointer bg-transparent p-1"
+              className="w-10 h-10 rounded-md border border-border cursor-pointer bg-transparent p-1 shrink-0"
             />
             <Input
               id="accentColor"
@@ -650,11 +654,11 @@ export function CaseForm({
           {formData.logo ? (
             <div className="space-y-2">
               <div className="flex items-center gap-4 bg-muted/30 p-3 border border-border rounded-lg">
-                <div className="flex items-center justify-center bg-background border border-border rounded-full w-14 h-14 overflow-hidden shrink-0">
+                <div className="flex items-center justify-center bg-[#1A1A1A] border border-[#272727] rounded-full w-14 h-14 overflow-hidden shrink-0 p-2 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
                   <img
                     src={formData.logo}
                     alt="Логотип"
-                    className="w-10 h-10 object-contain"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="flex flex-col gap-1.5 flex-1 min-w-0">
