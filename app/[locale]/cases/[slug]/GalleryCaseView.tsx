@@ -245,13 +245,11 @@ export const GalleryCaseView = ({
             className="flex justify-start mb-[36px]"
             variants={itemVariants}
           >
-            <div className="flex justify-center items-center bg-[#1A1A1A] shadow-[inset_0_0_15px_rgba(255,255,255,0.05)] p-3 border border-[#272727] rounded-full w-[120px] h-[120px] overflow-hidden">
-              <img
-                src={logo}
-                alt={`${title} logo`}
-                className="w-full h-full object-contain"
-              />
-            </div>
+            <img
+              src={logo}
+              alt={`${title} logo`}
+              className="w-[120px] h-[120px] object-contain"
+            />
           </motion.div>
         )}
 
@@ -498,7 +496,7 @@ function QuestionCTAButton({ isEnglish }: { isEnglish: boolean }) {
 
       {/* Текст кнопки */}
       <span className="z-10 relative font-medium text-[32px] text-white md:text-[50px] leading-[1] tracking-tight">
-        {isEnglish ? "Got a question?" : "Появился вопрос?"}
+        {isEnglish ? "Message me on Telegram" : "Написать мне в ТГ"}
       </span>
     </motion.a>
   );
