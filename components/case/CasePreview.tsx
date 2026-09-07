@@ -68,8 +68,8 @@ export const CasePreview = ({
           <div />
         )}
 
-        {/* Табы переключения (если картинок больше 1) */}
-        {images.length > 1 && (
+        {/* Табы переключения (если картинок больше 1 и это не автопереключение/гифка) */}
+        {images.length > 1 && item.variant !== "slideshow" && (
           <div className="flex items-center gap-[24px]">
             {images.map((img, idx) => {
               const isActive = idx === activeIndex;

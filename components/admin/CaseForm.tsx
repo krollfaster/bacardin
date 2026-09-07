@@ -1515,6 +1515,10 @@ function DraggableStreamItem({
                         </span>
                         {labelText}
                       </div>
+                    ) : item.variant === "slideshow" ? (
+                      <div className="flex items-center bg-muted/40 px-3 border border-border rounded-md h-8 text-muted-foreground text-xs">
+                        Кадр {imgIdx + 1}
+                      </div>
                     ) : (
                       <Input
                         value={img.title || ""}
