@@ -36,9 +36,9 @@ export const Hero = () => {
         {/* Имя и статус */}
         <motion.div
           variants={slideUp}
-          className="mb-4.5"
+          className="mb-[14px]"
         >
-          <h1 className="font-medium text-[47px] leading-[1.1]">
+          <h1 className="font-medium text-[47px] leading-[54px]">
             <span className="text-foreground">{t("name")}</span>
             {" "}
             <span className="text-[#AFCE90]">{t("status")}</span>
@@ -49,7 +49,7 @@ export const Hero = () => {
         <motion.div
           variants={slideUp}
         >
-          <p className="font-medium text-[47px] text-muted-foreground leading-[1.1]">
+          <p className="font-medium text-[47px] text-muted-foreground leading-[54px]">
             {t("description")}
           </p>
         </motion.div>
