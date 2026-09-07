@@ -15,7 +15,7 @@ const Tag = ({ label, index }: { label: string; index: number }) => {
           transition: { delay: index * 0.03, duration: 0.3 },
         },
       }}
-      className="rounded-xl bg-card px-6 py-3 flex items-center text-[26px] leading-[34px] font-[500] text-muted-foreground"
+      className="rounded-xl bg-card px-[24px] py-[16px] flex items-center text-[28px] leading-[36px] font-[500] text-muted-foreground"
       style={{ boxShadow: "inset 0 0 18px rgba(255, 255, 255, 0.04)" }}
     >
       {label}
@@ -45,7 +45,7 @@ export const Tags = () => {
         </motion.h2>
 
         {/* Сетка тегов */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-[16px]">
           {items.map((tag, index) => (
             <Tag key={tag} label={tag} index={index} />
           ))}
