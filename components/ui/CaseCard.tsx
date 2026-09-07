@@ -162,10 +162,10 @@ export const CaseCard = ({ caseItem, locale, uiElementLabel }: CaseCardProps) =>
                 boxShadow: "inset 0 0 50px rgba(255,255,255,0.03)"
               }}
             >
-              <span className="text-lg font-medium text-foreground truncate">
+              <span className="text-lg font-medium text-muted-foreground truncate">
                 {title}
               </span>
-              <span className="text-lg text-muted-foreground whitespace-nowrap ml-4">
+              <span className="text-lg font-medium text-muted-foreground whitespace-nowrap ml-4">
                 {caseItem.type === "component" 
                   ? (subtitle || uiElementLabel || "UI Element")
                   : (subtitle || null)
