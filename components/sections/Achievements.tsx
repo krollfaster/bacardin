@@ -79,7 +79,7 @@ export const Achievements = () => {
         </motion.h2>
 
         {/* Сетка карточек */}
-        <div className="gap-[32px] grid grid-cols-1 md:grid-cols-2">
+        <div className="gap-[24px] grid grid-cols-1 md:grid-cols-2">
           {strengths.map((parts, index) => (
             <AchievementCard key={index} parts={parts} index={index} />
           ))}

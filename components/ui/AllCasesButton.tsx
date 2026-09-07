@@ -71,7 +71,7 @@ export const AllCasesButton = ({ locale, totalCount, label }: AllCasesButtonProp
       variants={fadeIn}
       onHoverStart={playHoverSound}
       style={{ perspective: 1000 }}
-      className="mt-[32px]"
+      className="mt-[24px]"
     >
       <motion.div
         style={{

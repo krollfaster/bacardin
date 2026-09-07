@@ -40,7 +40,7 @@ export const HomeCases = ({ cases, locale, totalCasesCount }: HomeCasesProps) =>
 
         {/* Сетка кейсов */}
         <motion.div
-          className="gap-[32px] grid grid-cols-1 md:grid-cols-2"
+          className="gap-[24px] grid grid-cols-1 md:grid-cols-2"
           variants={staggerContainer}
         >
           {cases.map((caseItem) => (

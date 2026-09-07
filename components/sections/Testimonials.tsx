@@ -125,7 +125,7 @@ export const Testimonials = () => {
                 </motion.h2>
 
                 {/* Сетка карточек */}
-                <div className="gap-[32px] grid grid-cols-1 md:grid-cols-2">
+                <div className="gap-[24px] grid grid-cols-1 md:grid-cols-2">
                     {testimonials.map((item, index) => (
                         <TestimonialCard
                             key={index}

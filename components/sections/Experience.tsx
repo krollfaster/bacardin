@@ -165,7 +165,7 @@ export const Experience = () => {
         </motion.h2>
 
         {/* Карточки опыта */}
-        <div className="flex flex-col gap-[32px]">
+        <div className="flex flex-col gap-[24px]">
           {experiences.map((exp, index) => (
             <ExperienceCard
               key={index}
