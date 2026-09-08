@@ -270,7 +270,7 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-09-08T08:22:30.776Z",
+    "updatedAt": "2026-09-08T09:06:23.701Z",
     "galleryLayout": "stack",
     "title_en": "SuperApp \"ISU\"",
     "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
@@ -621,28 +621,38 @@
         "images": [
           {
             "id": "nep137rda",
-            "url": "/images/cases/1788802652181-c4h0f3.png",
+            "url": "/images/cases/1788858358624-0oo4a2.png",
             "title": "1"
           },
           {
             "id": "i30t59jtp",
-            "url": "/images/cases/1788802664913-xxksp4.png",
+            "url": "/images/cases/1788858362137-6q29nt.png",
             "title": "2"
           },
           {
             "id": "2p6npr7wo",
-            "url": "/images/cases/1788802668230-vz49h4.png",
+            "url": "/images/cases/1788858365957-ev1h4x.png",
             "title": "3"
           },
           {
             "id": "055v1hicu",
-            "url": "/images/cases/1788802673221-lssvh3.png",
+            "url": "/images/cases/1788858369372-qrczd5.png",
             "title": "4"
           },
           {
             "id": "aabf3ee66",
-            "url": "/images/cases/1788802676818-2lmzcu.png",
+            "url": "/images/cases/1788858372685-u4vx0e.png",
             "title": "5"
+          },
+          {
+            "id": "6f01zw3q1",
+            "url": "/images/cases/1788858376436-frcabf.png",
+            "title": ""
+          },
+          {
+            "id": "u3y7fbb0l",
+            "url": "/images/cases/1788858380047-ksj5lb.png",
+            "title": ""
           }
         ]
       },
