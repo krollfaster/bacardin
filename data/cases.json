@@ -252,17 +252,17 @@
     "category": "design",
     "coverImage": "/images/cases/1768245632342-6iywil.png",
     "images": [
-      "/images/cases/1768425221673-7d0kog.png",
-      "/images/cases/1768425221673-0wq8u8.png",
-      "/images/cases/1768425221680-espfxz.png",
-      "/images/cases/1768425221683-bgz2p9.png",
-      "/images/cases/1768425221704-hbdyf8.png",
-      "/images/cases/1768425221737-ctpncz.png",
-      "/images/cases/1768425221707-ft2kp5.png",
-      "/images/cases/1768425221739-duf77q.png",
-      "/images/cases/1768425221739-csy2nl.png",
-      "/images/cases/1768425221740-viaf6y.png",
-      "/images/cases/1768425221750-l9paa7.png"
+      "/images/cases/1788855517739-2zz4fi.png",
+      "/images/cases/1788855517738-86hm3o.png",
+      "/images/cases/1788855517738-6nehlv.png",
+      "/images/cases/1788855517738-573zyc.png",
+      "/images/cases/1788855517737-dd6pql.png",
+      "/images/cases/1788855517737-9rwdxt.png",
+      "/images/cases/1788855517785-theevm.png",
+      "/images/cases/1788855517787-c4mwcv.png",
+      "/images/cases/1788855517787-sxtqbo.png",
+      "/images/cases/1788855517795-2dg57l.png",
+      "/images/cases/1788855517796-eo16dr.png"
     ],
     "componentUrl": "",
     "content": "",
@@ -270,7 +270,7 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-09-07T17:52:18.101Z",
+    "updatedAt": "2026-09-08T08:22:30.776Z",
     "galleryLayout": "stack",
     "title_en": "SuperApp \"ISU\"",
     "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
@@ -541,12 +541,12 @@
         "images": [
           {
             "id": "in0f5lxf6",
-            "url": "/images/cases/1788802204514-jnety9.png",
+            "url": "/images/cases/1788855739245-zaktbh.png",
             "title": "До"
           },
           {
             "id": "weel3rt7f",
-            "url": "/images/cases/1788802208906-t1ssyh.png",
+            "url": "/images/cases/1788855743445-90r8ys.png",
             "title": "После"
           }
         ]
@@ -795,7 +795,8 @@
           }
         ]
       }
-    ]
+    ],
+    "inProgress": false
   },
   {
     "id": "mka0saqg9dksvu4qxmc",
