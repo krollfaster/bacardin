@@ -270,10 +270,10 @@
     "featuredOnHome": true,
     "homeOrder": 1,
     "createdAt": "2026-01-11T14:42:12.875Z",
-    "updatedAt": "2026-09-08T09:06:23.701Z",
+    "updatedAt": "2026-09-11T18:52:42.399Z",
     "galleryLayout": "stack",
-    "title_en": "SuperApp \"ISU\"",
-    "description_en": "B2C-like Productivity Platform for Top Executives. An internal product that competed for user attention just like a B2C startup, focusing on retention and engagement metrics rather than forced adoption",
+    "title_en": "ISU Redesign for Executives",
+    "description_en": "ISU is a B2E product built from 5 modules, where Sber's executives manage tasks, knowledge, goals and strategic planning for the entire top management team.",
     "vibecodeOrder": null,
     "highlights": [
       {
@@ -527,7 +527,7 @@
       }
     },
     "subtitle": "Лидировал редизайн",
-    "subtitle_en": "Productivity, B2C",
+    "subtitle_en": "Led the redesign",
     "accentColor": "#8BCBF7",
     "logo": "/images/cases/1788800224431-6q0lb0.svg",
     "tags": [],
@@ -678,132 +678,147 @@
     ],
     "items_en": [
       {
-        "id": "65wr9wilc",
-        "type": "heading",
-        "title": "Context"
+        "id": "en-prev-1",
+        "type": "preview",
+        "title": "Preview",
+        "variant": "comparison",
+        "interval": 3,
+        "images": [
+          {
+            "id": "en-prev-1-a",
+            "url": "/images/cases/1788855739245-zaktbh.png",
+            "title": "Before"
+          },
+          {
+            "id": "en-prev-1-b",
+            "url": "/images/cases/1788855743445-90r8ys.png",
+            "title": "After"
+          }
+        ]
       },
       {
-        "id": "zknbpjyxv",
+        "id": "en-h-1",
+        "type": "heading",
+        "title": "Case"
+      },
+      {
+        "id": "en-c-1",
         "type": "card",
-        "title": "Expectations 🔎",
-        "description": "The business expected me to bring order to current user flows and raise the design bar for a product that had outgrown its startup roots",
+        "title": "Context",
+        "description": "A Seed-stage product for Sber's top management stood at the point of transition from a closed pilot for the Management Board to a full-scale release across all of the bank's Agile teams.",
         "fullWidth": true
       },
       {
-        "id": "ok1gj4e07",
+        "id": "en-c-2",
         "type": "card",
-        "title": "Responsibility 🎯",
-        "description": "Full ownership of UX/UI for all web modules within the ecosystem. I had the final word on all design decisions and interface architecture",
-        "fullWidth": false
-      },
-      {
-        "id": "knj61zgwk",
-        "type": "card",
-        "title": "Communication 🤝",
-        "description": "Synchronized decisions with 3 Product Owners and the ISU platform (shared backend). Regular syncs with the Principle Designer and Dev Lead",
-        "fullWidth": false
-      },
-      {
-        "id": "tnpaqr04p",
-        "type": "heading",
-        "title": "Actions"
-      },
-      {
-        "id": "xv130ji1a",
-        "type": "card",
-        "title": "UX Strategy 🧩 ",
-        "description": "Developed a B2C-Like redesign strategy for sub-products (Tasks, Notes, Goals, etc.) into a single seamless environment to boost key metrics",
-        "fullWidth": false
-      },
-      {
-        "id": "nvd5osgpe",
-        "type": "card",
-        "title": "Hands-on Work ✍️ ",
-        "description": "With no direct reports, I personally implemented the entire scope: from high-level information architecture to pixel-perfect mockups",
-        "fullWidth": false
-      },
-      {
-        "id": "rh0g6rxo8",
-        "type": "card",
-        "title": "New Ideas 💡 ",
-        "description": "Designed concepts for new features, such as embedding bank OKRs (Goals) into the task tracker with vertical and horizontal cascading logic",
+        "title": "Situation",
+        "description": "Rather than making drastic changes, I spent the first week in one-on-one conversations with developers and analysts, carefully embedding new processes into the rails they were already used to and comfortable with.",
         "fullWidth": true
       },
       {
-        "id": "t95zl0wq7",
+        "id": "en-c-3",
         "type": "card",
-        "title": "Scrum Master 🔄 ",
-        "description": "As a Scrum Master (14 people), I improved process transparency, provided Agile mentoring, pitched to the team, and handled facilitation",
-        "fullWidth": false
-      },
-      {
-        "id": "6rtf8ktx0",
-        "type": "card",
-        "title": "Discovery 🔬 ",
-        "description": "Established regular research: gathering feedback, testing hypotheses, and building a foundation for user insights (JTBD map)",
-        "fullWidth": false
-      },
-      {
-        "id": "62kxxudyl",
-        "type": "heading",
-        "title": "Impact"
-      },
-      {
-        "id": "c4g9mdfy5",
-        "type": "card",
-        "title": "Time-to-Market 🚀 ",
-        "description": "Migration to the ANT Design System accelerated UI development and ensured consistency, allowing the team to ship features 2x faster",
-        "fullWidth": false
-      },
-      {
-        "id": "rzgdw1peo",
-        "type": "card",
-        "title": "Architecture 🏗",
-        "description": "Designed a flexible structure for the \"Projects\" feature, shielding the product from logic breaks during \"rush\" urgent tasks",
-        "fullWidth": false
-      },
-      {
-        "id": "47m3q82bg",
-        "type": "card",
-        "title": "Cognitive Load 🧠 ",
-        "description": "Simplified the interface by refining the UI, significantly reducing cognitive load for users across the entire application",
+        "title": "Task",
+        "description": "The PM, the tech lead and I had to join forces and recast the heavy logic of ISU's 5 modules into a lean end-to-end scenario, carefully balancing the business vision against engineering constraints.",
         "fullWidth": true
       },
       {
-        "id": "5zdsoohrz",
-        "type": "heading",
-        "title": "Metrics"
+        "id": "en-c-4",
+        "type": "card",
+        "title": "Result",
+        "description": "The product is ready to scale, time-to-market was cut by reducing tech debt, and the design was successfully defended in front of the bank's C-level.",
+        "fullWidth": true
       },
       {
-        "id": "5rxikvcin",
+        "id": "en-m-1",
         "type": "metrics",
         "cards": [
           {
-            "id": "4fzna0a3n",
-            "description": "NPS: +6 p.p",
+            "id": "en-m-1-a",
+            "description": "NPS: +6 p.p.",
             "span": 1
           },
           {
-            "id": "zk0yn1zrm",
+            "id": "en-m-1-b",
             "description": "CSI: +2.0",
             "span": 1
           },
           {
-            "id": "8djo4ey8x",
-            "description": "TTM: -40%",
-            "span": 1
-          },
-          {
-            "id": "172p25vg4",
-            "description": "Pixel Perfect: 98% (KPI>90%)",
-            "span": 2
-          },
-          {
-            "id": "2e62s5ioz",
-            "description": "MAU: +43%",
+            "id": "en-m-1-c",
+            "description": "MAU: +15%",
             "span": 1
           }
         ]
+      },
+      {
+        "id": "en-c-5",
+        "type": "card",
+        "title": "What would I do differently?",
+        "description": "I would propose that the PM introduce custom metrics for each module's scenarios, to back the C-level's affinity for the new design with hard numbers on how much faster the Sber Management Board works.",
+        "fullWidth": true
+      },
+      {
+        "id": "en-prev-2",
+        "type": "preview",
+        "title": "Process",
+        "variant": "slideshow",
+        "interval": 0.5,
+        "images": [
+          {
+            "id": "en-prev-2-a",
+            "url": "/images/cases/1788858358624-0oo4a2.png",
+            "title": "1"
+          },
+          {
+            "id": "en-prev-2-b",
+            "url": "/images/cases/1788858362137-6q29nt.png",
+            "title": "2"
+          },
+          {
+            "id": "en-prev-2-c",
+            "url": "/images/cases/1788858365957-ev1h4x.png",
+            "title": "3"
+          },
+          {
+            "id": "en-prev-2-d",
+            "url": "/images/cases/1788858369372-qrczd5.png",
+            "title": "4"
+          },
+          {
+            "id": "en-prev-2-e",
+            "url": "/images/cases/1788858372685-u4vx0e.png",
+            "title": "5"
+          },
+          {
+            "id": "en-prev-2-f",
+            "url": "/images/cases/1788858376436-frcabf.png",
+            "title": ""
+          },
+          {
+            "id": "en-prev-2-g",
+            "url": "/images/cases/1788858380047-ksj5lb.png",
+            "title": ""
+          }
+        ]
+      },
+      {
+        "id": "en-h-2",
+        "type": "heading",
+        "title": "Challenges"
+      },
+      {
+        "id": "en-c-6",
+        "type": "card",
+        "title": "Parallel Workstreams",
+        "description": "When urgent requests came in from the bank's top leadership, my team and I didn't panic - we quickly redistributed the load so that not a single core redesign sprint was derailed, but it was hard.",
+        "fullWidth": true
+      },
+      {
+        "id": "en-c-7",
+        "type": "card",
+        "title": "Unnecessary Proactivity",
+        "description": "Trying my hand as Scrum Master with the support of an Agile coach, I launched a series of facilitation sessions - but that experience taught me not to try to \"fix\" processes that already run steadily and deliver results.",
+        "fullWidth": true
       }
     ],
     "inProgress": false
